@@ -4,10 +4,12 @@ using UnityEngine;
 
 interface BodyPart
 {
-    int blood { get; set; }
-    int bloodLossRate { get; set; }
+    float blood { get; set; }
+    float bloodLossRate { get; set; }
 
     List<BodyPart> connectedBodyParts {get; set ;}
 
-    void pumpBlood();
+    void PumpBlood();
+
+    void LoseBlood();
 }
