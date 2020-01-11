@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Torso : MonoBehaviour, BodyPart
 {
-    public float blood { get; set; } = 500f;
+    float BodyPart.blood { get => blood; set => blood = value; }
+    public float blood;
     private float timeSinceLastPump = 0;
 
-    public float bloodLossRate { get; set; } = 50f;
+    float BodyPart.bloodPumpRate { get => bloodPumpRate; set => bloodPumpRate = value; }
+    public float bloodPumpRate;
+
+    float BodyPart.bloodLossRate { get => bloodLossRate; set => bloodLossRate = value; }
+    public float bloodLossRate;
     private float timeSinceLastBloodLoss = 0;
+
 
     List<BodyPart> BodyPart.connectedBodyParts { get => connectedBodyParts; set => connectedBodyParts = value; }
     private List<BodyPart> connectedBodyParts = new List<BodyPart>();
@@ -16,23 +22,21 @@ public class Torso : MonoBehaviour, BodyPart
 
     //TODO: add a check for running out of blood
     //only pump blood if there's blood left to pump
-    public void PumpBlood()
+    public void PumpBlood(float pumpRate, float timeSinceLastPump)
     {
         foreach (BodyPart connectedBodyPart in connectedBodyParts)
         {
-            if (blood >= 0.0f)
-            {
-                float newBlood = Mathf.Max(blood - 2f, 0f);
-                connectedBodyPart.blood += (blood - newBlood);
-                blood = newBlood;
-            }
+            float proposedBloodOut = pumpRate * timeSinceLastPump;
+            float cappedBloodOut = Mathf.Min(blood, proposedBloodOut);
+            connectedBodyPart.blood += cappedBloodOut;
+            blood -= cappedBloodOut;
         }
     }
 
-    //only lose blood if there's blood left to lose
-    public void LoseBlood()
+    public void LoseBlood(float lossRate, float timeSinceLastLoss)
     {
-        blood = Mathf.Max(blood - bloodLossRate, 0);
+        float bloodLost = Mathf.Max(lossRate * timeSinceLastLoss, 0);
+        blood -= bloodLost;
     }
 
     // Start is called before the first frame update
@@ -47,26 +51,17 @@ public class Torso : MonoBehaviour, BodyPart
 
     public float tempUpdate = 0;
 
-    // Update is called once per frame
     void Update()
     {
-        //pumps blood once per second
-        timeSinceLastPump += Time.deltaTime;
-        if (timeSinceLastPump >= 1.0f)
-        {
-            LoseBlood();
-            PumpBlood();
-            timeSinceLastPump = 0.0f;
-        }
+        LoseBlood(bloodLossRate, Time.deltaTime);
+        PumpBlood(bloodPumpRate, Time.deltaTime);
 
         tempUpdate += Time.deltaTime;
-        if (tempUpdate >= 3.0f)
+        if (tempUpdate >= 1.0f)
         {
-            Debug.Log("Torso Blood: " + blood);
+            Debug.Log(gameObject.name + " Blood: " + blood);
             tempUpdate = 0.0f;
 
         }
     }
-
-
 }

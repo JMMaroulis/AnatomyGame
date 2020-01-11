@@ -6,10 +6,10 @@ interface BodyPart
 {
     float blood { get; set; }
     float bloodLossRate { get; set; }
-
+    float bloodPumpRate { get; set; }
     List<BodyPart> connectedBodyParts {get; set ;}
 
-    void PumpBlood();
+    void PumpBlood(float pumpRate, float timeSinceLastPump);
 
-    void LoseBlood();
+    void LoseBlood(float lossRate, float timeSinceLastLoss);
 }
