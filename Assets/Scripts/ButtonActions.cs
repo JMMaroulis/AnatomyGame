@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class ButtonActions : MonoBehaviour
 {
+    public List<GameObject> menuButtons;
+    public GameObject selectedBodyPart;
+
     // Start is called before the first frame update
     void Start()
     {
-        Button bandageButton = GameObject.FindGameObjectWithTag("bandages").GetComponent<Button>();
-        bandageButton.onClick.AddListener(boop);
+        AssignBandagesButton(menuButtons[0]);
     }
 
     // Update is called once per frame
@@ -18,8 +20,25 @@ public class ButtonActions : MonoBehaviour
         
     }
 
-    void boop()
+    void ClearAllButtons()
     {
-        Debug.Log("boop");
+        foreach (GameObject buttonObject in menuButtons)
+        {
+            buttonObject.GetComponent<Button>().onClick.RemoveAllListeners();
+        }
+    }
+
+    void AssignBandagesButton(GameObject buttonObject)
+    {
+        buttonObject.GetComponent<Button>().onClick.AddListener(Bandages);
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "BANDAGES";
+        buttonText.fontSize = 40;
+    }
+
+    void Bandages()
+    {
+        Debug.Log("applying bandages everywhere, for now");
+        selectedBodyPart.GetComponent<BodyPart>().bloodLossRate -= 10;
     }
 }
