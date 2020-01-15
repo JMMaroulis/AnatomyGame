@@ -22,7 +22,6 @@ public class ButtonActions : MonoBehaviour
         menuButtons[0].GetComponent<Button>().Select();
 
         //get bodyparts from body
-        //bodyParts = body.transform.GetComponentsInChildren<BodyPart>().ToList<BodyPart>();
         for (int i = 0; i < body.transform.childCount; i++)
         {
             bodyPartObjects.Add(body.transform.GetChild(i).gameObject);

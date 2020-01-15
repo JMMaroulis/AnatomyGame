@@ -25,16 +25,16 @@ public class Leg : MonoBehaviour, BodyPart
         foreach (BodyPart connectedBodyPart in connectedBodyParts)
         {
             float proposedBloodOut = pumpRate * timeSinceLastPump;
-            float cappedBloodOut = Mathf.Min(blood, proposedBloodOut);
-            connectedBodyPart.blood += cappedBloodOut;
-            blood -= cappedBloodOut;
+            float bloodOut = Mathf.Max(Mathf.Min(blood, proposedBloodOut), 0);
+            connectedBodyPart.blood += bloodOut;
+            blood -= bloodOut;
         }
     }
 
     public void LoseBlood(float lossRate, float timeSinceLastLoss)
     {
-        float bloodLost = Mathf.Max(lossRate * timeSinceLastLoss, 0);
-        blood -= bloodLost;
+        float bloodLost = lossRate * timeSinceLastLoss;
+        blood = Mathf.Max(blood - bloodLost, 0);
     }
 
     // Start is called before the first frame update
@@ -51,8 +51,9 @@ public class Leg : MonoBehaviour, BodyPart
 
     void Update()
     {
-        LoseBlood(bloodLossRate, Time.deltaTime);
+        LoseBlood(bloodLossRate / 2f, Time.deltaTime);
         PumpBlood(bloodPumpRate, Time.deltaTime);
+        LoseBlood(bloodLossRate / 2f, Time.deltaTime);
 
         tempUpdate += Time.deltaTime;
         if (tempUpdate >= 1.0f)
