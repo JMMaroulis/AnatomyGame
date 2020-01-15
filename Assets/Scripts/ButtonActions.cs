@@ -10,6 +10,7 @@ public class ButtonActions : MonoBehaviour
     public GameObject selectedBodyPartObject = null;
     public GameObject body;
     private List<GameObject> bodyPartObjects = new List<GameObject>();
+    private int bodyPartMenuCounter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,11 +42,14 @@ public class ButtonActions : MonoBehaviour
         
     }
 
+    //make button take us back to default menu
     void AssignDefaultButtons()
     {
         AssignSelectBodyPartOptions(menuButtons[1]);
+        bodyPartMenuCounter = 0;
     }
 
+    //remove all text and actions from all buttons
     void ClearAllButtons()
     {
         foreach (GameObject buttonObject in menuButtons)
@@ -55,6 +59,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+    //make a button apply bandages to selected bodypart
     void AssignBandagesButton(GameObject buttonObject)
     {
         buttonObject.GetComponent<Button>().onClick.AddListener(Bandages);
@@ -62,12 +67,14 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = "BANDAGES";
     }
 
+    //apply bandages to selected bodypart
     void Bandages()
     {
         Debug.Log("applying bandages to" + selectedBodyPartObject.name);
         selectedBodyPartObject.GetComponent<BodyPart>().bloodLossRate -= 10;
     }
 
+    //make a button take us to the bodypart select menu
     void AssignSelectBodyPartOptions(GameObject buttonObject)
     {
         ClearAllButtons();
@@ -88,24 +95,27 @@ public class ButtonActions : MonoBehaviour
         menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
         menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
 
-        //more bodyparts button
-        //TODO: SUPPORT FOR MORE THAN 6 BODYPARTS
-        menuButtons[7].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
-
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
         int numBodyParts = bodyPartObjects.Count();
-        for (int i = 0; i < Mathf.Min(numBodyParts, 6); i++)
+        int countStart = bodyPartMenuCounter;
+        while(bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart+6))
         {
             //select bodypart, then reset to default
-            //unless we implement some sort of state tree to walk back on, resetting the whole thing'll do
-            AssignSelectBodyPart(menuButtons[i], bodyPartObjects[i]);
-            menuButtons[i].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+            AssignSelectBodyPart(menuButtons[bodyPartMenuCounter - countStart], bodyPartObjects[bodyPartMenuCounter]);
+            menuButtons[bodyPartMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+            bodyPartMenuCounter += 1;
         }
 
+        if (bodyPartMenuCounter < numBodyParts)
+        {
+            //more bodyparts button
+            menuButtons[7].GetComponent<Button>().onClick.AddListener(SelectBodyPartOptions);
+            menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
+        }
     }
 
+    //make a button select a given bodypart
     void AssignSelectBodyPart(GameObject buttonObject, GameObject bodyPartObject)
     {
         UnityEngine.Events.UnityAction action1 = () => { SelectBodyPart(bodyPartObject); };
@@ -116,6 +126,7 @@ public class ButtonActions : MonoBehaviour
         buttonText.fontSize = 40;
     }
 
+    //select a given bodypart
     void SelectBodyPart(GameObject bodyPartObject)
     {
         selectedBodyPartObject = bodyPartObject;
