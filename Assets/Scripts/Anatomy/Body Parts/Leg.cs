@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Leg : MonoBehaviour, BodyPart
@@ -22,12 +23,18 @@ public class Leg : MonoBehaviour, BodyPart
     //only pump blood if there's blood left to pump
     public void PumpBlood(float pumpRate, float timeSinceLastPump)
     {
-        foreach (BodyPart connectedBodyPart in connectedBodyParts)
+        //pumping blood to body parts in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
+        List<int> pumpOrder = Enumerable.Range(0, connectedBodyParts.Count()).ToList<int>();
+        IListExtensions.Shuffle<int>(pumpOrder);
+        foreach (int bodyPartIndex in pumpOrder)
         {
-            float proposedBloodOut = pumpRate * timeSinceLastPump;
-            float bloodOut = Mathf.Max(Mathf.Min(blood, proposedBloodOut), 0);
-            connectedBodyPart.blood += bloodOut;
-            blood -= bloodOut;
+            if (connectedBodyParts[bodyPartIndex].blood <= blood)
+            {
+                float proposedBloodOut = pumpRate * timeSinceLastPump;
+                float bloodOut = Mathf.Max(Mathf.Min(blood, proposedBloodOut), 0);
+                connectedBodyParts[bodyPartIndex].blood += bloodOut;
+                blood -= bloodOut;
+            }
         }
     }
 
