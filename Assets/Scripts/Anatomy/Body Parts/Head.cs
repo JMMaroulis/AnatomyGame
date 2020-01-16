@@ -4,16 +4,20 @@ using System.Linq;
 using UnityEngine;
 public class Head : MonoBehaviour, BodyPart
 {
+    bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
+    public bool isFunctioning = true;
+
     float BodyPart.blood { get => blood; set => blood = value; }
     public float blood;
-    private float timeSinceLastPump = 0;
+
+    float BodyPart.bloodRequiredToFunction { get => bloodRequiredToFunction; set => bloodRequiredToFunction = value; }
+    public float bloodRequiredToFunction;
 
     float BodyPart.bloodPumpRate { get => bloodPumpRate; set => bloodPumpRate = value; }
     public float bloodPumpRate;
 
     float BodyPart.bloodLossRate { get => bloodLossRate; set => bloodLossRate = value; }
     public float bloodLossRate;
-    private float timeSinceLastBloodLoss = 0;
 
 
     List<BodyPart> BodyPart.connectedBodyParts { get => connectedBodyParts; set => connectedBodyParts = value; }
@@ -45,6 +49,19 @@ public class Head : MonoBehaviour, BodyPart
         blood = Mathf.Max(blood-bloodLost, 0);
     }
 
+    public void CheckForFunctionality()
+    {
+        if (blood < bloodRequiredToFunction)
+        {
+            isFunctioning = false;
+        }
+        else
+        {
+            isFunctioning = true;
+        }
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,13 +79,13 @@ public class Head : MonoBehaviour, BodyPart
         LoseBlood(bloodLossRate / 2f, Time.deltaTime);
         PumpBlood(bloodPumpRate, Time.deltaTime);
         LoseBlood(bloodLossRate / 2f, Time.deltaTime);
+        CheckForFunctionality();
 
         tempUpdate += Time.deltaTime;
         if (tempUpdate >= 1.0f)
         {
             Debug.Log(gameObject.name + " Blood: " + blood);
             tempUpdate = 0.0f;
-
         }
     }
 }

@@ -523,7 +523,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca33a1b888d7eef47801768797802d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFunctioning: 1
   blood: 500
+  bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
   connectedBodyPartsGameObjects:
@@ -788,7 +790,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4efea50eff8fe4b83973b10294824e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFunctioning: 1
   blood: 500
+  bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
   connectedBodyPartsGameObjects:
@@ -1347,7 +1351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2911f39dccc614ea3f99b0199ad821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFunctioning: 1
   blood: 500
+  bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
   connectedBodyPartsGameObjects:
@@ -1387,7 +1393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.28866667, y: 0.28066665}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.375, y: -2}
+  m_AnchoredPosition: {x: -2.5, y: -2}
   m_SizeDelta: {x: 4.9000244, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &850396916
@@ -3247,7 +3253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb7cfbc1ed22f047bb379a79198b4d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFunctioning: 1
   blood: 500
+  bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
   connectedBodyPartsGameObjects:
@@ -3296,7 +3304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb7cfbc1ed22f047bb379a79198b4d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFunctioning: 1
   blood: 500
+  bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
   connectedBodyPartsGameObjects:
@@ -3345,7 +3355,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c2911f39dccc614ea3f99b0199ad821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFunctioning: 1
   blood: 500
+  bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 100
   connectedBodyPartsGameObjects:

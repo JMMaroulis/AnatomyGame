@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class Leg : MonoBehaviour, BodyPart
 {
+    bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
+    public bool isFunctioning = true;
+
     float BodyPart.blood { get => blood; set => blood = value; }
     public float blood;
+
+    float BodyPart.bloodRequiredToFunction { get => bloodRequiredToFunction; set => bloodRequiredToFunction = value; }
+    public float bloodRequiredToFunction;
 
     float BodyPart.bloodPumpRate { get => bloodPumpRate; set => bloodPumpRate = value; }
     public float bloodPumpRate;
@@ -44,6 +50,19 @@ public class Leg : MonoBehaviour, BodyPart
         blood = Mathf.Max(blood - bloodLost, 0);
     }
 
+    public void CheckForFunctionality()
+    {
+        if (blood < bloodRequiredToFunction)
+        {
+            isFunctioning = false;
+        }
+        else
+        {
+            isFunctioning = true;
+        }
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,18 +75,20 @@ public class Leg : MonoBehaviour, BodyPart
 
     public float tempUpdate = 0;
 
+
+
     void Update()
     {
         LoseBlood(bloodLossRate / 2f, Time.deltaTime);
         PumpBlood(bloodPumpRate, Time.deltaTime);
         LoseBlood(bloodLossRate / 2f, Time.deltaTime);
+        CheckForFunctionality();
 
         tempUpdate += Time.deltaTime;
         if (tempUpdate >= 1.0f)
         {
             Debug.Log(gameObject.name + " Blood: " + blood);
             tempUpdate = 0.0f;
-
         }
     }
 }
