@@ -41,13 +41,17 @@ public class BloodLevelReporting : MonoBehaviour
     void UpdateBloodText()
     {
         string bloodTextNew = "Blood Levels:\n";
+        float bloodSum = 0;
         foreach (GameObject bodyPartObject in bodyPartObjects)
         {
             bloodTextNew += bodyPartObject.name;
             bloodTextNew += ": ";
             bloodTextNew += Mathf.Round(bodyPartObject.GetComponent<BodyPart>().blood);
             bloodTextNew += "\n";
+            bloodSum += bodyPartObject.GetComponent<BodyPart>().blood;
         }
+        bloodTextNew += "Sum Blood: " + bloodSum;
+
         bloodText.text = bloodTextNew;
 
     }

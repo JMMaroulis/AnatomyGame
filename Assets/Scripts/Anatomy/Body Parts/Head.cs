@@ -24,42 +24,18 @@ public class Head : MonoBehaviour, BodyPart
     private List<BodyPart> connectedBodyParts = new List<BodyPart>();
     public List<GameObject> connectedBodyPartsGameObjects;
 
-    //TODO: add a check for running out of blood
-    //only pump blood if there's blood left to pump
     public void PumpBlood(float pumpRate, float timeSinceLastPump)
     {
-        //pumping blood to body parts in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
-        List<int> pumpOrder = Enumerable.Range(0, connectedBodyParts.Count()).ToList<int>();
-        IListExtensions.Shuffle<int>(pumpOrder);
-        foreach (int bodyPartIndex in pumpOrder)
-        {
-            if (connectedBodyParts[bodyPartIndex].blood <= blood)
-            {
-                float proposedBloodOut = pumpRate * timeSinceLastPump;
-                float bloodOut = Mathf.Max(Mathf.Min(blood, proposedBloodOut), 0);
-                connectedBodyParts[bodyPartIndex].blood += bloodOut;
-                blood -= bloodOut;
-            }
-        }
+        BodyPartsStatic.PumpBlood(bloodPumpRate, Time.deltaTime, ref blood, ref connectedBodyParts);
     }
-
     public void LoseBlood(float lossRate, float timeSinceLastLoss)
     {
-        float bloodLost = lossRate * timeSinceLastLoss;
-        blood = Mathf.Max(blood-bloodLost, 0);
+        BodyPartsStatic.LoseBlood(lossRate, timeSinceLastLoss, ref blood);
     }
 
     public void CheckForFunctionality()
     {
-        if (blood < bloodRequiredToFunction)
-        {
-            isFunctioning = false;
-        }
-        else
-        {
-            isFunctioning = true;
-        }
-
+        isFunctioning = BodyPartsStatic.CheckForFunctionality(blood, bloodRequiredToFunction);
     }
 
     // Start is called before the first frame update

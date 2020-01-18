@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface BodyPart
+public interface BodyPart
 {
     bool isFunctioning { get; set; }
     float bloodRequiredToFunction { get; set; }

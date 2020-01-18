@@ -527,7 +527,7 @@ MonoBehaviour:
   blood: 500
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
-  bloodLossRate: 0
+  bloodLossRate: 50
   connectedBodyPartsGameObjects:
   - {fileID: 451720058}
   - {fileID: 1867183651}
@@ -794,7 +794,7 @@ MonoBehaviour:
   blood: 500
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
-  bloodLossRate: 0
+  bloodLossRate: 100
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   tempUpdate: 0
@@ -3359,7 +3359,7 @@ MonoBehaviour:
   blood: 500
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
-  bloodLossRate: 100
+  bloodLossRate: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   tempUpdate: 0
