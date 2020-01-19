@@ -17,6 +17,14 @@ public class BloodLevelReporting : MonoBehaviour
         for (int i = 0; i < body.transform.childCount; i++)
         {
             bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
+
+            //get organs from bodypart
+            //NOTE: THIS INTRODUCES THE ASSUMPTION THAT ORGANS WILL ALWAYS BE CHILDREN OF THEIR CONTAINING BODYPARTS
+            //AS WELL AS CONTIANED IN THE containedOrgans LISTS. IT WILL DO FOR NOW.
+            for(int j = 0; j < body.transform.GetChild(i).childCount; j++)
+            {
+                bodyPartObjects.Add(body.transform.GetChild(i).GetChild(j).gameObject);
+            }
         }
 
         bloodText = gameObject.GetComponent<Text>();

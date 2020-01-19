@@ -8,12 +8,26 @@ public static class BodyPartsStatic
 {
 
     //Pumps blood, if there is blood left to pump.
-    public static void PumpBlood(float pumpRate, float timeSinceLastPump, ref float blood, ref List<BodyPart> connectedBodyParts)
+    public static void PumpBlood(float pumpRate, float timeSinceLastPump, ref float blood, ref List<BodyPart> connectedBodyParts, ref List<BodyPart> containedOrgans)
     {
-        //pumping blood to body parts in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between themf
-        List<int> pumpOrder = Enumerable.Range(0, connectedBodyParts.Count()).ToList<int>();
-        IListExtensions.Shuffle<int>(pumpOrder);
-        foreach (int bodyPartIndex in pumpOrder)
+        //pumping blood to contained organs in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
+        List<int> organPumpOrder = Enumerable.Range(0, containedOrgans.Count()).ToList<int>();
+        IListExtensions.Shuffle<int>(organPumpOrder);
+        foreach (int organIndex in organPumpOrder)
+        {
+            if (containedOrgans[organIndex].blood <= blood)
+            {
+                float proposedBloodOut = pumpRate * timeSinceLastPump;
+                float bloodOut = Mathf.Max(Mathf.Min(blood, proposedBloodOut), 0);
+                containedOrgans[organIndex].blood += bloodOut;
+                blood -= bloodOut;
+            }
+        }
+
+        //pumping blood to body parts in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
+        List<int> limbPumpOrder = Enumerable.Range(0, connectedBodyParts.Count()).ToList<int>();
+        IListExtensions.Shuffle<int>(limbPumpOrder);
+        foreach (int bodyPartIndex in limbPumpOrder)
         {
             if (connectedBodyParts[bodyPartIndex].blood <= blood)
             {

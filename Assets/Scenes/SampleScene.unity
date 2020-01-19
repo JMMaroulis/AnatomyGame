@@ -369,6 +369,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61478079}
   m_CullTransparentMesh: 0
+--- !u!1 &139341403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 139341405}
+  - component: {fileID: 139341404}
+  m_Layer: 0
+  m_Name: Heart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &139341404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139341403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98465dd9e9f4d314db33d70a456c7bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFunctioning: 1
+  blood: 100
+  bloodRequiredToFunction: 0
+  bloodPumpRate: 50
+  bloodLossRate: 0
+  connectedBodyPartsGameObjects:
+  - {fileID: 364669068}
+  containedOrgansGameObjects: []
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
+--- !u!4 &139341405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139341403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 364669069}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &329362650
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +561,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 139341405}
   m_Father: {fileID: 965609866}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -527,13 +582,18 @@ MonoBehaviour:
   blood: 500
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
-  bloodLossRate: 50
+  bloodLossRate: 0
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
   connectedBodyPartsGameObjects:
   - {fileID: 451720058}
   - {fileID: 1867183651}
   - {fileID: 2022202132}
   - {fileID: 2058615751}
   - {fileID: 815907113}
+  containedOrgansGameObjects:
+  - {fileID: 139341403}
   tempUpdate: 0
 --- !u!1 &374478779
 GameObject:
@@ -794,9 +854,13 @@ MonoBehaviour:
   blood: 500
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
-  bloodLossRate: 100
+  bloodLossRate: 0
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgansGameObjects: []
   tempUpdate: 0
 --- !u!1 &455039389
 GameObject:
@@ -1356,8 +1420,12 @@ MonoBehaviour:
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgansGameObjects: []
   tempUpdate: 0
 --- !u!1 &850396914
 GameObject:
@@ -3260,6 +3328,10 @@ MonoBehaviour:
   bloodLossRate: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgansGameObjects: []
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
   tempUpdate: 0
 --- !u!1 &2022202132
 GameObject:
@@ -3311,6 +3383,10 @@ MonoBehaviour:
   bloodLossRate: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgansGameObjects: []
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
   tempUpdate: 0
 --- !u!1 &2058615751
 GameObject:
@@ -3359,7 +3435,11 @@ MonoBehaviour:
   blood: 500
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
-  bloodLossRate: 0
+  bloodLossRate: 100
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgansGameObjects: []
   tempUpdate: 0

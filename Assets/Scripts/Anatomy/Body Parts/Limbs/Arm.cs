@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-public class Torso : MonoBehaviour, BodyPart
+public class Arm : MonoBehaviour, BodyPart
 {
-    
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
@@ -26,14 +24,28 @@ public class Torso : MonoBehaviour, BodyPart
     private List<BodyPart> connectedBodyParts = new List<BodyPart>();
     public List<GameObject> connectedBodyPartsGameObjects;
 
-    public void PumpBlood(float pumpRate, float timeSinceLastPump)
+    List<BodyPart> BodyPart.containedOrgans { get => containedOrgans; set => containedOrgans = value; }
+    private List<BodyPart> containedOrgans = new List<BodyPart>();
+    public List<GameObject> containedOrgansGameObjects;
+
+    //oxygen stuff
+    float BodyPart.oxygen { get => oxygen; set => oxygen = value; }
+    public float oxygen;
+
+    float BodyPart.oxygenMax { get => oxygenMax; set => oxygenMax = value; }
+    public float oxygenMax;
+
+    float BodyPart.oxygenRequired { get => oxygenRequired; set => oxygenRequired = value; }
+    public float oxygenRequired;
+
+    public void PumpBlood()
     {
-        BodyPartsStatic.PumpBlood(bloodPumpRate, Time.deltaTime, ref blood, ref connectedBodyParts);
+        BodyPartsStatic.PumpBlood(bloodPumpRate, Time.deltaTime, ref blood, ref connectedBodyParts, ref containedOrgans);
     }
 
-    public void LoseBlood(float lossRate, float timeSinceLastLoss)
+    public void LoseBlood()
     {
-        BodyPartsStatic.LoseBlood(lossRate, timeSinceLastLoss, ref blood);
+        BodyPartsStatic.LoseBlood(bloodLossRate, Time.deltaTime, ref blood);
     }
 
     public void CheckForFunctionality()
@@ -49,16 +61,20 @@ public class Torso : MonoBehaviour, BodyPart
         {
             connectedBodyParts.Add(connectedBodyPartGameObject.GetComponent<BodyPart>());
         }
+
+        //connect organs
+        foreach (GameObject connectedOrganGameObject in containedOrgansGameObjects)
+        {
+            connectedBodyParts.Add(connectedOrganGameObject.GetComponent<BodyPart>());
+        }
     }
 
     public float tempUpdate = 0;
 
-
     void Update()
     {
-        LoseBlood(bloodLossRate / 2f, Time.deltaTime);
-        PumpBlood(bloodPumpRate, Time.deltaTime);
-        LoseBlood(bloodLossRate / 2f, Time.deltaTime);
+        LoseBlood();
+        //PumpBlood();
         CheckForFunctionality();
 
         tempUpdate += Time.deltaTime;

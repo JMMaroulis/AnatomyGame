@@ -5,17 +5,26 @@ using UnityEngine;
 public interface BodyPart
 {
     bool isFunctioning { get; set; }
+
+    //blood stuff
     float bloodRequiredToFunction { get; set; }
     float blood { get; set; }
     float bloodLossRate { get; set; }
     float bloodPumpRate { get; set; }
-    List<BodyPart> connectedBodyParts {get; set ;}
+    List<BodyPart> connectedBodyParts {get; set;}
+
+    //oxygen stuff
+    float oxygen { get; set; }
+    float oxygenMax { get; set; }
+    float oxygenRequired { get; set; }
+
+    List<BodyPart> containedOrgans { get; set; }
 
     //move blood from bodypart to all connected bodyparts
-    void PumpBlood(float pumpRate, float timeSinceLastPump);
+    void PumpBlood();
 
     //lose blood from bodypart
-    void LoseBlood(float lossRate, float timeSinceLastLoss);
+    void LoseBlood();
 
     //update isFunctioning
     void CheckForFunctionality();
