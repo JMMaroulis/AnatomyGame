@@ -42,7 +42,7 @@ public class Heart : MonoBehaviour, BodyPart
    
     public void PumpBlood()
     {
-        BodyPartsStatic.PumpBlood(bloodPumpRate, Time.deltaTime, ref blood, ref connectedBodyParts, ref containedOrgans);
+        BodyPartsStatic.PumpBlood(bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
     }
 
     public void LoseBlood()
@@ -50,9 +50,14 @@ public class Heart : MonoBehaviour, BodyPart
         BodyPartsStatic.LoseBlood(bloodLossRate, Time.deltaTime, ref blood);
     }
 
+    public void ConsumeOxygen()
+    {
+        BodyPartsStatic.ConsumeOxygen(oxygenRequired, Time.deltaTime, ref oxygen);
+    }
+
     public void CheckForFunctionality()
     {
-        isFunctioning = BodyPartsStatic.CheckForFunctionality(blood, bloodRequiredToFunction);
+        isFunctioning = BodyPartsStatic.CheckForFunctionality(blood, bloodRequiredToFunction, oxygen, oxygenRequired);
     }
 
 
@@ -103,14 +108,20 @@ public class Heart : MonoBehaviour, BodyPart
         //connect organs
         foreach (GameObject connectedOrganGameObject in containedOrgansGameObjects)
         {
-            connectedBodyParts.Add(connectedOrganGameObject.GetComponent<BodyPart>());
+            containedOrgans.Add(connectedOrganGameObject.GetComponent<BodyPart>());
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        PumpBloodMaster();
+        CheckForFunctionality();
+        LoseBlood();
+        ConsumeOxygen();
+        if (isFunctioning)
+        {
+            PumpBloodMaster();
+        }
     }
 
 

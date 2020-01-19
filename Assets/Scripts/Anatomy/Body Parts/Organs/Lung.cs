@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-public class Arm : MonoBehaviour, BodyPart
+
+public class Lung : MonoBehaviour, BodyPart
 {
+
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
@@ -32,12 +33,15 @@ public class Arm : MonoBehaviour, BodyPart
     float BodyPart.oxygen { get => oxygen; set => oxygen = value; }
     public float oxygen;
 
+    public float oxygenAbsorptionRate;
+
     float BodyPart.oxygenMax { get => oxygenMax; set => oxygenMax = value; }
     public float oxygenMax;
 
     float BodyPart.oxygenRequired { get => oxygenRequired; set => oxygenRequired = value; }
     public float oxygenRequired;
 
+   
     public void PumpBlood()
     {
         BodyPartsStatic.PumpBlood(bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
@@ -58,6 +62,8 @@ public class Arm : MonoBehaviour, BodyPart
         isFunctioning = BodyPartsStatic.CheckForFunctionality(blood, bloodRequiredToFunction, oxygen, oxygenRequired);
     }
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,19 +80,21 @@ public class Arm : MonoBehaviour, BodyPart
         }
     }
 
-    public float tempUpdate = 0;
+    void AbsorbOxygen()
+    {
+        if (isFunctioning)
+        {
+            oxygen = Mathf.Min(oxygenMax, oxygen + oxygenAbsorptionRate * Time.deltaTime);
+        }
+    }
 
+    // Update is called once per frame
     void Update()
     {
         LoseBlood();
-        ConsumeOxygen();
+        AbsorbOxygen();
         CheckForFunctionality();
-
-        tempUpdate += Time.deltaTime;
-        if (tempUpdate >= 1.0f)
-        {
-            Debug.Log(gameObject.name + " Blood: " + blood);
-            tempUpdate = 0.0f;
-        }
     }
+
+
 }

@@ -17,6 +17,7 @@ public interface BodyPart
     float oxygen { get; set; }
     float oxygenMax { get; set; }
     float oxygenRequired { get; set; }
+    
 
     List<BodyPart> containedOrgans { get; set; }
 
@@ -25,6 +26,9 @@ public interface BodyPart
 
     //lose blood from bodypart
     void LoseBlood();
+
+    //use oxygen from supply
+    void ConsumeOxygen();
 
     //update isFunctioning
     void CheckForFunctionality();

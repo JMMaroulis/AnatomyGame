@@ -201,8 +201,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 923910317}
   m_HandleRect: {fileID: 923910316}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.95739996
+  m_Value: 1.0000018
+  m_Size: 0.95740014
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -399,16 +399,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFunctioning: 1
-  blood: 100
+  blood: 500
   bloodRequiredToFunction: 0
   bloodPumpRate: 50
   bloodLossRate: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
-  oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
+  oxygen: 100
+  oxygenMax: 100
+  oxygenRequired: 10
 --- !u!4 &139341405
 Transform:
   m_ObjectHideFlags: 0
@@ -563,6 +563,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 139341405}
+  - {fileID: 1977569297}
+  - {fileID: 1302856265}
   m_Father: {fileID: 965609866}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -584,8 +586,8 @@ MonoBehaviour:
   bloodPumpRate: 50
   bloodLossRate: 0
   oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
+  oxygenMax: 100
+  oxygenRequired: 5
   connectedBodyPartsGameObjects:
   - {fileID: 451720058}
   - {fileID: 1867183651}
@@ -594,6 +596,8 @@ MonoBehaviour:
   - {fileID: 815907113}
   containedOrgansGameObjects:
   - {fileID: 139341403}
+  - {fileID: 1977569295}
+  - {fileID: 1302856263}
   tempUpdate: 0
 --- !u!1 &374478779
 GameObject:
@@ -856,8 +860,8 @@ MonoBehaviour:
   bloodPumpRate: 50
   bloodLossRate: 0
   oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
+  oxygenMax: 100
+  oxygenRequired: 5
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
@@ -1421,179 +1425,12 @@ MonoBehaviour:
   bloodPumpRate: 50
   bloodLossRate: 0
   oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
+  oxygenMax: 100
+  oxygenRequired: 5
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
   tempUpdate: 0
---- !u!1 &850396914
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 850396915}
-  - component: {fileID: 850396917}
-  - component: {fileID: 850396916}
-  m_Layer: 5
-  m_Name: Text (TMP)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &850396915
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850396914}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1105771188}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.28866667, y: 0.28066665}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.5, y: -2}
-  m_SizeDelta: {x: 4.9000244, y: 4}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &850396916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850396914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'This is probably going to be a series of smaller textboxes and such, but
-    it''ll make an acceptable placeholder for now.
-
-
-    TODO:
-
-    Figure out how
-    to get these two textboxes to scale properly with resolution.
-
-    It''s almost
-    working, just not quite.'
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_outlineColor:
-    serializedVersion: 2
-    rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_textAlignment: 257
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
-  m_linkedTextComponent: {fileID: 0}
-  m_isLinkedTextComponent: 0
-  m_isTextTruncated: 0
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_ignoreRectMaskCulling: 0
-  m_ignoreCulling: 1
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_VertexBufferAutoSizeReduction: 1
-  m_firstVisibleCharacter: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_textInfo:
-    textComponent: {fileID: 850396916}
-    characterCount: 239
-    spriteCount: 0
-    spaceCount: 41
-    wordCount: 41
-    linkCount: 0
-    lineCount: 6
-    pageCount: 1
-    materialCount: 1
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_spriteAnimator: {fileID: 0}
-  m_hasFontAssetChanged: 0
-  m_subTextObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &850396917
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850396914}
-  m_CullTransparentMesh: 0
 --- !u!1 &885383399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +1924,104 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047501643}
   m_CullTransparentMesh: 0
+--- !u!1 &1084724856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084724857}
+  - component: {fileID: 1084724860}
+  - component: {fileID: 1084724859}
+  - component: {fileID: 1084724858}
+  m_Layer: 5
+  m_Name: OxygenLevel Textbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1084724857
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084724856}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99999, y: 0.99999, z: 0.99999}
+  m_Children: []
+  m_Father: {fileID: 1105771188}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.28066665}
+  m_AnchorMax: {x: 0.28866667, y: 1}
+  m_AnchoredPosition: {x: 543.83984, y: 2}
+  m_SizeDelta: {x: -6.9000244, y: 4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1084724858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084724856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161dbf5f9b9a11e4fb9eec2439d0db2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 965609865}
+--- !u!114 &1084724859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084724856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Known stats?
+
+    Random stuff?
+
+    Don''t really know what should go
+    in this space. possibly nothing, just expand the main textbox?'
+--- !u!222 &1084724860
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084724856}
+  m_CullTransparentMesh: 0
 --- !u!1 &1105771184
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,7 +2114,7 @@ RectTransform:
   m_Children:
   - {fileID: 329362651}
   - {fileID: 885383400}
-  - {fileID: 850396915}
+  - {fileID: 1084724857}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2481,7 +2416,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1263956146}
   m_HandleRect: {fileID: 1263956145}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2724,6 +2659,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263956144}
   m_CullTransparentMesh: 0
+--- !u!1 &1302856263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1302856265}
+  - component: {fileID: 1302856264}
+  m_Layer: 0
+  m_Name: Right Lung
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1302856264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302856263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1e170829a252f4ea85ced1992fa02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFunctioning: 1
+  blood: 500
+  bloodRequiredToFunction: 100
+  bloodPumpRate: 50
+  bloodLossRate: 0
+  connectedBodyPartsGameObjects:
+  - {fileID: 364669068}
+  containedOrgansGameObjects: []
+  oxygen: 0
+  oxygenAbsorptionRate: 50
+  oxygenMax: 500
+  oxygenRequired: 0
+--- !u!4 &1302856265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302856263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 364669069}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1565867862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3330,9 +3320,64 @@ MonoBehaviour:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
   oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
+  oxygenMax: 100
+  oxygenRequired: 5
   tempUpdate: 0
+--- !u!1 &1977569295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1977569297}
+  - component: {fileID: 1977569296}
+  m_Layer: 0
+  m_Name: Left Lung
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1977569296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977569295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb1e170829a252f4ea85ced1992fa02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFunctioning: 1
+  blood: 500
+  bloodRequiredToFunction: 100
+  bloodPumpRate: 50
+  bloodLossRate: 0
+  connectedBodyPartsGameObjects:
+  - {fileID: 364669068}
+  containedOrgansGameObjects: []
+  oxygen: 0
+  oxygenAbsorptionRate: 50
+  oxygenMax: 500
+  oxygenRequired: 0
+--- !u!4 &1977569297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977569295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 364669069}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2022202132
 GameObject:
   m_ObjectHideFlags: 0
@@ -3385,8 +3430,8 @@ MonoBehaviour:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
   oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
+  oxygenMax: 100
+  oxygenRequired: 5
   tempUpdate: 0
 --- !u!1 &2058615751
 GameObject:
@@ -3435,10 +3480,10 @@ MonoBehaviour:
   blood: 500
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
-  bloodLossRate: 100
+  bloodLossRate: 0
   oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
+  oxygenMax: 100
+  oxygenRequired: 5
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
