@@ -403,12 +403,15 @@ MonoBehaviour:
   bloodRequiredToFunction: 0
   bloodPumpRate: 50
   bloodLossRate: 0
-  connectedBodyPartsGameObjects:
-  - {fileID: 364669068}
-  containedOrgansGameObjects: []
   oxygen: 100
   oxygenMax: 100
   oxygenRequired: 10
+  damage: 10
+  damageMax: 100
+  efficiency: 0
+  connectedBodyPartsGameObjects:
+  - {fileID: 364669068}
+  containedOrgansGameObjects: []
 --- !u!4 &139341405
 Transform:
   m_ObjectHideFlags: 0
@@ -585,9 +588,12 @@ MonoBehaviour:
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
-  oxygen: 0
+  oxygen: 10
   oxygenMax: 100
   oxygenRequired: 5
+  damage: 0
+  damageMax: 100
+  efficiency: 0
   connectedBodyPartsGameObjects:
   - {fileID: 451720058}
   - {fileID: 1867183651}
@@ -859,9 +865,12 @@ MonoBehaviour:
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
-  oxygen: 0
+  oxygen: 10
   oxygenMax: 100
   oxygenRequired: 5
+  damage: 0
+  damageMax: 100
+  efficiency: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
@@ -1424,9 +1433,12 @@ MonoBehaviour:
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
-  oxygen: 0
+  oxygen: 10
   oxygenMax: 100
   oxygenRequired: 5
+  damage: 0
+  damageMax: 100
+  efficiency: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
@@ -1959,7 +1971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.28066665}
   m_AnchorMax: {x: 0.28866667, y: 1}
-  m_AnchoredPosition: {x: 543.83984, y: 2}
+  m_AnchoredPosition: {x: 543.75, y: 2}
   m_SizeDelta: {x: -6.9000244, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1084724858
@@ -2691,15 +2703,18 @@ MonoBehaviour:
   isFunctioning: 1
   blood: 500
   bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  bloodPumpRate: 35
   bloodLossRate: 0
+  oxygen: 10
+  oxygenMax: 500
+  oxygenRequired: 0
+  oxygenAbsorptionRate: 50
+  damage: 0
+  damageMax: 100
+  efficiency: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
-  oxygen: 0
-  oxygenAbsorptionRate: 50
-  oxygenMax: 500
-  oxygenRequired: 0
 --- !u!4 &1302856265
 Transform:
   m_ObjectHideFlags: 0
@@ -3316,12 +3331,15 @@ MonoBehaviour:
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
+  oxygen: 10
+  oxygenMax: 100
+  oxygenRequired: 5
+  damage: 0
+  damageMax: 100
+  efficiency: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
-  oxygen: 0
-  oxygenMax: 100
-  oxygenRequired: 5
   tempUpdate: 0
 --- !u!1 &1977569295
 GameObject:
@@ -3355,15 +3373,18 @@ MonoBehaviour:
   isFunctioning: 1
   blood: 500
   bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  bloodPumpRate: 35
   bloodLossRate: 0
+  oxygen: 10
+  oxygenMax: 500
+  oxygenRequired: 0
+  oxygenAbsorptionRate: 50
+  damage: 50
+  damageMax: 100
+  efficiency: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
-  oxygen: 0
-  oxygenAbsorptionRate: 50
-  oxygenMax: 500
-  oxygenRequired: 0
 --- !u!4 &1977569297
 Transform:
   m_ObjectHideFlags: 0
@@ -3426,12 +3447,15 @@ MonoBehaviour:
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
+  oxygen: 10
+  oxygenMax: 100
+  oxygenRequired: 5
+  damage: 0
+  damageMax: 100
+  efficiency: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []
-  oxygen: 0
-  oxygenMax: 100
-  oxygenRequired: 5
   tempUpdate: 0
 --- !u!1 &2058615751
 GameObject:
@@ -3481,9 +3505,12 @@ MonoBehaviour:
   bloodRequiredToFunction: 100
   bloodPumpRate: 50
   bloodLossRate: 0
-  oxygen: 0
+  oxygen: 10
   oxygenMax: 100
   oxygenRequired: 5
+  damage: 0
+  damageMax: 100
+  efficiency: 0
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
   containedOrgansGameObjects: []

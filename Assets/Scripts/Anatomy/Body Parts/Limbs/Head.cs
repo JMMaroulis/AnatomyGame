@@ -7,6 +7,7 @@ public class Head : MonoBehaviour, BodyPart
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
+    //blood stuff
     float BodyPart.blood { get => blood; set => blood = value; }
     public float blood;
 
@@ -29,7 +30,17 @@ public class Head : MonoBehaviour, BodyPart
     float BodyPart.oxygenRequired { get => oxygenRequired; set => oxygenRequired = value; }
     public float oxygenRequired;
 
+    //damage stuff
+    float BodyPart.damage { get => damage; set => damage = value; }
+    public float damage;
 
+    float BodyPart.damageMax { get => damageMax; set => damageMax = value; }
+    public float damageMax;
+
+    float BodyPart.efficiency { get => efficiency; set => efficiency = value; }
+    public float efficiency;
+
+    //other body parts
     List<BodyPart> BodyPart.connectedBodyParts { get => connectedBodyParts; set => connectedBodyParts = value; }
     private List<BodyPart> connectedBodyParts = new List<BodyPart>();
     public List<GameObject> connectedBodyPartsGameObjects;
@@ -38,9 +49,9 @@ public class Head : MonoBehaviour, BodyPart
     private List<BodyPart> containedOrgans = new List<BodyPart>();
     public List<GameObject> containedOrgansGameObjects;
 
-    public void PumpBlood()
+    public void PumpBlood(float efficiency)
     {
-        BodyPartsStatic.PumpBlood(bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
+        BodyPartsStatic.PumpBlood(efficiency, bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
     }
 
     public void LoseBlood()
@@ -56,6 +67,16 @@ public class Head : MonoBehaviour, BodyPart
     public void CheckForFunctionality()
     {
         isFunctioning = BodyPartsStatic.CheckForFunctionality(blood, bloodRequiredToFunction, oxygen, oxygenRequired);
+    }
+
+    public void UpdateEfficiency()
+    {
+        efficiency = BodyPartsStatic.UpdateEfficiency(damage, damageMax, oxygen, oxygenRequired);
+    }
+
+    public void UpdateDamage()
+    {
+        damage = BodyPartsStatic.UpdateDamage(damage, damageMax, oxygen, oxygenRequired);
     }
 
     // Start is called before the first frame update
@@ -78,9 +99,11 @@ public class Head : MonoBehaviour, BodyPart
 
     void Update()
     {
+        CheckForFunctionality();
+        UpdateDamage();
+        UpdateEfficiency();
         LoseBlood();
         ConsumeOxygen();
-        CheckForFunctionality();
 
         tempUpdate += Time.deltaTime;
         if (tempUpdate >= 1.0f)

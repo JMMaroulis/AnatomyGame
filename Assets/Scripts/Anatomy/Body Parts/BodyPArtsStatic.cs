@@ -8,7 +8,7 @@ public static class BodyPartsStatic
 {
 
     //Pumps blood, if there is blood left to pump.
-    public static void PumpBlood(float pumpRate, float timeSinceLastPump, ref float blood, ref float oxygen, ref List<BodyPart> connectedBodyParts, ref List<BodyPart> containedOrgans)
+    public static void PumpBlood(float efficiency, float pumpRate, float timeSinceLastPump, ref float blood, ref float oxygen, ref List<BodyPart> connectedBodyParts, ref List<BodyPart> containedOrgans)
     {
         //pumping blood to contained organs in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
         List<int> organPumpOrder = Enumerable.Range(0, containedOrgans.Count()).ToList<int>();
@@ -16,8 +16,8 @@ public static class BodyPartsStatic
         foreach (int organIndex in organPumpOrder)
         {
             BodyPart organ = containedOrgans[organIndex];
-            float tempBloodPumpRate = Mathf.Max(Mathf.Min(pumpRate * (blood / organ.blood), pumpRate * 5), pumpRate * 0.2f);
-            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(pumpRate * (oxygen / organ.oxygen), pumpRate * 5), pumpRate * 0.2f);
+            float tempBloodPumpRate = Mathf.Max(Mathf.Min(pumpRate * (blood / organ.blood), pumpRate * 5), pumpRate * 0.2f) * efficiency;
+            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(pumpRate * (oxygen / organ.oxygen), pumpRate * 5), pumpRate * 0.2f) * efficiency;
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
@@ -39,8 +39,8 @@ public static class BodyPartsStatic
         foreach (int bodyPartIndex in limbPumpOrder)
         {
             BodyPart bodyPart = connectedBodyParts[bodyPartIndex];
-            float tempBloodPumpRate = Mathf.Max(Mathf.Min(pumpRate * (blood / bodyPart.blood), pumpRate * 5), pumpRate * 0.2f);
-            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(pumpRate * (oxygen / bodyPart.oxygen), pumpRate * 5), pumpRate * 0.2f);
+            float tempBloodPumpRate = Mathf.Max(Mathf.Min(pumpRate * (blood / bodyPart.blood), pumpRate * 5), pumpRate * 0.2f) * efficiency;
+            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(pumpRate * (oxygen / bodyPart.oxygen), pumpRate * 5), pumpRate * 0.2f) * efficiency;
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
@@ -74,7 +74,7 @@ public static class BodyPartsStatic
     {
         if (blood < bloodRequiredToFunction)
         { return false; }
-        if (oxygen < oxygenRequiredToFunction)
+        if (oxygen == 0)
         { return false; }
 
         else
@@ -82,6 +82,23 @@ public static class BodyPartsStatic
             return true;
         }
 
+    }
+
+    public static float UpdateEfficiency(float damage, float damageMax, float oxygen, float oxygenRequired)
+    {
+        float damageRatio = 1 - (damage / damageMax); //1 good, 0 bad
+        float oxygenRatio = Mathf.Min((oxygen / oxygenRequired),1); //1 good, 0 bad
+        float efficiency = damageRatio * oxygenRatio;
+
+        return efficiency;
+    }
+
+    public static float UpdateDamage(float damage, float damageMax, float oxygen, float oxygenRequired)
+    {
+        float oxygenRatio = 1 - Mathf.Min((oxygen / oxygenRequired), 1); //0 good, 1 bad
+
+        damage = Mathf.Min(damage + (oxygenRatio * Time.deltaTime), damageMax);
+        return damage;
     }
 
 }

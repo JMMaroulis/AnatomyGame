@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Heart : MonoBehaviour, BodyPart
 {
-
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
+    //blood stuff
     float BodyPart.blood { get => blood; set => blood = value; }
     public float blood;
 
@@ -20,15 +20,6 @@ public class Heart : MonoBehaviour, BodyPart
     float BodyPart.bloodLossRate { get => bloodLossRate; set => bloodLossRate = value; }
     public float bloodLossRate;
 
-
-    List<BodyPart> BodyPart.connectedBodyParts { get => connectedBodyParts; set => connectedBodyParts = value; }
-    private List<BodyPart> connectedBodyParts = new List<BodyPart>();
-    public List<GameObject> connectedBodyPartsGameObjects;
-
-    List<BodyPart> BodyPart.containedOrgans { get => containedOrgans; set => containedOrgans = value; }
-    private List<BodyPart> containedOrgans = new List<BodyPart>();
-    public List<GameObject> containedOrgansGameObjects;
-
     //oxygen stuff
     float BodyPart.oxygen { get => oxygen; set => oxygen = value; }
     public float oxygen;
@@ -39,10 +30,29 @@ public class Heart : MonoBehaviour, BodyPart
     float BodyPart.oxygenRequired { get => oxygenRequired; set => oxygenRequired = value; }
     public float oxygenRequired;
 
-   
-    public void PumpBlood()
+    //damage stuff
+    float BodyPart.damage { get => damage; set => damage = value; }
+    public float damage;
+
+    float BodyPart.damageMax { get => damageMax; set => damageMax = value; }
+    public float damageMax;
+
+    float BodyPart.efficiency { get => efficiency; set => efficiency = value; }
+    public float efficiency;
+
+    //other body parts
+    List<BodyPart> BodyPart.connectedBodyParts { get => connectedBodyParts; set => connectedBodyParts = value; }
+    private List<BodyPart> connectedBodyParts = new List<BodyPart>();
+    public List<GameObject> connectedBodyPartsGameObjects;
+
+    List<BodyPart> BodyPart.containedOrgans { get => containedOrgans; set => containedOrgans = value; }
+    private List<BodyPart> containedOrgans = new List<BodyPart>();
+    public List<GameObject> containedOrgansGameObjects;
+
+
+    public void PumpBlood(float efficiency)
     {
-        BodyPartsStatic.PumpBlood(bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
+        BodyPartsStatic.PumpBlood(efficiency, bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
     }
 
     public void LoseBlood()
@@ -60,6 +70,16 @@ public class Heart : MonoBehaviour, BodyPart
         isFunctioning = BodyPartsStatic.CheckForFunctionality(blood, bloodRequiredToFunction, oxygen, oxygenRequired);
     }
 
+    public void UpdateEfficiency()
+    {
+        efficiency = BodyPartsStatic.UpdateEfficiency(damage, damageMax, oxygen, oxygenRequired);
+    }
+
+    public void UpdateDamage()
+    {
+        damage = BodyPartsStatic.UpdateDamage(damage, damageMax, oxygen, oxygenRequired);
+    }
+
 
     //responsible for controlling blood pumping in all bodyparts
     //TODO: the amount of blood moving around should be capped by the amount of blood actually *in* the heart
@@ -70,14 +90,14 @@ public class Heart : MonoBehaviour, BodyPart
             return;
         }
         //get parts bodypart (most likely the torso)
-        BodyPart parentBodyPart = this.transform.parent.GetComponent<BodyPart>();
+        //BodyPart parentBodyPart = this.transform.parent.GetComponent<BodyPart>();
 
-        PumpBloodRecursive(parentBodyPart, new List<BodyPart>());
+        PumpBloodRecursive(this, new List<BodyPart>());
     }
 
     void PumpBloodRecursive(BodyPart currentBodyPart, List<BodyPart> alreadyPumped)
     {
-        currentBodyPart.PumpBlood();
+        currentBodyPart.PumpBlood(efficiency);
         alreadyPumped.Add(currentBodyPart);
         foreach (BodyPart bodyPart in currentBodyPart.containedOrgans)
         {
@@ -116,12 +136,11 @@ public class Heart : MonoBehaviour, BodyPart
     void Update()
     {
         CheckForFunctionality();
+        UpdateEfficiency();
+        UpdateDamage();
         LoseBlood();
         ConsumeOxygen();
-        if (isFunctioning)
-        {
-            PumpBloodMaster();
-        }
+        PumpBloodMaster();
     }
 
 

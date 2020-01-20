@@ -17,12 +17,16 @@ public interface BodyPart
     float oxygen { get; set; }
     float oxygenMax { get; set; }
     float oxygenRequired { get; set; }
+
+    float damage { get; set; }
+    float damageMax { get; set; }
+    float efficiency { get; set; }
     
 
     List<BodyPart> containedOrgans { get; set; }
 
     //move blood from bodypart to all connected bodyparts
-    void PumpBlood();
+    void PumpBlood(float efficiency);
 
     //lose blood from bodypart
     void LoseBlood();
@@ -32,4 +36,10 @@ public interface BodyPart
 
     //update isFunctioning
     void CheckForFunctionality();
+
+    //update efficiency
+    void UpdateEfficiency();
+
+    //update damage
+    void UpdateDamage();
 }
