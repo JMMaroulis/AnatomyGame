@@ -46,6 +46,9 @@ public class ButtonActions : MonoBehaviour
     {
         AssignSelectBodyPartOptions(menuButtons[1]);
         bodyPartMenuCounter = 0;
+
+        AssignSelectActionOptions(menuButtons[0]);
+
     }
 
     //remove all text and actions from all buttons
@@ -58,20 +61,43 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    //make a button apply bandages to selected bodypart
     void AssignBandagesButton(GameObject buttonObject)
     {
-        buttonObject.GetComponent<Button>().onClick.AddListener(Bandages);
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.Bandages(selectedBodyPartObject); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "BANDAGES";
     }
 
-    //apply bandages to selected bodypart
-    void Bandages()
+    void AssignBloodlettingButton(GameObject buttonObject)
     {
-        Debug.Log("applying bandages to" + selectedBodyPartObject.name);
-        selectedBodyPartObject.GetComponent<BodyPart>().bloodLossRate -= 10;
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.Bloodletting(selectedBodyPartObject); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "BLOODLETTING";
     }
+
+    void AssignAddBloodButton(GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.AddBlood(selectedBodyPartObject); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "ADD BLOOD";
+    }
+
+    void AssignRemoveBloodButton(GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.RemoveBlood(selectedBodyPartObject); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "REMOVE BLOOD";
+    }
+
+
 
     //make a button take us to the bodypart select menu
     void AssignSelectBodyPartOptions(GameObject buttonObject)
@@ -131,5 +157,24 @@ public class ButtonActions : MonoBehaviour
         selectedBodyPartObject = bodyPartObject;
     }
 
+    void AssignSelectActionOptions(GameObject buttonObject)
+    {
+        buttonObject.GetComponent<Button>().onClick.AddListener(SelectActionOptions);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT ACTION";
+    }
 
+    void SelectActionOptions()
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        AssignBandagesButton(menuButtons[0]);
+        AssignBloodlettingButton(menuButtons[1]);
+        AssignAddBloodButton(menuButtons[2]);
+        AssignRemoveBloodButton(menuButtons[3]);
+
+    }
 }
