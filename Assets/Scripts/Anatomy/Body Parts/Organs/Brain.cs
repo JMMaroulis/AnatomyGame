@@ -107,4 +107,13 @@ public class Brain : MonoBehaviour, BodyPart
         ConsumeOxygen();
     }
 
+    public void SeverConnection(GameObject connectedBodyPart)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SeverAllConnections()
+    {
+        throw new System.NotImplementedException();
+    }
 }

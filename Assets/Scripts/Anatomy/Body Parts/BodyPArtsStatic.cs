@@ -101,4 +101,28 @@ public static class BodyPartsStatic
         return damage;
     }
 
+    //severs connection between self and chosen body part (ONE WAY ONLY)
+    public static void SeverConnection(GameObject connectedBodyPart, ref List<GameObject> connectedBodyPartGameObjects, ref List<BodyPart> connectedBodyParts, ref float bloodLossRate, float inducedBloodLossRate)
+    {
+        connectedBodyPartGameObjects.Remove(connectedBodyPart);
+        connectedBodyParts.Remove(connectedBodyPart.GetComponent<BodyPart>());
+        bloodLossRate += inducedBloodLossRate;
+    }
+
+    //severs all connections between self and connecting bodyparts (BOTH WAYS)
+    public static void SeverAllIncomingConnections(GameObject bodyPartObject, List<GameObject> connectedBodyPartGameObjects)
+    {
+        //ask every connected bodypart to sever *this* bodypart from themselves
+        //then sever *that* bodypart from self
+        foreach (GameObject connectedBodyPartObject in connectedBodyPartGameObjects)
+        {
+            connectedBodyPartObject.GetComponent<BodyPart>().SeverConnection(bodyPartObject);
+        }
+
+        for (int i = (connectedBodyPartGameObjects.Count-1); i >= 0; i--)
+        {
+            bodyPartObject.GetComponent<BodyPart>().SeverConnection(connectedBodyPartGameObjects[i]);
+        }
+
+    }
 }

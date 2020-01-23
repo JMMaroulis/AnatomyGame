@@ -50,6 +50,16 @@ public class Leg : MonoBehaviour, BodyPart
     private List<BodyPart> containedOrgans = new List<BodyPart>();
     public List<GameObject> containedOrgansGameObjects;
 
+    public void SeverConnection(GameObject connectedBodyPart)
+    {
+        BodyPartsStatic.SeverConnection(connectedBodyPart, ref connectedBodyPartsGameObjects, ref connectedBodyParts, ref bloodLossRate, 20);
+    }
+
+    public void SeverAllConnections()
+    {
+        BodyPartsStatic.SeverAllIncomingConnections(this.transform.gameObject, connectedBodyPartsGameObjects);
+    }
+
     //TODO: add a check for running out of blood
     //only pump blood if there's blood left to pump
     public void PumpBlood(float efficiency)

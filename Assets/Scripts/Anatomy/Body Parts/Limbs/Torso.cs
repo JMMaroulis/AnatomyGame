@@ -47,8 +47,19 @@ public class Torso : MonoBehaviour, BodyPart
     public List<GameObject> connectedBodyPartsGameObjects;
 
     List<BodyPart> BodyPart.containedOrgans { get => containedOrgans; set => containedOrgans = value; }
+
     private List<BodyPart> containedOrgans = new List<BodyPart>();
     public List<GameObject> containedOrgansGameObjects;
+
+    public void SeverConnection(GameObject connectedBodyPart)
+    {
+        BodyPartsStatic.SeverConnection(connectedBodyPart, ref connectedBodyPartsGameObjects, ref connectedBodyParts, ref bloodLossRate, 20);
+    }
+
+    public void SeverAllConnections()
+    {
+        BodyPartsStatic.SeverAllIncomingConnections(this.transform.gameObject, connectedBodyPartsGameObjects);
+    }
 
     public void PumpBlood(float efficiency)
     {
@@ -114,4 +125,6 @@ public class Torso : MonoBehaviour, BodyPart
             tempUpdate = 0.0f;
         }
     }
+
+
 }

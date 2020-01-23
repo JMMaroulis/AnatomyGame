@@ -42,4 +42,8 @@ public interface BodyPart
 
     //update damage
     void UpdateDamage();
+
+    void SeverConnection(GameObject connectedBodyPart);
+
+    void SeverAllConnections();
 }
