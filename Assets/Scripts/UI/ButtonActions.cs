@@ -47,7 +47,8 @@ public class ButtonActions : MonoBehaviour
         AssignSelectBodyPartOptions(menuButtons[1]);
         bodyPartMenuCounter = 0;
 
-        AssignSelectActionOptions(menuButtons[0]);
+        AssignSelectBloodActionOptions(menuButtons[0]);
+        AssignSelectSurgeryActionOptions(menuButtons[2]);
 
     }
 
@@ -157,13 +158,13 @@ public class ButtonActions : MonoBehaviour
         selectedBodyPartObject = bodyPartObject;
     }
 
-    void AssignSelectActionOptions(GameObject buttonObject)
+    void AssignSelectBloodActionOptions(GameObject buttonObject)
     {
-        buttonObject.GetComponent<Button>().onClick.AddListener(SelectActionOptions);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT ACTION";
+        buttonObject.GetComponent<Button>().onClick.AddListener(SelectBloodActionOptions);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT BLOOD ACTION";
     }
 
-    void SelectActionOptions()
+    void SelectBloodActionOptions()
     {
         ClearAllButtons();
 
@@ -177,4 +178,31 @@ public class ButtonActions : MonoBehaviour
         AssignRemoveBloodButton(menuButtons[3]);
 
     }
+
+    void AssignSelectSurgeryActionOptions(GameObject buttonObject)
+    {
+        buttonObject.GetComponent<Button>().onClick.AddListener(SelectSurgeryActionOptions);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT SURGERY ACTION";
+    }
+
+    void SelectSurgeryActionOptions()
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        AssignRemoveBodyPartButton(menuButtons[0]);
+    }
+
+    void AssignRemoveBodyPartButton(GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveBodyPart(selectedBodyPartObject); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "AMPUTATE";
+    }
+
 }
