@@ -60,6 +60,14 @@ public class Leg : MonoBehaviour, BodyPart
         BodyPartsStatic.SeverAllIncomingConnections(this.transform.gameObject, connectedBodyPartsGameObjects);
     }
 
+    public void CreateConnection(GameObject bodyPartToConnect)
+    {
+        if (bodyPartToConnect != this)
+        {
+            BodyPartsStatic.CreateConnection(bodyPartToConnect, ref connectedBodyPartsGameObjects, ref connectedBodyParts);
+        }
+    }
+
     //TODO: add a check for running out of blood
     //only pump blood if there's blood left to pump
     public void PumpBlood(float efficiency)

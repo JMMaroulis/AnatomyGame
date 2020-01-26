@@ -59,6 +59,14 @@ public class Arm : MonoBehaviour, BodyPart
         BodyPartsStatic.SeverAllIncomingConnections(this.transform.gameObject, connectedBodyPartsGameObjects);
     }
 
+    public void CreateConnection(GameObject bodyPartToConnect)
+    {
+        if (bodyPartToConnect != this)
+        {
+            BodyPartsStatic.CreateConnection(bodyPartToConnect, ref connectedBodyPartsGameObjects, ref connectedBodyParts);
+        }
+    }
+
     public void PumpBlood(float efficiency)
     {
         BodyPartsStatic.PumpBlood(efficiency, bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);

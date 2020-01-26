@@ -98,8 +98,6 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = "REMOVE BLOOD";
     }
 
-
-
     //make a button take us to the bodypart select menu
     void AssignSelectBodyPartOptions(GameObject buttonObject)
     {
@@ -194,6 +192,7 @@ public class ButtonActions : MonoBehaviour
         menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
 
         AssignRemoveBodyPartButton(menuButtons[0]);
+        AssignAttachBodyPartButton(menuButtons[1]);
     }
 
     void AssignRemoveBodyPartButton(GameObject buttonObject)
@@ -205,4 +204,47 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = "AMPUTATE";
     }
 
+    void AssignAttachBodyPartButton(GameObject buttonObject)
+    {
+        bodyPartMenuCounter = 0;
+        buttonObject.GetComponent<Button>().onClick.AddListener(SelectBodyPartToAttachOptions);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "ATTACH TO...";
+    }
+
+    void SelectBodyPartToAttachOptions()
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        //put bodyparts on first 6 buttons
+        //TODO: Order this list somehow. Alphabetically, maybe?
+        int numBodyParts = bodyPartObjects.Count();
+        int countStart = bodyPartMenuCounter;
+        while (bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 6))
+        {
+            //assign button to connect chosen with selected, then go back to default
+            AssignConnectTwoBodyParts(selectedBodyPartObject, bodyPartObjects[bodyPartMenuCounter - countStart], menuButtons[bodyPartMenuCounter - countStart]);
+            menuButtons[bodyPartMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+            menuButtons[bodyPartMenuCounter - countStart].transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyPartObjects[bodyPartMenuCounter - countStart].name;
+            bodyPartMenuCounter += 1;
+        }
+
+        if (bodyPartMenuCounter < numBodyParts)
+        {
+            //more bodyparts button
+            menuButtons[7].GetComponent<Button>().onClick.AddListener(SelectBodyPartToAttachOptions);
+            menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
+        }
+    }
+
+    void AssignConnectTwoBodyParts(GameObject bodyPartObject1, GameObject bodyPartObject2, GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.ConnectBodyParts(bodyPartObject1, bodyPartObject2); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+    }
 }

@@ -152,4 +152,12 @@ public class Heart : MonoBehaviour, BodyPart
     {
         throw new System.NotImplementedException();
     }
+
+    public void CreateConnection(GameObject bodyPartToConnect)
+    {
+        if (bodyPartToConnect != this)
+        {
+            BodyPartsStatic.CreateConnection(bodyPartToConnect, ref connectedBodyPartsGameObjects, ref connectedBodyParts);
+        }
+    }
 }

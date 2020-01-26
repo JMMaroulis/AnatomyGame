@@ -125,4 +125,10 @@ public static class BodyPartsStatic
         }
 
     }
+
+    public static void CreateConnection(GameObject bodyPartObjectToConnect, ref List<GameObject> connectedBodyPartObjects, ref List<BodyPart> connectedBodyParts)
+    {
+        connectedBodyPartObjects.Add(bodyPartObjectToConnect);
+        connectedBodyParts.Add(bodyPartObjectToConnect.GetComponent<BodyPart>());
+    }
 }

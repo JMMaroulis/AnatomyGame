@@ -46,4 +46,6 @@ public interface BodyPart
     void SeverConnection(GameObject connectedBodyPart);
 
     void SeverAllConnections();
+
+    void CreateConnection(GameObject bodyPartToConnect);
 }
