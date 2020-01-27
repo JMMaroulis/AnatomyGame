@@ -110,6 +110,7 @@ public class Lung : MonoBehaviour, BodyPart
     // Update is called once per frame
     void Update()
     {
+        UpdateConnectedBodyParts();
         CheckForFunctionality();
         UpdateEfficiency();
         UpdateDamage();
@@ -134,5 +135,10 @@ public class Lung : MonoBehaviour, BodyPart
         {
             BodyPartsStatic.CreateConnection(bodyPartToConnect, ref connectedBodyPartsGameObjects, ref connectedBodyParts);
         }
+    }
+
+    public void UpdateConnectedBodyParts()
+    {
+        connectedBodyParts = BodyPartsStatic.UpdateConnectedBodyParts(ref connectedBodyPartsGameObjects, ref connectedBodyParts);
     }
 }

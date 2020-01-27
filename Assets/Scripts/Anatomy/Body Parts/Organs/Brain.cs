@@ -100,6 +100,7 @@ public class Brain : MonoBehaviour, BodyPart
     // Update is called once per frame
     void Update()
     {
+        UpdateConnectedBodyParts();
         CheckForFunctionality();
         UpdateEfficiency();
         UpdateDamage();
@@ -123,5 +124,10 @@ public class Brain : MonoBehaviour, BodyPart
         {
             BodyPartsStatic.CreateConnection(bodyPartToConnect, ref connectedBodyPartsGameObjects, ref connectedBodyParts);
         }
+    }
+
+    public void UpdateConnectedBodyParts()
+    {
+        connectedBodyParts = BodyPartsStatic.UpdateConnectedBodyParts(ref connectedBodyPartsGameObjects, ref connectedBodyParts);
     }
 }

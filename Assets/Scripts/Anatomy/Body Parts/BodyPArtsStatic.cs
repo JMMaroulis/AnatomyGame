@@ -131,4 +131,21 @@ public static class BodyPartsStatic
         connectedBodyPartObjects.Add(bodyPartObjectToConnect);
         connectedBodyParts.Add(bodyPartObjectToConnect.GetComponent<BodyPart>());
     }
+
+    //Adds any bodyparts not in the bodypart list to it, returning the proper list.
+    //NOTE: This method *DOES NOT* remove bodyparts that shouldn't be in the list. Make sure to sever bodypart connection properly, kids.
+    public static List<BodyPart> UpdateConnectedBodyParts(ref List<GameObject> connectedBodyPartObjects, ref List<BodyPart> connectedBodyParts)
+    {
+        foreach (GameObject connectedBodyPartObject in connectedBodyPartObjects)
+        {
+            //if isn't in bodypart list, add it
+            BodyPart connectedBodyPart = connectedBodyPartObject.GetComponent<BodyPart>();
+            if (!connectedBodyParts.Contains(connectedBodyPart))
+            {
+                connectedBodyParts.Add(connectedBodyPart);
+            }            
+        }
+
+        return connectedBodyParts;
+    }
 }

@@ -13,22 +13,33 @@ public class BloodLevelReporting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PopulateBodyPartsList();
+        UpdateBloodText();
+    }
+
+    void PopulateBodyPartsList()
+    {
         //get bodyparts from body
         for (int i = 0; i < body.transform.childCount; i++)
         {
-            bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
+            if (!bodyPartObjects.Contains(body.transform.GetChild(i).gameObject))
+            {
+                bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
+            }
 
             //get organs from bodypart
             //NOTE: THIS INTRODUCES THE ASSUMPTION THAT ORGANS WILL ALWAYS BE CHILDREN OF THEIR CONTAINING BODYPARTS
-            //AS WELL AS CONTIANED IN THE containedOrgans LISTS. IT WILL DO FOR NOW.
-            for(int j = 0; j < body.transform.GetChild(i).childCount; j++)
+            //AS WELL AS CONTAINED IN THE containedOrgans LISTS. IT WILL DO FOR NOW.
+            for (int j = 0; j < body.transform.GetChild(i).childCount; j++)
             {
-                bodyPartObjects.Add(body.transform.GetChild(i).GetChild(j).gameObject);
+                if (!bodyPartObjects.Contains(body.transform.GetChild(i).GetChild(j).gameObject))
+                {
+                    bodyPartObjects.Add(body.transform.GetChild(i).GetChild(j).gameObject);
+                }
             }
         }
 
         bloodText = gameObject.GetComponent<Text>();
-        UpdateBloodText();
     }
 
     // Update is called once per frame
@@ -43,7 +54,7 @@ public class BloodLevelReporting : MonoBehaviour
 
         }
 
-
+        PopulateBodyPartsList();
     }
 
     void UpdateBloodText()

@@ -68,6 +68,10 @@ public class Torso : MonoBehaviour, BodyPart
             BodyPartsStatic.CreateConnection(bodyPartToConnect, ref connectedBodyPartsGameObjects, ref connectedBodyParts);
         }
     }
+    public void UpdateConnectedBodyParts()
+    {
+        connectedBodyParts = BodyPartsStatic.UpdateConnectedBodyParts(ref connectedBodyPartsGameObjects, ref connectedBodyParts);
+    }
 
     public void PumpBlood(float efficiency)
     {
@@ -120,6 +124,7 @@ public class Torso : MonoBehaviour, BodyPart
 
     void Update()
     {
+        UpdateConnectedBodyParts();
         CheckForFunctionality();
         UpdateDamage();
         UpdateEfficiency();

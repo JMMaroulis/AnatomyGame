@@ -67,6 +67,11 @@ public class Arm : MonoBehaviour, BodyPart
         }
     }
 
+    public void UpdateConnectedBodyParts()
+    {
+        connectedBodyParts = BodyPartsStatic.UpdateConnectedBodyParts(ref connectedBodyPartsGameObjects, ref connectedBodyParts);
+    }
+
     public void PumpBlood(float efficiency)
     {
         BodyPartsStatic.PumpBlood(efficiency, bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
@@ -117,6 +122,7 @@ public class Arm : MonoBehaviour, BodyPart
 
     void Update()
     {
+        UpdateConnectedBodyParts();
         CheckForFunctionality();
         UpdateDamage();
         UpdateEfficiency();

@@ -48,4 +48,6 @@ public interface BodyPart
     void SeverAllConnections();
 
     void CreateConnection(GameObject bodyPartToConnect);
+
+    void UpdateConnectedBodyParts();
 }

@@ -21,11 +21,7 @@ public class ButtonActions : MonoBehaviour
         //button 0 selected by default
         menuButtons[0].GetComponent<Button>().Select();
 
-        //get bodyparts from body
-        for (int i = 0; i < body.transform.childCount; i++)
-        {
-            bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
-        }
+        PopulateBodyPartsList();
 
         //set button font sizes
         foreach (GameObject buttonObject in menuButtons)
@@ -35,10 +31,22 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+    void PopulateBodyPartsList()
+    {
+        //get bodyparts from body
+        for (int i = 0; i < body.transform.childCount; i++)
+        {
+            if (!bodyPartObjects.Contains(body.transform.GetChild(i).gameObject))
+            {
+                bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        PopulateBodyPartsList();
     }
 
     //make button take us back to default menu
@@ -228,9 +236,9 @@ public class ButtonActions : MonoBehaviour
         while (bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 6))
         {
             //assign button to connect chosen with selected, then go back to default
-            AssignConnectTwoBodyParts(selectedBodyPartObject, bodyPartObjects[bodyPartMenuCounter - countStart], menuButtons[bodyPartMenuCounter - countStart]);
+            AssignConnectTwoBodyParts(selectedBodyPartObject, bodyPartObjects[bodyPartMenuCounter], menuButtons[bodyPartMenuCounter - countStart]);
             menuButtons[bodyPartMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-            menuButtons[bodyPartMenuCounter - countStart].transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyPartObjects[bodyPartMenuCounter - countStart].name;
+            menuButtons[bodyPartMenuCounter - countStart].transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyPartObjects[bodyPartMenuCounter].name;
             bodyPartMenuCounter += 1;
         }
 

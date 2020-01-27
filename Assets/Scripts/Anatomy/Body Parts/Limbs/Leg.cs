@@ -68,6 +68,11 @@ public class Leg : MonoBehaviour, BodyPart
         }
     }
 
+    public void UpdateConnectedBodyParts()
+    {
+        connectedBodyParts = BodyPartsStatic.UpdateConnectedBodyParts(ref connectedBodyPartsGameObjects,ref connectedBodyParts);
+    }
+
     //TODO: add a check for running out of blood
     //only pump blood if there's blood left to pump
     public void PumpBlood(float efficiency)
@@ -122,6 +127,7 @@ public class Leg : MonoBehaviour, BodyPart
 
     void Update()
     {
+        UpdateConnectedBodyParts();
         CheckForFunctionality();
         UpdateDamage();
         UpdateEfficiency();
