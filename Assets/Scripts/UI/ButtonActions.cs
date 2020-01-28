@@ -33,13 +33,11 @@ public class ButtonActions : MonoBehaviour
 
     void PopulateBodyPartsList()
     {
+        bodyPartObjects = new List<GameObject>();
         //get bodyparts from body
         for (int i = 0; i < body.transform.childCount; i++)
         {
-            if (!bodyPartObjects.Contains(body.transform.GetChild(i).gameObject))
-            {
-                bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
-            }
+            bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
         }
     }
 
@@ -201,11 +199,12 @@ public class ButtonActions : MonoBehaviour
 
         AssignRemoveBodyPartButton(menuButtons[0]);
         AssignAttachBodyPartButton(menuButtons[1]);
+        AssignDestroyBodyPart(menuButtons[2]);
     }
 
     void AssignRemoveBodyPartButton(GameObject buttonObject)
     {
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveBodyPart(selectedBodyPartObject); };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveBodyPart(selectedBodyPartObject); AssignDefaultButtons(); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -254,5 +253,14 @@ public class ButtonActions : MonoBehaviour
     {
         UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.ConnectBodyParts(bodyPartObject1, bodyPartObject2); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+    }
+
+    void AssignDestroyBodyPart(GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPartObject); AssignDefaultButtons(); selectedBodyPartObject = null; };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "DESTROY";
     }
 }

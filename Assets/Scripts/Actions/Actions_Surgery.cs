@@ -16,4 +16,10 @@ public static class Actions_Surgery
         bodyPartObject2.GetComponent<BodyPart>().CreateConnection(bodyPartObject1);
     }
 
+    public static void DeleteBodyPart(GameObject bodyPartObject)
+    {
+        RemoveBodyPart(bodyPartObject);
+        GameObject.Destroy(bodyPartObject);
+    }
+
 }
