@@ -13,33 +13,30 @@ public class OxygenLevelReporting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        oxygenText = gameObject.GetComponent<Text>();
         PopulateBodyPartsList();
         UpdateOxygenText();
     }
 
     void PopulateBodyPartsList()
     {
+
+        bodyPartObjects = new List<GameObject>();
+
         //get bodyparts from body
         for (int i = 0; i < body.transform.childCount; i++)
         {
-            if (!bodyPartObjects.Contains(body.transform.GetChild(i).gameObject))
-            {
-                bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
-            }
+            bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
 
             //get organs from bodypart
             //NOTE: THIS INTRODUCES THE ASSUMPTION THAT ORGANS WILL ALWAYS BE CHILDREN OF THEIR CONTAINING BODYPARTS
             //AS WELL AS CONTAINED IN THE containedOrgans LISTS. IT WILL DO FOR NOW.
             for (int j = 0; j < body.transform.GetChild(i).childCount; j++)
             {
-                if(!bodyPartObjects.Contains(body.transform.GetChild(i).GetChild(j).gameObject))
-                {
-                    bodyPartObjects.Add(body.transform.GetChild(i).GetChild(j).gameObject);
-                }
+                bodyPartObjects.Add(body.transform.GetChild(i).GetChild(j).gameObject);
             }
         }
 
-        oxygenText = gameObject.GetComponent<Text>();
     }
 
     // Update is called once per frame

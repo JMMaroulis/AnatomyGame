@@ -406,7 +406,7 @@ MonoBehaviour:
   oxygen: 100
   oxygenMax: 100
   oxygenRequired: 10
-  damage: 10
+  damage: 0
   damageMax: 100
   efficiency: 0
   connectedBodyPartsGameObjects:
@@ -3537,7 +3537,7 @@ MonoBehaviour:
   oxygenMax: 500
   oxygenRequired: 0
   oxygenAbsorptionRate: 50
-  damage: 50
+  damage: 0
   damageMax: 100
   efficiency: 0
   connectedBodyPartsGameObjects:
