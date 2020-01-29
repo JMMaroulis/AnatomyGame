@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Torso : MonoBehaviour, BodyPart
 {
+    bool BodyPart.isTimePassing { get => isTimePassing; set => isTimePassing = value; }
+    public bool isTimePassing = true;
+
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
@@ -117,6 +120,8 @@ public class Torso : MonoBehaviour, BodyPart
         {
             containedOrgans.Add(connectedOrganGameObject.GetComponent<BodyPart>());
         }
+
+        Time.timeScale = 10.0f;
     }
 
     public float tempUpdate = 0;
@@ -125,11 +130,16 @@ public class Torso : MonoBehaviour, BodyPart
     void Update()
     {
         UpdateConnectedBodyParts();
-        CheckForFunctionality();
         UpdateDamage();
+        CheckForFunctionality();
         UpdateEfficiency();
-        LoseBlood();
-        ConsumeOxygen();
+
+        if (isTimePassing)
+        {
+
+            LoseBlood();
+            ConsumeOxygen();
+        }
 
         tempUpdate += Time.deltaTime;
         if (tempUpdate >= 1.0f)
@@ -138,6 +148,5 @@ public class Torso : MonoBehaviour, BodyPart
             tempUpdate = 0.0f;
         }
     }
-
 
 }

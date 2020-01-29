@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface BodyPart
 {
+    bool isTimePassing { get; set; }
     bool isFunctioning { get; set; }
 
     //blood stuff

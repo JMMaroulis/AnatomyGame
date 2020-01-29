@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEngine;
 public class Arm : MonoBehaviour, BodyPart
 {
+    bool BodyPart.isTimePassing { get => isTimePassing; set => isTimePassing = value; }
+    public bool isTimePassing = true;
+
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
@@ -123,11 +126,16 @@ public class Arm : MonoBehaviour, BodyPart
     void Update()
     {
         UpdateConnectedBodyParts();
-        CheckForFunctionality();
         UpdateDamage();
+        CheckForFunctionality();
         UpdateEfficiency();
-        LoseBlood();
-        ConsumeOxygen();
+
+        if (isTimePassing)
+        {
+
+            LoseBlood();
+            ConsumeOxygen();
+        }
 
         tempUpdate += Time.deltaTime;
         if (tempUpdate >= 1.0f)

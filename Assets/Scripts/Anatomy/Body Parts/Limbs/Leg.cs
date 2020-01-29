@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Leg : MonoBehaviour, BodyPart
 {
+    bool BodyPart.isTimePassing { get => isTimePassing; set => isTimePassing = value; }
+    public bool isTimePassing = true;
+
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
@@ -128,11 +131,16 @@ public class Leg : MonoBehaviour, BodyPart
     void Update()
     {
         UpdateConnectedBodyParts();
-        CheckForFunctionality();
         UpdateDamage();
+        CheckForFunctionality();
         UpdateEfficiency();
-        LoseBlood();
-        ConsumeOxygen();
+
+        if (isTimePassing)
+        {
+
+            LoseBlood();
+            ConsumeOxygen();
+        }
 
         tempUpdate += Time.deltaTime;
         if (tempUpdate >= 1.0f)

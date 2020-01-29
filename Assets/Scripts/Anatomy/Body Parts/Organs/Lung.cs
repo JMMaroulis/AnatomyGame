@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Lung : MonoBehaviour, BodyPart
 {
-
+    bool BodyPart.isTimePassing { get => isTimePassing; set => isTimePassing = value; }
+    public bool isTimePassing = true;
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
@@ -114,9 +115,14 @@ public class Lung : MonoBehaviour, BodyPart
         CheckForFunctionality();
         UpdateEfficiency();
         UpdateDamage();
-        LoseBlood();
-        ConsumeOxygen();
-        AbsorbOxygen();
+
+        if (isTimePassing && this.transform.parent.GetComponent<BodyPart>().isTimePassing)
+        {
+            LoseBlood();
+            ConsumeOxygen();
+            AbsorbOxygen();
+        }
+
     }
 
     public void SeverConnection(GameObject connectedBodyPart)
