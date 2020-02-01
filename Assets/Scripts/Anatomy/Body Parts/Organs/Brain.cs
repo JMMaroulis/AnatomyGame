@@ -7,6 +7,9 @@ public class Brain : MonoBehaviour, BodyPart
     bool BodyPart.isTimePassing { get => isTimePassing; set => isTimePassing = value; }
     public bool isTimePassing = true;
 
+    float BodyPart.timeScale { get => timeScale; set => timeScale = value; }
+    public float timeScale = 1.0f;
+
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
 
@@ -55,17 +58,17 @@ public class Brain : MonoBehaviour, BodyPart
 
     public void PumpBlood(float efficiency)
     {
-        BodyPartsStatic.PumpBlood(efficiency, bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
+        BodyPartsStatic.PumpBlood(efficiency, bloodPumpRate, Time.deltaTime * timeScale, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
     }
 
     public void LoseBlood()
     {
-        BodyPartsStatic.LoseBlood(bloodLossRate, Time.deltaTime, ref blood);
+        BodyPartsStatic.LoseBlood(bloodLossRate, Time.deltaTime * timeScale, ref blood);
     }
 
     public void ConsumeOxygen()
     {
-        BodyPartsStatic.ConsumeOxygen(oxygenRequired, Time.deltaTime, ref oxygen);
+        BodyPartsStatic.ConsumeOxygen(oxygenRequired, Time.deltaTime * timeScale, ref oxygen);
     }
 
     public void CheckForFunctionality()
@@ -103,12 +106,13 @@ public class Brain : MonoBehaviour, BodyPart
     void Update()
     {
         UpdateConnectedBodyParts();
-        CheckForFunctionality();
-        UpdateEfficiency();
-        UpdateDamage();
+
 
         if (isTimePassing && this.transform.parent.GetComponent<BodyPart>().isTimePassing)
         {
+            CheckForFunctionality();
+            UpdateEfficiency();
+            UpdateDamage();
             LoseBlood();
             ConsumeOxygen();
         }

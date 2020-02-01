@@ -12,9 +12,12 @@ public class Clock : MonoBehaviour
     public bool isTimePassing; // { get { return _isTimePassing; } set { _isTimePassing = value; BodyPartsTimePaassing(); } }
     //private bool _isTimePassing;
 
+    public float globalTimeScalingFactor;
+
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = globalTimeScalingFactor;
         isTimePassing = false;
         PopulateBodyPartsList();
     }
@@ -22,7 +25,7 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Time.timeScale = globalTimeScalingFactor;
         PopulateBodyPartsList();
         BodyPartsTimePassing();
     }

@@ -5,6 +5,8 @@ using UnityEngine;
 public interface BodyPart
 {
     bool isTimePassing { get; set; }
+
+    float timeScale { get; set; }
     bool isFunctioning { get; set; }
 
     //blood stuff

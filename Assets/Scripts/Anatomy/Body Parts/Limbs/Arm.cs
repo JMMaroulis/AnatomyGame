@@ -6,6 +6,8 @@ public class Arm : MonoBehaviour, BodyPart
 {
     bool BodyPart.isTimePassing { get => isTimePassing; set => isTimePassing = value; }
     public bool isTimePassing = true;
+    float BodyPart.timeScale { get => timeScale; set => timeScale = value; }
+    public float timeScale = 1.0f;
 
     bool BodyPart.isFunctioning { get => isFunctioning; set => isFunctioning = value; }
     public bool isFunctioning = true;
@@ -77,17 +79,17 @@ public class Arm : MonoBehaviour, BodyPart
 
     public void PumpBlood(float efficiency)
     {
-        BodyPartsStatic.PumpBlood(efficiency, bloodPumpRate, Time.deltaTime, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
+        BodyPartsStatic.PumpBlood(efficiency, bloodPumpRate, Time.deltaTime * timeScale, ref blood, ref oxygen, ref connectedBodyParts, ref containedOrgans);
     }
 
     public void LoseBlood()
     {
-        BodyPartsStatic.LoseBlood(bloodLossRate, Time.deltaTime, ref blood);
+        BodyPartsStatic.LoseBlood(bloodLossRate, Time.deltaTime * timeScale, ref blood);
     }
 
     public void ConsumeOxygen()
     {
-        BodyPartsStatic.ConsumeOxygen(oxygenRequired, Time.deltaTime, ref oxygen);
+        BodyPartsStatic.ConsumeOxygen(oxygenRequired, Time.deltaTime * timeScale, ref oxygen);
     }
 
     public void UpdateEfficiency()
@@ -126,22 +128,15 @@ public class Arm : MonoBehaviour, BodyPart
     void Update()
     {
         UpdateConnectedBodyParts();
-        UpdateDamage();
-        CheckForFunctionality();
-        UpdateEfficiency();
 
         if (isTimePassing)
         {
-
+            UpdateDamage();
+            CheckForFunctionality();
+            UpdateEfficiency();
             LoseBlood();
             ConsumeOxygen();
         }
 
-        tempUpdate += Time.deltaTime;
-        if (tempUpdate >= 1.0f)
-        {
-            Debug.Log(gameObject.name + " Blood: " + blood);
-            tempUpdate = 0.0f;
-        }
     }
 }
