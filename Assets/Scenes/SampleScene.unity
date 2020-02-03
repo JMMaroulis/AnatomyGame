@@ -2883,7 +2883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 965609865}
-  isTimePassing: 0
+  isTimePassing: 1
   globalTimeScalingFactor: 10
 --- !u!1 &1302856263
 GameObject:

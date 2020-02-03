@@ -106,9 +106,12 @@ public class Lung : MonoBehaviour, BodyPart
 
     void AbsorbOxygen()
     {
+        //apply the same scaling formula used to scale oxygen/blood pumping
+        //pretend we're taking oxygen from an external bodypart with oxygen level of maxOxygen/2
         if (isFunctioning)
         {
-            oxygen = Mathf.Min(oxygenMax, oxygen + oxygenAbsorptionRate * Time.deltaTime * timeScale * efficiency);
+            float tempOxygenAbsorbRate = Mathf.Max(Mathf.Min(oxygenAbsorptionRate * ((oxygenMax/4) / oxygen), oxygenAbsorptionRate * 5), oxygenAbsorptionRate * 0.2f) * efficiency;
+            oxygen = Mathf.Min(oxygenMax, oxygen + (tempOxygenAbsorbRate * Time.deltaTime * timeScale * efficiency));
         }
     }
 
