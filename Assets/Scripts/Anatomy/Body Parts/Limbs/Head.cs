@@ -139,4 +139,9 @@ public class Head : MonoBehaviour, BodyPart
         }
 
     }
+
+    public string GenerateDescription()
+    {
+        return BodyPartsStatic.GenerateDescription(this, this.transform.name);
+    }
 }

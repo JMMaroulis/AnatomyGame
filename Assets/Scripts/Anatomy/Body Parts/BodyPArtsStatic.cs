@@ -148,4 +148,53 @@ public static class BodyPartsStatic
 
         return connectedBodyParts;
     }
+
+    public static string GenerateDescription(BodyPart bodyPart, string bodyPartName)
+    {
+        string description = "";
+
+        //add damage description
+        float damageMax = bodyPart.damageMax;
+        float damage = bodyPart.damage;
+        description += "The " + bodyPartName + " is ";
+        if (damage <= 0.1f) {
+            description += "undamaged.";
+        }
+        else if(damage > 0.1f && damage <= damageMax/4)
+        {
+            description += "lightly damaged.";
+        }
+        else if(damage > damageMax / 4 && damage <= damageMax / 2)
+        {
+            description += "quite damaged.";
+        }
+        else if(damage> damageMax/2 && damage<= (3 * damageMax) / 4)
+        {
+            description += "heavily damaged.";
+        }
+        else if(damage > (3 * damageMax) / 4 && damage < damageMax)
+        {
+            description += "severely damaged.";
+        }
+        else if(damage == damageMax)
+        {
+            description += "completely destroyed.";
+        }
+        else
+        {
+            description += "INVALID DAMAGE VALUE: INVESTIGATE THIS.";
+        }
+        description += "\n";
+        //add blood description
+
+
+        //add oxygen description
+
+
+        //add connections description
+
+
+        return description;
+    }
+
 }

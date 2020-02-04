@@ -141,4 +141,9 @@ public class Brain : MonoBehaviour, BodyPart
     {
         connectedBodyParts = BodyPartsStatic.UpdateConnectedBodyParts(ref connectedBodyPartsGameObjects, ref connectedBodyParts);
     }
+
+    public string GenerateDescription()
+    {
+        return BodyPartsStatic.GenerateDescription(this, this.transform.name);
+    }
 }

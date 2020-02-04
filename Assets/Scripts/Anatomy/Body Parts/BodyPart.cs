@@ -53,4 +53,6 @@ public interface BodyPart
     void CreateConnection(GameObject bodyPartToConnect);
 
     void UpdateConnectedBodyParts();
+
+    string GenerateDescription();
 }
