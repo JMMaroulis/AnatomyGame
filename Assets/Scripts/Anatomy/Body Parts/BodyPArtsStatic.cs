@@ -149,10 +149,11 @@ public static class BodyPartsStatic
         return connectedBodyParts;
     }
 
-    public static string GenerateDescription(BodyPart bodyPart, string bodyPartName)
+    public static string GenerateDescription(BodyPart bodyPart, List<GameObject> connectedBodyPartObjects, string bodyPartName)
     {
         string description = "";
 
+        #region damage description
         //add damage description
         float damageMax = bodyPart.damageMax;
         float damage = bodyPart.damage;
@@ -185,14 +186,80 @@ public static class BodyPartsStatic
             description += "INVALID DAMAGE VALUE: INVESTIGATE THIS.";
         }
         description += "\n";
+        #endregion
+
+        #region blood description
         //add blood description
+        float blood = bodyPart.blood;
+        description += "The " + bodyPartName + " is ";
+        if (blood <= 0.1f)
+        {
+            description += "completely drained.";
+        }
+        else if (blood > 0.1f && blood <= 25.0f)
+        {
+            description += "deathly pale.";
+        }
+        else if (blood > 25.0f && blood <= 50.0f)
+        {
+            description += "quite pale.";
+        }
+        else if (blood > 50.0f && blood <= 100.0f)
+        {
+            description += "a tad pale.";
+        }
+        else if (blood > 100.0f)
+        {
+            description += "nice and pink.";
+        }
+        else
+        {
+            description += "INVALID DAMAGE VALUE: INVESTIGATE THIS.";
+        }
+        description += "\n";
+        #endregion
 
-
+        #region oxygen description
         //add oxygen description
+        float oxygen = bodyPart.oxygen;
+        description += "The " + bodyPartName + " is ";
+        if (oxygen <= 0.1f)
+        {
+            description += "deeply blue.";
+        }
+        else if (oxygen > 0.1f && oxygen <= 25.0f)
+        {
+            description += "dark blue.";
+        }
+        else if (oxygen > 25.0f && oxygen <= 50.0f)
+        {
+            description += "quite blue.";
+        }
+        else if (oxygen > 50.0f && oxygen <= 100.0f)
+        {
+            description += "a tad blue.";
+        }
+        else if (oxygen > 100.0f)
+        {
+            description += "not blue.";
+        }
+        else
+        {
+            description += "INVALID DAMAGE VALUE: INVESTIGATE THIS.";
+        }
+        description += "\n";
+        #endregion
 
-
+        #region connections description
         //add connections description
-
+        description += "The " + bodyPartName + " is connected to: ";
+        for (int i = 0; i < connectedBodyPartObjects.Count; i++)
+        {
+            description += connectedBodyPartObjects[i].transform.name;
+            if (i != connectedBodyPartObjects.Count-1)
+            {   description += ",";  }
+        }
+        #endregion
 
         return description;
     }

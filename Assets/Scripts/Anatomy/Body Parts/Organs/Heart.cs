@@ -181,6 +181,6 @@ public class Heart : MonoBehaviour, BodyPart
 
     public string GenerateDescription()
     {
-        return BodyPartsStatic.GenerateDescription(this, this.transform.name);
+        return BodyPartsStatic.GenerateDescription(this, new List<GameObject> { this.transform.parent.gameObject }, this.transform.name);
     }
 }

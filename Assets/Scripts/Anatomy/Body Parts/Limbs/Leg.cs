@@ -147,6 +147,6 @@ public class Leg : MonoBehaviour, BodyPart
 
     public string GenerateDescription()
     {
-        return BodyPartsStatic.GenerateDescription(this, this.transform.name);
+        return BodyPartsStatic.GenerateDescription(this, connectedBodyPartsGameObjects, this.transform.name);
     }
 }

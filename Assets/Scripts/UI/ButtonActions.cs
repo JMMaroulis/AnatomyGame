@@ -11,6 +11,7 @@ public class ButtonActions : MonoBehaviour
     public GameObject body;
     private List<GameObject> bodyPartObjects = new List<GameObject>();
     private int bodyPartMenuCounter = 0;
+    public DescriptionReporting descriptionReporting;
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +56,7 @@ public class ButtonActions : MonoBehaviour
 
         AssignSelectBloodActionOptions(menuButtons[0]);
         AssignSelectSurgeryActionOptions(menuButtons[2]);
-
+        AssignExamineBodyPart(menuButtons[3]);
     }
 
     //remove all text and actions from all buttons
@@ -262,5 +263,14 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "DESTROY";
+    }
+
+    void AssignExamineBodyPart(GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { descriptionReporting.FetchDescription(selectedBodyPartObject.GetComponent<BodyPart>()); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "EXAMINE BODYPART";
     }
 }
