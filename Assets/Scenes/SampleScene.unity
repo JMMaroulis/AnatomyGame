@@ -649,6 +649,7 @@ MonoBehaviour:
   - {fileID: 1606805035}
   selectedBodyPartObject: {fileID: 0}
   body: {fileID: 965609865}
+  descriptionReporting: {fileID: 1639331019}
 --- !u!4 &374478781
 Transform:
   m_ObjectHideFlags: 0
@@ -3201,9 +3202,9 @@ GameObject:
   - component: {fileID: 1639331015}
   - component: {fileID: 1639331018}
   - component: {fileID: 1639331017}
-  - component: {fileID: 1639331016}
+  - component: {fileID: 1639331019}
   m_Layer: 5
-  m_Name: DamageLevel Textbox (1)
+  m_Name: Description Textbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3228,19 +3229,6 @@ RectTransform:
   m_AnchoredPosition: {x: 681.88, y: -324.99}
   m_SizeDelta: {x: 1367.5, y: -650}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1639331016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1639331014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9070659b5e54df54fa800394aaf71c1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  body: {fileID: 965609865}
 --- !u!114 &1639331017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3290,6 +3278,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639331014}
   m_CullTransparentMesh: 0
+--- !u!114 &1639331019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639331014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099d0da227af4044b9982c4895d4f5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1708655654
 GameObject:
   m_ObjectHideFlags: 0

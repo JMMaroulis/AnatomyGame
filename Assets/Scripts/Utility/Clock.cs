@@ -13,6 +13,7 @@ public class Clock : MonoBehaviour
     //private bool _isTimePassing;
 
     public float globalTimeScalingFactor;
+    private float timeUntilClockStops = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,14 @@ public class Clock : MonoBehaviour
     {
         Time.timeScale = globalTimeScalingFactor;
         PopulateBodyPartsList();
+
+        //checking if it's time for time to stop yet
+        timeUntilClockStops = Mathf.Max(timeUntilClockStops - Time.deltaTime, 0.0f);
+        if (timeUntilClockStops <= 0.0f)
+        {
+            isTimePassing = false;
+        }
+
         BodyPartsTimePassing();
     }
 
@@ -52,6 +61,7 @@ public class Clock : MonoBehaviour
 
     }
 
+    //would be great if we could trigger this on isTimePassing changing, rather than invoking it manually every frame
     public void BodyPartsTimePassing()
     {
 
@@ -61,6 +71,18 @@ public class Clock : MonoBehaviour
             bodyPart.isTimePassing = isTimePassing;
         }
 
+    }
+
+    //sets time passing for all bodyparts for [ingameSeconds] of IN-GAME-TIME
+    public void StartClockUntil(float ingameSeconds)
+    {
+        isTimePassing = true;
+        timeUntilClockStops = ingameSeconds;
+    }
+
+    public static IEnumerator WaitForSecondsStatic(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 
 }
