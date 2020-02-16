@@ -5,9 +5,8 @@ using UnityEngine;
 public static class Actions_Surgery
 {
 
-    public static void RemoveBodyPart(GameObject bodyPartObject)
+    public static void RemoveBodyPart(GameObject bodyPartObject, float seconds)
     {
-        float seconds = 20.0f * 60.0f;
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
         StaticCoroutine.Start(RemoveBodyPartCoroutine(bodyPartObject, seconds));
     }
@@ -18,10 +17,8 @@ public static class Actions_Surgery
         bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
     }
 
-
-    public static void ConnectBodyParts(GameObject bodyPartObject1, GameObject bodyPartObject2)
+    public static void ConnectBodyParts(GameObject bodyPartObject1, GameObject bodyPartObject2, float seconds)
     {
-        float seconds = 20.0f * 60.0f;
         GameObject.FindObjectOfType<Clock>().StartClockUntil(20.0f * 60.0f);
         StaticCoroutine.Start(ConnectBodyPartCoroutine(bodyPartObject1, bodyPartObject2, seconds));
     }
@@ -33,9 +30,8 @@ public static class Actions_Surgery
         bodyPartObject2.GetComponent<BodyPart>().CreateConnection(bodyPartObject1);
     }
 
-    public static void DeleteBodyPart(GameObject bodyPartObject)
+    public static void DeleteBodyPart(GameObject bodyPartObject, float seconds)
     {
-        float seconds = 10.0f * 60.0f;
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
         StaticCoroutine.Start(DeleteBodyPartCoroutine(bodyPartObject, seconds));
     }

@@ -5,12 +5,11 @@ using UnityEngine;
 public static class Actions_Blood
 {
     //apply bandages to selected bodypart
-    public static void Bandages(GameObject bodyPartObject)
+    public static void Bandages(GameObject bodyPartObject, float seconds)
     {
-        float seconds = 60.0f;
         Debug.Log("Applying bandages to" + bodyPartObject.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        StaticCoroutine.Start(BanadagesCoroutine(bodyPartObject, 60.0f));
+        StaticCoroutine.Start(BanadagesCoroutine(bodyPartObject, seconds));
     }
     
     
@@ -21,9 +20,8 @@ public static class Actions_Blood
     }
     
 
-    public static void Bloodletting(GameObject bodyPartObject)
+    public static void Bloodletting(GameObject bodyPartObject, float seconds)
     {
-        float seconds = 60.0f;
         Debug.Log("Cutting " + bodyPartObject.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
         StaticCoroutine.Start(BloodlettingCoroutine(bodyPartObject, seconds));
@@ -35,9 +33,8 @@ public static class Actions_Blood
         bodyPartObject.GetComponent<BodyPart>().bloodLossRate += 10;
     }
 
-    public static void AddBlood(GameObject bodyPartObject)
+    public static void AddBlood(GameObject bodyPartObject, float seconds)
     {
-        float seconds = 5.0f * 60.0f;
         Debug.Log("Adding blood to " + bodyPartObject.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
         StaticCoroutine.Start(AddBloodCoroutine(bodyPartObject, seconds));
@@ -49,9 +46,8 @@ public static class Actions_Blood
         bodyPartObject.GetComponent<BodyPart>().blood += 100;
     }
 
-    public static void RemoveBlood(GameObject bodyPartObject)
+    public static void RemoveBlood(GameObject bodyPartObject, float seconds)
     {
-        float seconds = 2.0f * 60.0f;
         Debug.Log("Removing blood from" + bodyPartObject.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
         StaticCoroutine.Start(RemoveBloodCoroutine(bodyPartObject, seconds));
