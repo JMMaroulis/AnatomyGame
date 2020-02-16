@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Clock : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Clock : MonoBehaviour
 
     public float globalTimeScalingFactor;
     private float timeUntilClockStops = 0.0f;
+    private float timeElapsed = 0.0f;
+    private float startingTime = 60.0f * 60.0f * 10.0f;
+    public Text currentTime;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +25,7 @@ public class Clock : MonoBehaviour
         Time.timeScale = globalTimeScalingFactor;
         isTimePassing = false;
         PopulateBodyPartsList();
+        currentTime.text = "00:00:00";
     }
 
     // Update is called once per frame
@@ -37,6 +42,7 @@ public class Clock : MonoBehaviour
         }
 
         BodyPartsTimePassing();
+        UpdateCurrentTime();
     }
 
 
@@ -83,6 +89,16 @@ public class Clock : MonoBehaviour
     public static IEnumerator WaitForSecondsStatic(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+    }
+
+    void UpdateCurrentTime()
+    {
+        if (isTimePassing)
+        {
+            timeElapsed += Time.deltaTime;
+            int timeElapsedTemp = (int)timeElapsed;
+            currentTime.text = string.Format("{0:00}:{1:00}:{2:00}", timeElapsedTemp / 3600, (timeElapsedTemp / 60) % 60, timeElapsedTemp % 60);
+        }
     }
 
 }
