@@ -12,6 +12,7 @@ public class ButtonActions : MonoBehaviour
     private List<GameObject> bodyPartObjects = new List<GameObject>();
     private int bodyPartMenuCounter = 0;
     public DescriptionReporting descriptionReporting;
+    public Text selectedBodyPartText;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class ButtonActions : MonoBehaviour
             Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
             buttonText.fontSize = 40;
         }
+
+        selectedBodyPartText.text = "No Body Part Selected";
     }
 
     void PopulateBodyPartsList()
@@ -46,6 +49,9 @@ public class ButtonActions : MonoBehaviour
     void Update()
     {
         PopulateBodyPartsList();
+        if (selectedBodyPartObject) selectedBodyPartText.text = selectedBodyPartObject.name;
+        else selectedBodyPartText.text = "No Body Part Selected";
+
     }
 
     //make button take us back to default menu
@@ -258,7 +264,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignDestroyBodyPart(GameObject buttonObject)
     {
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPartObject); AssignDefaultButtons(); selectedBodyPartObject = null; };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPartObject); AssignDefaultButtons(); selectedBodyPartObject = null;};
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
