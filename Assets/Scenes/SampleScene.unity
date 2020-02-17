@@ -401,18 +401,21 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  blood: 500
   bloodRequiredToFunction: 0
-  bloodPumpRate: 50
+  blood: 100
   bloodLossRate: 0
+  bloodPumpRate: 10
   oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 2
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
+  efficiency: 1
+  connectedBodyParts:
+  - {fileID: 364669070}
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgans: []
   containedOrgansGameObjects: []
 --- !u!4 &139341405
 Transform:
@@ -680,27 +683,28 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  blood: 500
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 5
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
-  connectedBodyPartsGameObjects:
-  - {fileID: 451720058}
-  - {fileID: 1867183651}
-  - {fileID: 2022202132}
-  - {fileID: 2058615751}
-  - {fileID: 815907113}
+  efficiency: 1
+  connectedBodyParts: []
+  connectedBodyPartsGameObjects: []
+  containedOrgans:
+  - {fileID: 139341404}
+  - {fileID: 1977569296}
+  - {fileID: 1302856264}
+  - {fileID: 451720060}
   containedOrgansGameObjects:
   - {fileID: 139341403}
   - {fileID: 1977569295}
   - {fileID: 1302856263}
-  tempUpdate: 0
+  - {fileID: 451720058}
 --- !u!1 &374478779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,21 +1064,24 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  blood: 500
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 5
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
+  efficiency: 1
+  connectedBodyParts:
+  - {fileID: 364669070}
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgans:
+  - {fileID: 974589056}
   containedOrgansGameObjects:
   - {fileID: 974589053}
-  tempUpdate: 0
 --- !u!1 &455039389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,7 +1608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &815907114
 Transform:
   m_ObjectHideFlags: 0
@@ -1629,20 +1636,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  timeScale: 1
+  timeScale: 0
   isFunctioning: 1
-  blood: 500
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 5
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
-  connectedBodyPartsGameObjects:
-  - {fileID: 364669068}
+  efficiency: 1
+  connectedBodyParts: []
+  connectedBodyPartsGameObjects: []
+  containedOrgans: []
   containedOrgansGameObjects: []
   tempUpdate: 0
 --- !u!1 &885383399
@@ -2059,21 +2067,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46681511a39710041b71b9ff255cb0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTimePassing: 1
-  timeScale: 1
-  isFunctioning: 1
-  blood: 0
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  isTimePassing: 0
+  timeScale: 0
+  isFunctioning: 0
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 5
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
+  efficiency: 1
+  connectedBodyParts:
+  - {fileID: 451720060}
   connectedBodyPartsGameObjects:
   - {fileID: 451720058}
+  containedOrgans: []
   containedOrgansGameObjects: []
 --- !u!1 &1047501643
 GameObject:
@@ -2981,7 +2992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 965609865}
   isTimePassing: 1
-  globalTimeScalingFactor: 20
+  globalTimeScalingFactor: 5
   currentTime: {fileID: 188086456}
 --- !u!1 &1302856263
 GameObject:
@@ -3015,20 +3026,23 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  blood: 500
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 35
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 0
-  oxygenAbsorptionRate: 50
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
+  efficiency: 1
+  connectedBodyParts:
+  - {fileID: 364669070}
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgans: []
   containedOrgansGameObjects: []
+  oxygenAbsorptionRate: 50
 --- !u!4 &1302856265
 Transform:
   m_ObjectHideFlags: 0
@@ -3712,7 +3726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1867183652
 Transform:
   m_ObjectHideFlags: 0
@@ -3740,22 +3754,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  timeScale: 1
+  timeScale: 0
   isFunctioning: 1
-  blood: 500
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 5
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
-  connectedBodyPartsGameObjects:
-  - {fileID: 364669068}
+  efficiency: 1
+  connectedBodyParts: []
+  connectedBodyPartsGameObjects: []
+  containedOrgans: []
   containedOrgansGameObjects: []
-  tempUpdate: 0
 --- !u!1 &1977569295
 GameObject:
   m_ObjectHideFlags: 0
@@ -3788,20 +3802,23 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  blood: 500
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 35
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 0
-  oxygenAbsorptionRate: 50
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
+  efficiency: 1
+  connectedBodyParts:
+  - {fileID: 364669070}
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
+  containedOrgans: []
   containedOrgansGameObjects: []
+  oxygenAbsorptionRate: 50
 --- !u!4 &1977569297
 Transform:
   m_ObjectHideFlags: 0
@@ -3832,7 +3849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2022202133
 Transform:
   m_ObjectHideFlags: 0
@@ -3860,22 +3877,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  timeScale: 1
+  timeScale: 0
   isFunctioning: 1
-  blood: 500
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 5
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
-  connectedBodyPartsGameObjects:
-  - {fileID: 364669068}
+  efficiency: 1
+  connectedBodyParts: []
+  connectedBodyPartsGameObjects: []
+  containedOrgans: []
   containedOrgansGameObjects: []
-  tempUpdate: 0
 --- !u!1 &2033847329
 GameObject:
   m_ObjectHideFlags: 0
@@ -3984,7 +4001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2058615752
 Transform:
   m_ObjectHideFlags: 0
@@ -4012,19 +4029,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  timeScale: 1
+  timeScale: 0
   isFunctioning: 1
-  blood: 500
-  bloodRequiredToFunction: 100
-  bloodPumpRate: 50
+  bloodRequiredToFunction: 0
+  blood: 100
   bloodLossRate: 0
-  oxygen: 10
+  bloodPumpRate: 10
+  oxygen: 100
   oxygenMax: 500
-  oxygenRequired: 5
+  oxygenRequired: 1
   damage: 0
   damageMax: 100
-  efficiency: 0
-  connectedBodyPartsGameObjects:
-  - {fileID: 364669068}
+  efficiency: 1
+  connectedBodyParts: []
+  connectedBodyPartsGameObjects: []
+  containedOrgans: []
   containedOrgansGameObjects: []
   tempUpdate: 0
