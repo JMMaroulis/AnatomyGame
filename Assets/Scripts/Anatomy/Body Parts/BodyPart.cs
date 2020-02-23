@@ -96,35 +96,31 @@ public class BodyPart : MonoBehaviour
         oxygen = Mathf.Max(oxygen - oxygenconsumed, 0);
     }
 
-    public bool CheckForFunctionality()
+    public void CheckForFunctionality()
     {
         if (blood < bloodRequiredToFunction)
-        { return false; }
-        if (oxygen == 0)
-        { return false; }
+        { isFunctioning = false; }
+        if (oxygen <= 0)
+        { isFunctioning = false; }
 
         else
         {
-            return true;
+            isFunctioning = true;
         }
 
     }
 
-    public float UpdateEfficiency()
+    public void UpdateEfficiency()
     {
         float damageRatio = 1 - (damage / damageMax); //1 good, 0 bad
         float oxygenRatio = Mathf.Min((oxygen / oxygenRequired), 1); //1 good, 0 bad
-        float efficiency = damageRatio * oxygenRatio;
-
-        return efficiency;
+        efficiency = damageRatio * oxygenRatio;
     }
 
-    public float UpdateDamage()
+    public void UpdateDamage()
     {
         float oxygenRatio = 1 - Mathf.Min((oxygen / oxygenRequired), 1); //0 good, 1 bad
-
         damage = Mathf.Min(damage + (oxygenRatio * Time.deltaTime), damageMax);
-        return damage;
     }
 
     //severs connection between self and chosen body part (ONE WAY ONLY)
