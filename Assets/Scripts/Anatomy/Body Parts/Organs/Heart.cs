@@ -21,8 +21,11 @@ public class Heart : BodyPart
 
     void PumpBloodRecursive(BodyPart currentBodyPart, List<BodyPart> alreadyPumped)
     {
-        currentBodyPart.PumpBlood();
+        //pump blood for current bodypart, add to list to avoid repetition
+        float heartEfficiency = efficiency;
+        currentBodyPart.PumpBlood(heartEfficiency);
         alreadyPumped.Add(currentBodyPart);
+
         foreach (BodyPart bodyPart in currentBodyPart.containedOrgans)
         {
             if (alreadyPumped.Contains(bodyPart) == false)

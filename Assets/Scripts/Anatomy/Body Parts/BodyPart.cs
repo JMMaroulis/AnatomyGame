@@ -31,17 +31,18 @@ public class BodyPart : MonoBehaviour
     public List<GameObject> containedOrgansGameObjects;
 
     //Pumps blood, if there is blood left to pump.
-    public void PumpBlood()
+    public void PumpBlood(float heartEfficiency)
     {
         float timeSinceLastPump = Time.deltaTime;
+
         //pumping blood to contained organs in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
         List<int> organPumpOrder = Enumerable.Range(0, containedOrgans.Count()).ToList<int>();
         IListExtensions.Shuffle<int>(organPumpOrder);
         foreach (int organIndex in organPumpOrder)
         {
             BodyPart organ = containedOrgans[organIndex];
-            float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / organ.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * efficiency;
-            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / organ.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * efficiency;
+            float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / organ.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
+            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / organ.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
@@ -63,8 +64,8 @@ public class BodyPart : MonoBehaviour
         foreach (int bodyPartIndex in limbPumpOrder)
         {
             BodyPart bodyPart = connectedBodyParts[bodyPartIndex];
-            float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / bodyPart.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * efficiency;
-            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / bodyPart.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * efficiency;
+            float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / bodyPart.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
+            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / bodyPart.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
