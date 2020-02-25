@@ -8,6 +8,7 @@ public class Clock : MonoBehaviour
 
     public GameObject body;
     public DeathMonitor deathMonitor;
+    public LifeMonitor lifeMonitor;
     private List<GameObject> bodyPartObjects = new List<GameObject>();
 
     //TODO: find some way to get this thing working as a public bool in the inspector with properties, rather than just updating every bodypart value every frame
@@ -44,6 +45,8 @@ public class Clock : MonoBehaviour
 
         BodyPartsTimePassing();
         deathMonitor.isTimePassing = isTimePassing;
+        lifeMonitor.isTimePassing = isTimePassing;
+
 
         UpdateCurrentTime();
     }
