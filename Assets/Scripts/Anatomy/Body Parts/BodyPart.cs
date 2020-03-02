@@ -85,9 +85,43 @@ public class BodyPart : MonoBehaviour
     //applies blood loss rate
     public void LoseBlood()
     {
-        float timeSinceLastLoss = Time.deltaTime;   
+        float timeSinceLastLoss = Time.deltaTime;
         float bloodLost = bloodLossRate * timeSinceLastLoss;
-        blood = Mathf.Max(blood - bloodLost, 0);
+
+        //if bodypart doesn't have enough blood to lose, inflict the remaining loss on neighbouring parts instead
+        //otherwise, lose it from this bodypart
+        if (bloodLost > blood)
+        {
+            float bloodLostRemainder = bloodLost - blood;
+            blood = Mathf.Max(blood - bloodLost, 0);
+            connectedBodyParts[Random.Range(0, connectedBodyParts.Count)].LoseBloodChain(bloodLostRemainder, 0);
+        }
+        else
+        {
+            blood = Mathf.Max(blood - bloodLost, 0);
+        }
+    }
+
+    //searches random attached bodyparts for the remaining blood to lose
+    //TODO: this really is a terrible, terrible thing, but it works for now.
+    //Probably won't hold up on bodies with more parts
+    public void LoseBloodChain(float bloodLost, int stepCount)
+    {
+        stepCount += 1;
+        if (stepCount > 3) { return; }
+
+        //if bodypart doesn't have enough blood to lose, inflict the remaining loss on neighbouring parts instead
+        //otherwise, lose it from this bodypart
+        if (bloodLost > blood)
+        {
+            float bloodLostRemainder = bloodLost - blood;
+            blood = Mathf.Max(blood - bloodLost, 0);
+            connectedBodyParts[Random.Range(0, connectedBodyParts.Count)].LoseBloodChain(bloodLostRemainder, stepCount);
+        }
+        else
+        {
+            blood = Mathf.Max(blood - bloodLost, 0);
+        }
     }
 
     public void ConsumeOxygen()
