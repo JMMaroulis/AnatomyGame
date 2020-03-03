@@ -210,6 +210,7 @@ public class BodyPart : MonoBehaviour
         return connectedBodyParts;
     }
 
+    /*
     public string GenerateDescription()
     {
         string description = "";
@@ -321,5 +322,47 @@ public class BodyPart : MonoBehaviour
 
         return description;
     }
+    */
 
+    public string GenerateDescription()
+    {
+        string description = "";
+
+        description += $"Examining {this.gameObject.name}:\n";
+
+        #region damage description
+        //add damage description
+        description += $"Damage: {damage} / {damageMax}\n";
+        #endregion
+
+        #region blood description
+        //add blood description
+        description += $"Blood: {blood} units, requires {bloodRequiredToFunction} to function.\n";
+        #endregion
+
+        #region blood loss description
+        //add blood description
+        description += $"Losing {bloodLossRate} of blood per second.\n";
+        #endregion
+
+        #region oxygen description
+        //add oxygen description
+        description += $"Oxygen: {oxygen} / {oxygenMax}, requires {oxygenRequired} per second to function.\n";
+        #endregion
+
+        #region connections description
+        //add connections description
+        description += "Connected to: ";
+        for (int i = 0; i < connectedBodyPartsGameObjects.Count; i++)
+        {
+            description += connectedBodyPartsGameObjects[i].transform.name;
+            if (i != connectedBodyPartsGameObjects.Count - 1)
+            { description += ", "; }
+        }
+        #endregion
+
+        return description;
+
+
+    }
 }

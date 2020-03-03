@@ -10,17 +10,7 @@ public class Lung : BodyPart
     // Start is called before the first frame update
     void Start()
     {
-        //connect body parts
-        foreach (GameObject connectedBodyPartGameObject in connectedBodyPartsGameObjects)
-        {
-            //connectedBodyParts.Add(connectedBodyPartGameObject.GetComponent<BodyPart>());
-        }
 
-        //connect organs
-        foreach (GameObject connectedOrganGameObject in containedOrgansGameObjects)
-        {
-            //containedOrgans.Add(connectedOrganGameObject.GetComponent<BodyPart>());
-        }
     }
 
     void AbsorbOxygen()
