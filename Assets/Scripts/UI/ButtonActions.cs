@@ -8,11 +8,14 @@ public class ButtonActions : MonoBehaviour
 {
     public List<GameObject> menuButtons;
     public GameObject selectedBodyPartObject = null;
+    public GameObject selectedOrganObject = null;
     public GameObject body;
     private List<GameObject> bodyPartObjects = new List<GameObject>();
     private int bodyPartMenuCounter = 0;
+    private int organMenuCounter = 0;
     public DescriptionReporting descriptionReporting;
     public Text selectedBodyPartText;
+    public Text selectedOrganText;
 
     // Start is called before the first frame update
     void Start()
@@ -49,16 +52,23 @@ public class ButtonActions : MonoBehaviour
     void Update()
     {
         PopulateBodyPartsList();
+
         if (selectedBodyPartObject) selectedBodyPartText.text = selectedBodyPartObject.name;
         else selectedBodyPartText.text = "No Body Part Selected";
+
+        if (selectedOrganObject) selectedOrganText.text = selectedOrganObject.name;
+        else selectedOrganText.text = "No Body Part Selected";
 
     }
 
     //make button take us back to default menu
     void AssignDefaultButtons()
     {
+        ClearAllButtons();
         AssignSelectBodyPartOptions(menuButtons[1]);
+        AssignSelectOrganOptions(menuButtons[4]);
         bodyPartMenuCounter = 0;
+        organMenuCounter = 0;
 
         AssignSelectBloodActionOptions(menuButtons[0]);
         AssignSelectSurgeryActionOptions(menuButtons[2]);
@@ -118,16 +128,11 @@ public class ButtonActions : MonoBehaviour
     //make a button take us to the bodypart select menu
     void AssignSelectBodyPartOptions(GameObject buttonObject)
     {
-        ClearAllButtons();
         buttonObject.GetComponent<Button>().onClick.AddListener(SelectBodyPartOptions);
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "SELECT BODY PART";
     }
 
-    //NOTE: Eventually there's going to be bodyparts containing organs.
-    //maybe they'll be 'bodyparts' too, maybe a different class of object.
-    //best to keep in mind that we most likely won't want to select those here.
-    //some sort of 'SelectBodyPartOrganOptions()' method or something.
     void SelectBodyPartOptions()
     {
         ClearAllButtons();
@@ -156,6 +161,45 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+    //make a button take us to the organ select menu
+    void AssignSelectOrganOptions(GameObject buttonObject)
+    {
+        buttonObject.GetComponent<Button>().onClick.AddListener(SelectOrganOptions);
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "SELECT ORGAN";
+    }
+
+    void SelectOrganOptions()
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        //put organs on first 6 buttons
+        //TODO: Order this list somehow. Alphabetically, maybe?
+        List<GameObject> organObjects = selectedBodyPartObject.GetComponent<BodyPart>().containedOrgansGameObjects;
+        int numBodyParts = organObjects.Count();
+        int countStart = organMenuCounter;
+        while (organMenuCounter < Mathf.Min(numBodyParts, countStart + 6))
+        {
+            //select organ, then reset to default
+            AssignSelectOrgan(menuButtons[organMenuCounter - countStart], organObjects[organMenuCounter]);
+            menuButtons[organMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+            organMenuCounter += 1;
+        }
+
+        if (organMenuCounter < numBodyParts)
+        {
+            //more organs button
+            menuButtons[7].GetComponent<Button>().onClick.AddListener(SelectOrganOptions);
+            menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
+        }
+
+
+    }
+
     //make a button select a given bodypart
     void AssignSelectBodyPart(GameObject buttonObject, GameObject bodyPartObject)
     {
@@ -167,10 +211,28 @@ public class ButtonActions : MonoBehaviour
         buttonText.fontSize = 40;
     }
 
-    //select a given bodypart
+    //select a given bodypart, reset currently selected organ
     void SelectBodyPart(GameObject bodyPartObject)
     {
         selectedBodyPartObject = bodyPartObject;
+        selectedOrganObject = null;
+    }
+
+    //make a button select a given bodypart
+    void AssignSelectOrgan(GameObject buttonObject, GameObject organObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { SelectOrgan(organObject); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = organObject.name;
+        buttonText.fontSize = 40;
+    }
+
+    //select a given bodypart
+    void SelectOrgan(GameObject organObject)
+    {
+        selectedOrganObject = organObject;
     }
 
     void AssignSelectBloodActionOptions(GameObject buttonObject)
