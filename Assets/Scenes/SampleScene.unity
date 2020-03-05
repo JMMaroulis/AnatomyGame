@@ -315,7 +315,6 @@ GameObject:
   - component: {fileID: 188086454}
   - component: {fileID: 188086457}
   - component: {fileID: 188086456}
-  - component: {fileID: 188086455}
   m_Layer: 5
   m_Name: CurrentTime
   m_TagString: Untagged
@@ -342,18 +341,6 @@ RectTransform:
   m_AnchoredPosition: {x: -138.5, y: -42}
   m_SizeDelta: {x: 280.76, y: 83.859985}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &188086455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 188086453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 099d0da227af4044b9982c4895d4f5fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &188086456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2976,7 +2963,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639331014}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 099d0da227af4044b9982c4895d4f5fb, type: 3}
   m_Name: 
@@ -3492,7 +3479,6 @@ GameObject:
   - component: {fileID: 2033847330}
   - component: {fileID: 2033847333}
   - component: {fileID: 2033847332}
-  - component: {fileID: 2033847331}
   m_Layer: 5
   m_Name: CurrentlySelectedBodypart
   m_TagString: Untagged
@@ -3519,18 +3505,6 @@ RectTransform:
   m_AnchoredPosition: {x: -139.5, y: -53}
   m_SizeDelta: {x: 277.80005, y: 102.5}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2033847331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2033847329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 099d0da227af4044b9982c4895d4f5fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2033847332
 MonoBehaviour:
   m_ObjectHideFlags: 0
