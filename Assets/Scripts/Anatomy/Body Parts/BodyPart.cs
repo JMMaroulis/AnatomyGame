@@ -27,7 +27,7 @@ public class BodyPart : MonoBehaviour
 
     public List<BodyPart> connectedBodyParts;
     public List<GameObject> connectedBodyPartsGameObjects;
-    public List<BodyPart> containedOrgans;
+    public List<Organ> containedOrgans;
     public List<GameObject> containedOrgansGameObjects;
 
     //Pumps blood, if there is blood left to pump.
@@ -40,7 +40,7 @@ public class BodyPart : MonoBehaviour
         IListExtensions.Shuffle<int>(organPumpOrder);
         foreach (int organIndex in organPumpOrder)
         {
-            BodyPart organ = containedOrgans[organIndex];
+            Organ organ = containedOrgans[organIndex];
             float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / organ.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
             float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / organ.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
 
@@ -158,12 +158,6 @@ public class BodyPart : MonoBehaviour
         damage = Mathf.Min(damage + (oxygenRatio * Time.deltaTime), damageMax);
     }
 
-    //severs connection between self and chosen body part (ONE WAY ONLY)
-    public void SeverConnectionIncoming(GameObject connectedBodyPart, float inducedBloodLossRate)
-    {
-        connectedBodyPart.GetComponent<BodyPart>().SeverConnectionIncoming(this.gameObject, inducedBloodLossRate);
-    }
-
     public void SeverConnectionOutgoing(GameObject connectedBodyPart, float inducedBloodLossRate)
     {
         //severing connection to bodypart
@@ -172,7 +166,7 @@ public class BodyPart : MonoBehaviour
 
         //severing connection to organ
         containedOrgansGameObjects.Remove(connectedBodyPart);
-        containedOrgans.Remove(connectedBodyPart.GetComponent<BodyPart>());
+        containedOrgans.Remove(connectedBodyPart.GetComponent<Organ>());
 
         bloodLossRate += inducedBloodLossRate;
     }

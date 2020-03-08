@@ -27,6 +27,7 @@ public static class Actions_Surgery
     {
         yield return new WaitForSeconds(seconds);
         organObject.GetComponent<BodyPart>().SeverAllConnections();
+        organObject.GetComponent<Organ>().RemoveFromBodyPart();
     }
 
     public static void ConnectBodyParts(GameObject bodyPartObject1, GameObject bodyPartObject2, float seconds)
