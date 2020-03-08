@@ -166,8 +166,14 @@ public class BodyPart : MonoBehaviour
 
     public void SeverConnectionOutgoing(GameObject connectedBodyPart, float inducedBloodLossRate)
     {
+        //severing connection to bodypart
         connectedBodyPartsGameObjects.Remove(connectedBodyPart);
         connectedBodyParts.Remove(connectedBodyPart.GetComponent<BodyPart>());
+
+        //severing connection to organ
+        containedOrgansGameObjects.Remove(connectedBodyPart);
+        containedOrgans.Remove(connectedBodyPart.GetComponent<BodyPart>());
+
         bloodLossRate += inducedBloodLossRate;
     }
 

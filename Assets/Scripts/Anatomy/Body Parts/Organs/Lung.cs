@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lung : BodyPart
+public class Lung : Organ
 {
 
     public float oxygenAbsorptionRate;

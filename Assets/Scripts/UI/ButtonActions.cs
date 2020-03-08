@@ -11,6 +11,7 @@ public class ButtonActions : MonoBehaviour
     public GameObject selectedOrganObject = null;
     public GameObject body;
     private List<GameObject> bodyPartObjects = new List<GameObject>();
+    private List<GameObject> organObjects = new List<GameObject>();
     private int bodyPartMenuCounter = 0;
     private int organMenuCounter = 0;
     public DescriptionReporting descriptionReporting;
@@ -48,16 +49,28 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+    void PopulateOrgansList()
+    {
+        organObjects = new List<GameObject>();
+        List<Organ> organs = FindObjectsOfType<Organ>().ToList();
+
+        foreach (Organ organ in organs)
+        {
+            organObjects.Add(organ.transform.gameObject);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         PopulateBodyPartsList();
+        PopulateOrgansList();
 
         if (selectedBodyPartObject) selectedBodyPartText.text = selectedBodyPartObject.name;
         else selectedBodyPartText.text = "No Body Part Selected";
 
         if (selectedOrganObject) selectedOrganText.text = selectedOrganObject.name;
-        else selectedOrganText.text = "No Body Part Selected";
+        else selectedOrganText.text = "No Organ Selected";
 
     }
 
@@ -179,10 +192,9 @@ public class ButtonActions : MonoBehaviour
 
         //put organs on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
-        List<GameObject> organObjects = selectedBodyPartObject.GetComponent<BodyPart>().containedOrgansGameObjects;
-        int numBodyParts = organObjects.Count();
+        int numOrgans = organObjects.Count();
         int countStart = organMenuCounter;
-        while (organMenuCounter < Mathf.Min(numBodyParts, countStart + 6))
+        while (organMenuCounter < Mathf.Min(numOrgans, countStart + 6))
         {
             //select organ, then reset to default
             AssignSelectOrgan(menuButtons[organMenuCounter - countStart], organObjects[organMenuCounter]);
@@ -190,7 +202,7 @@ public class ButtonActions : MonoBehaviour
             organMenuCounter += 1;
         }
 
-        if (organMenuCounter < numBodyParts)
+        if (organMenuCounter < numOrgans)
         {
             //more organs button
             menuButtons[7].GetComponent<Button>().onClick.AddListener(SelectOrganOptions);
@@ -225,7 +237,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = organObject.name;
+        buttonText.text = $" {organObject.GetComponent<Organ>().parentBodyPartObject.name} : {organObject.name}";
         buttonText.fontSize = 40;
     }
 
@@ -273,6 +285,7 @@ public class ButtonActions : MonoBehaviour
         AssignRemoveBodyPartButton(menuButtons[0]);
         AssignAttachBodyPartButton(menuButtons[1]);
         AssignDestroyBodyPart(menuButtons[2]);
+        AssignRemoveOrganButton(menuButtons[3]);
     }
 
     void AssignRemoveBodyPartButton(GameObject buttonObject)
@@ -282,7 +295,17 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "AMPUTATE: " + seconds + " seconds";
+        buttonText.text = "AMPUTATE BODYPART: " + seconds + " seconds";
+    }
+
+    void AssignRemoveOrganButton(GameObject buttonObject)
+    {
+        float seconds = 10 * 60.0f;
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveOrgan(selectedOrganObject, seconds); AssignDefaultButtons(); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "EXTRACT ORGAN: " + seconds + " seconds";
     }
 
     void AssignAttachBodyPartButton(GameObject buttonObject)

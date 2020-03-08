@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Heart : BodyPart
+public class Heart : Organ
 {
 
     //responsible for controlling blood pumping in all bodyparts

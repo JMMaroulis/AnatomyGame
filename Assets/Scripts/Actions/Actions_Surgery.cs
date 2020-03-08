@@ -17,6 +17,18 @@ public static class Actions_Surgery
         bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
     }
 
+    public static void RemoveOrgan(GameObject organObject, float seconds)
+    {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        StaticCoroutine.Start(RemoveOrganCoroutine(organObject, seconds));
+    }
+
+    public static IEnumerator RemoveOrganCoroutine(GameObject organObject, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        organObject.GetComponent<BodyPart>().SeverAllConnections();
+    }
+
     public static void ConnectBodyParts(GameObject bodyPartObject1, GameObject bodyPartObject2, float seconds)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(20.0f * 60.0f);
