@@ -237,7 +237,14 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $" {organObject.GetComponent<Organ>().parentBodyPartObject.name} : {organObject.name}";
+        if (organObject.GetComponent<Organ>().connectedBodyPartsGameObjects.Count != 0)
+        {
+            buttonText.text = $"{organObject.GetComponent<Organ>().connectedBodyPartsGameObjects[0].name} : {organObject.name}";
+        }
+        else
+        {
+            buttonText.text = $"External : {organObject.name}";
+        }
         buttonText.fontSize = 40;
     }
 

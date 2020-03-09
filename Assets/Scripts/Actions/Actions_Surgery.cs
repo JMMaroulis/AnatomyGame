@@ -26,8 +26,7 @@ public static class Actions_Surgery
     public static IEnumerator RemoveOrganCoroutine(GameObject organObject, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        organObject.GetComponent<BodyPart>().SeverAllConnections();
-        organObject.GetComponent<Organ>().RemoveFromBodyPart();
+        organObject.GetComponent<Organ>().SeverAllConnections();
     }
 
     public static void ConnectBodyParts(GameObject bodyPartObject1, GameObject bodyPartObject2, float seconds)

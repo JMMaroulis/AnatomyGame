@@ -5,16 +5,7 @@ using UnityEngine;
 
 public class Organ : BodyPart
 {
-    public GameObject parentBodyPartObject;
-    public BodyPart parentBodyPart;
-
-    public void RemoveFromBodyPart()
-    {
-        parentBodyPart.SeverConnectionOutgoing(this.gameObject, 10.0f);
-
-        parentBodyPartObject = null;
-        parentBodyPart = null;
-
-        bloodLossRate += 10.0f;
-    }
+    //I *REALLY* don't like this solution, but until I can think of a better answer, we're going to insist that all organs only even have one object in the bodypart connection lists
+    //And by insist, I mean don't do otherwise, cause it's not going to force you not to, but it will probably break things
+    //At this point, the Organ object type only exists so that unity can find all the organs easily and differentiate them from non-organs
 }
