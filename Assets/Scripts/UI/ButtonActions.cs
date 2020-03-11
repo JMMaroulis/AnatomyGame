@@ -293,6 +293,7 @@ public class ButtonActions : MonoBehaviour
         AssignAttachBodyPartButton(menuButtons[1]);
         AssignDestroyBodyPart(menuButtons[2]);
         AssignRemoveOrganButton(menuButtons[3]);
+        AssignImplantOrganButton(menuButtons[4]);
     }
 
     void AssignRemoveBodyPartButton(GameObject buttonObject)
@@ -322,6 +323,15 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "ATTACH TO... (10 minutes)";
+    }
+
+    void AssignImplantOrganButton(GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.ImplantOrgan(selectedOrganObject, selectedBodyPartObject, 600.0f); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "IMPLANT ORGAN INTO BODYPART (10 minutes)";
     }
 
     void SelectBodyPartToAttachOptions()

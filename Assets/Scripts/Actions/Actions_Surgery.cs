@@ -29,6 +29,25 @@ public static class Actions_Surgery
         organObject.GetComponent<Organ>().SeverAllConnections();
     }
 
+    public static void ImplantOrgan(GameObject organObject, GameObject bodyPartObject, float seconds)
+    {
+        if (organObject.GetComponent<Organ>().connectedBodyParts.Count != 0 || organObject.GetComponent<Organ>().connectedBodyPartsGameObjects.Count != 0)
+        {
+            Debug.Log("That organ is already inside something! Don't do that!");
+            return;
+        }
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        StaticCoroutine.Start(ImplantOrganCoroutine(organObject, bodyPartObject, seconds));
+    }
+
+    public static IEnumerator ImplantOrganCoroutine(GameObject organObject, GameObject bodyPartObject, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        organObject.GetComponent<Organ>().CreateConnection(bodyPartObject);
+        bodyPartObject.GetComponent<BodyPart>().AddContainedOrgan(organObject);
+    }
+
+
     public static void ConnectBodyParts(GameObject bodyPartObject1, GameObject bodyPartObject2, float seconds)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(20.0f * 60.0f);

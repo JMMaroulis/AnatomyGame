@@ -191,6 +191,12 @@ public class BodyPart : MonoBehaviour
         connectedBodyParts.Add(bodyPartObjectToConnect.GetComponent<BodyPart>());
     }
 
+    public void AddContainedOrgan(GameObject organObjectToImplant)
+    {
+        containedOrgansGameObjects.Add(organObjectToImplant);
+        containedOrgans.Add(organObjectToImplant.GetComponent<Organ>());
+    }
+
 
     //Adds any bodyparts not in the bodypart list to it, returning the proper list.
     //NOTE: This method *DOES NOT* remove bodyparts that shouldn't be in the list. Make sure to sever bodypart connection properly, kids.
