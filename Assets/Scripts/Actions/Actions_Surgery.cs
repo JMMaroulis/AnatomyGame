@@ -26,7 +26,13 @@ public static class Actions_Surgery
     public static IEnumerator RemoveOrganCoroutine(GameObject organObject, float seconds)
     {
         yield return new WaitForSeconds(seconds);
+
+        //disconnect
         organObject.GetComponent<Organ>().SeverAllConnections();
+
+        //remove from being child of bodypart
+        organObject.transform.SetParent(organObject.transform.parent.parent);
+
     }
 
     public static void ImplantOrgan(GameObject organObject, GameObject bodyPartObject, float seconds)
@@ -36,6 +42,7 @@ public static class Actions_Surgery
             Debug.Log("That organ is already inside something! Don't do that!");
             return;
         }
+
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
         StaticCoroutine.Start(ImplantOrganCoroutine(organObject, bodyPartObject, seconds));
     }
@@ -43,8 +50,14 @@ public static class Actions_Surgery
     public static IEnumerator ImplantOrganCoroutine(GameObject organObject, GameObject bodyPartObject, float seconds)
     {
         yield return new WaitForSeconds(seconds);
+
+        //connect
         organObject.GetComponent<Organ>().CreateConnection(bodyPartObject);
         bodyPartObject.GetComponent<BodyPart>().AddContainedOrgan(organObject);
+
+        //make organ child of bodypart
+        organObject.transform.SetParent(bodyPartObject.transform);
+
     }
 
 

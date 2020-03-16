@@ -17,7 +17,7 @@ public class Brain : Organ
         UpdateConnectedBodyParts();
 
 
-        if (isTimePassing && this.transform.parent.GetComponent<BodyPart>().isTimePassing)
+        if (isTimePassing)
         {
             CheckForFunctionality();
             UpdateEfficiency();
