@@ -13,7 +13,6 @@ public class Arm : BodyPart
 
     void Update()
     {
-        UpdateConnectedBodyParts();
 
         if (isTimePassing)
         {

@@ -27,9 +27,6 @@ public class Lung : Organ
     // Update is called once per frame
     void Update()
     {
-        UpdateConnectedBodyParts();
-
-
         if (isTimePassing)
         {
             CheckForFunctionality();

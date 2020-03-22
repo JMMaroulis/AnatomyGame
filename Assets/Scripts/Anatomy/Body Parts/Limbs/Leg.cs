@@ -18,7 +18,6 @@ public class Leg : BodyPart
 
     void Update()
     {
-        UpdateConnectedBodyParts();
 
         if (isTimePassing)
         {

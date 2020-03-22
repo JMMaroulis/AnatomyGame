@@ -501,6 +501,7 @@ MonoBehaviour:
   - {fileID: 1726063732}
   - {fileID: 1606805035}
   selectedBodyPartObject: {fileID: 0}
+  selectedOrganObject: {fileID: 0}
   body: {fileID: 965609865}
   descriptionReporting: {fileID: 1639331019}
   selectedBodyPartText: {fileID: 2033847332}
@@ -854,6 +855,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455039389}
   m_CullTransparentMesh: 0
+--- !u!1 &456601628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 456601629}
+  - component: {fileID: 456601630}
+  m_Layer: 0
+  m_Name: Brain (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &456601629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456601628}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 965609866}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &456601630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456601628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46681511a39710041b71b9ff255cb0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTimePassing: 0
+  timeScale: 0
+  isFunctioning: 0
+  bloodRequiredToFunction: 100
+  blood: 500
+  bloodLossRate: 0
+  bloodPumpRate: 50
+  oxygen: 100
+  oxygenMax: 500
+  oxygenRequired: 5
+  damage: 0
+  damageMax: 100
+  efficiency: 1
+  connectedBodyParts: []
+  connectedBodyPartsGameObjects: []
+  containedOrgans: []
+  containedOrgansGameObjects: []
 --- !u!1 &457528519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,68 +1706,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &934596478
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 934596479}
-  - component: {fileID: 934596480}
-  m_Layer: 0
-  m_Name: Brain
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &934596479
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934596478}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2022202133}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &934596480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934596478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46681511a39710041b71b9ff255cb0af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTimePassing: 0
-  timeScale: 0
-  isFunctioning: 0
-  bloodRequiredToFunction: 100
-  blood: 500
-  bloodLossRate: 0
-  bloodPumpRate: 50
-  oxygen: 100
-  oxygenMax: 500
-  oxygenRequired: 5
-  damage: 0
-  damageMax: 100
-  efficiency: 1
-  connectedBodyParts:
-  - {fileID: 2022202134}
-  connectedBodyPartsGameObjects:
-  - {fileID: 2022202132}
-  containedOrgans: []
-  containedOrgansGameObjects: []
 --- !u!1 &965609865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,6 +1739,7 @@ Transform:
   - {fileID: 1867183652}
   - {fileID: 815907114}
   - {fileID: 2022202133}
+  - {fileID: 456601629}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2497,7 +2497,7 @@ MonoBehaviour:
   deathMonitor: {fileID: 1124799829}
   lifeMonitor: {fileID: 714661424}
   isTimePassing: 1
-  globalTimeScalingFactor: 10
+  globalTimeScalingFactor: 60
   currentTime: {fileID: 188086456}
 --- !u!1 &1302856263
 GameObject:
@@ -2661,7 +2661,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.94380575}
   m_AnchorMax: {x: 1, y: 0.94380575}
-  m_AnchoredPosition: {x: -137.02002, y: -155.5}
+  m_AnchoredPosition: {x: -137, y: -155.5}
   m_SizeDelta: {x: 277.80005, y: 102.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1555175678
@@ -3511,8 +3511,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 934596479}
+  m_Children: []
   m_Father: {fileID: 965609866}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3545,10 +3544,8 @@ MonoBehaviour:
   - {fileID: 364669070}
   connectedBodyPartsGameObjects:
   - {fileID: 364669068}
-  containedOrgans:
-  - {fileID: 934596480}
-  containedOrgansGameObjects:
-  - {fileID: 934596478}
+  containedOrgans: []
+  containedOrgansGameObjects: []
 --- !u!1 &2033847329
 GameObject:
   m_ObjectHideFlags: 0

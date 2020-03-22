@@ -13,7 +13,6 @@ public class Head : BodyPart
 
     void Update()
     {
-        UpdateConnectedBodyParts();
 
         if (isTimePassing)
         {

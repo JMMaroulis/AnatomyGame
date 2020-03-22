@@ -14,8 +14,6 @@ public class Torso : BodyPart
 
     void Update()
     {
-        UpdateConnectedBodyParts();
-
         if (isTimePassing)
         {
             UpdateDamage();

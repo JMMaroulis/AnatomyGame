@@ -5,58 +5,58 @@ using UnityEngine;
 public static class Actions_Blood
 {
     //apply bandages to selected bodypart
-    public static void Bandages(GameObject bodyPartObject, float seconds)
+    public static void Bandages(BodyPart bodyPart, float seconds)
     {
-        Debug.Log("Applying bandages to" + bodyPartObject.name);
+        Debug.Log("Applying bandages to" + bodyPart.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        StaticCoroutine.Start(BanadagesCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(BanadagesCoroutine(bodyPart, seconds));
     }
     
     
-    private static IEnumerator BanadagesCoroutine(GameObject bodyPartObject, float seconds)
+    private static IEnumerator BanadagesCoroutine(BodyPart bodyPart, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        bodyPartObject.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPartObject.GetComponent<BodyPart>().bloodLossRate - 10);
+        bodyPart.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().bloodLossRate - 10);
     }
     
 
-    public static void Bloodletting(GameObject bodyPartObject, float seconds)
+    public static void Bloodletting(BodyPart bodyPart, float seconds)
     {
-        Debug.Log("Cutting " + bodyPartObject.name);
+        Debug.Log("Cutting " + bodyPart.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        StaticCoroutine.Start(BloodlettingCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(BloodlettingCoroutine(bodyPart, seconds));
     }
 
-    private static IEnumerator BloodlettingCoroutine(GameObject bodyPartObject, float seconds)
+    private static IEnumerator BloodlettingCoroutine(BodyPart bodyPart, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        bodyPartObject.GetComponent<BodyPart>().bloodLossRate += 10;
+        bodyPart.GetComponent<BodyPart>().bloodLossRate += 10;
     }
 
-    public static void AddBlood(GameObject bodyPartObject, float seconds)
+    public static void AddBlood(BodyPart bodyPart, float seconds)
     {
-        Debug.Log("Adding blood to " + bodyPartObject.name);
+        Debug.Log("Adding blood to " + bodyPart.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        StaticCoroutine.Start(AddBloodCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(AddBloodCoroutine(bodyPart, seconds));
     }
 
-    private static IEnumerator AddBloodCoroutine(GameObject bodyPartObject, float seconds)
+    private static IEnumerator AddBloodCoroutine(BodyPart bodyPart, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        bodyPartObject.GetComponent<BodyPart>().blood += 100;
+        bodyPart.GetComponent<BodyPart>().blood += 100;
     }
 
-    public static void RemoveBlood(GameObject bodyPartObject, float seconds)
+    public static void RemoveBlood(BodyPart bodyPart, float seconds)
     {
-        Debug.Log("Removing blood from" + bodyPartObject.name);
+        Debug.Log("Removing blood from" + bodyPart.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        StaticCoroutine.Start(RemoveBloodCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(RemoveBloodCoroutine(bodyPart, seconds));
     }
 
-    private static IEnumerator RemoveBloodCoroutine(GameObject bodyPartObject, float seconds)
+    private static IEnumerator RemoveBloodCoroutine(BodyPart bodyPart, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        bodyPartObject.GetComponent<BodyPart>().blood = Mathf.Max(0, bodyPartObject.GetComponent<BodyPart>().blood - 100);
+        bodyPart.GetComponent<BodyPart>().blood = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().blood - 100);
     }
 
 }

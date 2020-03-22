@@ -52,9 +52,6 @@ public class Heart : Organ
     // Update is called once per frame
     void Update()
     {
-        UpdateConnectedBodyParts();
-
-
         if (isTimePassing)
         {
             CheckForFunctionality();

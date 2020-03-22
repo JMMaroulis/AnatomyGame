@@ -26,9 +26,7 @@ public class BodyPart : MonoBehaviour
     public float efficiency;
 
     public List<BodyPart> connectedBodyParts;
-    public List<GameObject> connectedBodyPartsGameObjects;
     public List<Organ> containedOrgans;
-    public List<GameObject> containedOrgansGameObjects;
 
     //Pumps blood, if there is blood left to pump.
     public void PumpBlood(float heartEfficiency)
@@ -161,11 +159,9 @@ public class BodyPart : MonoBehaviour
     public void SeverConnectionOutgoing(GameObject connectedBodyPart, float inducedBloodLossRate)
     {
         //severing connection to bodypart
-        connectedBodyPartsGameObjects.Remove(connectedBodyPart);
         connectedBodyParts.Remove(connectedBodyPart.GetComponent<BodyPart>());
 
         //severing connection to organ
-        containedOrgansGameObjects.Remove(connectedBodyPart);
         containedOrgans.Remove(connectedBodyPart.GetComponent<Organ>());
 
         bloodLossRate += inducedBloodLossRate;
@@ -175,46 +171,25 @@ public class BodyPart : MonoBehaviour
     public void SeverAllConnections()
     {
         //sever *that* connection to *this*
-        foreach (GameObject connectedBodyPartObject in connectedBodyPartsGameObjects)
+        foreach (BodyPart connectedBodyPart in connectedBodyParts)
         {
-            connectedBodyPartObject.GetComponent<BodyPart>().SeverConnectionOutgoing(this.gameObject, 20);
+            connectedBodyPart.SeverConnectionOutgoing(this.gameObject, 20);
         }
 
         //sever *this* connection to *those*
         connectedBodyParts = new List<BodyPart>();
-        connectedBodyPartsGameObjects = new List<GameObject>();
     }
 
-    public void CreateConnection(GameObject bodyPartObjectToConnect)
+    public void CreateConnection(BodyPart bodyPartToConnect)
     {
-        connectedBodyPartsGameObjects.Add(bodyPartObjectToConnect);
-        connectedBodyParts.Add(bodyPartObjectToConnect.GetComponent<BodyPart>());
+        connectedBodyParts.Add(bodyPartToConnect);
     }
 
-    public void AddContainedOrgan(GameObject organObjectToImplant)
+    public void AddContainedOrgan(Organ organToImplant)
     {
-        containedOrgansGameObjects.Add(organObjectToImplant);
-        containedOrgans.Add(organObjectToImplant.GetComponent<Organ>());
+        containedOrgans.Add(organToImplant);
     }
 
-
-    //Adds any bodyparts not in the bodypart list to it, returning the proper list.
-    //NOTE: This method *DOES NOT* remove bodyparts that shouldn't be in the list. Make sure to sever bodypart connection properly, kids.
-    public List<BodyPart> UpdateConnectedBodyParts()
-    {
-        
-        foreach (GameObject connectedBodyPartObject in connectedBodyPartsGameObjects)
-        {
-            //if isn't in bodypart list, add it
-            BodyPart connectedBodyPart = connectedBodyPartObject.GetComponent<BodyPart>();
-            if (!connectedBodyParts.Contains(connectedBodyPart))
-            {
-                connectedBodyParts.Add(connectedBodyPart);
-            }
-        }
-        
-        return connectedBodyParts;
-    }
 
     /*
     public string GenerateDescription()
@@ -318,10 +293,10 @@ public class BodyPart : MonoBehaviour
         #region connections description
         //add connections description
         description += "The " + this.gameObject.name + " is connected to: ";
-        for (int i = 0; i < connectedBodyPartsGameObjects.Count; i++)
+        for (int i = 0; i < connectedBodyParts.Count; i++)
         {
-            description += connectedBodyPartsGameObjects[i].transform.name;
-            if (i != connectedBodyPartsGameObjects.Count - 1)
+            description += connectedBodyParts[i].transform.name;
+            if (i != connectedBodyParts.Count - 1)
             { description += ","; }
         }
         #endregion
@@ -359,10 +334,10 @@ public class BodyPart : MonoBehaviour
         #region connections description
         //add connections description
         description += "Connected to: ";
-        for (int i = 0; i < connectedBodyPartsGameObjects.Count; i++)
+        for (int i = 0; i < connectedBodyParts.Count; i++)
         {
-            description += connectedBodyPartsGameObjects[i].transform.name;
-            if (i != connectedBodyPartsGameObjects.Count - 1)
+            description += connectedBodyParts[i].transform.name;
+            if (i != connectedBodyParts.Count - 1)
             { description += ", "; }
         }
         #endregion

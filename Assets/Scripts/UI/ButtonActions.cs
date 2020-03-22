@@ -7,11 +7,11 @@ using System.Linq;
 public class ButtonActions : MonoBehaviour
 {
     public List<GameObject> menuButtons;
-    public GameObject selectedBodyPartObject = null;
-    public GameObject selectedOrganObject = null;
+    public BodyPart selectedBodyPart = null;
+    public Organ selectedOrgan = null;
     public GameObject body;
-    private List<GameObject> bodyPartObjects = new List<GameObject>();
-    private List<GameObject> organObjects = new List<GameObject>();
+    private List<BodyPart> bodyParts = new List<BodyPart>();
+    private List<Organ> organs = new List<Organ>();
     private int bodyPartMenuCounter = 0;
     private int organMenuCounter = 0;
     public DescriptionReporting descriptionReporting;
@@ -41,23 +41,19 @@ public class ButtonActions : MonoBehaviour
 
     void PopulateBodyPartsList()
     {
-        bodyPartObjects = new List<GameObject>();
+        bodyParts = new List<BodyPart>();
+
         //get bodyparts from body
+        //we can't just use findObejctsOfType<BodyPart>() here, cause that will get all of the organs as well
         for (int i = 0; i < body.transform.childCount; i++)
         {
-            bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
+            bodyParts.Add(body.transform.GetChild(i).gameObject.GetComponent<BodyPart>());
         }
     }
 
     void PopulateOrgansList()
     {
-        organObjects = new List<GameObject>();
-        List<Organ> organs = FindObjectsOfType<Organ>().ToList();
-
-        foreach (Organ organ in organs)
-        {
-            organObjects.Add(organ.transform.gameObject);
-        }
+        organs = FindObjectsOfType<Organ>().ToList<Organ>();
     }
 
     // Update is called once per frame
@@ -66,10 +62,10 @@ public class ButtonActions : MonoBehaviour
         PopulateBodyPartsList();
         PopulateOrgansList();
 
-        if (selectedBodyPartObject) selectedBodyPartText.text = selectedBodyPartObject.name;
+        if (selectedBodyPart) selectedBodyPartText.text = selectedBodyPart.name;
         else selectedBodyPartText.text = "No Body Part Selected";
 
-        if (selectedOrganObject) selectedOrganText.text = selectedOrganObject.name;
+        if (selectedOrgan) selectedOrganText.text = selectedOrgan.name;
         else selectedOrganText.text = "No Organ Selected";
 
     }
@@ -101,7 +97,7 @@ public class ButtonActions : MonoBehaviour
     void AssignBandagesButton(GameObject buttonObject)
     {
         float seconds = 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.Bandages(selectedBodyPartObject, seconds); };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.Bandages(selectedBodyPart, seconds); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -111,7 +107,7 @@ public class ButtonActions : MonoBehaviour
     void AssignBloodlettingButton(GameObject buttonObject)
     {
         float seconds = 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.Bloodletting(selectedBodyPartObject, seconds); };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.Bloodletting(selectedBodyPart, seconds); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -121,7 +117,7 @@ public class ButtonActions : MonoBehaviour
     void AssignAddBloodButton(GameObject buttonObject)
     {
         float seconds = 120.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.AddBlood(selectedBodyPartObject, seconds); };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.AddBlood(selectedBodyPart, seconds); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -131,7 +127,7 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveBloodButton(GameObject buttonObject)
     {
         float seconds = 120.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.RemoveBlood(selectedBodyPartObject, seconds); };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.RemoveBlood(selectedBodyPart, seconds); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -156,12 +152,12 @@ public class ButtonActions : MonoBehaviour
 
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
-        int numBodyParts = bodyPartObjects.Count();
+        int numBodyParts = bodyParts.Count();
         int countStart = bodyPartMenuCounter;
         while(bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart+6))
         {
             //select bodypart, then reset to default
-            AssignSelectBodyPart(menuButtons[bodyPartMenuCounter - countStart], bodyPartObjects[bodyPartMenuCounter]);
+            AssignSelectBodyPart(menuButtons[bodyPartMenuCounter - countStart], bodyParts[bodyPartMenuCounter]);
             menuButtons[bodyPartMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
             bodyPartMenuCounter += 1;
         }
@@ -192,12 +188,12 @@ public class ButtonActions : MonoBehaviour
 
         //put organs on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
-        int numOrgans = organObjects.Count();
+        int numOrgans = organs.Count();
         int countStart = organMenuCounter;
         while (organMenuCounter < Mathf.Min(numOrgans, countStart + 6))
         {
             //select organ, then reset to default
-            AssignSelectOrgan(menuButtons[organMenuCounter - countStart], organObjects[organMenuCounter]);
+            AssignSelectOrgan(menuButtons[organMenuCounter - countStart], organs[organMenuCounter]);
             menuButtons[organMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
             organMenuCounter += 1;
         }
@@ -213,45 +209,45 @@ public class ButtonActions : MonoBehaviour
     }
 
     //make a button select a given bodypart
-    void AssignSelectBodyPart(GameObject buttonObject, GameObject bodyPartObject)
+    void AssignSelectBodyPart(GameObject buttonObject, BodyPart bodyPart)
     {
-        UnityEngine.Events.UnityAction action1 = () => { SelectBodyPart(bodyPartObject); };
+        UnityEngine.Events.UnityAction action1 = () => { SelectBodyPart(bodyPart); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = bodyPartObject.name;
+        buttonText.text = bodyPart.name;
         buttonText.fontSize = 40;
     }
 
     //select a given bodypart, reset currently selected organ
-    void SelectBodyPart(GameObject bodyPartObject)
+    void SelectBodyPart(BodyPart bodyPart)
     {
-        selectedBodyPartObject = bodyPartObject;
-        selectedOrganObject = null;
+        selectedBodyPart = bodyPart;
+        selectedOrgan = null;
     }
 
     //make a button select a given bodypart
-    void AssignSelectOrgan(GameObject buttonObject, GameObject organObject)
+    void AssignSelectOrgan(GameObject buttonObject, Organ organ)
     {
-        UnityEngine.Events.UnityAction action1 = () => { SelectOrgan(organObject); };
+        UnityEngine.Events.UnityAction action1 = () => { SelectOrgan(organ); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        if (organObject.GetComponent<Organ>().connectedBodyPartsGameObjects.Count != 0)
+        if (organ.connectedBodyParts.Count != 0)
         {
-            buttonText.text = $"{organObject.GetComponent<Organ>().connectedBodyPartsGameObjects[0].name} : {organObject.name}";
+            buttonText.text = $"{organ.GetComponent<Organ>().connectedBodyParts[0].name} : {organ.name}";
         }
         else
         {
-            buttonText.text = $"External : {organObject.name}";
+            buttonText.text = $"External : {organ.name}";
         }
         buttonText.fontSize = 40;
     }
 
     //select a given bodypart
-    void SelectOrgan(GameObject organObject)
+    void SelectOrgan(Organ organ)
     {
-        selectedOrganObject = organObject;
+        selectedOrgan = organ;
     }
 
     void AssignSelectBloodActionOptions(GameObject buttonObject)
@@ -299,7 +295,7 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveBodyPartButton(GameObject buttonObject)
     {
         float seconds = 10 * 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveBodyPart(selectedBodyPartObject, seconds); AssignDefaultButtons(); };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveBodyPart(selectedBodyPart, seconds); AssignDefaultButtons(); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -309,7 +305,7 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveOrganButton(GameObject buttonObject)
     {
         float seconds = 10 * 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveOrgan(selectedOrganObject, seconds); AssignDefaultButtons(); };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveOrgan(selectedOrgan, seconds); AssignDefaultButtons(); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -327,7 +323,17 @@ public class ButtonActions : MonoBehaviour
 
     void AssignImplantOrganButton(GameObject buttonObject)
     {
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.ImplantOrgan(selectedOrganObject, selectedBodyPartObject, 600.0f); };
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedBodyPart == null || selectedOrgan == null)
+        {
+            action1 = () => { Debug.Log("You need to select both a bodypart and an organ for that!"); };
+        }
+        else
+        {
+            action1 = () => { Actions_Surgery.ImplantOrgan(selectedOrgan, selectedBodyPart, 600.0f); };
+        }
+
+
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -344,14 +350,14 @@ public class ButtonActions : MonoBehaviour
 
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
-        int numBodyParts = bodyPartObjects.Count();
+        int numBodyParts = bodyParts.Count();
         int countStart = bodyPartMenuCounter;
         while (bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 6))
         {
             //assign button to connect chosen with selected, then go back to default
-            AssignConnectTwoBodyParts(selectedBodyPartObject, bodyPartObjects[bodyPartMenuCounter], menuButtons[bodyPartMenuCounter - countStart]);
+            AssignConnectTwoBodyParts(selectedBodyPart, bodyParts[bodyPartMenuCounter], menuButtons[bodyPartMenuCounter - countStart]);
             menuButtons[bodyPartMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-            menuButtons[bodyPartMenuCounter - countStart].transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyPartObjects[bodyPartMenuCounter].name;
+            menuButtons[bodyPartMenuCounter - countStart].transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyParts[bodyPartMenuCounter].name;
             bodyPartMenuCounter += 1;
         }
 
@@ -363,17 +369,17 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    void AssignConnectTwoBodyParts(GameObject bodyPartObject1, GameObject bodyPartObject2, GameObject buttonObject)
+    void AssignConnectTwoBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, GameObject buttonObject)
     {
         float seconds = 10 * 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.ConnectBodyParts(bodyPartObject1, bodyPartObject2, seconds); };
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
     }
 
     void AssignDestroyBodyPart(GameObject buttonObject)
     {
         float seconds = 10 * 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPartObject, seconds); AssignDefaultButtons(); selectedBodyPartObject = null;};
+        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds); AssignDefaultButtons(); selectedBodyPart = null;};
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -382,7 +388,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignExamineBodyPart(GameObject buttonObject)
     {
-        UnityEngine.Events.UnityAction action1 = () => { descriptionReporting.FetchDescription(selectedBodyPartObject.GetComponent<BodyPart>()); };
+        UnityEngine.Events.UnityAction action1 = () => { descriptionReporting.FetchDescription(selectedBodyPart.GetComponent<BodyPart>()); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
