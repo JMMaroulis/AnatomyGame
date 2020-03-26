@@ -97,7 +97,16 @@ public class ButtonActions : MonoBehaviour
     void AssignBandagesButton(GameObject buttonObject)
     {
         float seconds = 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.Bandages(selectedBodyPart, seconds); };
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedOrgan == null)
+        {
+            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+        }
+        else
+        {
+            action1 = () => { Actions_Blood.Bandages(selectedBodyPart, seconds); };
+        }
+
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -107,9 +116,17 @@ public class ButtonActions : MonoBehaviour
     void AssignBloodlettingButton(GameObject buttonObject)
     {
         float seconds = 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.Bloodletting(selectedBodyPart, seconds); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedOrgan == null)
+        {
+            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+        }
+        else
+        {
+            action1 = () => { Actions_Blood.Bloodletting(selectedBodyPart, seconds); };
+        }
 
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "BLOODLETTING: " + seconds + " seconds";
     }
@@ -117,9 +134,17 @@ public class ButtonActions : MonoBehaviour
     void AssignAddBloodButton(GameObject buttonObject)
     {
         float seconds = 120.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.AddBlood(selectedBodyPart, seconds); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedOrgan == null)
+        {
+            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+        }
+        else
+        {
+            action1 = () => { Actions_Blood.AddBlood(selectedBodyPart, seconds); };
+        }
 
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "ADD BLOOD: " + seconds + " seconds";
     }
@@ -127,7 +152,16 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveBloodButton(GameObject buttonObject)
     {
         float seconds = 120.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Blood.RemoveBlood(selectedBodyPart, seconds); };
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedOrgan == null)
+        {
+            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+        }
+        else
+        {
+            action1 = () => { Actions_Blood.RemoveBlood(selectedBodyPart, seconds); };
+        }
+
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -295,7 +329,16 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveBodyPartButton(GameObject buttonObject)
     {
         float seconds = 10 * 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveBodyPart(selectedBodyPart, seconds); AssignDefaultButtons(); };
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedOrgan == null)
+        {
+            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+        }
+        else
+        {
+            action1 = () => { Actions_Surgery.RemoveBodyPart(selectedBodyPart, seconds); AssignDefaultButtons(); };
+        }
+
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -305,7 +348,16 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveOrganButton(GameObject buttonObject)
     {
         float seconds = 10 * 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.RemoveOrgan(selectedOrgan, seconds); AssignDefaultButtons(); };
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedOrgan == null)
+        {
+            action1 = () => { Debug.Log("You need to select an organ for that!"); };
+        }
+        else
+        {
+            action1 = () => { Actions_Surgery.RemoveOrgan(selectedOrgan, seconds); AssignDefaultButtons(); };
+        }
+
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -314,8 +366,17 @@ public class ButtonActions : MonoBehaviour
 
     void AssignAttachBodyPartButton(GameObject buttonObject)
     {
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedBodyPart == null)
+        {
+            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+        }
+        else
+        {
+            action1 = () => { SelectBodyPartToAttachOptions(); };
+        }
         bodyPartMenuCounter = 0;
-        buttonObject.GetComponent<Button>().onClick.AddListener(SelectBodyPartToAttachOptions);
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "ATTACH TO... (10 minutes)";
@@ -379,7 +440,21 @@ public class ButtonActions : MonoBehaviour
     void AssignDestroyBodyPart(GameObject buttonObject)
     {
         float seconds = 10 * 60.0f;
-        UnityEngine.Events.UnityAction action1 = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds); AssignDefaultButtons(); selectedBodyPart = null;};
+        UnityEngine.Events.UnityAction action1 = null;
+
+        if (selectedBodyPart == null)
+        {
+            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+        }
+        else if (selectedBodyPart == null || selectedBodyPart.connectedBodyParts.Count() != 0)
+        {
+            action1 = () => { Debug.Log("That bodypart is still connected to things!"); };
+        }
+        else
+        {
+            action1 = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds); AssignDefaultButtons(); selectedBodyPart = null; };
+        }
+
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -388,7 +463,16 @@ public class ButtonActions : MonoBehaviour
 
     void AssignExamineBodyPart(GameObject buttonObject)
     {
-        UnityEngine.Events.UnityAction action1 = () => { descriptionReporting.FetchDescription(selectedBodyPart.GetComponent<BodyPart>()); };
+        UnityEngine.Events.UnityAction action1 = null;
+        if (selectedBodyPart == null)
+        {
+            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+        }
+        else
+        {
+            action1 = () => { descriptionReporting.FetchDescription(selectedBodyPart.GetComponent<BodyPart>()); };
+        }
+
         buttonObject.GetComponent<Button>().onClick.AddListener(action1);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
