@@ -99,7 +99,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f;
         UnityEngine.Events.UnityAction action1 = null;
-        if (selectedOrgan == null)
+        if (selectedBodyPart == null)
         {
             action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
@@ -118,7 +118,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f;
         UnityEngine.Events.UnityAction action1 = null;
-        if (selectedOrgan == null)
+        if (selectedBodyPart == null)
         {
             action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
@@ -136,7 +136,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 120.0f;
         UnityEngine.Events.UnityAction action1 = null;
-        if (selectedOrgan == null)
+        if (selectedBodyPart == null)
         {
             action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
@@ -154,7 +154,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 120.0f;
         UnityEngine.Events.UnityAction action1 = null;
-        if (selectedOrgan == null)
+        if (selectedBodyPart == null)
         {
             action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
@@ -331,7 +331,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10 * 60.0f;
         UnityEngine.Events.UnityAction action1 = null;
-        if (selectedOrgan == null)
+        if (selectedBodyPart == null)
         {
             action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
