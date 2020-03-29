@@ -17,6 +17,7 @@ public class ButtonActions : MonoBehaviour
     public DescriptionReporting descriptionReporting;
     public Text selectedBodyPartText;
     public Text selectedOrganText;
+    public Text messageBox;
 
     // Start is called before the first frame update
     void Start()
@@ -100,7 +101,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedOrgan == null)
         {
-            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+            action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
         else
         {
@@ -119,7 +120,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedOrgan == null)
         {
-            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+            action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
         else
         {
@@ -137,7 +138,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedOrgan == null)
         {
-            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+            action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
         else
         {
@@ -155,7 +156,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedOrgan == null)
         {
-            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+            action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
         else
         {
@@ -332,7 +333,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedOrgan == null)
         {
-            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+            action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
         else
         {
@@ -351,7 +352,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedOrgan == null)
         {
-            action1 = () => { Debug.Log("You need to select an organ for that!"); };
+            action1 = () => { messageBox.text = "You need to select an organ for that!"; };
         }
         else
         {
@@ -369,7 +370,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedBodyPart == null)
         {
-            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+            action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
         else
         {
@@ -387,7 +388,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedBodyPart == null || selectedOrgan == null)
         {
-            action1 = () => { Debug.Log("You need to select both a bodypart and an organ for that!"); };
+            action1 = () => { messageBox.text = "You need to select both a bodypart and an organ for that!"; };
         }
         else
         {
@@ -444,11 +445,11 @@ public class ButtonActions : MonoBehaviour
 
         if (selectedBodyPart == null)
         {
-            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+            action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
         else if (selectedBodyPart == null || selectedBodyPart.connectedBodyParts.Count() != 0)
         {
-            action1 = () => { Debug.Log("That bodypart is still connected to things!"); };
+            action1 = () => { messageBox.text = "That bodypart is still connected to things!"; };
         }
         else
         {
@@ -466,7 +467,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action1 = null;
         if (selectedBodyPart == null)
         {
-            action1 = () => { Debug.Log("You need to select a bodypart for that!"); };
+            action1 = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
         else
         {
