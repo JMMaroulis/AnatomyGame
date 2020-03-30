@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LifeMonitor : MonoBehaviour
 {
 
     public bool isTimePassing;
-    public float victoryDuration;
-    public float victoryDurationLimit;
+    public Clock clock;
+    public bool hasPlayerWon;
+    public float requiredVictoryWait;
+    public Text messageBox;
 
     public GameObject body;
     private List<GameObject> bodyPartObjects;
@@ -15,44 +18,46 @@ public class LifeMonitor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        victoryDuration = 0.0f;
+        hasPlayerWon = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        PopulateBodyPartsList();
 
-        if (isTimePassing)
+        if (hasPlayerWon)
         {
-            if (VictoryCheck())
-            {
-                victoryDuration += Time.deltaTime;
-            }
+            messageBox.text = "Congration, you done it!";
         }
-
-
-        if (victoryDuration >= victoryDurationLimit)
-        {
-            Debug.Log("Congration: you done it");
-        }
+        
     }
 
-    private bool VictoryCheck()
+    public void VictoryCheck()
     {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(requiredVictoryWait);
+        StaticCoroutine.Start(VictoryCheckCoroutine(requiredVictoryWait));
+    }
+
+    public IEnumerator VictoryCheckCoroutine(float seconds)
+    {
+        clock.globalTimeScalingFactor = 60.0f;
+        clock.StartClockUntil(seconds);
+        yield return new WaitForSeconds(seconds);
+
         bool victory = true;
 
         //check the vital statistics of every bodypart in the body
+        PopulateBodyPartsList();
         foreach (GameObject bodyPartObject in bodyPartObjects)
         {
             BodyPart bodyPart = bodyPartObject.GetComponent<BodyPart>();
 
             victory = victory && bodyPart.blood >= bodyPart.bloodRequiredToFunction;
             victory = victory && bodyPart.oxygen >= bodyPart.oxygenRequired;
-            victory = victory && bodyPart.damage <= (bodyPart.damageMax / 2.0f);
+            victory = victory && bodyPart.damage <= ( bodyPart.damageMax / 5.0f);
         }
 
-        return victory;
+        hasPlayerWon = victory;
     }
 
     void PopulateBodyPartsList()

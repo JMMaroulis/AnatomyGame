@@ -538,6 +538,7 @@ MonoBehaviour:
   selectedBodyPartText: {fileID: 2033847332}
   selectedOrganText: {fileID: 1555175678}
   messageBox: {fileID: 811546129}
+  lifeMonitor: {fileID: 714661424}
 --- !u!4 &374478781
 Transform:
   m_ObjectHideFlags: 0
@@ -1393,8 +1394,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  victoryDuration: 0
-  victoryDurationLimit: 100
+  clock: {fileID: 1294914373}
+  hasPlayerWon: 0
+  requiredVictoryWait: 3600
+  messageBox: {fileID: 811546129}
   body: {fileID: 965609865}
 --- !u!4 &714661425
 Transform:

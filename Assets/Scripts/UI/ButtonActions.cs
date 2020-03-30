@@ -18,6 +18,7 @@ public class ButtonActions : MonoBehaviour
     public Text selectedBodyPartText;
     public Text selectedOrganText;
     public Text messageBox;
+    public LifeMonitor lifeMonitor;
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +84,7 @@ public class ButtonActions : MonoBehaviour
         AssignSelectBloodActionOptions(menuButtons[0]);
         AssignSelectSurgeryActionOptions(menuButtons[2]);
         AssignExamineBodyPart(menuButtons[3]);
+        AssignVictoryCheck(menuButtons[6]);
     }
 
     //remove all text and actions from all buttons
@@ -478,5 +480,13 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "EXAMINE BODYPART";
+    }
+
+    void AssignVictoryCheck(GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action1 = () => { lifeMonitor.VictoryCheck(); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action1);
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "WAIT AN HOUR";
     }
 }
