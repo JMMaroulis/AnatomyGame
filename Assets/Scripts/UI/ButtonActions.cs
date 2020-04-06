@@ -81,21 +81,6 @@ public class ButtonActions : MonoBehaviour
 
     }
 
-    //make button take us back to default menu
-    void AssignDefaultButtons()
-    {
-        ClearAllButtons();
-        AssignSelectBodyPartOptions(menuButtons[1]);
-        AssignSelectOrganOptions(menuButtons[4]);
-        bodyPartMenuCounter = 0;
-        organMenuCounter = 0;
-
-        AssignSelectBloodActionOptions(menuButtons[0]);
-        AssignSelectSurgeryActionOptions(menuButtons[2]);
-        AssignExamineBodyPart(menuButtons[3]);
-        AssignVictoryCheck(menuButtons[6]);
-    }
-
     //remove all text and actions from all buttons
     void ClearAllButtons()
     {
@@ -104,6 +89,73 @@ public class ButtonActions : MonoBehaviour
             buttonObject.GetComponent<Button>().onClick.RemoveAllListeners();
             buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "";
         }
+    }
+
+    //make button take us back to default menu
+    void AssignDefaultButtons()
+    {
+        bodyPartMenuCounter = 0;
+        organMenuCounter = 0;
+
+        ClearAllButtons();
+
+        AssignSelectBodyPartOptions(menuButtons[0]);
+        AssignSelectOrganOptions(menuButtons[1]);
+        AssignSelectBodyPartActionOptions(menuButtons[2]);
+        AssignSelectOrganActionOptions(menuButtons[3]);
+
+        //AssignSelectBloodActionOptions(menuButtons[0]);
+        //AssignSelectSurgeryActionOptions(menuButtons[2]);
+        //AssignExamineBodyPart(menuButtons[3]);
+
+        AssignVictoryCheck(menuButtons[6]);
+    }
+
+    void AssignSelectBodyPartActionOptions(GameObject buttonObject)
+    {
+        buttonObject.GetComponent<Button>().onClick.AddListener(SelectBodyPartActionOptions);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT BODYPART ACTION";
+    }
+
+    void SelectBodyPartActionOptions()
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        AssignRemoveBodyPartButton(menuButtons[0]);
+        AssignAttachBodyPartButton(menuButtons[1]);
+        AssignDestroyBodyPart(menuButtons[2]);
+        //AssignRemoveOrganButton(menuButtons[3]);
+        //AssignImplantOrganButton(menuButtons[4]);
+        AssignBandagesButton(menuButtons[3]);
+        AssignBloodlettingButton(menuButtons[4]);
+        AssignAddBloodButton(menuButtons[5]);
+        AssignRemoveBloodButton(menuButtons[7]);
+    }
+
+
+    void AssignSelectOrganActionOptions(GameObject buttonObject)
+    {
+        buttonObject.GetComponent<Button>().onClick.AddListener(SelectOrganActionOptions);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT ORGAN ACTION";
+    }
+
+    void SelectOrganActionOptions()
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        //AssignRemoveBodyPartButton(menuButtons[0]);
+        //AssignAttachBodyPartButton(menuButtons[1]);
+        //AssignDestroyBodyPart(menuButtons[2]);
+        AssignRemoveOrganButton(menuButtons[0]);
+        AssignImplantOrganButton(menuButtons[1]);
     }
 
     void AssignBandagesButton(GameObject buttonObject)

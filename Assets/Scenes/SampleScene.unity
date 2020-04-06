@@ -404,12 +404,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257884925}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 238a2cb1c885dc44a9c3a7627f7ee8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 965609865}
+  messageBox: {fileID: 811546129}
 --- !u!4 &257884927
 Transform:
   m_ObjectHideFlags: 0
@@ -1447,8 +1448,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.28066665}
   m_AnchorMax: {x: 0.28866667, y: 1}
-  m_AnchoredPosition: {x: 682, y: -494}
-  m_SizeDelta: {x: 1367.4, y: -987.8}
+  m_AnchoredPosition: {x: 682.86, y: -467.5}
+  m_SizeDelta: {x: 1365.7, y: -934.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &811546129
 MonoBehaviour:
@@ -1477,7 +1478,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 6
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
