@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhysicalInjuryGenerator : MonoBehaviour
 {
     public GameObject body;
+    public Text messageBox;
     private List<BodyPart> bodyParts;
     private List<Organ> organs;
 
@@ -18,6 +20,8 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     //select n random bodyparts
     public void InjureRandomBodypart(int numberOfInjuries)
     {
+        string injuryText = "";
+
         for (int i = 0; i < numberOfInjuries; i++)
         {
             //selected bodypart to injure, and injury to apply
@@ -29,16 +33,19 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             {
                 case 0:
                     Debug.Log($"Stabbed {bodyPart.name}");
+                    injuryText += $"The {bodyPart.name} has been stabbed.\n";
                     Stab(bodyPart);
                     break;
 
                 case 1:
                     Debug.Log($"Shot {bodyPart.name}");
+                    injuryText += $"The {bodyPart.name} has been shot.\n";
                     Shoot(bodyPart);
                     break;
 
                 case 2:
                     Debug.Log($"Crushed {bodyPart.name}");
+                    injuryText += $"The {bodyPart.name} has been crushed.\n";
                     Crush(bodyPart);
                     break;
 
@@ -46,6 +53,8 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     break;
             }
         }
+
+        messageBox.text = injuryText;
     }
 
     //assorted physical injury methods

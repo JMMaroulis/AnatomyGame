@@ -67,7 +67,16 @@ public class ButtonActions : MonoBehaviour
         if (selectedBodyPart) selectedBodyPartText.text = selectedBodyPart.name;
         else selectedBodyPartText.text = "No Body Part Selected";
 
-        if (selectedOrgan) selectedOrganText.text = selectedOrgan.name;
+        if (selectedOrgan) {
+            if (selectedOrgan.connectedBodyParts.Count != 0)
+            {
+                selectedOrganText.text = $"{selectedOrgan.connectedBodyParts[0]} : {selectedOrgan.name}";
+            }
+            else
+            {
+                selectedOrganText.text = $"External : {selectedOrgan.name}";
+            }
+        }
         else selectedOrganText.text = "No Organ Selected";
 
     }
@@ -260,7 +269,6 @@ public class ButtonActions : MonoBehaviour
     void SelectBodyPart(BodyPart bodyPart)
     {
         selectedBodyPart = bodyPart;
-        selectedOrgan = null;
     }
 
     //make a button select a given bodypart
