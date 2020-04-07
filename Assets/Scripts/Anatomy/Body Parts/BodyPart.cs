@@ -88,7 +88,7 @@ public class BodyPart : MonoBehaviour
 
         //if bodypart doesn't have enough blood to lose, inflict the remaining loss on neighbouring parts instead
         //otherwise, lose it from this bodypart
-        if (bloodLost > blood)
+        if (bloodLost > blood && connectedBodyParts.Count > 0)
         {
             float bloodLostRemainder = bloodLost - blood;
             blood = Mathf.Max(blood - bloodLost, 0);
