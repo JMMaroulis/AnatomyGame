@@ -45,11 +45,12 @@ public class ButtonActions : MonoBehaviour
     {
         bodyParts = new List<BodyPart>();
 
-        //get bodyparts from body
-        //we can't just use findObejctsOfType<BodyPart>() here, cause that will get all of the organs as well
-        for (int i = 0; i < body.transform.childCount; i++)
+        foreach (BodyPart bodypart in FindObjectsOfType<BodyPart>().ToList<BodyPart>())
         {
-            bodyParts.Add(body.transform.GetChild(i).gameObject.GetComponent<BodyPart>());
+            if (!(bodypart is Organ))
+            {
+                bodyParts.Add(bodypart);
+            }
         }
     }
 

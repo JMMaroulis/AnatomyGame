@@ -535,9 +535,9 @@ MonoBehaviour:
   selectedBodyPart: {fileID: 0}
   selectedOrgan: {fileID: 0}
   body: {fileID: 965609865}
-  descriptionReporting: {fileID: 1639331019}
   selectedBodyPartText: {fileID: 2033847332}
   selectedOrganText: {fileID: 1555175678}
+  descriptionText: {fileID: 1639331017}
   messageBox: {fileID: 811546129}
   lifeMonitor: {fileID: 714661424}
 --- !u!4 &374478781
@@ -3061,7 +3061,6 @@ GameObject:
   - component: {fileID: 1639331015}
   - component: {fileID: 1639331018}
   - component: {fileID: 1639331017}
-  - component: {fileID: 1639331019}
   m_Layer: 5
   m_Name: Description Textbox
   m_TagString: Untagged
@@ -3137,18 +3136,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639331014}
   m_CullTransparentMesh: 0
---- !u!114 &1639331019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1639331014}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 099d0da227af4044b9982c4895d4f5fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1708655654
 GameObject:
   m_ObjectHideFlags: 0

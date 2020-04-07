@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class Clock : MonoBehaviour
     public GameObject body;
     public DeathMonitor deathMonitor;
     public LifeMonitor lifeMonitor;
-    private List<GameObject> bodyPartObjects = new List<GameObject>();
+    private List<BodyPart> bodyParts = new List<BodyPart>();
 
     //TODO: find some way to get this thing working as a public bool in the inspector with properties, rather than just updating every bodypart value every frame
     public bool isTimePassing; // { get { return _isTimePassing; } set { _isTimePassing = value; BodyPartsTimePaassing(); } }
@@ -18,7 +19,6 @@ public class Clock : MonoBehaviour
     public float globalTimeScalingFactor;
     private float timeUntilClockStops = 0.0f;
     private float timeElapsed = 0.0f;
-    private float startingTime = 60.0f * 60.0f * 10.0f;
     public Text currentTime;
 
     // Start is called before the first frame update
@@ -54,32 +54,15 @@ public class Clock : MonoBehaviour
 
     void PopulateBodyPartsList()
     {
-
-        bodyPartObjects = new List<GameObject>();
-
-        //get bodyparts from body
-        for (int i = 0; i < body.transform.childCount; i++)
-        {
-            bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
-
-            //get organs from bodypart
-            //NOTE: THIS INTRODUCES THE ASSUMPTION THAT ORGANS WILL ALWAYS BE CHILDREN OF THEIR CONTAINING BODYPARTS
-            //AS WELL AS CONTAINED IN THE containedOrgans LISTS. IT WILL DO FOR NOW.
-            for (int j = 0; j < body.transform.GetChild(i).childCount; j++)
-            {
-                bodyPartObjects.Add(body.transform.GetChild(i).GetChild(j).gameObject);
-            }
-        }
-
+        bodyParts = FindObjectsOfType<BodyPart>().ToList<BodyPart>();
     }
 
     //would be great if we could trigger this on isTimePassing changing, rather than invoking it manually every frame
     public void BodyPartsTimePassing()
     {
 
-        foreach (GameObject bodyPartObject in bodyPartObjects)
+        foreach (BodyPart bodyPart in bodyParts)
         {
-            BodyPart bodyPart = bodyPartObject.GetComponent<BodyPart>();
             bodyPart.isTimePassing = isTimePassing;
         }
 
