@@ -28,6 +28,9 @@ public class BodyPart : MonoBehaviour
     public List<BodyPart> connectedBodyParts;
     public List<Organ> containedOrgans;
 
+    private bool isConnectedToBrain;
+    private float connectedBrainEfficiency;
+
     //Pumps blood, if there is blood left to pump.
     public void PumpBlood(float heartEfficiency)
     {
@@ -143,11 +146,52 @@ public class BodyPart : MonoBehaviour
 
     }
 
+    //kicks off recursive process for finding brain, and efficiency thereof
+    public void IsConnectedToBrainStarter()
+    {
+        isConnectedToBrain = false;
+        connectedBrainEfficiency = 0.0f;
+        IsConnectedToBrain(this, new List<BodyPart>());
+    }
+
+    //recursive iteration
+    private void IsConnectedToBrain(BodyPart currentBodyPart, List<BodyPart> alreadyChecked)
+    {
+
+        if (currentBodyPart is Brain)
+        {
+            isConnectedToBrain = true;
+            connectedBrainEfficiency = currentBodyPart.efficiency;
+        }
+        alreadyChecked.Add(currentBodyPart);
+
+
+        foreach (BodyPart bodyPart in currentBodyPart.containedOrgans)
+        {
+            if (alreadyChecked.Contains(bodyPart) == false)
+            {
+                IsConnectedToBrain(bodyPart, alreadyChecked);
+            }
+        }
+
+        foreach (BodyPart bodyPart in currentBodyPart.connectedBodyParts)
+        {
+            if (alreadyChecked.Contains(bodyPart) == false)
+            {
+                IsConnectedToBrain(bodyPart, alreadyChecked);
+            }
+        }
+
+    }
+
     public void UpdateEfficiency()
     {
+        IsConnectedToBrainStarter();
+
         float damageRatio = 1 - (damage / damageMax); //1 good, 0 bad
         float oxygenRatio = Mathf.Min((oxygen / oxygenRequired), 1); //1 good, 0 bad
-        efficiency = damageRatio * oxygenRatio;
+        efficiency = damageRatio * oxygenRatio * connectedBrainEfficiency;
+
     }
 
     public void UpdateDamage()
