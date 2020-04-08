@@ -16,7 +16,6 @@ public class ButtonActions : MonoBehaviour
     private int organMenuCounter = 0;
     public Text selectedBodyPartText;
     public Text selectedOrganText;
-    public Text descriptionText;
     public Text messageBox;
     public LifeMonitor lifeMonitor;
 
@@ -387,7 +386,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "INJECT HEALTH POTION: " + seconds + " seconds";
+        buttonText.text = "INJECT HEALTH POTION (50 units): " + seconds + " seconds";
 
     }
 
@@ -659,7 +658,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { descriptionText.text = bodypart.GenerateDescription(); };
+            action = () => { messageBox.text = bodypart.GenerateDescription(); };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -677,7 +676,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { descriptionText.text = organ.GenerateDescription(); };
+            action = () => { messageBox.text = organ.GenerateDescription(); };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);

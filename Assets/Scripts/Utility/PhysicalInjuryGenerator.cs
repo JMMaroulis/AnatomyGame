@@ -34,19 +34,19 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             {
                 case 0:
                     Debug.Log($"Stabbed {bodyPart.name}");
-                    injuryText += $"The {bodyPart.name} has been stabbed.\n";
+                    injuryText += $"\nThe {bodyPart.name} has been stabbed.";
                     Stab(bodyPart);
                     break;
 
                 case 1:
                     Debug.Log($"Shot {bodyPart.name}");
-                    injuryText += $"The {bodyPart.name} has been shot.\n";
+                    injuryText += $"\nThe {bodyPart.name} has been shot.";
                     Shoot(bodyPart);
                     break;
 
                 case 2:
                     Debug.Log($"Crushed {bodyPart.name}");
-                    injuryText += $"The {bodyPart.name} has been crushed.\n";
+                    injuryText += $"\nThe {bodyPart.name} has been crushed.";
                     Crush(bodyPart);
                     break;
 

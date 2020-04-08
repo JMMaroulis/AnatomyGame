@@ -405,6 +405,14 @@ public class BodyPart : MonoBehaviour
         description += $"Oxygen: {oxygen} / {oxygenMax}, requires {oxygenRequired} per second to function.\n";
         #endregion
 
+        #region drugs description
+        //add health potion desctiption
+        if (healthPotion > 0.0f)
+        {
+            description += $"Health Potion: {healthPotion} Units.\n";
+        }
+        #endregion
+
         #region connections description
         //add connections description
         description += "Connected to: ";
