@@ -126,7 +126,8 @@ public class ButtonActions : MonoBehaviour
 
         AssignSelectSurgeryActionOptions(menuButtons[0], selectedBodyPart);
         AssignSelectBloodActionOptions(menuButtons[1], selectedBodyPart);
-        AssignExamineBodyPart(menuButtons[2], selectedBodyPart);
+        AssignSelectMedicineActionOptions(menuButtons[2], selectedBodyPart);
+        AssignExamineBodyPart(menuButtons[3], selectedBodyPart);
 
     }
 
@@ -148,7 +149,8 @@ public class ButtonActions : MonoBehaviour
 
         AssignSelectSurgeryActionOptions(menuButtons[0], selectedOrgan);
         AssignSelectBloodActionOptions(menuButtons[1], selectedOrgan);
-        AssignExamineOrgan(menuButtons[2], selectedOrgan);
+        AssignSelectMedicineActionOptions(menuButtons[2], selectedOrgan);
+        AssignExamineOrgan(menuButtons[3], selectedOrgan);
     }
 
 
@@ -291,6 +293,35 @@ public class ButtonActions : MonoBehaviour
     }
 
 
+    //make a button take us to the medicine action
+    void AssignSelectMedicineActionOptions(GameObject buttonObject, BodyPart bodypart)
+    {
+        UnityEngine.Events.UnityAction action = () => { SelectMedicineActionOptions(bodypart); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT MEDICINE ACTION";
+    }
+
+    void SelectMedicineActionOptions(BodyPart bodypart)
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        if (bodypart is Organ)
+        {
+            AssignInjectHealthPotionButton(menuButtons[0], bodypart);
+        }
+        else
+        {
+            AssignInjectHealthPotionButton(menuButtons[0], bodypart);
+        }
+    }
+
+
+
+
 
     #region Selection
 
@@ -338,6 +369,31 @@ public class ButtonActions : MonoBehaviour
     #endregion
 
 
+    #region Medicine
+
+    void AssignInjectHealthPotionButton(GameObject buttonObject, BodyPart bodypart)
+    {
+        float seconds = 10.0f;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Medicine.InjectHealthPotion(bodypart, seconds); };
+        }
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "INJECT HEALTH POTION: " + seconds + " seconds";
+
+    }
+
+    #endregion
+
+
     #region Blood
 
     void AssignBandagesButton(GameObject buttonObject, BodyPart bodypart)
@@ -365,7 +421,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
-            action = () => { messageBox.text = "You need to select a bodypart for that!"; };
+            action = () => { messageBox.text = "You need to select something for that!"; };
         }
         else
         {
@@ -383,7 +439,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
-            action = () => { messageBox.text = "You need to select a bodypart for that!"; };
+            action = () => { messageBox.text = "You need to select something for that!"; };
         }
         else
         {

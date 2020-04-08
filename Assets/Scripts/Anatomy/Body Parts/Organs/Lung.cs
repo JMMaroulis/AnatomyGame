@@ -30,11 +30,7 @@ public class Lung : Organ
     {
         if (isTimePassing)
         {
-            CheckForFunctionality();
-            UpdateEfficiency();
-            UpdateDamage();
-            LoseBlood();
-            ConsumeOxygen();
+            UpdateBodyPart();
             AbsorbOxygen();
         }
 

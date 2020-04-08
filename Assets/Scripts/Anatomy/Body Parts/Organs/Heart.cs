@@ -54,11 +54,7 @@ public class Heart : Organ
     {
         if (isTimePassing)
         {
-            CheckForFunctionality();
-            UpdateEfficiency();
-            UpdateDamage();
-            LoseBlood();
-            ConsumeOxygen();
+            UpdateBodyPart();
             PumpBloodMaster();
         }
 

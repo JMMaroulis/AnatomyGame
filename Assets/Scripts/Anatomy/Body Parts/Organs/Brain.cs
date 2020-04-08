@@ -17,11 +17,7 @@ public class Brain : Organ
 
         if (isTimePassing)
         {
-            CheckForFunctionality();
-            UpdateEfficiency();
-            UpdateDamage();
-            LoseBlood();
-            ConsumeOxygen();
+            UpdateBodyPart();
         }
 
     }

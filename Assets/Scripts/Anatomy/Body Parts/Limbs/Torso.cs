@@ -14,15 +14,7 @@ public class Torso : BodyPart
 
     void Update()
     {
-        if (isTimePassing)
-        {
-            UpdateDamage();
-            CheckForFunctionality();
-            UpdateEfficiency();
-            LoseBlood();
-            ConsumeOxygen();
-        }
-
+        UpdateBodyPart();
     }
 
 }

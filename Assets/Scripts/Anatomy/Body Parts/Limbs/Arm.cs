@@ -13,16 +13,7 @@ public class Arm : BodyPart
 
     void Update()
     {
-
-        if (isTimePassing)
-        {
-            UpdateDamage();
-            CheckForFunctionality();
-            UpdateEfficiency();
-            LoseBlood();
-            ConsumeOxygen();
-        }
-
+        UpdateBodyPart();
     }
 
 }

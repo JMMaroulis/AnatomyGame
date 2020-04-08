@@ -31,6 +31,25 @@ public class BodyPart : MonoBehaviour
     private bool isConnectedToBrain;
     private float connectedBrainEfficiency;
 
+
+    //drug stuff
+    public float healthPotion;
+
+    public void UpdateBodyPart()
+    {
+
+        if (isTimePassing)
+        {
+            ApplyDrugs();
+            UpdateDamage();
+            CheckForFunctionality();
+            UpdateEfficiency();
+            LoseBlood();
+            ConsumeOxygen();
+        }
+
+    }
+
     //Pumps blood, if there is blood left to pump.
     public void PumpBlood(float heartEfficiency)
     {
@@ -130,6 +149,17 @@ public class BodyPart : MonoBehaviour
         float timeSinceLastConsumption = Time.deltaTime;
         float oxygenconsumed = oxygenRequired * timeSinceLastConsumption;
         oxygen = Mathf.Max(oxygen - oxygenconsumed, 0);
+    }
+
+    public void ApplyDrugs()
+    {
+        if (healthPotion > 0.0f)
+        {
+            //in 1 second, will process 1 unit of health potion
+            float healthPotionProcessed = Mathf.Min(healthPotion, Time.deltaTime);
+            healthPotion = Mathf.Max(0.0f, healthPotion - healthPotionProcessed);
+            damage = Mathf.Max(0.0f, damage - healthPotionProcessed);
+        }
     }
 
     public void CheckForFunctionality()

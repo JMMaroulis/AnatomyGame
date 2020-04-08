@@ -12,22 +12,9 @@ public class Leg : BodyPart
 
     }
 
-    public float tempUpdate = 0;
-
-
-
     void Update()
     {
-
-        if (isTimePassing)
-        {
-            UpdateDamage();
-            CheckForFunctionality();
-            UpdateEfficiency();
-            LoseBlood();
-            ConsumeOxygen();
-        }
-
+        UpdateBodyPart();
     }
 
 }

@@ -7,6 +7,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 {
     public GameObject body;
     public Text messageBox;
+    public int numberStartingInjuries;
     private List<BodyPart> bodyParts;
     private List<Organ> organs;
 
@@ -14,7 +15,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     void Start()
     {
         PopulateBodyPartsList();
-        InjureRandomBodypart(2);
+        InjureRandomBodypart(numberStartingInjuries);
     }
 
     //select n random bodyparts
