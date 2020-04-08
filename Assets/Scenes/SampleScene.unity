@@ -425,7 +425,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364669068
 GameObject:
@@ -540,7 +540,6 @@ MonoBehaviour:
   body: {fileID: 965609865}
   selectedBodyPartText: {fileID: 2033847332}
   selectedOrganText: {fileID: 1555175678}
-  descriptionText: {fileID: 0}
   messageBox: {fileID: 811546129}
   lifeMonitor: {fileID: 714661424}
 --- !u!4 &374478781
@@ -555,7 +554,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &427520767
 GameObject:
@@ -892,65 +891,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 455039389}
   m_CullTransparentMesh: 0
---- !u!1 &456601628
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 456601629}
-  - component: {fileID: 456601630}
-  m_Layer: 0
-  m_Name: Brain (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &456601629
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456601628}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18242271, y: 3.0764737, z: -331.07306}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &456601630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456601628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46681511a39710041b71b9ff255cb0af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTimePassing: 0
-  timeScale: 0
-  isFunctioning: 0
-  bloodRequiredToFunction: 100
-  blood: 500
-  bloodLossRate: 0
-  bloodPumpRate: 50
-  oxygen: 100
-  oxygenMax: 500
-  oxygenRequired: 5
-  damage: 0
-  damageMax: 100
-  efficiency: 1
-  connectedBodyParts: []
-  containedOrgans: []
-  healthPotion: 0
 --- !u!1 &457528519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,7 +1357,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &811546126
 GameObject:
@@ -1453,7 +1393,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.28066665}
   m_AnchorMax: {x: 0.28866667, y: 1}
-  m_AnchoredPosition: {x: 683, y: -325.1}
+  m_AnchoredPosition: {x: 683, y: -325.10004}
   m_SizeDelta: {x: 1365.7, y: -649.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &811546129
@@ -1852,7 +1792,7 @@ Transform:
   - {fileID: 815907114}
   - {fileID: 2022202133}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1047501643
 GameObject:
@@ -2225,7 +2165,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1126341983
 GameObject:
@@ -2590,7 +2530,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1294914373
 MonoBehaviour:
