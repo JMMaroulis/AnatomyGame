@@ -43,9 +43,7 @@ public static class Actions_Surgery
             Debug.Log("That organ is already inside something! Don't do that!");
             return;
         }
-
-
-
+               
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
         StaticCoroutine.Start(ImplantOrganCoroutine(organ, bodyPart, seconds));
     }
@@ -66,7 +64,7 @@ public static class Actions_Surgery
 
     public static void ConnectBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, float seconds)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(20.0f * 60.0f);
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
         StaticCoroutine.Start(ConnectBodyPartCoroutine(bodyPart1, bodyPart2, seconds));
     }
 
