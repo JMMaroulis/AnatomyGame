@@ -26,6 +26,10 @@ public class Heart : Organ
         currentBodyPart.PumpBlood(heartEfficiency);
         alreadyPumped.Add(currentBodyPart);
 
+        //shuffle to prevent weird behaviour from ordered looping
+        IListExtensions.Shuffle<Organ>(currentBodyPart.containedOrgans);
+        IListExtensions.Shuffle<BodyPart>(currentBodyPart.connectedBodyParts);
+
         foreach (BodyPart bodyPart in currentBodyPart.containedOrgans)
         {
             if (alreadyPumped.Contains(bodyPart) == false)
@@ -33,6 +37,7 @@ public class Heart : Organ
                 PumpBloodRecursive(bodyPart, alreadyPumped);
             }
         }
+
         foreach (BodyPart bodyPart in currentBodyPart.connectedBodyParts)
         {
             if (alreadyPumped.Contains(bodyPart) == false)

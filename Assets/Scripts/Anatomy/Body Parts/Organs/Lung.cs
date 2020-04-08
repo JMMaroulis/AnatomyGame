@@ -30,8 +30,8 @@ public class Lung : Organ
     {
         if (isTimePassing)
         {
-            UpdateBodyPart();
             AbsorbOxygen();
+            UpdateBodyPart();
         }
 
     }
