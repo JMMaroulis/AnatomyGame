@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Heart : Organ
@@ -27,25 +28,18 @@ public class Heart : Organ
         alreadyPumped.Add(currentBodyPart);
 
         //shuffle to prevent weird behaviour from ordered looping
-        IListExtensions.Shuffle<Organ>(currentBodyPart.containedOrgans);
-        IListExtensions.Shuffle<BodyPart>(currentBodyPart.connectedBodyParts);
+        List<BodyPart> allBodyParts = currentBodyPart.connectedBodyParts.Concat(currentBodyPart.containedOrgans).ToList<BodyPart>();
+        List<int> bodypartPumpOrder = Enumerable.Range(0, allBodyParts.Count()).ToList<int>();
+        IListExtensions.Shuffle<int>(bodypartPumpOrder);
 
-        foreach (BodyPart bodyPart in currentBodyPart.containedOrgans)
+        foreach (int bodypartPumpIndex in bodypartPumpOrder)
         {
-            if (alreadyPumped.Contains(bodyPart) == false)
+            if (alreadyPumped.Contains(allBodyParts[bodypartPumpIndex]) == false)
             {
-                PumpBloodRecursive(bodyPart, alreadyPumped);
+                PumpBloodRecursive(allBodyParts[bodypartPumpIndex], alreadyPumped);
             }
         }
-
-        foreach (BodyPart bodyPart in currentBodyPart.connectedBodyParts)
-        {
-            if (alreadyPumped.Contains(bodyPart) == false)
-            {
-                PumpBloodRecursive(bodyPart, alreadyPumped);
-            }
-        }
-
+        
     }
 
     // Start is called before the first frame update

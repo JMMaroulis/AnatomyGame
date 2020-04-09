@@ -56,36 +56,15 @@ public class BodyPart : MonoBehaviour
         float timeSinceLastPump = Time.deltaTime;
 
         //pumping blood to contained organs in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
-        List<int> organPumpOrder = Enumerable.Range(0, containedOrgans.Count()).ToList<int>();
-        IListExtensions.Shuffle<int>(organPumpOrder);
-        foreach (int organIndex in organPumpOrder)
+        List<BodyPart> allBodyParts = connectedBodyParts.Concat(containedOrgans).ToList<BodyPart>();
+        List<int> bodypartPumpOrder = Enumerable.Range(0, allBodyParts.Count()).ToList<int>();
+        IListExtensions.Shuffle<int>(bodypartPumpOrder);
+        foreach (int bodyPartIndex in bodypartPumpOrder)
         {
-            Organ organ = containedOrgans[organIndex];
-            float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / organ.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
-            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / organ.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
-
-            //transport blood
-            float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
-            float bloodOut = Mathf.Max(Mathf.Min(blood, proposedBloodOut), 0);
-            organ.blood += bloodOut;
-            blood -= bloodOut;
-
-            //transport oxygen, capped by blood transport
-            float proposedOxygenOut = Mathf.Min(tempOxygenPumpRate * timeSinceLastPump, bloodOut);
-            float oxygenOut = Mathf.Max(Mathf.Min(oxygen, proposedOxygenOut), 0);
-            //oxygenOut = Mathf.Min(organ.oxygenMax - organ.oxygen, oxygenOut);
-            organ.oxygen += oxygenOut;
-            oxygen -= oxygenOut;
-        }
-
-        //pumping blood to body parts in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
-        List<int> limbPumpOrder = Enumerable.Range(0, connectedBodyParts.Count()).ToList<int>();
-        IListExtensions.Shuffle<int>(limbPumpOrder);
-        foreach (int bodyPartIndex in limbPumpOrder)
-        {
-            BodyPart bodyPart = connectedBodyParts[bodyPartIndex];
+            BodyPart bodyPart = allBodyParts[bodyPartIndex];
             float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / bodyPart.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
             float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / bodyPart.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
+            float tempHealthPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (healthPotion / bodyPart.healthPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
@@ -96,9 +75,14 @@ public class BodyPart : MonoBehaviour
             //transport oxygen, capped by blood transport
             float proposedOxygenOut = Mathf.Min(tempOxygenPumpRate * timeSinceLastPump, bloodOut);
             float oxygenOut = Mathf.Max(Mathf.Min(oxygen, proposedOxygenOut), 0);
-            //oxygenOut = Mathf.Min(bodyPart.oxygenMax - bodyPart.oxygen, oxygenOut);
             bodyPart.oxygen += oxygenOut;
             oxygen -= oxygenOut;
+
+            //transport health potion, capped by blood transport
+            float proposedHealthPotionOut = Mathf.Min(tempHealthPotionPumpRate * timeSinceLastPump, bloodOut);
+            float healthPotionOut = Mathf.Max(Mathf.Min(healthPotion, proposedHealthPotionOut), 0);
+            bodyPart.healthPotion += healthPotionOut;
+            healthPotion -= healthPotionOut;
         }
     }
 
@@ -155,10 +139,18 @@ public class BodyPart : MonoBehaviour
     {
         if (healthPotion > 0.0f)
         {
-            //in 1 second, will process 1 unit of health potion
-            float healthPotionProcessed = Mathf.Min(healthPotion, Time.deltaTime);
-            healthPotion = Mathf.Max(0.0f, healthPotion - healthPotionProcessed);
-            damage = Mathf.Max(0.0f, damage - healthPotionProcessed);
+            if (damage > 0.0f)
+            {
+                //in 1 second, will process 1/5 unit of health potion
+                float healthPotionProcessed = Mathf.Min(healthPotion, Time.deltaTime * 0.5f);
+                healthPotion = Mathf.Max(0.0f, healthPotion - healthPotionProcessed);
+                damage = Mathf.Max(0.0f, damage - healthPotionProcessed);
+            }
+            else
+            {
+                //decays at 1/100th unit per second, if no damage to be healed
+                healthPotion = Mathf.Max(0.0f, healthPotion - Time.deltaTime * 0.01f);
+            }
         }
     }
 
