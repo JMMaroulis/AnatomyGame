@@ -278,7 +278,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257884925}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 238a2cb1c885dc44a9c3a7627f7ee8e4, type: 3}
   m_Name: 
@@ -480,7 +480,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -496,7 +496,7 @@ MonoBehaviour:
   - {fileID: 139341404}
   - {fileID: 1342094375}
   - {fileID: 1302856264}
-  healthPotion: 0
+  healthPotion: 100
 --- !u!1 &374478779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,7 +1394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.28066665}
   m_AnchorMax: {x: 0.28866667, y: 1}
-  m_AnchoredPosition: {x: 683, y: -325.10004}
+  m_AnchoredPosition: {x: 683, y: -325.125}
   m_SizeDelta: {x: 1365.7, y: -649.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &811546129
@@ -1489,7 +1489,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -2549,7 +2549,7 @@ MonoBehaviour:
   deathMonitor: {fileID: 1124799829}
   lifeMonitor: {fileID: 714661424}
   isTimePassing: 1
-  globalTimeScalingFactor: 30
+  globalTimeScalingFactor: 50
   currentTime: {fileID: 188086456}
 --- !u!1 &1302856263
 GameObject:
@@ -2587,7 +2587,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -2597,7 +2597,7 @@ MonoBehaviour:
   - {fileID: 364669070}
   containedOrgans: []
   healthPotion: 0
-  oxygenAbsorptionRate: 50
+  oxygenAbsorptionRate: 100
 --- !u!4 &1302856265
 Transform:
   m_ObjectHideFlags: 0
@@ -2648,7 +2648,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -2710,7 +2710,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -2720,7 +2720,7 @@ MonoBehaviour:
   - {fileID: 364669070}
   containedOrgans: []
   healthPotion: 0
-  oxygenAbsorptionRate: 50
+  oxygenAbsorptionRate: 100
 --- !u!4 &1342094376
 Transform:
   m_ObjectHideFlags: 0
@@ -3418,7 +3418,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -3478,7 +3478,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -3617,7 +3617,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  oxygen: 100
+  oxygen: 200
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0

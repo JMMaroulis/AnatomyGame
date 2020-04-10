@@ -15,9 +15,15 @@ public class Brain : Organ
     void Update()
     {
 
-        if (isTimePassing)
+        float deltaTime = Time.deltaTime;
+        //capping deltatime at 1ms to stop inaccuracies
+        while (deltaTime > 0.0f)
         {
-            UpdateBodyPart();
+            float tempDeltaTime = Mathf.Min(deltaTime, 0.1f);
+
+            UpdateBodyPart(tempDeltaTime);
+
+            deltaTime = Mathf.Max(0.0f, deltaTime - 0.1f);
         }
 
     }

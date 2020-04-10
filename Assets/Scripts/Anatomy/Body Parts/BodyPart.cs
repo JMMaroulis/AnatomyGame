@@ -35,25 +35,27 @@ public class BodyPart : MonoBehaviour
     //drug stuff
     public float healthPotion;
 
-    public void UpdateBodyPart()
+    public void UpdateBodyPart(float deltaTime)
     {
 
         if (isTimePassing)
         {
-            ApplyDrugs();
-            UpdateDamage();
-            CheckForFunctionality();
-            UpdateEfficiency();
-            LoseBlood();
-            ConsumeOxygen();
+
+                ApplyDrugs(deltaTime);
+                UpdateDamage(deltaTime);
+                CheckForFunctionality();
+                UpdateEfficiency();
+                LoseBlood(deltaTime);
+                ConsumeOxygen(deltaTime);
+
         }
 
     }
 
     //Pumps blood, if there is blood left to pump.
-    public void PumpBlood(float heartEfficiency)
+    public void PumpBlood(float heartEfficiency, float deltaTime)
     {
-        float timeSinceLastPump = Time.deltaTime;
+        float timeSinceLastPump = deltaTime;
 
         //pumping blood to contained organs in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
         List<BodyPart> allBodyParts = connectedBodyParts.Concat(containedOrgans).ToList<BodyPart>();
@@ -87,9 +89,9 @@ public class BodyPart : MonoBehaviour
     }
 
     //applies blood loss rate
-    public void LoseBlood()
+    public void LoseBlood(float deltaTime)
     {
-        float timeSinceLastLoss = Time.deltaTime;
+        float timeSinceLastLoss = deltaTime;
         float bloodLost = bloodLossRate * timeSinceLastLoss;
 
         //if bodypart doesn't have enough blood to lose, inflict the remaining loss on neighbouring parts instead
@@ -128,28 +130,28 @@ public class BodyPart : MonoBehaviour
         }
     }
 
-    public void ConsumeOxygen()
+    public void ConsumeOxygen(float deltaTime)
     {
-        float timeSinceLastConsumption = Time.deltaTime;
+        float timeSinceLastConsumption = deltaTime;
         float oxygenconsumed = oxygenRequired * timeSinceLastConsumption;
         oxygen = Mathf.Max(oxygen - oxygenconsumed, 0);
     }
 
-    public void ApplyDrugs()
+    public void ApplyDrugs(float deltaTime)
     {
         if (healthPotion > 0.0f)
         {
             if (damage > 0.0f)
             {
                 //in 1 second, will process 1/5 unit of health potion
-                float healthPotionProcessed = Mathf.Min(healthPotion, Time.deltaTime * 0.5f);
+                float healthPotionProcessed = Mathf.Min(healthPotion, deltaTime * 0.5f);
                 healthPotion = Mathf.Max(0.0f, healthPotion - healthPotionProcessed);
                 damage = Mathf.Max(0.0f, damage - healthPotionProcessed);
             }
             else
             {
                 //decays at 1/100th unit per second, if no damage to be healed
-                healthPotion = Mathf.Max(0.0f, healthPotion - Time.deltaTime * 0.01f);
+                healthPotion = Mathf.Max(0.0f, healthPotion - deltaTime * 0.01f);
             }
         }
     }
@@ -216,10 +218,10 @@ public class BodyPart : MonoBehaviour
 
     }
 
-    public void UpdateDamage()
+    public void UpdateDamage(float deltaTime)
     {
         float oxygenRatio = 1 - Mathf.Min((oxygen / oxygenRequired), 1); //0 good, 1 bad
-        damage = Mathf.Min(damage + (oxygenRatio * Time.deltaTime), damageMax);
+        damage = Mathf.Min(damage + (oxygenRatio * deltaTime), damageMax);
     }
 
     public void SeverConnectionOutgoing(GameObject connectedBodyPart, float inducedBloodLossRate)

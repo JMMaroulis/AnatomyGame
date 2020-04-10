@@ -8,7 +8,7 @@ public class Heart : Organ
 
     //responsible for controlling blood pumping in all bodyparts
     //TODO: the amount of blood moving around should be capped by the amount of blood actually *in* the heart
-    void PumpBloodMaster()
+    void PumpBloodMaster(float deltaTime)
     {
         if (isFunctioning == false)
         {
@@ -17,14 +17,14 @@ public class Heart : Organ
         //get parts bodypart (most likely the torso)
         //BodyPart parentBodyPart = this.transform.parent.GetComponent<BodyPart>();
 
-        PumpBloodRecursive(this, new List<BodyPart>());
+        PumpBloodRecursive(this, new List<BodyPart>(), deltaTime);
     }
 
-    void PumpBloodRecursive(BodyPart currentBodyPart, List<BodyPart> alreadyPumped)
+    void PumpBloodRecursive(BodyPart currentBodyPart, List<BodyPart> alreadyPumped, float deltaTime)
     {
         //pump blood for current bodypart, add to list to avoid repetition
         float heartEfficiency = efficiency;
-        currentBodyPart.PumpBlood(heartEfficiency);
+        currentBodyPart.PumpBlood(heartEfficiency, deltaTime);
         alreadyPumped.Add(currentBodyPart);
 
         //shuffle to prevent weird behaviour from ordered looping
@@ -36,7 +36,7 @@ public class Heart : Organ
         {
             if (alreadyPumped.Contains(allBodyParts[bodypartPumpIndex]) == false)
             {
-                PumpBloodRecursive(allBodyParts[bodypartPumpIndex], alreadyPumped);
+                PumpBloodRecursive(allBodyParts[bodypartPumpIndex], alreadyPumped, deltaTime);
             }
         }
         
@@ -53,10 +53,19 @@ public class Heart : Organ
     {
         if (isTimePassing)
         {
-            UpdateBodyPart();
-            PumpBloodMaster();
-        }
 
+            float deltaTime = Time.deltaTime;
+            //capping deltatime at 100ms to stop inaccuracies
+            while (deltaTime > 0.0f)
+            {
+                float tempDeltaTime = Mathf.Min(deltaTime, 0.1f);
+                PumpBloodMaster(tempDeltaTime);
+                UpdateBodyPart(tempDeltaTime);
+
+                deltaTime = Mathf.Max(0.0f, deltaTime - 0.1f);
+            }
+
+        }
     }
 
     public void SeverConnection(GameObject connectedBodyPart)
