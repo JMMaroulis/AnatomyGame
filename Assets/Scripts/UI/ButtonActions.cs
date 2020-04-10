@@ -105,6 +105,9 @@ public class ButtonActions : MonoBehaviour
         AssignSelectBodyPartActionOptions(menuButtons[2]);
         AssignSelectOrganActionOptions(menuButtons[3]);
 
+        AssignExamineBodyPart(menuButtons[4], selectedBodyPart);
+        AssignExamineOrgan(menuButtons[5], selectedOrgan);
+
         AssignVictoryCheck(menuButtons[6]);
         AssignWaitOneMinute(menuButtons[7]);
     }
@@ -128,8 +131,6 @@ public class ButtonActions : MonoBehaviour
         AssignSelectSurgeryActionOptions(menuButtons[0], selectedBodyPart);
         AssignSelectBloodActionOptions(menuButtons[1], selectedBodyPart);
         AssignSelectMedicineActionOptions(menuButtons[2], selectedBodyPart);
-        AssignExamineBodyPart(menuButtons[3], selectedBodyPart);
-
     }
 
 
@@ -151,7 +152,6 @@ public class ButtonActions : MonoBehaviour
         AssignSelectSurgeryActionOptions(menuButtons[0], selectedOrgan);
         AssignSelectBloodActionOptions(menuButtons[1], selectedOrgan);
         AssignSelectMedicineActionOptions(menuButtons[2], selectedOrgan);
-        AssignExamineOrgan(menuButtons[3], selectedOrgan);
     }
 
 
