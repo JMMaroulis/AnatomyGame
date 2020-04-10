@@ -313,16 +313,17 @@ public class ButtonActions : MonoBehaviour
         if (bodypart is Organ)
         {
             AssignInjectHealthPotionButton(menuButtons[0], bodypart);
+            AssignInjectAntidoteButton(menuButtons[1], bodypart);
+            AssignInjectSlowPoisonButton(menuButtons[2], bodypart);
+
         }
         else
         {
             AssignInjectHealthPotionButton(menuButtons[0], bodypart);
+            AssignInjectAntidoteButton(menuButtons[1], bodypart);
+            AssignInjectSlowPoisonButton(menuButtons[2], bodypart);
         }
     }
-
-
-
-
 
     #region Selection
 
@@ -389,6 +390,46 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "INJECT HEALTH POTION (50 units): " + seconds + " seconds";
+
+    }
+
+    void AssignInjectAntidoteButton(GameObject buttonObject, BodyPart bodypart)
+    {
+        float seconds = 10.0f;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Medicine.InjectAntidote(bodypart, seconds); messageBox.text = $"Injecting 50 units of Antidote into the {bodypart.name}..."; };
+        }
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "INJECT ANTIDOTE (50 units): " + seconds + " seconds";
+
+    }
+
+    void AssignInjectSlowPoisonButton(GameObject buttonObject, BodyPart bodypart)
+    {
+        float seconds = 10.0f;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Medicine.InjectSlowPoison(bodypart, seconds); messageBox.text = $"Injecting 50 units of Slow Poison into the {bodypart.name}..."; };
+        }
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "INJECT SLOW POISON (50 units): " + seconds + " seconds";
 
     }
 

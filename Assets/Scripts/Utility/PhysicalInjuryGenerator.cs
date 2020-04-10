@@ -27,7 +27,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         {
             //selected bodypart to injure, and injury to apply
             BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
-            int injuryNumber = Random.Range(0, 3);
+            int injuryNumber = Random.Range(0, 5);
 
             //apply injury
             switch (injuryNumber)
@@ -50,6 +50,18 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     Crush(bodyPart);
                     break;
 
+                case 3:
+                    Debug.Log($"Snake bit {bodyPart.name}");
+                    injuryText += $"\nThe {bodyPart.name} has been bitten by a venomous snake.";
+                    SnakeBite(bodyPart);
+                    break;
+
+                case 4:
+                    Debug.Log($"Crushed {bodyPart.name}");
+                    injuryText += $"\nThe {bodyPart.name} has been poisoned.";
+                    SlowPoison(bodyPart);
+                    break;
+                                       
                 default:
                     break;
             }
@@ -76,6 +88,19 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         bodyPart.damage = Mathf.Min(bodyPart.damage + 30, bodyPart.damageMax);
         bodyPart.bloodLossRate += 10;
     }
+
+    public void SnakeBite(BodyPart bodyPart)
+    {
+        bodyPart.damage = Mathf.Min(bodyPart.damage + 10, bodyPart.damageMax);
+        bodyPart.bloodLossRate += 3;
+        bodyPart.slowPoison += 10;
+    }
+
+    public void SlowPoison(BodyPart bodyPart)
+    {
+        bodyPart.slowPoison += 100;
+    }
+
 
 
 

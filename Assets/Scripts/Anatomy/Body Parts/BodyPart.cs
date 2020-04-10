@@ -34,6 +34,8 @@ public class BodyPart : MonoBehaviour
 
     //drug stuff
     public float healthPotion;
+    public float antidote;
+    public float slowPoison;
 
     public void UpdateBodyPart(float deltaTime)
     {
@@ -67,6 +69,9 @@ public class BodyPart : MonoBehaviour
             float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / bodyPart.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
             float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / bodyPart.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
             float tempHealthPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (healthPotion / bodyPart.healthPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
+            float tempAntidotePumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (antidote / bodyPart.antidote * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
+            float tempSlowPoisonPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (slowPoison / bodyPart.slowPoison * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.000001f) * heartEfficiency;
+
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
@@ -79,12 +84,33 @@ public class BodyPart : MonoBehaviour
             float oxygenOut = Mathf.Max(Mathf.Min(oxygen, proposedOxygenOut), 0);
             bodyPart.oxygen += oxygenOut;
             oxygen -= oxygenOut;
+            if (healthPotion > 0.0f)
+            {
+                //transport health potion, capped by blood transport
+                float proposedHealthPotionOut = Mathf.Min(tempHealthPotionPumpRate * timeSinceLastPump, bloodOut);
+                float healthPotionOut = Mathf.Max(Mathf.Min(healthPotion, proposedHealthPotionOut), 0);
+                bodyPart.healthPotion += healthPotionOut;
+                healthPotion -= healthPotionOut;
+            }
 
-            //transport health potion, capped by blood transport
-            float proposedHealthPotionOut = Mathf.Min(tempHealthPotionPumpRate * timeSinceLastPump, bloodOut);
-            float healthPotionOut = Mathf.Max(Mathf.Min(healthPotion, proposedHealthPotionOut), 0);
-            bodyPart.healthPotion += healthPotionOut;
-            healthPotion -= healthPotionOut;
+            if (antidote > 0.0f)
+            {
+                //transport antidote, capped by blood transport
+                float proposedAntidoteOut = Mathf.Min(tempAntidotePumpRate * timeSinceLastPump, bloodOut);
+                float antidoteOut = Mathf.Max(Mathf.Min(antidote, proposedAntidoteOut), 0);
+                bodyPart.antidote += antidoteOut;
+                antidote -= antidoteOut;
+            }
+
+            if (slowPoison > 0.0f)
+            {
+                //transport slow poison, capped by blood transport
+                float proposedSlowPoisonOut = Mathf.Min(tempSlowPoisonPumpRate * timeSinceLastPump, bloodOut);
+                float slowPoisonOut = Mathf.Max(Mathf.Min(slowPoison, proposedSlowPoisonOut), 0);
+                bodyPart.slowPoison += slowPoisonOut;
+                slowPoison -= slowPoisonOut;
+            }
+
         }
     }
 
@@ -137,13 +163,17 @@ public class BodyPart : MonoBehaviour
         oxygen = Mathf.Max(oxygen - oxygenconsumed, 0);
     }
 
+    //TODO: currently using a units processed per second model
+    //doesn't allow for emergent properties of overdosing to happen, just makes higher doses last longer
+    //consider scaling effects of drugs with amount of drug present
     public void ApplyDrugs(float deltaTime)
     {
+        //health potion
         if (healthPotion > 0.0f)
         {
             if (damage > 0.0f)
             {
-                //in 1 second, will process 1/5 unit of health potion
+                //in 1 second, will process 1/5 unit of health potion, curing 1/5 units of damage
                 float healthPotionProcessed = Mathf.Min(healthPotion, deltaTime * 0.5f);
                 healthPotion = Mathf.Max(0.0f, healthPotion - healthPotionProcessed);
                 damage = Mathf.Max(0.0f, damage - healthPotionProcessed);
@@ -154,6 +184,28 @@ public class BodyPart : MonoBehaviour
                 healthPotion = Mathf.Max(0.0f, healthPotion - deltaTime * 0.01f);
             }
         }
+
+        //antidote
+        //neutralises poison at 1 unit per second
+        //decays at 1 unit per second regardless of poison
+        if (antidote > 0.0f)
+        {
+            float antidoteProcessed = Mathf.Min(antidote, deltaTime * 1.0f);
+            antidote = Mathf.Max(0.0f, antidote - antidoteProcessed);
+            slowPoison = Mathf.Max(0.0f, slowPoison - antidoteProcessed);
+        }
+
+        //slow poison
+        //100 units of damage per unit of poison
+        //processes at 0.001 units per seconds
+        if (slowPoison > 0.0f)
+        {
+            float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * 0.001f);
+            slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
+            damage = Mathf.Min(damageMax, damage + (slowPoisonProcessed*100));            
+        }
+
+
     }
 
     public void CheckForFunctionality()
@@ -427,10 +479,22 @@ public class BodyPart : MonoBehaviour
         #endregion
 
         #region drugs description
-        //add health potion desctiption
+        //add health potion description
         if (healthPotion > 0.0f)
         {
             description += $"Health Potion: {healthPotion} Units.\n";
+        }
+
+        //add antidote description
+        if (antidote > 0.0f)
+        {
+            description += $"Antidote: {antidote} Units.\n";
+        }
+
+        //add slow poison description
+        if (slowPoison > 0.0f)
+        {
+            description += $"Slow Poison: {slowPoison} Units.\n";
         }
         #endregion
 
