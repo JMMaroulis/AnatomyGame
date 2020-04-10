@@ -189,8 +189,9 @@ public class BodyPart : MonoBehaviour
         }
         alreadyChecked.Add(currentBodyPart);
 
+        List<BodyPart> allBodyParts = currentBodyPart.connectedBodyParts.Concat(currentBodyPart.containedOrgans).ToList();
 
-        foreach (BodyPart bodyPart in currentBodyPart.containedOrgans)
+        foreach (BodyPart bodyPart in allBodyParts)
         {
             if (alreadyChecked.Contains(bodyPart) == false)
             {
@@ -198,13 +199,39 @@ public class BodyPart : MonoBehaviour
             }
         }
 
-        foreach (BodyPart bodyPart in currentBodyPart.connectedBodyParts)
+    }
+
+    //kicks off recursive process for finding target bodypart
+    public bool IsConnectedToBodyPartStarter(BodyPart targetBodypart)
+    {
+        return IsConnectedToBodyPart(this, targetBodypart, new List<BodyPart>());
+    }
+
+    //recursive iteration
+    private bool IsConnectedToBodyPart(BodyPart currentBodyPart, BodyPart targetBodyPart, List<BodyPart> alreadyChecked)
+    {
+
+        if (currentBodyPart == targetBodyPart)
+        {
+            return true;
+        }
+        alreadyChecked.Add(currentBodyPart);
+
+        List<BodyPart> allBodyParts = currentBodyPart.connectedBodyParts.Concat(currentBodyPart.containedOrgans).ToList();
+
+
+        foreach (BodyPart bodyPart in allBodyParts)
         {
             if (alreadyChecked.Contains(bodyPart) == false)
             {
-                IsConnectedToBrain(bodyPart, alreadyChecked);
+                if (IsConnectedToBodyPart(bodyPart, targetBodyPart, alreadyChecked))
+                {
+                    return true;
+                }
             }
         }
+
+        return false;
 
     }
 

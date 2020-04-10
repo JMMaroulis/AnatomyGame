@@ -17,7 +17,23 @@ public class Heart : Organ
         //get parts bodypart (most likely the torso)
         //BodyPart parentBodyPart = this.transform.parent.GetComponent<BodyPart>();
 
-        PumpBloodRecursive(this, new List<BodyPart>(), deltaTime);
+        //starting from a random bodypart that is connected to this heart:
+        BodyPart[] allBodyParts = FindObjectsOfType<BodyPart>();
+        List<int> bodypartOrder = Enumerable.Range(0, allBodyParts.Count()).ToList<int>();
+        IListExtensions.Shuffle<int>(bodypartOrder);
+
+        //TODO: remove having to do the full graph search to find this heart for every organ somehow?
+        //a bool flat that updates on connection/severing of a part could work
+        //but that wouldn't really be compatible with having multiple hearts
+        foreach (int bodypartIndex in bodypartOrder)
+        {
+            if (allBodyParts[bodypartIndex].IsConnectedToBodyPartStarter(this))
+            {
+                //PumpBloodRecursive(allBodyParts[bodypartIndex], new List<BodyPart>(), deltaTime);
+                //break;
+                allBodyParts[bodypartIndex].PumpBlood(efficiency, deltaTime);
+            }
+        }
     }
 
     void PumpBloodRecursive(BodyPart currentBodyPart, List<BodyPart> alreadyPumped, float deltaTime)

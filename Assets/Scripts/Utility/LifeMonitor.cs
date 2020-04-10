@@ -40,6 +40,7 @@ public class LifeMonitor : MonoBehaviour
 
     public IEnumerator VictoryCheckCoroutine(float seconds)
     {
+        float oldTimeScalingFactor = clock.globalTimeScalingFactor;
         clock.globalTimeScalingFactor = 100.0f;
         clock.StartClockUntil(seconds);
         yield return new WaitForSeconds(seconds);
@@ -58,6 +59,7 @@ public class LifeMonitor : MonoBehaviour
         }
 
         hasPlayerWon = victory;
+        clock.globalTimeScalingFactor = oldTimeScalingFactor;
     }
 
     void PopulateBodyPartsList()
