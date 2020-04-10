@@ -21,7 +21,18 @@ public class Brain : Organ
         {
             float tempDeltaTime = Mathf.Min(deltaTime, 0.1f);
 
-            UpdateBodyPart(tempDeltaTime);
+            //overriding bodypart update, to avoid brain damage spiralling the efficiency
+            if (isTimePassing)
+            {
+
+                ApplyDrugs(tempDeltaTime);
+                UpdateDamage(tempDeltaTime);
+                CheckForFunctionality();
+                UpdateEfficiency();
+                LoseBlood(tempDeltaTime);
+                ConsumeOxygen(tempDeltaTime);
+
+            }
 
             deltaTime = Mathf.Max(0.0f, deltaTime - 0.1f);
         }

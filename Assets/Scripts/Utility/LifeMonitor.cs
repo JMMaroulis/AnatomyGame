@@ -40,7 +40,7 @@ public class LifeMonitor : MonoBehaviour
 
     public IEnumerator VictoryCheckCoroutine(float seconds)
     {
-        //clock.globalTimeScalingFactor = 60.0f;
+        clock.globalTimeScalingFactor = 100.0f;
         clock.StartClockUntil(seconds);
         yield return new WaitForSeconds(seconds);
 
