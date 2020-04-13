@@ -70,7 +70,7 @@ public class BodyPart : MonoBehaviour
             float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / bodyPart.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
             float tempHealthPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (healthPotion / bodyPart.healthPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
             float tempAntidotePumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (antidote / bodyPart.antidote * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
-            float tempSlowPoisonPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (slowPoison / bodyPart.slowPoison * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.000001f) * heartEfficiency;
+            float tempSlowPoisonPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (slowPoison / bodyPart.slowPoison * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
 
 
             //transport blood
@@ -196,13 +196,14 @@ public class BodyPart : MonoBehaviour
         }
 
         //slow poison
-        //100 units of damage per unit of poison
+        //0.01% of poison amount as damage per second
         //processes at 0.001 units per seconds
         if (slowPoison > 0.0f)
         {
             float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * 0.001f);
             slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
-            damage = Mathf.Min(damageMax, damage + (slowPoisonProcessed*100));            
+            //damage = Mathf.Min(damageMax, damage + (slowPoisonProcessed*100));            
+            damage = Mathf.Max(0.0f, damage + slowPoison * 0.0001f);
         }
 
 

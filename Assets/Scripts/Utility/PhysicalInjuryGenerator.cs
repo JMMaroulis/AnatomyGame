@@ -93,7 +93,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     {
         bodyPart.damage = Mathf.Min(bodyPart.damage + 10, bodyPart.damageMax);
         bodyPart.bloodLossRate += 3;
-        bodyPart.slowPoison += 30;
+        bodyPart.slowPoison += 50;
     }
 
     public void SlowPoison(BodyPart bodyPart)
