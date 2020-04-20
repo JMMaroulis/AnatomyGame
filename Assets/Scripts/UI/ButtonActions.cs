@@ -31,13 +31,6 @@ public class ButtonActions : MonoBehaviour
 
         PopulateBodyPartsList();
 
-        //set button font sizes
-        foreach (GameObject buttonObject in menuButtons)
-        {
-            Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-            buttonText.fontSize = 40;
-        }
-
         selectedBodyPartText.text = "No Body Part Selected";
     }
 
@@ -335,7 +328,6 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = bodyPart.name;
-        buttonText.fontSize = 40;
     }
 
     //select a given bodypart
@@ -359,7 +351,6 @@ public class ButtonActions : MonoBehaviour
         {
             buttonText.text = $"External : {organ.name}";
         }
-        buttonText.fontSize = 40;
     }
 
     //select a given bodypart
