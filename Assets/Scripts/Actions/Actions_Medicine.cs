@@ -41,4 +41,16 @@ public static class Actions_Medicine
         bodyPartObject.slowPoison += 50.0f;
     }
 
+    public static void InjectStasisPotion(BodyPart bodyPartObject, float seconds)
+    {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        StaticCoroutine.Start(InjectStasisPotionCoroutine(bodyPartObject, seconds));
+    }
+
+    public static IEnumerator InjectStasisPotionCoroutine(BodyPart bodyPartObject, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        bodyPartObject.stasisPotion += 50.0f;
+    }
+
 }

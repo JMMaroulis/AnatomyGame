@@ -31,7 +31,7 @@ public class Heart : Organ
             {
                 //PumpBloodRecursive(allBodyParts[bodypartIndex], new List<BodyPart>(), deltaTime);
                 //break;
-                allBodyParts[bodypartIndex].PumpBlood(efficiency, deltaTime);
+                allBodyParts[bodypartIndex].PumpBlood(efficiency, deltaTime * timeScale);
             }
         }
     }

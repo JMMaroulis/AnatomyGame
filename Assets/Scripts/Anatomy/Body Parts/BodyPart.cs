@@ -36,6 +36,7 @@ public class BodyPart : MonoBehaviour
     public float healthPotion;
     public float antidote;
     public float slowPoison;
+    public float stasisPotion;
 
     public void UpdateBodyPart(float deltaTime)
     {
@@ -57,6 +58,7 @@ public class BodyPart : MonoBehaviour
     //Pumps blood, if there is blood left to pump.
     public void PumpBlood(float heartEfficiency, float deltaTime)
     {
+        deltaTime *= timeScale;
         float timeSinceLastPump = deltaTime;
 
         //pumping blood to contained organs in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
@@ -71,7 +73,7 @@ public class BodyPart : MonoBehaviour
             float tempHealthPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (healthPotion / bodyPart.healthPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
             float tempAntidotePumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (antidote / bodyPart.antidote * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
             float tempSlowPoisonPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (slowPoison / bodyPart.slowPoison * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
-
+            float tempStasisPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (stasisPotion / bodyPart.stasisPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
@@ -111,12 +113,23 @@ public class BodyPart : MonoBehaviour
                 slowPoison -= slowPoisonOut;
             }
 
+            if (stasisPotion > 0.0f)
+            {
+                //transport stasis potion, capped by blood transport
+                float proposedStasisPotionOut = Mathf.Min(tempStasisPotionPumpRate * timeSinceLastPump, bloodOut);
+                float stasisPotionOut = Mathf.Max(Mathf.Min(stasisPotion, proposedStasisPotionOut), 0);
+                bodyPart.stasisPotion += stasisPotionOut;
+                stasisPotion -= stasisPotionOut;
+            }
+
         }
     }
 
     //applies blood loss rate
     public void LoseBlood(float deltaTime)
     {
+        deltaTime *= timeScale;
+
         float timeSinceLastLoss = deltaTime;
         float bloodLost = bloodLossRate * timeSinceLastLoss;
 
@@ -158,6 +171,8 @@ public class BodyPart : MonoBehaviour
 
     public void ConsumeOxygen(float deltaTime)
     {
+        deltaTime *= timeScale;
+
         float timeSinceLastConsumption = deltaTime;
         float oxygenconsumed = oxygenRequired * timeSinceLastConsumption;
         oxygen = Mathf.Max(oxygen - oxygenconsumed, 0);
@@ -168,6 +183,9 @@ public class BodyPart : MonoBehaviour
     //consider scaling effects of drugs with amount of drug present
     public void ApplyDrugs(float deltaTime)
     {
+
+        deltaTime *= timeScale;
+
         //health potion
         if (healthPotion > 0.0f)
         {
@@ -203,9 +221,21 @@ public class BodyPart : MonoBehaviour
             float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * 0.001f);
             slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
             //damage = Mathf.Min(damageMax, damage + (slowPoisonProcessed*100));            
-            damage = Mathf.Max(0.0f, damage + slowPoison * 0.0001f);
+            damage = Mathf.Max(0.0f, damage + slowPoison * deltaTime * 0.001f);
         }
 
+        //stasis potion
+        //TODO: needs to stick around long enough for an organ to be removed/replaced, figure out the numbers
+        // currently setting the timeScale = -(1/50) * potion + 1
+        //IMPORTANT NOTE: the decay rate of the statis potion is independant of its own effect on the timescale,
+        //otherwise we end up in weird reverse temporal singularities from which there is no escape. Which is cool and all, but tends
+        //there being no way out of them is no bueno
+        if (stasisPotion > 0.0f)
+        {
+            float stasisPotionProcessed = Mathf.Min(stasisPotion, (deltaTime/timeScale) * 0.01f);
+            stasisPotion = Mathf.Max(0.0f, stasisPotion - stasisPotionProcessed);
+        }
+        timeScale = (-(1.0f / 60.0f) * stasisPotion) + 1.0f;
 
     }
 
@@ -300,6 +330,8 @@ public class BodyPart : MonoBehaviour
 
     public void UpdateDamage(float deltaTime)
     {
+        deltaTime *= timeScale;
+
         float oxygenRatio = 1 - Mathf.Min((oxygen / oxygenRequired), 1); //0 good, 1 bad
         damage = Mathf.Min(damage + (oxygenRatio * deltaTime), damageMax);
     }
@@ -496,6 +528,12 @@ public class BodyPart : MonoBehaviour
         if (slowPoison > 0.0f)
         {
             description += $"Slow Poison: {slowPoison} Units.\n";
+        }
+
+        //add stasis potion description
+        if (stasisPotion > 0.0f)
+        {
+            description += $"Stasis Postion: {stasisPotion} Units.\n";
         }
         #endregion
 

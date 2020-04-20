@@ -15,6 +15,8 @@ public class Lung : Organ
 
     void AbsorbOxygen(float deltaTime)
     {
+        deltaTime *= timeScale;
+
         //apply the same scaling formula used to scale oxygen/blood pumping
         //simulate max blood oxygen saturation of 1:1 by capping oxygen at blood level
         //pretend we're taking oxygen from an external bodypart with oxygen level of maxOxygen/2

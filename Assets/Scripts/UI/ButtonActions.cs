@@ -308,13 +308,14 @@ public class ButtonActions : MonoBehaviour
             AssignInjectHealthPotionButton(menuButtons[0], bodypart);
             AssignInjectAntidoteButton(menuButtons[1], bodypart);
             AssignInjectSlowPoisonButton(menuButtons[2], bodypart);
-
+            AssignInjectStasisPotionButton(menuButtons[3], bodypart);
         }
         else
         {
             AssignInjectHealthPotionButton(menuButtons[0], bodypart);
             AssignInjectAntidoteButton(menuButtons[1], bodypart);
             AssignInjectSlowPoisonButton(menuButtons[2], bodypart);
+            AssignInjectStasisPotionButton(menuButtons[3], bodypart);
         }
     }
 
@@ -421,6 +422,26 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "INJECT SLOW POISON (50 units): " + seconds + " seconds";
+
+    }
+
+    void AssignInjectStasisPotionButton(GameObject buttonObject, BodyPart bodypart)
+    {
+        float seconds = 10.0f;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Medicine.InjectStasisPotion(bodypart, seconds); messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}..."; };
+        }
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "INJECT STASIS POTION(50 units): " + seconds + " seconds";
 
     }
 
