@@ -2600,7 +2600,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
-  oxygenAbsorptionRate: 100
+  oxygenAbsorptionRate: 150
 --- !u!4 &1302856265
 Transform:
   m_ObjectHideFlags: 0
@@ -2729,7 +2729,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
-  oxygenAbsorptionRate: 100
+  oxygenAbsorptionRate: 150
 --- !u!4 &1342094376
 Transform:
   m_ObjectHideFlags: 0
