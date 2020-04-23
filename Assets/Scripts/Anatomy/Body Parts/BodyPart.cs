@@ -501,7 +501,7 @@ public class BodyPart : MonoBehaviour
 
         #region blood loss description
         //add blood description
-        description += $"Losing {bloodLossRate} of blood per second.\n";
+        description += $"Losing {bloodLossRate} units of blood per second.\n";
         #endregion
 
         #region oxygen description
@@ -533,6 +533,23 @@ public class BodyPart : MonoBehaviour
         {
             description += $"Stasis Postion: {stasisPotion} Units.\n";
         }
+        #endregion
+
+        #region charms description
+        //add heart charm description
+        if (this.GetComponent<HeartCharm>() != null)
+        {
+            HeartCharm heartCharm = this.GetComponent<HeartCharm>();
+            description += $"Heart Charm: {heartCharm.expiryTime - heartCharm.timeElapsed} seconds remaining.\n";
+        }
+
+        //add heart charm description
+        if (this.GetComponent<LungCharm>() != null)
+        {
+            LungCharm lungCharm = this.GetComponent<LungCharm>();
+            description += $"Lung Charm: {lungCharm.expiryTime - lungCharm.timeElapsed} seconds remaining.\n";
+        }
+
         #endregion
 
         #region connections description

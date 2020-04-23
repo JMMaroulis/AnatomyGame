@@ -124,6 +124,7 @@ public class ButtonActions : MonoBehaviour
         AssignSelectSurgeryActionOptions(menuButtons[0], selectedBodyPart);
         AssignSelectBloodActionOptions(menuButtons[1], selectedBodyPart);
         AssignSelectMedicineActionOptions(menuButtons[2], selectedBodyPart);
+        AssignSelectCharmActionOptions(menuButtons[3], selectedBodyPart);
     }
 
 
@@ -145,6 +146,7 @@ public class ButtonActions : MonoBehaviour
         AssignSelectSurgeryActionOptions(menuButtons[0], selectedOrgan);
         AssignSelectBloodActionOptions(menuButtons[1], selectedOrgan);
         AssignSelectMedicineActionOptions(menuButtons[2], selectedOrgan);
+        AssignSelectCharmActionOptions(menuButtons[3], selectedBodyPart);
     }
 
 
@@ -319,6 +321,33 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+    void AssignSelectCharmActionOptions(GameObject buttonObject, BodyPart bodypart)
+    {
+        UnityEngine.Events.UnityAction action = () => { SelectCharmActionOptions(bodypart); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT CHARM ACTION";
+    }
+
+    void SelectCharmActionOptions(BodyPart bodypart)
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        if (bodypart is Organ)
+        {
+            AssignApplyHeartCharm(menuButtons[0], bodypart);
+            AssignApplyLungCharm(menuButtons[1], bodypart);
+        }
+        else
+        {
+            AssignApplyHeartCharm(menuButtons[0], bodypart);
+            AssignApplyLungCharm(menuButtons[1], bodypart);
+        }
+    }
+
     #region Selection
 
     //make a button select a given bodypart
@@ -442,6 +471,50 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "INJECT STASIS POTION(50 units): " + seconds + " seconds";
+
+    }
+
+    #endregion
+
+    #region Charms
+
+    void AssignApplyHeartCharm(GameObject buttonObject, BodyPart bodypart)
+    {
+        float seconds = 30.0f;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Charms.ApplyHeartCharm(bodypart, seconds); messageBox.text = $"Applying a Heart Charm to the {bodypart.name}..."; };
+        }
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Apply Heart Charm (30 Minutes): " + seconds + " seconds";
+
+    }
+
+    void AssignApplyLungCharm(GameObject buttonObject, BodyPart bodypart)
+    {
+        float seconds = 30.0f;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Charms.ApplyLungCharm(bodypart, seconds); messageBox.text = $"Applying a Lung Charm to the {bodypart.name}..."; };
+        }
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Apply Lung Charm (30 Minutes): " + seconds + " seconds";
 
     }
 
