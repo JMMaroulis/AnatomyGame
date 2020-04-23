@@ -43,11 +43,11 @@ public class OxygenLevelReporting : MonoBehaviour
     void Update()
     {
 
-        secondCounter += Time.deltaTime;
-        if (secondCounter >= 1.0f)
+        secondCounter += Time.unscaledDeltaTime;
+        if (secondCounter >= 0.1f)
         {
             UpdateOxygenText();
-            secondCounter -= 1.0f;
+            secondCounter = 0.0f;
         }
 
         PopulateBodyPartsList();

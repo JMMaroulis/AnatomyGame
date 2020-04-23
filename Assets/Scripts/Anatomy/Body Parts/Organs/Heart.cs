@@ -31,7 +31,7 @@ public class Heart : Organ
             {
                 //PumpBloodRecursive(allBodyParts[bodypartIndex], new List<BodyPart>(), deltaTime);
                 //break;
-                allBodyParts[bodypartIndex].PumpBlood(efficiency, deltaTime * timeScale);
+                allBodyParts[bodypartIndex].PumpBlood(efficiency, deltaTime);
             }
         }
     }
@@ -74,11 +74,11 @@ public class Heart : Organ
             //capping deltatime at 100ms to stop inaccuracies
             while (deltaTime > 0.0f)
             {
-                float tempDeltaTime = Mathf.Min(deltaTime, 0.1f);
+                float tempDeltaTime = Mathf.Min(deltaTime, 0.2f);
                 PumpBloodMaster(tempDeltaTime);
                 UpdateBodyPart(tempDeltaTime);
 
-                deltaTime = Mathf.Max(0.0f, deltaTime - 0.1f);
+                deltaTime = Mathf.Max(0.0f, deltaTime - 0.2f);
             }
 
         }

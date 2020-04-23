@@ -172,9 +172,7 @@ public class BodyPart : MonoBehaviour
     public void ConsumeOxygen(float deltaTime)
     {
         deltaTime *= timeScale;
-
-        float timeSinceLastConsumption = deltaTime;
-        float oxygenconsumed = oxygenRequired * timeSinceLastConsumption;
+        float oxygenconsumed = oxygenRequired * deltaTime;
         oxygen = Mathf.Max(oxygen - oxygenconsumed, 0);
     }
 
