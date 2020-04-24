@@ -263,7 +263,7 @@ public class BodyPart : MonoBehaviour
     private void IsConnectedToBrain(BodyPart currentBodyPart, List<BodyPart> alreadyChecked)
     {
 
-        if (currentBodyPart is Brain)
+        if (currentBodyPart is Brain && currentBodyPart.enabled)
         {
             isConnectedToBrain = true;
             connectedBrainEfficiency = currentBodyPart.efficiency;
@@ -543,11 +543,18 @@ public class BodyPart : MonoBehaviour
             description += $"Heart Charm: {heartCharm.expiryTime - heartCharm.timeElapsed} seconds remaining.\n";
         }
 
-        //add heart charm description
+        //add lung charm description
         if (this.GetComponent<LungCharm>() != null)
         {
             LungCharm lungCharm = this.GetComponent<LungCharm>();
             description += $"Lung Charm: {lungCharm.expiryTime - lungCharm.timeElapsed} seconds remaining.\n";
+        }
+
+        //add petrification charm description
+        if (this.GetComponent<PetrificationCharm>() != null)
+        {
+            PetrificationCharm petrificationCharm = this.GetComponent<PetrificationCharm>();
+            description += $"Petrificationk Charm: {petrificationCharm.expiryTime - petrificationCharm.timeElapsed} seconds remaining.\n";
         }
 
         #endregion

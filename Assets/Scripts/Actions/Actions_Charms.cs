@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class Actions_Charms
@@ -27,6 +26,18 @@ public static class Actions_Charms
     {
         yield return new WaitForSeconds(seconds);
         bodyPartObject.gameObject.AddComponent<LungCharm>();
+    }
+
+    public static void ApplyPetrificationCharm(BodyPart bodyPartObject, float seconds)
+    {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        StaticCoroutine.Start(ApplyPetrificationCharmCoroutine(bodyPartObject, seconds));
+    }
+
+    public static IEnumerator ApplyPetrificationCharmCoroutine(BodyPart bodyPartObject, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        bodyPartObject.gameObject.AddComponent<PetrificationCharm>();
     }
 
 }

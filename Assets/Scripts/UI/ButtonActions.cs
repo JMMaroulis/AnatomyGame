@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
@@ -146,7 +145,7 @@ public class ButtonActions : MonoBehaviour
         AssignSelectSurgeryActionOptions(menuButtons[0], selectedOrgan);
         AssignSelectBloodActionOptions(menuButtons[1], selectedOrgan);
         AssignSelectMedicineActionOptions(menuButtons[2], selectedOrgan);
-        AssignSelectCharmActionOptions(menuButtons[3], selectedBodyPart);
+        AssignSelectCharmActionOptions(menuButtons[3], selectedOrgan);
     }
 
 
@@ -340,11 +339,13 @@ public class ButtonActions : MonoBehaviour
         {
             AssignApplyHeartCharm(menuButtons[0], bodypart);
             AssignApplyLungCharm(menuButtons[1], bodypart);
+            AssignApplyPetrificationCharm(menuButtons[2], bodypart);
         }
         else
         {
             AssignApplyHeartCharm(menuButtons[0], bodypart);
             AssignApplyLungCharm(menuButtons[1], bodypart);
+            AssignApplyPetrificationCharm(menuButtons[2], bodypart);
         }
     }
 
@@ -515,6 +516,26 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Apply Lung Charm (30 Minutes): " + seconds + " seconds";
+
+    }
+
+    void AssignApplyPetrificationCharm(GameObject buttonObject, BodyPart bodypart)
+    {
+        float seconds = 30.0f;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Charms.ApplyPetrificationCharm(bodypart, seconds); messageBox.text = $"Applying a Petrification Charm to the {bodypart.name}..."; };
+        }
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Apply Petrification Charm (30 Minutes): " + seconds + " seconds";
 
     }
 
