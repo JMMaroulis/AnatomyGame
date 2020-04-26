@@ -99,9 +99,7 @@ public class ButtonActions : MonoBehaviour
 
         AssignExamineBodyPart(menuButtons[4], selectedBodyPart);
         AssignExamineOrgan(menuButtons[5], selectedOrgan);
-
-        AssignVictoryCheck(menuButtons[6]);
-        AssignWaitOneMinute(menuButtons[7]);
+        AssignSelectWaitActionOptions(menuButtons[6]);
     }
 
 
@@ -257,6 +255,26 @@ public class ButtonActions : MonoBehaviour
     }
 
 
+    //make a button take us to the waiting action select menu
+    void AssignSelectWaitActionOptions(GameObject buttonObject)
+    {
+        buttonObject.GetComponent<Button>().onClick.AddListener(SelectWaitActionOptions);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "WAIT...";
+    }
+
+    void SelectWaitActionOptions()
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        AssignWaitOneMinute(menuButtons[0]);
+        AssignWaitOneHour(menuButtons[1]);
+    }
+
+
     //make a button take us to the blood action menu
     void AssignSelectBloodActionOptions(GameObject buttonObject, BodyPart bodypart)
     {
@@ -288,7 +306,7 @@ public class ButtonActions : MonoBehaviour
     }
 
 
-    //make a button take us to the medicine action
+    //make a button take us to the medicine action menu
     void AssignSelectMedicineActionOptions(GameObject buttonObject, BodyPart bodypart)
     {
         UnityEngine.Events.UnityAction action = () => { SelectMedicineActionOptions(bodypart); };
@@ -320,6 +338,8 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+
+    //make a button take us to the charm action menu
     void AssignSelectCharmActionOptions(GameObject buttonObject, BodyPart bodypart)
     {
         UnityEngine.Events.UnityAction action = () => { SelectCharmActionOptions(bodypart); };
@@ -837,7 +857,7 @@ public class ButtonActions : MonoBehaviour
     #endregion
 
 
-    void AssignVictoryCheck(GameObject buttonObject)
+    void AssignWaitOneHour(GameObject buttonObject)
     {
         UnityEngine.Events.UnityAction action = () => { lifeMonitor.VictoryCheck(); messageBox.text = "Waiting one hour..."; };
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
