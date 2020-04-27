@@ -99,7 +99,8 @@ public class ButtonActions : MonoBehaviour
 
         AssignExamineBodyPart(menuButtons[4], selectedBodyPart);
         AssignExamineOrgan(menuButtons[5], selectedOrgan);
-        AssignSelectWaitActionOptions(menuButtons[6]);
+        AssignSelectSpawnBodyPartActionOptions(menuButtons[6]);
+        AssignSelectWaitActionOptions(menuButtons[7]);
     }
 
 
@@ -411,6 +412,26 @@ public class ButtonActions : MonoBehaviour
     }
 
     #endregion
+
+    //make a button take us to the bodypart spawning action menu
+    void AssignSelectSpawnBodyPartActionOptions(GameObject buttonObject)
+    {
+        UnityEngine.Events.UnityAction action = () => { SelectSpawnBodyPartActionOptions(); };
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT BODYPART SPAWNING ACTION";
+    }
+
+    void SelectSpawnBodyPartActionOptions()
+    {
+        ClearAllButtons();
+
+        //cancel button
+        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
+        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+
+        AssignSpawnHeartButton(menuButtons[0]);
+
+    }
 
 
     #region Medicine
@@ -853,6 +874,23 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "EXAMINE ORGAN";
     }
+
+    #endregion
+
+    void AssignSpawnHeartButton(GameObject buttonObject)
+    {
+        float seconds = 60.0f * 5.0f;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHeart(seconds); messageBox.text = $"Spawning a new heart..."; };
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Spawn a new heart: " + seconds + " seconds";
+
+    }
+
+    #region spawnBodyParts
+
 
     #endregion
 
