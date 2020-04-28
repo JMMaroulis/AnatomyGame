@@ -331,7 +331,7 @@ public class BodyPart : MonoBehaviour
         deltaTime *= timeScale;
 
         float oxygenRatio = 1 - Mathf.Min((oxygen / oxygenRequired), 1); //0 good, 1 bad
-        damage = Mathf.Min(damage + (oxygenRatio * deltaTime), damageMax);
+        damage = Mathf.Min(damage + (oxygenRatio * deltaTime * 0.2f), damageMax);
     }
 
     public void SeverConnectionOutgoing(GameObject connectedBodyPart, float inducedBloodLossRate)
@@ -367,121 +367,6 @@ public class BodyPart : MonoBehaviour
     {
         containedOrgans.Add(organToImplant);
     }
-
-
-    /*
-    public string GenerateDescription()
-    {
-        string description = "";
-
-        #region damage description
-        //add damage description
-        description += "The " + this.gameObject.name + " is ";
-        if (damage <= 0.1f)
-        {
-            description += "undamaged.";
-        }
-        else if (damage > 0.1f && damage <= damageMax / 4)
-        {
-            description += "lightly damaged.";
-        }
-        else if (damage > damageMax / 4 && damage <= damageMax / 2)
-        {
-            description += "quite damaged.";
-        }
-        else if (damage > damageMax / 2 && damage <= (3 * damageMax) / 4)
-        {
-            description += "heavily damaged.";
-        }
-        else if (damage > (3 * damageMax) / 4 && damage < damageMax)
-        {
-            description += "severely damaged.";
-        }
-        else if (damage == damageMax)
-        {
-            description += "completely destroyed.";
-        }
-        else
-        {
-            description += "INVALID DAMAGE VALUE: INVESTIGATE THIS.";
-        }
-        description += "\n";
-        #endregion
-
-        #region blood description
-        //add blood description
-        description += "The " + this.gameObject.name + " is ";
-        if (blood <= 0.1f)
-        {
-            description += "completely drained.";
-        }
-        else if (blood > 0.1f && blood <= 25.0f)
-        {
-            description += "deathly pale.";
-        }
-        else if (blood > 25.0f && blood <= 50.0f)
-        {
-            description += "quite pale.";
-        }
-        else if (blood > 50.0f && blood <= 100.0f)
-        {
-            description += "a tad pale.";
-        }
-        else if (blood > 100.0f)
-        {
-            description += "nice and pink.";
-        }
-        else
-        {
-            description += "INVALID DAMAGE VALUE: INVESTIGATE THIS.";
-        }
-        description += "\n";
-        #endregion
-
-        #region oxygen description
-        //add oxygen description
-        description += "The " + this.gameObject.name + " is ";
-        if (oxygen <= 0.1f)
-        {
-            description += "deeply blue.";
-        }
-        else if (oxygen > 0.1f && oxygen <= 25.0f)
-        {
-            description += "dark blue.";
-        }
-        else if (oxygen > 25.0f && oxygen <= 50.0f)
-        {
-            description += "quite blue.";
-        }
-        else if (oxygen > 50.0f && oxygen <= 100.0f)
-        {
-            description += "a tad blue.";
-        }
-        else if (oxygen > 100.0f)
-        {
-            description += "not blue.";
-        }
-        else
-        {
-            description += "INVALID DAMAGE VALUE: INVESTIGATE THIS.";
-        }
-        description += "\n";
-        #endregion
-
-        #region connections description
-        //add connections description
-        description += "The " + this.gameObject.name + " is connected to: ";
-        for (int i = 0; i < connectedBodyParts.Count; i++)
-        {
-            description += connectedBodyParts[i].transform.name;
-            if (i != connectedBodyParts.Count - 1)
-            { description += ","; }
-        }
-        #endregion
-
-        return description;
-    }
-    */
 
     public string GenerateDescription()
     {
