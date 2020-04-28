@@ -35,16 +35,14 @@ public class LungCharm : Charm
         float oxygenAbsorptionRate = 150.0f;
         float oxygenMax = parentBodyPart.oxygenMax;
         float oxygen = parentBodyPart.oxygen;
-        float efficiency = parentBodyPart.efficiency;
+        float efficiency = 1.0f;
         float blood = parentBodyPart.blood;
 
         //apply the same scaling formula used to scale oxygen/blood pumping
         //simulate max blood oxygen saturation of 1:1 by capping oxygen at blood level
         //pretend we're taking oxygen from an external bodypart with oxygen level of maxOxygen/2
-        if (parentBodyPart.isFunctioning)
-        {
-            float tempOxygenAbsorbRate = Mathf.Max(Mathf.Min(oxygenAbsorptionRate * ((oxygenMax / 4) / oxygen), oxygenAbsorptionRate * 5), oxygenAbsorptionRate * 0.2f) * efficiency;
-            parentBodyPart.oxygen = Mathf.Min(blood, Mathf.Min(oxygenMax, oxygen + (tempOxygenAbsorbRate * deltaTime * efficiency)));
-        }
+        //forcing efficiency at 1.0f, ignoring whether or not the bodypart is functioning
+        float tempOxygenAbsorbRate = Mathf.Max(Mathf.Min(oxygenAbsorptionRate * ((oxygenMax / 4) / oxygen), oxygenAbsorptionRate * 5), oxygenAbsorptionRate * 0.2f) * efficiency;
+        parentBodyPart.oxygen = Mathf.Min(blood, Mathf.Min(oxygenMax, oxygen + (tempOxygenAbsorbRate * deltaTime * efficiency)));
     }
 }

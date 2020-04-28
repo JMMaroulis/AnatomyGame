@@ -27,7 +27,7 @@ public class HeartCharm : Charm
     }
 
     //stolen from Heart.cs, modified slightly to work as an attachment to a bodypart rather than a bodypart in and of itself
-    //efficiency forcibly set to 1.0f
+    //forcing efficiency at 1.0f, ignoring whether or not the bodypart is functioning
     void PumpBloodMaster(float deltaTime)
     {
         //starting from a random bodypart that is connected to this charm:
