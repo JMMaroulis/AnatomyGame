@@ -416,12 +416,12 @@ public class ButtonActions : MonoBehaviour
     //make a button take us to the bodypart spawning action menu
     void AssignSelectSpawnBodyPartActionOptions(GameObject buttonObject)
     {
-        UnityEngine.Events.UnityAction action = () => { SelectSpawnBodyPartActionOptions(); };
+        UnityEngine.Events.UnityAction action = () => { SelectSpawnOrganActionOptions(); };
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT BODYPART SPAWNING ACTION";
+        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT ORGAN SPAWNING ACTION";
     }
 
-    void SelectSpawnBodyPartActionOptions()
+    void SelectSpawnOrganActionOptions()
     {
         ClearAllButtons();
 
@@ -430,6 +430,8 @@ public class ButtonActions : MonoBehaviour
         menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
 
         AssignSpawnHeartButton(menuButtons[0]);
+        AssignSpawnLungButton(menuButtons[1]);
+        AssignSpawnBrainButton(menuButtons[2]);
 
     }
 
@@ -877,6 +879,10 @@ public class ButtonActions : MonoBehaviour
 
     #endregion
 
+
+
+    #region spawnBodyParts
+
     void AssignSpawnHeartButton(GameObject buttonObject)
     {
         float seconds = 60.0f * 5.0f;
@@ -889,8 +895,77 @@ public class ButtonActions : MonoBehaviour
 
     }
 
-    #region spawnBodyParts
+    void AssignSpawnLungButton(GameObject buttonObject)
+    {
+        float seconds = 60.0f * 5.0f;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLung(seconds); messageBox.text = $"Spawning a new lung..."; };
 
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Spawn a new lung: " + seconds + " seconds";
+
+    }
+
+    void AssignSpawnBrainButton(GameObject buttonObject)
+    {
+        float seconds = 60.0f * 5.0f;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+
+    }
+
+    void AssignSpawnArmButton(GameObject buttonObject)
+    {
+        float seconds = 60.0f * 5.0f;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+
+    }
+
+    void AssignSpawnLegButton(GameObject buttonObject)
+    {
+        float seconds = 60.0f * 5.0f;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+
+    }
+
+    void AssignSpawnTorsoButton(GameObject buttonObject)
+    {
+        float seconds = 60.0f * 5.0f;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+
+    }
+
+    void AssignSpawnHeadButton(GameObject buttonObject)
+    {
+        float seconds = 60.0f * 5.0f;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+
+    }
 
     #endregion
 

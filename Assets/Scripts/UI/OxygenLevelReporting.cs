@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class OxygenLevelReporting : MonoBehaviour
 {
     public GameObject body;
-    private List<GameObject> bodyPartObjects = new List<GameObject>();
+    private List<BodyPart> bodyParts = new List<BodyPart>();
     private float secondCounter;
     private Text oxygenText;
 
@@ -20,23 +21,7 @@ public class OxygenLevelReporting : MonoBehaviour
 
     void PopulateBodyPartsList()
     {
-
-        bodyPartObjects = new List<GameObject>();
-
-        //get bodyparts from body
-        for (int i = 0; i < body.transform.childCount; i++)
-        {
-            bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
-
-            //get organs from bodypart
-            //NOTE: THIS INTRODUCES THE ASSUMPTION THAT ORGANS WILL ALWAYS BE CHILDREN OF THEIR CONTAINING BODYPARTS
-            //AS WELL AS CONTAINED IN THE containedOrgans LISTS. IT WILL DO FOR NOW.
-            for (int j = 0; j < body.transform.GetChild(i).childCount; j++)
-            {
-                bodyPartObjects.Add(body.transform.GetChild(i).GetChild(j).gameObject);
-            }
-        }
-
+        bodyParts = FindObjectsOfType<BodyPart>().ToList();
     }
 
     // Update is called once per frame
@@ -58,13 +43,13 @@ public class OxygenLevelReporting : MonoBehaviour
     {
         string oxygenTextNew = "Oxygen Levels:\n";
         float oxygenSum = 0;
-        foreach (GameObject bodyPartObject in bodyPartObjects)
+        foreach (BodyPart bodyPart in bodyParts)
         {
-            oxygenTextNew += bodyPartObject.name;
+            oxygenTextNew += bodyPart.name;
             oxygenTextNew += ": ";
-            oxygenTextNew += Mathf.Round(bodyPartObject.GetComponent<BodyPart>().oxygen);
+            oxygenTextNew += Mathf.Round(bodyPart.GetComponent<BodyPart>().oxygen);
             oxygenTextNew += "\n";
-            oxygenSum += bodyPartObject.GetComponent<BodyPart>().oxygen;
+            oxygenSum += bodyPart.oxygen;
         }
         oxygenTextNew += "Sum Oxygen: " + oxygenSum;
 

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Linq;
 public class DamageLevelReporting : MonoBehaviour
 {
     public GameObject body;
-    private List<GameObject> bodyPartObjects = new List<GameObject>();
+    private List<BodyPart> bodyParts = new List<BodyPart>();
     private float secondCounter;
     private Text damageText;
 
@@ -35,36 +35,20 @@ public class DamageLevelReporting : MonoBehaviour
 
     void PopulateBodyPartsList()
     {
-
-        bodyPartObjects = new List<GameObject>();
-
-        //get bodyparts from body
-        for (int i = 0; i < body.transform.childCount; i++)
-        {
-            bodyPartObjects.Add(body.transform.GetChild(i).gameObject);
-
-            //get organs from bodypart
-            //NOTE: THIS INTRODUCES THE ASSUMPTION THAT ORGANS WILL ALWAYS BE CHILDREN OF THEIR CONTAINING BODYPARTS
-            //AS WELL AS CONTAINED IN THE containedOrgans LISTS. IT WILL DO FOR NOW.
-            for (int j = 0; j < body.transform.GetChild(i).childCount; j++)
-            {
-                bodyPartObjects.Add(body.transform.GetChild(i).GetChild(j).gameObject);
-            }
-        }
-
+        bodyParts = FindObjectsOfType<BodyPart>().ToList();
     }
 
     void UpdateDamageText()
     {
         string damageTextNew = "Damage Levels:\n";
         float damageSum = 0;
-        foreach (GameObject bodyPartObject in bodyPartObjects)
+        foreach (BodyPart bodyPart in bodyParts)
         {
-            damageTextNew += bodyPartObject.name;
+            damageTextNew += bodyPart.name;
             damageTextNew += ": ";
-            damageTextNew += Mathf.Round(bodyPartObject.GetComponent<BodyPart>().damage);
+            damageTextNew += Mathf.Round(bodyPart.damage);
             damageTextNew += "\n";
-            damageSum += bodyPartObject.GetComponent<BodyPart>().damage;
+            damageSum += bodyPart.damage;
         }
         damageTextNew += "Sum Damage: " + damageSum;
 
