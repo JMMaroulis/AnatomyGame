@@ -40,4 +40,16 @@ public static class Actions_Charms
         bodyPartObject.gameObject.AddComponent<PetrificationCharm>();
     }
 
+    public static void ApplyBloodRegenCharm(BodyPart bodyPartObject, float seconds)
+    {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        StaticCoroutine.Start(ApplyBloodRegenCharmCoroutine(bodyPartObject, seconds));
+    }
+
+    public static IEnumerator ApplyBloodRegenCharmCoroutine(BodyPart bodyPartObject, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        bodyPartObject.gameObject.AddComponent<BloodRegenCharm>();
+    }
+
 }

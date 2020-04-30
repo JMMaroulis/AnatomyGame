@@ -29,7 +29,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         {
             //selected bodypart to injure, and injury to apply
             BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
-            int injuryNumber = Random.Range(0, 6);
+            int injuryNumber = Random.Range(0, 5);
 
             //apply injury
             switch (injuryNumber)

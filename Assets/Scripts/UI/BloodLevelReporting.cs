@@ -27,6 +27,7 @@ public class BloodLevelReporting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PopulateBodyPartsList();
         secondCounter += Time.unscaledDeltaTime;
         if (secondCounter >= 0.1f)
         {
@@ -34,7 +35,6 @@ public class BloodLevelReporting : MonoBehaviour
             secondCounter = 0.0f;
         }
 
-        PopulateBodyPartsList();
     }
 
     void UpdateBloodText()

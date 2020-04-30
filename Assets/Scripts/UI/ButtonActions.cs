@@ -361,12 +361,14 @@ public class ButtonActions : MonoBehaviour
             AssignApplyHeartCharm(menuButtons[0], bodypart);
             AssignApplyLungCharm(menuButtons[1], bodypart);
             AssignApplyPetrificationCharm(menuButtons[2], bodypart);
+            AssignApplyBloodRegenCharm(menuButtons[3], bodypart);
         }
         else
         {
             AssignApplyHeartCharm(menuButtons[0], bodypart);
             AssignApplyLungCharm(menuButtons[1], bodypart);
             AssignApplyPetrificationCharm(menuButtons[2], bodypart);
+            AssignApplyBloodRegenCharm(menuButtons[3], bodypart);
         }
     }
 
@@ -582,6 +584,26 @@ public class ButtonActions : MonoBehaviour
 
     }
 
+    void AssignApplyBloodRegenCharm(GameObject buttonObject, BodyPart bodypart)
+    {
+        float seconds = 30.0f;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Charms.ApplyBloodRegenCharm(bodypart, seconds); messageBox.text = $"Applying a Blood Regeneration Charm to the {bodypart.name}..."; };
+        }
+
+        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+
+        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = "Apply Blood Regen Charm (30 Minutes): " + seconds + " seconds";
+
+    }
+
     #endregion
 
 
@@ -589,7 +611,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignBandagesButton(GameObject buttonObject, BodyPart bodypart)
     {
-        float seconds = 60.0f;
+        float seconds = 30.0f;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -608,7 +630,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignBloodlettingButton(GameObject buttonObject, BodyPart bodypart)
     {
-        float seconds = 60.0f;
+        float seconds = 30.0f;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -626,7 +648,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignAddBloodButton(GameObject buttonObject, BodyPart bodypart)
     {
-        float seconds = 120.0f;
+        float seconds = 20.0f;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -644,7 +666,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignRemoveBloodButton(GameObject buttonObject, BodyPart bodypart)
     {
-        float seconds = 120.0f;
+        float seconds = 20.0f;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -658,7 +680,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "REMOVE BLOOD: " + seconds + " seconds";
+        buttonText.text = "REMOVE BLOOD (100 units): " + seconds + " seconds";
     }
 
     #endregion

@@ -27,16 +27,13 @@ public class OxygenLevelReporting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        PopulateBodyPartsList();
         secondCounter += Time.unscaledDeltaTime;
         if (secondCounter >= 0.1f)
         {
             UpdateOxygenText();
             secondCounter = 0.0f;
         }
-
-        PopulateBodyPartsList();
-
     }
 
     void UpdateOxygenText()
