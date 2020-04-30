@@ -492,14 +492,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257884925}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 238a2cb1c885dc44a9c3a7627f7ee8e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 965609865}
   messageBox: {fileID: 811546129}
-  numberStartingInjuries: 2
+  numberStartingBodyPartInjuries: 2
+  numberStartingOrganInjuries: 1
 --- !u!4 &257884927
 Transform:
   m_ObjectHideFlags: 0

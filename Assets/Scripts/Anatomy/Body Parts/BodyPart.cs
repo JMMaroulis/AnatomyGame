@@ -44,12 +44,12 @@ public class BodyPart : MonoBehaviour
         if (isTimePassing)
         {
 
-                ApplyDrugs(deltaTime);
-                UpdateDamage(deltaTime);
-                CheckForFunctionality();
-                UpdateEfficiency();
-                LoseBlood(deltaTime);
-                ConsumeOxygen(deltaTime);
+            ApplyDrugs(deltaTime);
+            UpdateDamage(deltaTime);
+            CheckForFunctionality();
+            UpdateEfficiency();
+            LoseBlood(deltaTime);
+            ConsumeOxygen(deltaTime);
 
         }
 
