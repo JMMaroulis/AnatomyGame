@@ -84,6 +84,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+
     //instate default menu
     void AssignDefaultButtons()
     {
@@ -92,74 +93,19 @@ public class ButtonActions : MonoBehaviour
 
         ClearAllButtons();
 
-        AssignSelectBodyPartOptions(menuButtons[0]);
-        AssignSelectOrganOptions(menuButtons[1]);
-        AssignSelectBodyPartActionOptions(menuButtons[2]);
-        AssignSelectOrganActionOptions(menuButtons[3]);
-
         AssignExamineBodyPart(menuButtons[4], selectedBodyPart);
         AssignExamineOrgan(menuButtons[5], selectedOrgan);
         AssignSelectSpawnBodyPartActionOptions(menuButtons[6]);
         AssignSelectWaitActionOptions(menuButtons[7]);
     }
 
-
-    //make a button take us to the bodypart action select menu
-    void AssignSelectBodyPartActionOptions(GameObject buttonObject)
-    {
-        buttonObject.GetComponent<Button>().onClick.AddListener(SelectBodyPartActionOptions);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT BODYPART ACTION";
-    }
-
-    void SelectBodyPartActionOptions()
+    public void SelectBodyPartOptions(bool firstClick = true)
     {
         ClearAllButtons();
-
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
-
-        AssignSelectSurgeryActionOptions(menuButtons[0], selectedBodyPart);
-        AssignSelectBloodActionOptions(menuButtons[1], selectedBodyPart);
-        AssignSelectMedicineActionOptions(menuButtons[2], selectedBodyPart);
-        AssignSelectCharmActionOptions(menuButtons[3], selectedBodyPart);
-    }
-
-
-    //make a button take us to the organ action select menu
-    void AssignSelectOrganActionOptions(GameObject buttonObject)
-    {
-        buttonObject.GetComponent<Button>().onClick.AddListener(SelectOrganActionOptions);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT ORGAN ACTION";
-    }
-
-    void SelectOrganActionOptions()
-    {
-        ClearAllButtons();
-
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
-
-        AssignSelectSurgeryActionOptions(menuButtons[0], selectedOrgan);
-        AssignSelectBloodActionOptions(menuButtons[1], selectedOrgan);
-        AssignSelectMedicineActionOptions(menuButtons[2], selectedOrgan);
-        AssignSelectCharmActionOptions(menuButtons[3], selectedOrgan);
-    }
-
-
-    //make a button take us to the bodypart select menu
-    void AssignSelectBodyPartOptions(GameObject buttonObject)
-    {
-        buttonObject.GetComponent<Button>().onClick.AddListener(SelectBodyPartOptions);
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "SELECT BODY PART";
-    }
-
-    void SelectBodyPartOptions()
-    {
-        ClearAllButtons();
-
+        if (firstClick)
+        {
+            bodyPartMenuCounter = 0;
+        }
         //cancel button
         menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
         menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
@@ -179,27 +125,19 @@ public class ButtonActions : MonoBehaviour
         if (bodyPartMenuCounter < numBodyParts)
         {
             //more bodyparts button
-            menuButtons[7].GetComponent<Button>().onClick.AddListener(SelectBodyPartOptions);
+            UnityEngine.Events.UnityAction action = () => { SelectBodyPartOptions(false); };
+            menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
             menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
         }
     }
 
-
-    //make a button take us to the organ select menu
-    void AssignSelectOrganOptions(GameObject buttonObject)
-    {
-        buttonObject.GetComponent<Button>().onClick.AddListener(SelectOrganOptions);
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "SELECT ORGAN";
-    }
-
-    void SelectOrganOptions()
+    public void SelectOrganOptions(bool firstClick)
     {
         ClearAllButtons();
-
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+        if (firstClick)
+        {
+            organMenuCounter = 0;
+        }
 
         //put organs on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
@@ -216,43 +154,28 @@ public class ButtonActions : MonoBehaviour
         if (organMenuCounter < numOrgans)
         {
             //more organs button
-            menuButtons[7].GetComponent<Button>().onClick.AddListener(SelectOrganOptions);
+            UnityEngine.Events.UnityAction action = () => { SelectOrganOptions(false); };
+            menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
             menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
         }
-
-
     }
 
-
-    //make a button take us to the surgery action menu
-    void AssignSelectSurgeryActionOptions(GameObject buttonObject, BodyPart bodypart)
-    {
-        UnityEngine.Events.UnityAction action = () => { SelectSurgeryActionOptions(bodypart); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT SURGERY ACTION";
-    }
-
-    void SelectSurgeryActionOptions(BodyPart bodypart)
+    public void SelectSurgeryActionOptions_BodyPart()
     {
         ClearAllButtons();
 
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+        AssignRemoveBodyPartButton(menuButtons[0], selectedBodyPart);
+        AssignAttachBodyPartButton(menuButtons[1], selectedBodyPart);
+        AssignDestroyBodyPart(menuButtons[2], selectedBodyPart);
+    }
 
-        if (bodypart is Organ)
-        {
-            AssignRemoveOrganButton(menuButtons[0], (Organ)bodypart);
-            AssignImplantOrganButton(menuButtons[1], selectedBodyPart, (Organ)bodypart);
-            AssignDestroyOrgan(menuButtons[2], (Organ)bodypart);
-        }
-        else
-        {
-            AssignRemoveBodyPartButton(menuButtons[0], bodypart);
-            AssignAttachBodyPartButton(menuButtons[1], bodypart);
-            AssignDestroyBodyPart(menuButtons[2], bodypart);
-        }
+    public void SelectSurgeryActionOptions_Organ()
+    {
+        ClearAllButtons();
 
+        AssignRemoveOrganButton(menuButtons[0], selectedOrgan);
+        AssignImplantOrganButton(menuButtons[1], selectedBodyPart, selectedOrgan);
+        AssignDestroyOrgan(menuButtons[2], selectedOrgan);
     }
 
 
@@ -263,113 +186,71 @@ public class ButtonActions : MonoBehaviour
         buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "WAIT...";
     }
 
-    void SelectWaitActionOptions()
+    public void SelectWaitActionOptions()
     {
         ClearAllButtons();
-
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
 
         AssignWaitOneMinute(menuButtons[0]);
         AssignWaitOneHour(menuButtons[1]);
     }
 
-
-    //make a button take us to the blood action menu
-    void AssignSelectBloodActionOptions(GameObject buttonObject, BodyPart bodypart)
-    {
-        UnityEngine.Events.UnityAction action = () => { SelectBloodActionOptions(bodypart); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT BLOOD ACTION";
-    }
-
-    void SelectBloodActionOptions(BodyPart bodypart)
+    public void SelectBloodActionOptions_BodyPart()
     {
         ClearAllButtons();
 
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
-
-        if (bodypart is Organ)
-        {
-            AssignAddBloodButton(menuButtons[0], bodypart);
-            AssignRemoveBloodButton(menuButtons[1], bodypart);
-        }
-        else
-        {
-            AssignBandagesButton(menuButtons[0], bodypart);
-            AssignBloodlettingButton(menuButtons[1], bodypart);
-            AssignAddBloodButton(menuButtons[2], bodypart);
-            AssignRemoveBloodButton(menuButtons[3], bodypart);
-        }
+        AssignBandagesButton(menuButtons[0], selectedBodyPart);
+        AssignBloodlettingButton(menuButtons[1], selectedBodyPart);
+        AssignAddBloodButton(menuButtons[2], selectedBodyPart);
+        AssignRemoveBloodButton(menuButtons[3], selectedBodyPart);
     }
 
-
-    //make a button take us to the medicine action menu
-    void AssignSelectMedicineActionOptions(GameObject buttonObject, BodyPart bodypart)
-    {
-        UnityEngine.Events.UnityAction action = () => { SelectMedicineActionOptions(bodypart); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT MEDICINE ACTION";
-    }
-
-    void SelectMedicineActionOptions(BodyPart bodypart)
+    public void SelectBloodActionOptions_Organ()
     {
         ClearAllButtons();
 
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
-
-        if (bodypart is Organ)
-        {
-            AssignInjectHealthPotionButton(menuButtons[0], bodypart);
-            AssignInjectAntidoteButton(menuButtons[1], bodypart);
-            AssignInjectSlowPoisonButton(menuButtons[2], bodypart);
-            AssignInjectStasisPotionButton(menuButtons[3], bodypart);
-        }
-        else
-        {
-            AssignInjectHealthPotionButton(menuButtons[0], bodypart);
-            AssignInjectAntidoteButton(menuButtons[1], bodypart);
-            AssignInjectSlowPoisonButton(menuButtons[2], bodypart);
-            AssignInjectStasisPotionButton(menuButtons[3], bodypart);
-        }
+        AssignAddBloodButton(menuButtons[0], selectedOrgan);
+        AssignRemoveBloodButton(menuButtons[1], selectedOrgan);
     }
 
-
-    //make a button take us to the charm action menu
-    void AssignSelectCharmActionOptions(GameObject buttonObject, BodyPart bodypart)
-    {
-        UnityEngine.Events.UnityAction action = () => { SelectCharmActionOptions(bodypart); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT CHARM ACTION";
-    }
-
-    void SelectCharmActionOptions(BodyPart bodypart)
+    public void SelectMedicineActionOptions_BodyPart()
     {
         ClearAllButtons();
 
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
+        AssignInjectHealthPotionButton(menuButtons[0], selectedBodyPart);
+        AssignInjectAntidoteButton(menuButtons[1], selectedBodyPart);
+        AssignInjectSlowPoisonButton(menuButtons[2], selectedBodyPart);
+        AssignInjectStasisPotionButton(menuButtons[3], selectedBodyPart);
+    }
 
-        if (bodypart is Organ)
-        {
-            AssignApplyHeartCharm(menuButtons[0], bodypart);
-            AssignApplyLungCharm(menuButtons[1], bodypart);
-            AssignApplyPetrificationCharm(menuButtons[2], bodypart);
-            AssignApplyBloodRegenCharm(menuButtons[3], bodypart);
-        }
-        else
-        {
-            AssignApplyHeartCharm(menuButtons[0], bodypart);
-            AssignApplyLungCharm(menuButtons[1], bodypart);
-            AssignApplyPetrificationCharm(menuButtons[2], bodypart);
-            AssignApplyBloodRegenCharm(menuButtons[3], bodypart);
-        }
+    public void SelectMedicineActionOptions_Organ()
+    {
+        ClearAllButtons();
+
+        AssignInjectHealthPotionButton(menuButtons[0], selectedOrgan);
+        AssignInjectAntidoteButton(menuButtons[1], selectedOrgan);
+        AssignInjectSlowPoisonButton(menuButtons[2], selectedOrgan);
+        AssignInjectStasisPotionButton(menuButtons[3], selectedOrgan);
+
+    }
+
+    public void SelectCharmActionOptions_BodyPart()
+    {
+        ClearAllButtons();
+
+        AssignApplyHeartCharm(menuButtons[0], selectedBodyPart);
+        AssignApplyLungCharm(menuButtons[1], selectedBodyPart);
+        AssignApplyPetrificationCharm(menuButtons[2], selectedBodyPart);
+        AssignApplyBloodRegenCharm(menuButtons[3], selectedBodyPart);
+    }
+
+    public void SelectCharmActionOptions_Organ()
+    {
+        ClearAllButtons();
+
+        AssignApplyHeartCharm(menuButtons[0], selectedOrgan);
+        AssignApplyLungCharm(menuButtons[1], selectedOrgan);
+        AssignApplyPetrificationCharm(menuButtons[2], selectedOrgan);
+        AssignApplyBloodRegenCharm(menuButtons[3], selectedOrgan);
     }
 
     #region Selection
@@ -423,7 +304,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT ORGAN SPAWNING ACTION";
     }
 
-    void SelectSpawnOrganActionOptions()
+    public void SelectSpawnOrganActionOptions()
     {
         ClearAllButtons();
 
