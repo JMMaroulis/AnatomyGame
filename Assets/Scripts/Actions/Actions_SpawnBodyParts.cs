@@ -6,9 +6,10 @@ public static class Actions_SpawnBodyParts
 {
     #region organs
 
-    public static void SpawnHeart(float seconds)
+    public static void SpawnHeart(float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(SpawnHeartCoroutine(seconds));
     }
 
@@ -18,9 +19,10 @@ public static class Actions_SpawnBodyParts
         Object.FindObjectOfType<BodyPartSpawner>().SpawnHeart("newHeart");
     }
 
-    public static void SpawnLung(float seconds)
+    public static void SpawnLung(float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(SpawnLungCoroutine(seconds));
     }
 
@@ -30,9 +32,10 @@ public static class Actions_SpawnBodyParts
         Object.FindObjectOfType<BodyPartSpawner>().SpawnLung("newLung");
     }
 
-    public static void SpawnBrain(float seconds)
+    public static void SpawnBrain(float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(SpawnBrainCoroutine(seconds));
     }
 
@@ -46,9 +49,10 @@ public static class Actions_SpawnBodyParts
 
     #region bodyparts
 
-    public static void SpawnArm(float seconds)
+    public static void SpawnArm(float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(SpawnArmCoroutine(seconds));
     }
 
@@ -58,9 +62,10 @@ public static class Actions_SpawnBodyParts
         Object.FindObjectOfType<BodyPartSpawner>().SpawnArm("newArm");
     }
 
-    public static void SpawnLeg(float seconds)
+    public static void SpawnLeg(float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(SpawnLegCoroutine(seconds));
     }
 
@@ -70,9 +75,10 @@ public static class Actions_SpawnBodyParts
         Object.FindObjectOfType<BodyPartSpawner>().SpawnLeg("newLeg");
     }
 
-    public static void SpawnTorso(float seconds)
+    public static void SpawnTorso(float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(SpawnTorsoCoroutine(seconds));
     }
 
@@ -82,9 +88,10 @@ public static class Actions_SpawnBodyParts
         Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("newTorso");
     }
 
-    public static void SpawnHead(float seconds)
+    public static void SpawnHead(float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(SpawnHeadCoroutine(seconds));
     }
 

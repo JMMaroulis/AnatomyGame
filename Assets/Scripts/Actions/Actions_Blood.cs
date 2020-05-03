@@ -4,11 +4,13 @@ using UnityEngine;
 
 public static class Actions_Blood
 {
+
     //apply bandages to selected bodypart
-    public static void Bandages(BodyPart bodyPart, float seconds)
+    public static void Bandages(BodyPart bodyPart, float seconds, int goldCost)
     {
         Debug.Log("Applying bandages to" + bodyPart.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(BanadagesCoroutine(bodyPart, seconds));
     }
     
@@ -20,10 +22,11 @@ public static class Actions_Blood
     }
     
 
-    public static void Bloodletting(BodyPart bodyPart, float seconds)
+    public static void Bloodletting(BodyPart bodyPart, float seconds, int goldCost)
     {
         Debug.Log("Cutting " + bodyPart.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(BloodlettingCoroutine(bodyPart, seconds));
     }
 
@@ -33,10 +36,11 @@ public static class Actions_Blood
         bodyPart.GetComponent<BodyPart>().bloodLossRate += 10;
     }
 
-    public static void AddBlood(BodyPart bodyPart, float seconds)
+    public static void AddBlood(BodyPart bodyPart, float seconds, int goldCost)
     {
         Debug.Log("Adding blood to " + bodyPart.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(AddBloodCoroutine(bodyPart, seconds));
     }
 
@@ -46,10 +50,11 @@ public static class Actions_Blood
         bodyPart.GetComponent<BodyPart>().blood += 100;
     }
 
-    public static void RemoveBlood(BodyPart bodyPart, float seconds)
+    public static void RemoveBlood(BodyPart bodyPart, float seconds, int goldCost)
     {
         Debug.Log("Removing blood from" + bodyPart.name);
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(RemoveBloodCoroutine(bodyPart, seconds));
     }
 

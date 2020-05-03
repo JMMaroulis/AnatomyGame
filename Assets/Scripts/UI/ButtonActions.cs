@@ -296,6 +296,7 @@ public class ButtonActions : MonoBehaviour
     void AssignInjectHealthPotionButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 10.0f;
+        int goldCost = 50;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -303,7 +304,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectHealthPotion(bodypart, seconds); messageBox.text = $"Injecting 50 units of Health Potion into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectHealthPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Health Potion into the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -316,6 +317,7 @@ public class ButtonActions : MonoBehaviour
     void AssignInjectAntidoteButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 10.0f;
+        int goldCost = 50;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -323,7 +325,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectAntidote(bodypart, seconds); messageBox.text = $"Injecting 50 units of Antidote into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectAntidote(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Antidote into the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -336,6 +338,7 @@ public class ButtonActions : MonoBehaviour
     void AssignInjectSlowPoisonButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 10.0f;
+        int goldCost = 50;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -343,7 +346,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectSlowPoison(bodypart, seconds); messageBox.text = $"Injecting 50 units of Slow Poison into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectSlowPoison(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Slow Poison into the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -356,6 +359,7 @@ public class ButtonActions : MonoBehaviour
     void AssignInjectStasisPotionButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 10.0f;
+        int goldCost = 50;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -363,7 +367,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectStasisPotion(bodypart, seconds); messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -380,6 +384,7 @@ public class ButtonActions : MonoBehaviour
     void AssignApplyHeartCharm(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 30.0f;
+        int goldCost = 200;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -387,7 +392,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Charms.ApplyHeartCharm(bodypart, seconds); messageBox.text = $"Applying a Heart Charm to the {bodypart.name}..."; };
+            action = () => { Actions_Charms.ApplyHeartCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Heart Charm to the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -400,6 +405,7 @@ public class ButtonActions : MonoBehaviour
     void AssignApplyLungCharm(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 30.0f;
+        int goldCost = 200;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -407,7 +413,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Charms.ApplyLungCharm(bodypart, seconds); messageBox.text = $"Applying a Lung Charm to the {bodypart.name}..."; };
+            action = () => { Actions_Charms.ApplyLungCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Lung Charm to the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -420,6 +426,7 @@ public class ButtonActions : MonoBehaviour
     void AssignApplyPetrificationCharm(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 30.0f;
+        int goldCost = 200;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -427,7 +434,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Charms.ApplyPetrificationCharm(bodypart, seconds); messageBox.text = $"Applying a Petrification Charm to the {bodypart.name}..."; };
+            action = () => { Actions_Charms.ApplyPetrificationCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Petrification Charm to the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -440,6 +447,7 @@ public class ButtonActions : MonoBehaviour
     void AssignApplyBloodRegenCharm(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 30.0f;
+        int goldCost = 200;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -447,7 +455,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Charms.ApplyBloodRegenCharm(bodypart, seconds); messageBox.text = $"Applying a Blood Regeneration Charm to the {bodypart.name}..."; };
+            action = () => { Actions_Charms.ApplyBloodRegenCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Blood Regeneration Charm to the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -465,6 +473,7 @@ public class ButtonActions : MonoBehaviour
     void AssignBandagesButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 30.0f;
+        int goldCost = 10;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -472,7 +481,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Blood.Bandages(bodypart, seconds); messageBox.text = $"Applying bandages to the {bodypart.name}..."; };
+            action = () => { Actions_Blood.Bandages(bodypart, seconds, goldCost); messageBox.text = $"Applying bandages to the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -484,6 +493,7 @@ public class ButtonActions : MonoBehaviour
     void AssignBloodlettingButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 30.0f;
+        int goldCost = 0;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -491,7 +501,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Blood.Bloodletting(bodypart, seconds); messageBox.text = $"Inducing bleeding in the {bodypart.name}..."; };
+            action = () => { Actions_Blood.Bloodletting(bodypart, seconds, goldCost); messageBox.text = $"Inducing bleeding in the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -502,6 +512,7 @@ public class ButtonActions : MonoBehaviour
     void AssignAddBloodButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 20.0f;
+        int goldCost = 20;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -509,7 +520,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Blood.AddBlood(bodypart, seconds); messageBox.text = $"Injecting 100 units of blood into the {bodypart.name}..."; };
+            action = () => { Actions_Blood.AddBlood(bodypart, seconds, goldCost); messageBox.text = $"Injecting 100 units of blood into the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -520,6 +531,7 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveBloodButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 20.0f;
+        int goldCost = 0;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -527,7 +539,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Blood.RemoveBlood(bodypart, seconds); messageBox.text = $"Extracting 100 units of blood from the {bodypart.name}..."; };
+            action = () => { Actions_Blood.RemoveBlood(bodypart, seconds, goldCost); messageBox.text = $"Extracting 100 units of blood from the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -544,6 +556,7 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveBodyPartButton(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 10 * 60.0f;
+        int goldCost = 0;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -551,7 +564,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.RemoveBodyPart(bodypart, seconds); messageBox.text = $"Removing the {bodypart.name}..."; };
+            action = () => { Actions_Surgery.RemoveBodyPart(bodypart, seconds, goldCost); messageBox.text = $"Removing the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -609,13 +622,15 @@ public class ButtonActions : MonoBehaviour
     void AssignConnectTwoBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, GameObject buttonObject)
     {
         float seconds = 10 * 60.0f;
-        UnityEngine.Events.UnityAction action = () => { Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds); messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}..."; };
+        int goldCost = 20;
+        UnityEngine.Events.UnityAction action = () => { Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost); messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}..."; };
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
     }
 
     void AssignDestroyBodyPart(GameObject buttonObject, BodyPart bodypart)
     {
         float seconds = 10 * 60.0f;
+        int goldCost = 0;
         UnityEngine.Events.UnityAction action = null;
 
         if (bodypart == null)
@@ -628,7 +643,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds); bodypart = null; messageBox.text = $"Destroying the {bodypart.name}..."; };
+            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost); bodypart = null; messageBox.text = $"Destroying the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -644,6 +659,8 @@ public class ButtonActions : MonoBehaviour
 
     void AssignImplantOrganButton(GameObject buttonObject, BodyPart bodypart, Organ organ)
     {
+        float seconds = 60.0f * 10.0f;
+        int goldCost = 0;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null || organ == null)
         {
@@ -651,7 +668,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.ImplantOrgan(organ, bodypart, 600.0f); messageBox.text = $"Implanting the {organ.name} into the {bodypart.name}..."; };
+            action = () => { Actions_Surgery.ImplantOrgan(organ, bodypart, seconds, goldCost); messageBox.text = $"Implanting the {organ.name} into the {bodypart.name}..."; };
         }
 
 
@@ -665,6 +682,7 @@ public class ButtonActions : MonoBehaviour
     void AssignRemoveOrganButton(GameObject buttonObject, Organ organ)
     {
         float seconds = 10 * 60.0f;
+        int goldCost = 0;
         UnityEngine.Events.UnityAction action = null;
         if (organ == null)
         {
@@ -672,7 +690,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.RemoveOrgan(organ, seconds); messageBox.text = $"Extracting the {organ.name}..."; };
+            action = () => { Actions_Surgery.RemoveOrgan(organ, seconds, goldCost); messageBox.text = $"Extracting the {organ.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -685,6 +703,7 @@ public class ButtonActions : MonoBehaviour
     void AssignDestroyOrgan(GameObject buttonObject, Organ organ)
     {
         float seconds = 10 * 60.0f;
+        int goldCost = 0;
         UnityEngine.Events.UnityAction action = null;
 
         if (organ == null)
@@ -697,7 +716,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.DeleteBodyPart(organ, seconds); organ = null; messageBox.text = $"Destroying the {organ.name}..."; };
+            action = () => { Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost); organ = null; messageBox.text = $"Destroying the {organ.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -756,7 +775,8 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnHeartButton(GameObject buttonObject)
     {
         float seconds = 60.0f * 5.0f;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHeart(seconds); messageBox.text = $"Spawning a new heart..."; };
+        int goldCost = 500;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHeart(seconds, goldCost); messageBox.text = $"Spawning a new heart..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
@@ -768,7 +788,8 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnLungButton(GameObject buttonObject)
     {
         float seconds = 60.0f * 5.0f;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLung(seconds); messageBox.text = $"Spawning a new lung..."; };
+        int goldCost = 500;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLung(seconds, goldCost); messageBox.text = $"Spawning a new lung..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
@@ -780,7 +801,8 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnBrainButton(GameObject buttonObject)
     {
         float seconds = 60.0f * 5.0f;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+        int goldCost = 500;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
@@ -792,7 +814,8 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnArmButton(GameObject buttonObject)
     {
         float seconds = 60.0f * 5.0f;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+        int goldCost = 500;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
@@ -804,7 +827,8 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnLegButton(GameObject buttonObject)
     {
         float seconds = 60.0f * 5.0f;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+        int goldCost = 500;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
@@ -816,7 +840,8 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnTorsoButton(GameObject buttonObject)
     {
         float seconds = 60.0f * 5.0f;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+        int goldCost = 500;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
@@ -828,7 +853,8 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnHeadButton(GameObject buttonObject)
     {
         float seconds = 60.0f * 5.0f;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds); messageBox.text = $"Spawning a new brain..."; };
+        int goldCost = 500;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 

@@ -5,9 +5,10 @@ using UnityEngine;
 public static class Actions_Surgery
 {
 
-    public static void RemoveBodyPart(BodyPart bodyPartObject, float seconds)
+    public static void RemoveBodyPart(BodyPart bodyPartObject, float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(RemoveBodyPartCoroutine(bodyPartObject, seconds));
     }
 
@@ -17,9 +18,10 @@ public static class Actions_Surgery
         bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
     }
 
-    public static void RemoveOrgan(Organ organObject, float seconds)
+    public static void RemoveOrgan(Organ organObject, float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(RemoveOrganCoroutine(organObject, seconds));
     }
 
@@ -35,7 +37,7 @@ public static class Actions_Surgery
 
     }
 
-    public static void ImplantOrgan(Organ organ, BodyPart bodyPart, float seconds)
+    public static void ImplantOrgan(Organ organ, BodyPart bodyPart, float seconds, int goldCost)
     {
 
         if (organ.connectedBodyParts.Count != 0)
@@ -43,8 +45,9 @@ public static class Actions_Surgery
             Debug.Log("That organ is already inside something! Don't do that!");
             return;
         }
-               
+
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(ImplantOrganCoroutine(organ, bodyPart, seconds));
     }
 
@@ -62,9 +65,10 @@ public static class Actions_Surgery
     }
 
 
-    public static void ConnectBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, float seconds)
+    public static void ConnectBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(ConnectBodyPartCoroutine(bodyPart1, bodyPart2, seconds));
     }
 
@@ -75,9 +79,10 @@ public static class Actions_Surgery
         bodyPart2.CreateConnection(bodyPart1);
     }
 
-    public static void DeleteBodyPart(BodyPart bodyPart, float seconds)
+    public static void DeleteBodyPart(BodyPart bodyPart, float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(DeleteBodyPartCoroutine(bodyPart, seconds));
     }
 

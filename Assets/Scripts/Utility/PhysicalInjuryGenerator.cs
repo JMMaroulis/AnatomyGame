@@ -155,8 +155,8 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
     public void Missing(BodyPart bodyPart)
     {
-        Actions_Surgery.RemoveOrgan((Organ)bodyPart, 0);
-        Actions_Surgery.DeleteBodyPart(bodyPart, 0);
+        Actions_Surgery.RemoveOrgan((Organ)bodyPart, 0, 0);
+        Actions_Surgery.DeleteBodyPart(bodyPart, 0, 0);
     }
 
 

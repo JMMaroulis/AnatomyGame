@@ -200,8 +200,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1189550776}
   - component: {fileID: 1189550777}
+  - component: {fileID: 1189550778}
   m_Layer: 0
-  m_Name: _app
+  m_Name: GoldTracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -233,3 +234,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 903f6057552a7d842be2ed9950d7ccf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1189550778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189550775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af41686e1bdf0846bc7b6574d854e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldSpent: 0
+  currentGold: 0
