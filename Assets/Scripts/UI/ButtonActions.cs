@@ -22,20 +22,14 @@ public class ButtonActions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //assign starting button actions
-        AssignDefaultButtons();
-
-        //button 0 selected by default
-        menuButtons[0].GetComponent<Button>().Select();
-
+        ClearAllButtons();
         PopulateBodyPartsList();
-
-        selectedBodyPartText.text = "No Body Part Selected";
     }
 
     void PopulateBodyPartsList()
     {
         bodyParts = new List<BodyPart>();
+        
 
         foreach (BodyPart bodypart in FindObjectsOfType<BodyPart>().ToList<BodyPart>())
         {
@@ -44,6 +38,7 @@ public class ButtonActions : MonoBehaviour
                 bodyParts.Add(bodypart);
             }
         }
+        //bodyParts.Sort();
     }
 
     void PopulateOrgansList()
@@ -57,9 +52,11 @@ public class ButtonActions : MonoBehaviour
         PopulateBodyPartsList();
         PopulateOrgansList();
 
+        //update selected bodypart name text
         if (selectedBodyPart) selectedBodyPartText.text = selectedBodyPart.name;
         else selectedBodyPartText.text = "No Body Part Selected";
 
+        //update selected organ name text
         if (selectedOrgan) {
             if (selectedOrgan.connectedBodyParts.Count != 0)
             {
@@ -84,21 +81,6 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-
-    //instate default menu
-    void AssignDefaultButtons()
-    {
-        bodyPartMenuCounter = 0;
-        organMenuCounter = 0;
-
-        ClearAllButtons();
-
-        AssignExamineBodyPart(menuButtons[4], selectedBodyPart);
-        AssignExamineOrgan(menuButtons[5], selectedOrgan);
-        AssignSelectSpawnBodyPartActionOptions(menuButtons[6]);
-        AssignSelectWaitActionOptions(menuButtons[7]);
-    }
-
     public void SelectBodyPartOptions(bool firstClick = true)
     {
         ClearAllButtons();
@@ -106,19 +88,15 @@ public class ButtonActions : MonoBehaviour
         {
             bodyPartMenuCounter = 0;
         }
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
 
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
         int numBodyParts = bodyParts.Count();
         int countStart = bodyPartMenuCounter;
-        while(bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart+6))
+        while(bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 7))
         {
-            //select bodypart, then reset to default
+            //select bodypart
             AssignSelectBodyPart(menuButtons[bodyPartMenuCounter - countStart], bodyParts[bodyPartMenuCounter]);
-            menuButtons[bodyPartMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
             bodyPartMenuCounter += 1;
         }
 
@@ -143,11 +121,10 @@ public class ButtonActions : MonoBehaviour
         //TODO: Order this list somehow. Alphabetically, maybe?
         int numOrgans = organs.Count();
         int countStart = organMenuCounter;
-        while (organMenuCounter < Mathf.Min(numOrgans, countStart + 6))
+        while (organMenuCounter < Mathf.Min(numOrgans, countStart + 7))
         {
-            //select organ, then reset to default
+            //select organ
             AssignSelectOrgan(menuButtons[organMenuCounter - countStart], organs[organMenuCounter]);
-            menuButtons[organMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
             organMenuCounter += 1;
         }
 
@@ -308,14 +285,9 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
-
         AssignSpawnHeartButton(menuButtons[0]);
         AssignSpawnLungButton(menuButtons[1]);
         AssignSpawnBrainButton(menuButtons[2]);
-
     }
 
 
@@ -579,7 +551,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.RemoveBodyPart(bodypart, seconds); AssignDefaultButtons(); messageBox.text = $"Removing the {bodypart.name}..."; };
+            action = () => { Actions_Surgery.RemoveBodyPart(bodypart, seconds); messageBox.text = $"Removing the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -612,10 +584,6 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        //cancel button
-        menuButtons[6].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
-        menuButtons[6].transform.GetChild(0).gameObject.GetComponent<Text>().text = "CANCEL";
-
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
         int numBodyParts = bodyParts.Count();
@@ -624,7 +592,6 @@ public class ButtonActions : MonoBehaviour
         {
             //assign button to connect chosen with selected, then go back to default
             AssignConnectTwoBodyParts(bodypart, bodyParts[bodyPartMenuCounter], menuButtons[bodyPartMenuCounter - countStart]);
-            menuButtons[bodyPartMenuCounter - countStart].GetComponent<Button>().onClick.AddListener(AssignDefaultButtons);
             menuButtons[bodyPartMenuCounter - countStart].transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyParts[bodyPartMenuCounter].name;
             bodyPartMenuCounter += 1;
         }
@@ -661,7 +628,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds); AssignDefaultButtons(); bodypart = null; messageBox.text = $"Destroying the {bodypart.name}..."; };
+            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds); bodypart = null; messageBox.text = $"Destroying the {bodypart.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -705,7 +672,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.RemoveOrgan(organ, seconds); AssignDefaultButtons(); messageBox.text = $"Extracting the {organ.name}..."; };
+            action = () => { Actions_Surgery.RemoveOrgan(organ, seconds); messageBox.text = $"Extracting the {organ.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
@@ -730,7 +697,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.DeleteBodyPart(organ, seconds); AssignDefaultButtons(); organ = null; messageBox.text = $"Destroying the {organ.name}..."; };
+            action = () => { Actions_Surgery.DeleteBodyPart(organ, seconds); organ = null; messageBox.text = $"Destroying the {organ.name}..."; };
         }
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
