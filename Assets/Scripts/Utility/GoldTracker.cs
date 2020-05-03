@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GoldTracker : MonoBehaviour
 {
     public int goldSpent;
-    public int currentGold;
+    public int goldAccumulated;
 
     // Start is called before the first frame update
     void Start()

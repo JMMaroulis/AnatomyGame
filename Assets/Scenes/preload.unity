@@ -247,4 +247,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldSpent: 0
-  currentGold: 0
+  goldAccumulated: 500
