@@ -310,7 +310,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "INJECT HEALTH POTION (50 units): " + seconds + " seconds";
+        buttonText.text = $"Inject Health Potion (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -331,7 +331,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "INJECT ANTIDOTE (50 units): " + seconds + " seconds";
+        buttonText.text = $"Inject Antidote (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -352,7 +352,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "INJECT SLOW POISON (50 units): " + seconds + " seconds";
+        buttonText.text = $"Inject Slow Potion (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -373,7 +373,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "INJECT STASIS POTION(50 units): " + seconds + " seconds";
+        buttonText.text = $"Inject Stasis Potion (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -398,7 +398,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Apply Heart Charm (30 Minutes): " + seconds + " seconds";
+        buttonText.text = $"Apply Heart Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -419,7 +419,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Apply Lung Charm (30 Minutes): " + seconds + " seconds";
+        buttonText.text = $"Apply Lung Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -440,7 +440,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Apply Petrification Charm (30 Minutes): " + seconds + " seconds";
+        buttonText.text = $"Apply Petrification Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -461,7 +461,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Apply Blood Regen Charm (30 Minutes): " + seconds + " seconds";
+        buttonText.text = $"Apply Blood Regen Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -487,7 +487,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "BANDAGES: " + seconds + " seconds";
+        buttonText.text = $"Bandages: {seconds} seconds, {goldCost} gold";
     }
 
     void AssignBloodlettingButton(GameObject buttonObject, BodyPart bodypart)
@@ -506,7 +506,7 @@ public class ButtonActions : MonoBehaviour
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "BLOODLETTING: " + seconds + " seconds";
+        buttonText.text = $"Bloodletting: {seconds} seconds, {goldCost} gold";
     }
 
     void AssignAddBloodButton(GameObject buttonObject, BodyPart bodypart)
@@ -525,7 +525,7 @@ public class ButtonActions : MonoBehaviour
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "ADD BLOOD (100 units): " + seconds + " seconds";
+        buttonText.text = $"Inject Blood: (100 units): {seconds} seconds, {goldCost} gold";
     }
 
     void AssignRemoveBloodButton(GameObject buttonObject, BodyPart bodypart)
@@ -545,7 +545,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "REMOVE BLOOD (100 units): " + seconds + " seconds";
+        buttonText.text = $"Remove Blood: (100 units): {seconds} seconds, {goldCost} gold";
     }
 
     #endregion
@@ -570,7 +570,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "AMPUTATE BODYPART: " + seconds + " seconds";
+        buttonText.text = $"Amputate Bodypart: {seconds} seconds, {goldCost} gold";
     }
 
 
@@ -649,7 +649,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "DESTROY: " + seconds + " seconds";
+        buttonText.text = $"Destroy: {seconds} seconds, {goldCost} gold";
     }
 
     #endregion
@@ -675,7 +675,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "IMPLANT ORGAN INTO BODYPART (10 minutes)";
+        buttonText.text = $"Implant organ into limb: {seconds} seconds, {goldCost} gold";
     }
 
 
@@ -696,7 +696,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "EXTRACT ORGAN: " + seconds + " seconds";
+        buttonText.text = $"Extract Organ: {seconds} seconds, {goldCost} gold";
     }
 
 
@@ -722,7 +722,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "DESTROY: " + seconds + " seconds";
+        buttonText.text = $"Destroy: {seconds} seconds, {goldCost} gold";
     }
 
     #endregion
@@ -730,40 +730,28 @@ public class ButtonActions : MonoBehaviour
 
     #region Examine
 
-    void AssignExamineBodyPart(GameObject buttonObject, BodyPart bodypart)
+    public void ExamineSelectedBodyPart()
     {
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        if (selectedBodyPart == null)
         {
-            action = () => { messageBox.text = "You need to select a bodypart for that!"; };
+            messageBox.text = "You need to select a bodypart for that!";
         }
         else
         {
-            action = () => { messageBox.text = bodypart.GenerateDescription(); };
+            messageBox.text = selectedBodyPart.GenerateDescription();
         }
-
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "EXAMINE BODYPART";
     }
 
-    void AssignExamineOrgan(GameObject buttonObject, Organ organ)
+    public void ExamineSelectedOrgan()
     {
-        UnityEngine.Events.UnityAction action = null;
-        if (organ == null)
+        if (selectedOrgan == null)
         {
-            action = () => { messageBox.text = "You need to select an organ for that!"; };
+            messageBox.text = "You need to select an organ for that!";
         }
         else
         {
-            action = () => { messageBox.text = organ.GenerateDescription(); };
+            messageBox.text = selectedOrgan.GenerateDescription();
         }
-
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "EXAMINE ORGAN";
     }
 
     #endregion
@@ -781,7 +769,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Spawn a new heart: " + seconds + " seconds";
+        buttonText.text = $"Spawn a new heart: {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -794,7 +782,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Spawn a new lung: " + seconds + " seconds";
+        buttonText.text = $"Spawn a new lung: {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -807,7 +795,7 @@ public class ButtonActions : MonoBehaviour
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -815,12 +803,12 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new arm..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -828,12 +816,12 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new leg..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -841,12 +829,12 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new torso..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -854,12 +842,12 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new head..."; };
 
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
 
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Spawn a new brain: " + seconds + " seconds";
+        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -871,7 +859,7 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action = () => { lifeMonitor.VictoryCheck(); messageBox.text = "Waiting one hour..."; };
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "WAIT AN HOUR";
+        buttonText.text = "Wait an hour (Victory Check)";
     }
 
     void AssignWaitOneMinute(GameObject buttonObject)
@@ -879,6 +867,6 @@ public class ButtonActions : MonoBehaviour
         UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(60.0f); messageBox.text = "Waiting one minute..."; };
         buttonObject.GetComponent<Button>().onClick.AddListener(action);
         Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "WAIT ONE MINUTE";
+        buttonText.text = "Wait one minute";
     }
 }
