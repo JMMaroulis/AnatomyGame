@@ -38,8 +38,8 @@ public class LifeMonitor : MonoBehaviour
     {
         float oldTimeScalingFactor = clock.globalTimeScalingFactor;
         clock.globalTimeScalingFactor = 100.0f;
-        clock.StartClockUntil(1);
-        yield return new WaitForSeconds(1);
+        clock.StartClockUntil(seconds);
+        yield return new WaitForSeconds(seconds);
 
         messageBox.text = "";
         bool victory = true;
@@ -160,6 +160,9 @@ public class LifeMonitor : MonoBehaviour
         if (victory)
         {
             messageBox.text = "Congratulations, he'll live!\nYour payment is 500 gold.\nNew patient in 5 seconds...";
+            GameObject.FindObjectOfType<GoldTracker>().goldAccumulated += 500;
+            GameObject.FindObjectOfType<InjurySpawnTracker>().IncreaseInjuryNumber();
+
             yield return new WaitForSeconds(5 * clock.globalTimeScalingFactor);
             ResetGame();
         }

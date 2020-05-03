@@ -7,8 +7,6 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 {
     public GameObject body;
     public Text messageBox;
-    public int numberStartingBodyPartInjuries;
-    public int numberStartingOrganInjuries;
     private List<BodyPart> bodyParts;
     private List<Organ> organs;
     private string injuryText;
@@ -16,10 +14,11 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InjurySpawnTracker injurySpawnTracker = GameObject.FindObjectOfType<InjurySpawnTracker>();
         PopulateBodyPartsList();
         PopulateOrgansList();
-        InjureRandomBodypart(numberStartingBodyPartInjuries);
-        InjureRandomOrgan(numberStartingOrganInjuries);
+        InjureRandomBodypart(injurySpawnTracker.startingBodyPartInjuries);
+        InjureRandomOrgan(injurySpawnTracker.startingOrganInjuries);
     }
 
     //select n random bodyparts
