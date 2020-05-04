@@ -775,7 +775,7 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnHeartButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
-        int goldCost = 500;
+        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHeart(seconds, goldCost); messageBox.text = $"Spawning a new heart..."; };
 
         button.onClick.AddListener(action);
@@ -788,7 +788,7 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnLungButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
-        int goldCost = 500;
+        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLung(seconds, goldCost); messageBox.text = $"Spawning a new lung..."; };
 
         button.onClick.AddListener(action);
@@ -801,7 +801,7 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnBrainButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
-        int goldCost = 500;
+        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
 
         button.onClick.AddListener(action);
@@ -814,7 +814,7 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnArmButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
-        int goldCost = 500;
+        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnArm(seconds, goldCost); messageBox.text = $"Spawning a new arm..."; };
 
         button.onClick.AddListener(action);
@@ -827,7 +827,7 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnLegButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
-        int goldCost = 500;
+        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLeg(seconds, goldCost); messageBox.text = $"Spawning a new leg..."; };
 
         button.onClick.AddListener(action);
@@ -840,7 +840,7 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnTorsoButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
-        int goldCost = 500;
+        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnTorso(seconds, goldCost); messageBox.text = $"Spawning a new torso..."; };
 
         button.onClick.AddListener(action);
@@ -853,7 +853,7 @@ public class ButtonActions : MonoBehaviour
     void AssignSpawnHeadButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
-        int goldCost = 500;
+        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHead(seconds, goldCost); messageBox.text = $"Spawning a new head..."; };
 
         button.onClick.AddListener(action);
