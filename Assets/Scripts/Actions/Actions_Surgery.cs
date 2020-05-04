@@ -88,8 +88,12 @@ public static class Actions_Surgery
 
     public static IEnumerator DeleteBodyPartCoroutine(BodyPart bodyPart, float seconds)
     {
-        yield return RemoveBodyPartCoroutine(bodyPart, seconds);
+        yield return new WaitForSeconds(seconds);
         GameObject.Destroy(bodyPart);
+        foreach(Organ organ in bodyPart.containedOrgans)
+        {
+            GameObject.Destroy(organ);
+        }
     }
 
 }

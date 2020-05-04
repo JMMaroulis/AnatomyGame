@@ -5,7 +5,7 @@ using System.Linq;
 
 public class ButtonActions : MonoBehaviour
 {
-    public List<GameObject> menuButtons;
+    public List<Button> menuButtons;
     public BodyPart selectedBodyPart = null;
     public Organ selectedOrgan = null;
     public GameObject body;
@@ -74,10 +74,10 @@ public class ButtonActions : MonoBehaviour
     //remove all text and actions from all buttons
     void ClearAllButtons()
     {
-        foreach (GameObject buttonObject in menuButtons)
+        foreach (Button button in menuButtons)
         {
-            buttonObject.GetComponent<Button>().onClick.RemoveAllListeners();
-            buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "";
+            button.onClick.RemoveAllListeners();
+            button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "";
         }
     }
 
@@ -157,10 +157,10 @@ public class ButtonActions : MonoBehaviour
 
 
     //make a button take us to the waiting action select menu
-    void AssignSelectWaitActionOptions(GameObject buttonObject)
+    void AssignSelectWaitActionOptions(Button button)
     {
-        buttonObject.GetComponent<Button>().onClick.AddListener(SelectWaitActionOptions);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "WAIT...";
+        button.GetComponent<Button>().onClick.AddListener(SelectWaitActionOptions);
+        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "WAIT...";
     }
 
     public void SelectWaitActionOptions()
@@ -233,12 +233,12 @@ public class ButtonActions : MonoBehaviour
     #region Selection
 
     //make a button select a given bodypart
-    void AssignSelectBodyPart(GameObject buttonObject, BodyPart bodyPart)
+    void AssignSelectBodyPart(Button button, BodyPart bodyPart)
     {
         UnityEngine.Events.UnityAction action = () => { SelectBodyPart(bodyPart); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = bodyPart.name;
     }
 
@@ -249,12 +249,12 @@ public class ButtonActions : MonoBehaviour
     }
 
     //make a button select a given bodypart
-    void AssignSelectOrgan(GameObject buttonObject, Organ organ)
+    void AssignSelectOrgan(Button button, Organ organ)
     {
         UnityEngine.Events.UnityAction action = () => { SelectOrgan(organ); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         if (organ.connectedBodyParts.Count != 0)
         {
             buttonText.text = $"{organ.GetComponent<Organ>().connectedBodyParts[0].name} : {organ.name}";
@@ -273,14 +273,6 @@ public class ButtonActions : MonoBehaviour
 
     #endregion
 
-    //make a button take us to the bodypart spawning action menu
-    void AssignSelectSpawnBodyPartActionOptions(GameObject buttonObject)
-    {
-        UnityEngine.Events.UnityAction action = () => { SelectSpawnOrganActionOptions(); };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = "SELECT ORGAN SPAWNING ACTION";
-    }
-
     public void SelectSpawnOrganActionOptions()
     {
         ClearAllButtons();
@@ -290,10 +282,20 @@ public class ButtonActions : MonoBehaviour
         AssignSpawnBrainButton(menuButtons[2]);
     }
 
+    public void SelectSpawnBodyPartActionOptions()
+    {
+        ClearAllButtons();
+
+        AssignSpawnArmButton(menuButtons[0]);
+        AssignSpawnLegButton(menuButtons[1]);
+        AssignSpawnHeadButton(menuButtons[2]);
+        AssignSpawnTorsoButton(menuButtons[3]);
+    }
+
 
     #region Medicine
 
-    void AssignInjectHealthPotionButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignInjectHealthPotionButton(Button button, BodyPart bodypart)
     {
         float seconds = 10.0f;
         int goldCost = 50;
@@ -307,14 +309,14 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Medicine.InjectHealthPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Health Potion into the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Health Potion (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignInjectAntidoteButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignInjectAntidoteButton(Button button, BodyPart bodypart)
     {
         float seconds = 10.0f;
         int goldCost = 50;
@@ -328,14 +330,14 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Medicine.InjectAntidote(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Antidote into the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Antidote (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignInjectSlowPoisonButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignInjectSlowPoisonButton(Button button, BodyPart bodypart)
     {
         float seconds = 10.0f;
         int goldCost = 50;
@@ -349,14 +351,14 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Medicine.InjectSlowPoison(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Slow Poison into the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Slow Potion (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignInjectStasisPotionButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignInjectStasisPotionButton(Button button, BodyPart bodypart)
     {
         float seconds = 10.0f;
         int goldCost = 50;
@@ -370,9 +372,9 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Stasis Potion (50 units): {seconds} seconds, {goldCost} gold";
 
     }
@@ -381,7 +383,7 @@ public class ButtonActions : MonoBehaviour
 
     #region Charms
 
-    void AssignApplyHeartCharm(GameObject buttonObject, BodyPart bodypart)
+    void AssignApplyHeartCharm(Button button, BodyPart bodypart)
     {
         float seconds = 30.0f;
         int goldCost = 200;
@@ -395,14 +397,14 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Charms.ApplyHeartCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Heart Charm to the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Apply Heart Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignApplyLungCharm(GameObject buttonObject, BodyPart bodypart)
+    void AssignApplyLungCharm(Button button, BodyPart bodypart)
     {
         float seconds = 30.0f;
         int goldCost = 200;
@@ -416,14 +418,14 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Charms.ApplyLungCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Lung Charm to the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Apply Lung Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignApplyPetrificationCharm(GameObject buttonObject, BodyPart bodypart)
+    void AssignApplyPetrificationCharm(Button button, BodyPart bodypart)
     {
         float seconds = 30.0f;
         int goldCost = 200;
@@ -437,14 +439,14 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Charms.ApplyPetrificationCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Petrification Charm to the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Apply Petrification Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignApplyBloodRegenCharm(GameObject buttonObject, BodyPart bodypart)
+    void AssignApplyBloodRegenCharm(Button button, BodyPart bodypart)
     {
         float seconds = 30.0f;
         int goldCost = 200;
@@ -458,9 +460,9 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Charms.ApplyBloodRegenCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Blood Regeneration Charm to the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Apply Blood Regen Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
     }
@@ -470,7 +472,7 @@ public class ButtonActions : MonoBehaviour
 
     #region Blood
 
-    void AssignBandagesButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignBandagesButton(Button button, BodyPart bodypart)
     {
         float seconds = 30.0f;
         int goldCost = 10;
@@ -484,13 +486,13 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Blood.Bandages(bodypart, seconds, goldCost); messageBox.text = $"Applying bandages to the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Bandages: {seconds} seconds, {goldCost} gold";
     }
 
-    void AssignBloodlettingButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignBloodlettingButton(Button button, BodyPart bodypart)
     {
         float seconds = 30.0f;
         int goldCost = 0;
@@ -504,12 +506,12 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Blood.Bloodletting(bodypart, seconds, goldCost); messageBox.text = $"Inducing bleeding in the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        button.onClick.AddListener(action);
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Bloodletting: {seconds} seconds, {goldCost} gold";
     }
 
-    void AssignAddBloodButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignAddBloodButton(Button button, BodyPart bodypart)
     {
         float seconds = 20.0f;
         int goldCost = 20;
@@ -523,12 +525,12 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Blood.AddBlood(bodypart, seconds, goldCost); messageBox.text = $"Injecting 100 units of blood into the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        button.onClick.AddListener(action);
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Blood: (100 units): {seconds} seconds, {goldCost} gold";
     }
 
-    void AssignRemoveBloodButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignRemoveBloodButton(Button button, BodyPart bodypart)
     {
         float seconds = 20.0f;
         int goldCost = 0;
@@ -542,9 +544,9 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Blood.RemoveBlood(bodypart, seconds, goldCost); messageBox.text = $"Extracting 100 units of blood from the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Remove Blood: (100 units): {seconds} seconds, {goldCost} gold";
     }
 
@@ -553,7 +555,7 @@ public class ButtonActions : MonoBehaviour
 
     #region BodyPartSurgery
 
-    void AssignRemoveBodyPartButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignRemoveBodyPartButton(Button button, BodyPart bodypart)
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
@@ -567,14 +569,14 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Surgery.RemoveBodyPart(bodypart, seconds, goldCost); messageBox.text = $"Removing the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Amputate Bodypart: {seconds} seconds, {goldCost} gold";
     }
 
 
-    void AssignAttachBodyPartButton(GameObject buttonObject, BodyPart bodypart)
+    void AssignAttachBodyPartButton(Button button, BodyPart bodypart)
     {
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
@@ -586,9 +588,9 @@ public class ButtonActions : MonoBehaviour
             action = () => { SelectBodyPartToAttachOptions(bodypart); };
         }
         bodyPartMenuCounter = 0;
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "ATTACH TO... (10 minutes)";
     }
 
@@ -603,9 +605,11 @@ public class ButtonActions : MonoBehaviour
         int countStart = bodyPartMenuCounter;
         while (bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 6))
         {
+            Button menuButton = menuButtons[bodyPartMenuCounter - countStart];
+
             //assign button to connect chosen with selected, then go back to default
-            AssignConnectTwoBodyParts(bodypart, bodyParts[bodyPartMenuCounter], menuButtons[bodyPartMenuCounter - countStart]);
-            menuButtons[bodyPartMenuCounter - countStart].transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyParts[bodyPartMenuCounter].name;
+            AssignConnectTwoBodyParts(bodypart, bodyParts[bodyPartMenuCounter], menuButton);
+            menuButton.transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyParts[bodyPartMenuCounter].name;
             bodyPartMenuCounter += 1;
         }
 
@@ -613,21 +617,21 @@ public class ButtonActions : MonoBehaviour
         {
             //more bodyparts button
             UnityEngine.Events.UnityAction action = () => { SelectBodyPartToAttachOptions(bodypart); };
-            menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
+            menuButtons[7].onClick.AddListener(action);
             menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
         }
     }
 
 
-    void AssignConnectTwoBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, GameObject buttonObject)
+    void AssignConnectTwoBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, Button button)
     {
         float seconds = 10 * 60.0f;
         int goldCost = 20;
         UnityEngine.Events.UnityAction action = () => { Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost); messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}..."; };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
     }
 
-    void AssignDestroyBodyPart(GameObject buttonObject, BodyPart bodypart)
+    void AssignDestroyBodyPart(Button button, BodyPart bodypart)
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
@@ -637,7 +641,7 @@ public class ButtonActions : MonoBehaviour
         {
             action = () => { messageBox.text = "You need to select a bodypart for that!"; };
         }
-        else if (bodypart == null || selectedBodyPart.connectedBodyParts.Count() != 0)
+        else if (selectedBodyPart.connectedBodyParts.Count() != 0)
         {
             action = () => { messageBox.text = "That bodypart is still connected to things!"; };
         }
@@ -646,9 +650,9 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost); bodypart = null; messageBox.text = $"Destroying the {bodypart.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Destroy: {seconds} seconds, {goldCost} gold";
     }
 
@@ -657,7 +661,7 @@ public class ButtonActions : MonoBehaviour
 
     #region OrganSurgery
 
-    void AssignImplantOrganButton(GameObject buttonObject, BodyPart bodypart, Organ organ)
+    void AssignImplantOrganButton(Button button, BodyPart bodypart, Organ organ)
     {
         float seconds = 60.0f * 10.0f;
         int goldCost = 0;
@@ -666,20 +670,28 @@ public class ButtonActions : MonoBehaviour
         {
             action = () => { messageBox.text = "You need to select both a bodypart and an organ for that!"; };
         }
+        else if (bodypart.containedOrgans.Contains(organ))
+        {
+            action = () => { messageBox.text = "The organ is already in there!"; };
+        }
+        else if (organ.connectedBodyParts.Count != 0)
+        {
+            action = () => { messageBox.text = "The organ is already inside something else!"; };
+        }
         else
         {
             action = () => { Actions_Surgery.ImplantOrgan(organ, bodypart, seconds, goldCost); messageBox.text = $"Implanting the {organ.name} into the {bodypart.name}..."; };
         }
 
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Implant organ into limb: {seconds} seconds, {goldCost} gold";
     }
 
 
-    void AssignRemoveOrganButton(GameObject buttonObject, Organ organ)
+    void AssignRemoveOrganButton(Button button, Organ organ)
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
@@ -693,14 +705,14 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Surgery.RemoveOrgan(organ, seconds, goldCost); messageBox.text = $"Extracting the {organ.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Extract Organ: {seconds} seconds, {goldCost} gold";
     }
 
 
-    void AssignDestroyOrgan(GameObject buttonObject, Organ organ)
+    void AssignDestroyOrgan(Button button, Organ organ)
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
@@ -719,9 +731,9 @@ public class ButtonActions : MonoBehaviour
             action = () => { Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost); organ = null; messageBox.text = $"Destroying the {organ.name}..."; };
         }
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Destroy: {seconds} seconds, {goldCost} gold";
     }
 
@@ -760,113 +772,113 @@ public class ButtonActions : MonoBehaviour
 
     #region spawnBodyParts
 
-    void AssignSpawnHeartButton(GameObject buttonObject)
+    void AssignSpawnHeartButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHeart(seconds, goldCost); messageBox.text = $"Spawning a new heart..."; };
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new heart: {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignSpawnLungButton(GameObject buttonObject)
+    void AssignSpawnLungButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLung(seconds, goldCost); messageBox.text = $"Spawning a new lung..."; };
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new lung: {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignSpawnBrainButton(GameObject buttonObject)
+    void AssignSpawnBrainButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
         UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignSpawnArmButton(GameObject buttonObject)
+    void AssignSpawnArmButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new arm..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnArm(seconds, goldCost); messageBox.text = $"Spawning a new arm..."; };
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a new arm: {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignSpawnLegButton(GameObject buttonObject)
+    void AssignSpawnLegButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new leg..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLeg(seconds, goldCost); messageBox.text = $"Spawning a new leg..."; };
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a new leg: {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignSpawnTorsoButton(GameObject buttonObject)
+    void AssignSpawnTorsoButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new torso..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnTorso(seconds, goldCost); messageBox.text = $"Spawning a new torso..."; };
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a new torso: {seconds} seconds, {goldCost} gold";
 
     }
 
-    void AssignSpawnHeadButton(GameObject buttonObject)
+    void AssignSpawnHeadButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 500;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new head..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHead(seconds, goldCost); messageBox.text = $"Spawning a new head..."; };
 
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
+        button.onClick.AddListener(action);
 
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a new head: {seconds} seconds, {goldCost} gold";
 
     }
 
     #endregion
 
 
-    void AssignWaitOneHour(GameObject buttonObject)
+    void AssignWaitOneHour(Button button)
     {
         UnityEngine.Events.UnityAction action = () => { lifeMonitor.VictoryCheck(); messageBox.text = "Waiting one hour..."; };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        button.onClick.AddListener(action);
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait an hour (Victory Check)";
     }
 
-    void AssignWaitOneMinute(GameObject buttonObject)
+    void AssignWaitOneMinute(Button button)
     {
         UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(60.0f); messageBox.text = "Waiting one minute..."; };
-        buttonObject.GetComponent<Button>().onClick.AddListener(action);
-        Text buttonText = buttonObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        button.onClick.AddListener(action);
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait one minute";
     }
 }
