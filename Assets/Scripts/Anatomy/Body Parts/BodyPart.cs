@@ -37,6 +37,7 @@ public class BodyPart : MonoBehaviour
     public float antidote;
     public float slowPoison;
     public float stasisPotion;
+    public float coagulantPotion;
 
     public void UpdateBodyPart(float deltaTime)
     {
@@ -71,9 +72,10 @@ public class BodyPart : MonoBehaviour
             float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / bodyPart.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
             float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / bodyPart.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
             float tempHealthPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (healthPotion / bodyPart.healthPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
-            float tempAntidotePumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (antidote / bodyPart.antidote * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
+            float tempAntidotePumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (antidote / bodyPart.antidote * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
             float tempSlowPoisonPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (slowPoison / bodyPart.slowPoison * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
             float tempStasisPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (stasisPotion / bodyPart.stasisPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
+            float tempCoagulantPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (stasisPotion / bodyPart.stasisPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
@@ -120,6 +122,15 @@ public class BodyPart : MonoBehaviour
                 float stasisPotionOut = Mathf.Max(Mathf.Min(stasisPotion, proposedStasisPotionOut), 0);
                 bodyPart.stasisPotion += stasisPotionOut;
                 stasisPotion -= stasisPotionOut;
+            }
+
+            if (coagulantPotion > 0.0f)
+            {
+                //transport stasis potion, capped by blood transport
+                float proposedCoagulantPotionOut = Mathf.Min(tempCoagulantPotionPumpRate * timeSinceLastPump, bloodOut);
+                float coagulantPotionOut = Mathf.Max(Mathf.Min(coagulantPotion, proposedCoagulantPotionOut), 0);
+                bodyPart.coagulantPotion += coagulantPotionOut;
+                coagulantPotion -= coagulantPotionOut;
             }
 
         }
@@ -222,18 +233,36 @@ public class BodyPart : MonoBehaviour
             damage = Mathf.Max(0.0f, damage + slowPoison * deltaTime * 0.001f);
         }
 
+        //coagulant potion
+        if (coagulantPotion > 0.0f)
+        {
+            if (bloodLossRate > 0.0f)
+            {
+                float coagulantPotionProcessed = Mathf.Min(coagulantPotion, (deltaTime / timeScale) * 0.5f);
+                bloodLossRate = Mathf.Max(0, bloodLossRate - coagulantPotionProcessed);
+                coagulantPotion = Mathf.Max(0.0f, coagulantPotion - coagulantPotionProcessed);
+            }
+            else
+            {
+                //decays at 1/100th unit per second, if no bloodlossrate to be healed
+                coagulantPotion = Mathf.Max(0.0f, coagulantPotion - deltaTime * 0.01f);
+            }
+        }
+
         //stasis potion
         //TODO: needs to stick around long enough for an organ to be removed/replaced, figure out the numbers
         // currently setting the timeScale = -(1/50) * potion + 1
-        //IMPORTANT NOTE: the decay rate of the statis potion is independant of its own effect on the timescale,
-        //otherwise we end up in weird reverse temporal singularities from which there is no escape. Which is cool and all, but tends
-        //there being no way out of them is no bueno
+        //IMPORTANT NOTE: the decay rate of the stasis potion is independant of its own effect on the timescale,
+        //otherwise we end up in weird reverse temporal singularities from which there is no escape. Which is cool and all,
+        //but there being no way out of them is no bueno
         if (stasisPotion > 0.0f)
         {
             float stasisPotionProcessed = Mathf.Min(stasisPotion, (deltaTime/timeScale) * 0.01f);
             stasisPotion = Mathf.Max(0.0f, stasisPotion - stasisPotionProcessed);
         }
         timeScale = (-(1.0f / 60.0f) * stasisPotion) + 1.0f;
+
+
 
     }
 

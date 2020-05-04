@@ -197,6 +197,7 @@ public class ButtonActions : MonoBehaviour
         AssignInjectAntidoteButton(menuButtons[1], selectedBodyPart);
         AssignInjectSlowPoisonButton(menuButtons[2], selectedBodyPart);
         AssignInjectStasisPotionButton(menuButtons[3], selectedBodyPart);
+        AssignInjectCoagulantPotionButton(menuButtons[4], selectedBodyPart);
     }
 
     public void SelectMedicineActionOptions_Organ()
@@ -207,6 +208,7 @@ public class ButtonActions : MonoBehaviour
         AssignInjectAntidoteButton(menuButtons[1], selectedOrgan);
         AssignInjectSlowPoisonButton(menuButtons[2], selectedOrgan);
         AssignInjectStasisPotionButton(menuButtons[3], selectedOrgan);
+        AssignInjectCoagulantPotionButton(menuButtons[4], selectedOrgan);
 
     }
 
@@ -376,6 +378,27 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Stasis Potion (50 units): {seconds} seconds, {goldCost} gold";
+
+    }
+
+    void AssignInjectCoagulantPotionButton(Button button, BodyPart bodypart)
+    {
+        float seconds = 10.0f;
+        int goldCost = 50;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Medicine.InjectCoagulantPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Coagulant Potion into the {bodypart.name}..."; };
+        }
+
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Inject Coagulant Potion (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 

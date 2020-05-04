@@ -291,6 +291,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
 --- !u!4 &139341405
 Transform:
   m_ObjectHideFlags: 0
@@ -1145,6 +1146,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
 --- !u!1 &374478779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225,6 +3227,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
 --- !u!1 &846182033
 GameObject:
   m_ObjectHideFlags: 0
@@ -4242,6 +4245,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
 --- !u!4 &1015218354
 Transform:
   m_ObjectHideFlags: 0
@@ -6185,6 +6189,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
   oxygenAbsorptionRate: 150
 --- !u!4 &1302856265
 Transform:
@@ -6250,6 +6255,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
 --- !u!4 &1322724992
 Transform:
   m_ObjectHideFlags: 0
@@ -6314,6 +6320,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
   oxygenAbsorptionRate: 150
 --- !u!4 &1342094376
 Transform:
@@ -8067,6 +8074,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
 --- !u!1 &1975465494
 GameObject:
   m_ObjectHideFlags: 0
@@ -8340,6 +8348,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
 --- !u!1 &2028388511
 GameObject:
   m_ObjectHideFlags: 0
@@ -8854,6 +8863,7 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
 --- !u!1 &2140890957
 GameObject:
   m_ObjectHideFlags: 0
