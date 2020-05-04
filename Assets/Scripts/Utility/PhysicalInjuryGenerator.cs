@@ -77,7 +77,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         {
             //selected bodypart to injure, and injury to apply
             Organ organ = organs[Random.Range(0, organs.Count)];
-            int injuryNumber = Random.Range(0, 3);
+            int injuryNumber = Random.Range(0, 5);
 
             //apply injury
             switch (injuryNumber)
@@ -104,13 +104,16 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     break;
 
                 case 3:
-                    if (organ is Organ)
-                    {
-                        Debug.Log($"{organ.name} missing");
-                        injuryText += $"\nThe {organ.name} is missing?!.";
-                        Missing(organ);
-                    }
-                    else { i -= 1; }
+                    Debug.Log($"{organ.name} missing");
+                    injuryText += $"\nThe {organ.name} is missing?!";
+                    organs.Remove(organ);
+                    Missing(organ);
+                    break;
+
+                case 4:
+                    Debug.Log($"{organ.name} petrified");
+                    injuryText += $"\nThe {organ.name} has been temporarily petrified.";
+                    Petrify(organ);
                     break;
 
                 default:
@@ -158,7 +161,10 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         Actions_Surgery.DeleteBodyPart(bodyPart, 0, 0);
     }
 
-
+    public void Petrify(BodyPart bodyPart)
+    {
+        Actions_Charms.ApplyPetrificationCharm((Organ)bodyPart, 1800, 0);
+    }
 
     void PopulateBodyPartsList()
     {
