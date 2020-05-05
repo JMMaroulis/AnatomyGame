@@ -38,6 +38,7 @@ public class BodyPart : MonoBehaviour
     public float slowPoison;
     public float stasisPotion;
     public float coagulantPotion;
+    public float hastePotion;
 
     public void UpdateBodyPart(float deltaTime)
     {
@@ -69,13 +70,15 @@ public class BodyPart : MonoBehaviour
         foreach (int bodyPartIndex in bodypartPumpOrder)
         {
             BodyPart bodyPart = allBodyParts[bodyPartIndex];
-            float tempBloodPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (blood / bodyPart.blood), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
-            float tempOxygenPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (oxygen / bodyPart.oxygen), bloodPumpRate * 5), bloodPumpRate * 0.2f) * heartEfficiency;
-            float tempHealthPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (healthPotion / bodyPart.healthPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.01f) * heartEfficiency;
-            float tempAntidotePumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (antidote / bodyPart.antidote * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
-            float tempSlowPoisonPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (slowPoison / bodyPart.slowPoison * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
-            float tempStasisPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (stasisPotion / bodyPart.stasisPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
-            float tempCoagulantPotionPumpRate = Mathf.Max(Mathf.Min(bloodPumpRate * (stasisPotion / bodyPart.stasisPotion * 5), bloodPumpRate * 0.2f), bloodPumpRate * 0.00001f) * heartEfficiency;
+            //cap blood and oxygen transfer rate at between 0.2 and 5 times the blood pump rate
+            float tempBloodPumpRate =           Mathf.Max(Mathf.Min( (blood / bodyPart.blood),                     5), 0.2f) * bloodPumpRate * heartEfficiency;
+            float tempOxygenPumpRate =          Mathf.Max(Mathf.Min( (oxygen / bodyPart.oxygen),                   5), 0.2f) * bloodPumpRate * heartEfficiency;
+            float tempHealthPotionPumpRate =    Mathf.Max(Mathf.Min( (healthPotion / bodyPart.healthPotion),       5), 0.2f) * bloodPumpRate * heartEfficiency * 0.001f;
+            float tempAntidotePumpRate =        Mathf.Max(Mathf.Min( (antidote / bodyPart.antidote),               5), 0.2f) * bloodPumpRate * heartEfficiency * 0.001f;
+            float tempSlowPoisonPumpRate =      Mathf.Max(Mathf.Min( (slowPoison / bodyPart.slowPoison),           5), 0.2f) * bloodPumpRate * heartEfficiency * 0.0001f;
+            float tempStasisPotionPumpRate =    Mathf.Max(Mathf.Min( (stasisPotion / bodyPart.stasisPotion),       5), 0.2f) * bloodPumpRate * heartEfficiency * 0.001f;
+            float tempCoagulantPotionPumpRate = Mathf.Max(Mathf.Min( (coagulantPotion / bodyPart.coagulantPotion), 5), 0.2f) * bloodPumpRate * heartEfficiency * 0.001f;
+            float tempHastePotionPumpRate =     Mathf.Max(Mathf.Min( (hastePotion / bodyPart.hastePotion),         5), 0.2f) * bloodPumpRate * heartEfficiency * 0.001f;
 
             //transport blood
             float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
@@ -131,6 +134,15 @@ public class BodyPart : MonoBehaviour
                 float coagulantPotionOut = Mathf.Max(Mathf.Min(coagulantPotion, proposedCoagulantPotionOut), 0);
                 bodyPart.coagulantPotion += coagulantPotionOut;
                 coagulantPotion -= coagulantPotionOut;
+            }
+
+            if (hastePotion > 0.0f)
+            {
+                //transport stasis potion, capped by blood transport
+                float proposedHastePotionOut = Mathf.Min(tempHastePotionPumpRate * timeSinceLastPump, bloodOut);
+                float hastePotionOut = Mathf.Max(Mathf.Min(hastePotion, proposedHastePotionOut), 0);
+                bodyPart.hastePotion += hastePotionOut;
+                hastePotion -= hastePotionOut;
             }
 
         }
@@ -260,7 +272,12 @@ public class BodyPart : MonoBehaviour
             float stasisPotionProcessed = Mathf.Min(stasisPotion, (deltaTime/timeScale) * 0.01f);
             stasisPotion = Mathf.Max(0.0f, stasisPotion - stasisPotionProcessed);
         }
-        timeScale = (-(1.0f / 60.0f) * stasisPotion) + 1.0f;
+        if (hastePotion > 0.0f)
+        {
+            float hastePotionProcessed = Mathf.Min(hastePotion, (deltaTime / timeScale) * 0.01f);
+            hastePotion = Mathf.Max(0.0f, hastePotion - hastePotionProcessed);
+        }
+        timeScale = (-(1.0f / 60.0f) * stasisPotion) + ((1.0f / 60.0f) * hastePotion) +1.0f;
 
 
 
@@ -446,6 +463,12 @@ public class BodyPart : MonoBehaviour
         if (stasisPotion > 0.0f)
         {
             description += $"Stasis Postion: {stasisPotion} Units.\n";
+        }
+
+        //add stasis potion description
+        if (hastePotion > 0.0f)
+        {
+            description += $"Haste Postion: {hastePotion} Units.\n";
         }
 
         //add coagulant potion description

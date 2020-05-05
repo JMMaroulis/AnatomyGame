@@ -57,6 +57,19 @@ public static class Actions_Medicine
         bodyPartObject.stasisPotion += 50.0f;
     }
 
+    public static void InjectHastePotion(BodyPart bodyPartObject, float seconds, int goldCost)
+    {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+        StaticCoroutine.Start(InjectHastePotionCoroutine(bodyPartObject, seconds));
+    }
+
+    public static IEnumerator InjectHastePotionCoroutine(BodyPart bodyPartObject, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        bodyPartObject.hastePotion += 50.0f;
+    }
+
     public static void InjectCoagulantPotion(BodyPart bodyPartObject, float seconds, int goldCost)
     {
         GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);

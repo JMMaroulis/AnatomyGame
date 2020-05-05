@@ -155,14 +155,6 @@ public class ButtonActions : MonoBehaviour
         AssignDestroyOrgan(menuButtons[2], selectedOrgan);
     }
 
-
-    //make a button take us to the waiting action select menu
-    void AssignSelectWaitActionOptions(Button button)
-    {
-        button.GetComponent<Button>().onClick.AddListener(SelectWaitActionOptions);
-        button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "WAIT...";
-    }
-
     public void SelectWaitActionOptions()
     {
         ClearAllButtons();
@@ -197,7 +189,8 @@ public class ButtonActions : MonoBehaviour
         AssignInjectAntidoteButton(menuButtons[1], selectedBodyPart);
         AssignInjectSlowPoisonButton(menuButtons[2], selectedBodyPart);
         AssignInjectStasisPotionButton(menuButtons[3], selectedBodyPart);
-        AssignInjectCoagulantPotionButton(menuButtons[4], selectedBodyPart);
+        AssignInjectHastePotionButton(menuButtons[4], selectedBodyPart);
+        AssignInjectCoagulantPotionButton(menuButtons[5], selectedBodyPart);
     }
 
     public void SelectMedicineActionOptions_Organ()
@@ -208,7 +201,8 @@ public class ButtonActions : MonoBehaviour
         AssignInjectAntidoteButton(menuButtons[1], selectedOrgan);
         AssignInjectSlowPoisonButton(menuButtons[2], selectedOrgan);
         AssignInjectStasisPotionButton(menuButtons[3], selectedOrgan);
-        AssignInjectCoagulantPotionButton(menuButtons[4], selectedOrgan);
+        AssignInjectHastePotionButton(menuButtons[4], selectedBodyPart);
+        AssignInjectCoagulantPotionButton(menuButtons[5], selectedOrgan);
 
     }
 
@@ -378,6 +372,27 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Stasis Potion (50 units): {seconds} seconds, {goldCost} gold";
+
+    }
+
+    void AssignInjectHastePotionButton(Button button, BodyPart bodypart)
+    {
+        float seconds = 10.0f;
+        int goldCost = 50;
+        UnityEngine.Events.UnityAction action = null;
+        if (bodypart == null)
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { Actions_Medicine.InjectHastePotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Haste Potion into the {bodypart.name}..."; };
+        }
+
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Inject Haste Potion (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
