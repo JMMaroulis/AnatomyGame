@@ -447,6 +447,12 @@ public class BodyPart : MonoBehaviour
         {
             description += $"Stasis Postion: {stasisPotion} Units.\n";
         }
+
+        //add coagulant potion description
+        if (coagulantPotion > 0.0f)
+        {
+            description += $"Coagulant Postion: {coagulantPotion} Units.\n";
+        }
         #endregion
 
         #region charms description
