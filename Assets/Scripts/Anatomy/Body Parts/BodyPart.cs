@@ -389,6 +389,7 @@ public class BodyPart : MonoBehaviour
         containedOrgans.Remove(connectedBodyPart.GetComponent<Organ>());
 
         bloodLossRate += inducedBloodLossRate;
+        connectedBodyPart.GetComponent<BodyPart>().bloodLossRate += inducedBloodLossRate;
     }
 
     //severs all connections between self and connecting bodyparts (BOTH WAYS)
