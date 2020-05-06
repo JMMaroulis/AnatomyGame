@@ -36,8 +36,8 @@ public class LifeMonitor : MonoBehaviour
 
     public IEnumerator VictoryCheckCoroutine(float seconds)
     {
-        float oldTimeScalingFactor = clock.globalTimeScalingFactor;
-        clock.globalTimeScalingFactor = 100.0f;
+        //float oldTimeScalingFactor = clock.globalTimeScalingFactor;
+        //clock.globalTimeScalingFactor = 100.0f;
         clock.StartClockUntil(seconds);
         yield return new WaitForSeconds(seconds);
 
@@ -154,7 +154,7 @@ public class LifeMonitor : MonoBehaviour
             }
         }
 
-        clock.globalTimeScalingFactor = oldTimeScalingFactor;
+        //clock.globalTimeScalingFactor = oldTimeScalingFactor;
 
         hasPlayerWon = victory;
         if (victory)
@@ -163,7 +163,7 @@ public class LifeMonitor : MonoBehaviour
             GameObject.FindObjectOfType<GoldTracker>().goldAccumulated += 500;
             GameObject.FindObjectOfType<InjurySpawnTracker>().IncreaseInjuryNumber();
 
-            yield return new WaitForSeconds(5 * clock.globalTimeScalingFactor);
+            yield return new WaitForSeconds(5 * Time.timeScale);
             ResetGame();
         }
 

@@ -16,10 +16,13 @@ public class Clock : MonoBehaviour
     public bool isTimePassing; // { get { return _isTimePassing; } set { _isTimePassing = value; BodyPartsTimePaassing(); } }
     //private bool _isTimePassing;
 
-    public float globalTimeScalingFactor;
+    private float globalTimeScalingFactor;
     private float timeUntilClockStops = 0.0f;
     private float timeElapsed = 0.0f;
     public Text currentTime;
+
+    public Text clockText;
+    public Slider clockSlider;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,10 @@ public class Clock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        globalTimeScalingFactor = clockSlider.value;
         Time.timeScale = globalTimeScalingFactor;
+        clockText.text = $"Time Scaling: {globalTimeScalingFactor}x";
+
         PopulateBodyPartsList();
 
         //checking if it's time for time to stop yet
@@ -49,6 +55,8 @@ public class Clock : MonoBehaviour
 
 
         UpdateCurrentTime();
+        
+
     }
 
 
