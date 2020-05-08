@@ -50,7 +50,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  bloodMax: 0
+  bloodMax: 700
   oxygen: 400
   oxygenMax: 500
   oxygenRequired: 5

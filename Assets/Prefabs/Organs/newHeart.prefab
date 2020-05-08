@@ -50,7 +50,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
-  bloodMax: 0
+  bloodMax: 700
   oxygen: 250
   oxygenMax: 500
   oxygenRequired: 5
@@ -60,7 +60,7 @@ MonoBehaviour:
   connectedBodyParts: []
   containedOrgans: []
   healthPotion: 0
-  antidote: 33
+  antidote: 0
   slowPoison: 0
   stasisPotion: 0
   coagulantPotion: 0

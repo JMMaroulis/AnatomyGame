@@ -93,6 +93,7 @@ public class LifeMonitor : MonoBehaviour
             { new Lung().GetType(),  new List<int> {0,2}},
             { new Heart().GetType(), new List<int> {0,1}},
             { new Brain().GetType(), new List<int> {0,1}},
+            { new Eyes().GetType(),  new List<int> {0,2}}
         };
 
         foreach (BodyPart bodyPart in bodyParts)
