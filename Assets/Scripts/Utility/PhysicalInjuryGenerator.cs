@@ -28,7 +28,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         {
             //selected bodypart to injure, and injury to apply
             BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
-            int injuryNumber = Random.Range(0, 5);
+            int injuryNumber = Random.Range(0, 6);
 
             //apply injury
             switch (injuryNumber)
@@ -62,7 +62,18 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     injuryText += $"\nThe {bodyPart.name} has been poisoned.";
                     SlowPoison(bodyPart);
                     break;
-                                       
+
+                case 5:
+                    if (bodyPart is Torso)
+                    {
+                        i -= 1;
+                        break;
+                    }
+                    Debug.Log($"Crushed {bodyPart.name}");
+                    injuryText += $"\nThe {bodyPart.name} has been severed.";
+                    Sever(bodyPart);
+                    break;
+
                 default:
                     break;
             }
@@ -148,6 +159,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         bodyPart.damage = Mathf.Min(bodyPart.damage + 10, bodyPart.damageMax);
         bodyPart.bloodLossRate += 3;
         bodyPart.slowPoison += 50;
+    }
+
+    public void Sever(BodyPart bodyPart)
+    {
+        bodyPart.damage += 50;
+        Actions_Surgery.RemoveBodyPart(bodyPart, 0, 0);
     }
 
     public void SlowPoison(BodyPart bodyPart)
