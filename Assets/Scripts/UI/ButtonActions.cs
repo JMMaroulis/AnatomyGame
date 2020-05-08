@@ -7,14 +7,12 @@ public class ButtonActions : MonoBehaviour
 {
     public List<Button> menuButtons;
     public BodyPart selectedBodyPart = null;
-    public Organ selectedOrgan = null;
     public GameObject body;
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private List<Organ> organs = new List<Organ>();
     private int bodyPartMenuCounter = 0;
     private int organMenuCounter = 0;
     public Text selectedBodyPartText;
-    public Text selectedOrganText;
     public Text messageBox;
     public LifeMonitor lifeMonitor;
     public Clock clock;
@@ -54,20 +52,18 @@ public class ButtonActions : MonoBehaviour
 
         //update selected bodypart name text
         if (selectedBodyPart) selectedBodyPartText.text = selectedBodyPart.name;
-        else selectedBodyPartText.text = "No Body Part Selected";
-
-        //update selected organ name text
-        if (selectedOrgan) {
-            if (selectedOrgan.connectedBodyParts.Count != 0)
+        if (selectedBodyPart is Organ)
+        {
+            if (selectedBodyPart.connectedBodyParts.Count != 0)
             {
-                selectedOrganText.text = $"{selectedOrgan.connectedBodyParts[0]} : {selectedOrgan.name}";
+                selectedBodyPartText.text = $"{selectedBodyPart.connectedBodyParts[0]} : {selectedBodyPart.name}";
             }
             else
             {
-                selectedOrganText.text = $"External : {selectedOrgan.name}";
+                selectedBodyPartText.text = $"External : {selectedBodyPart.name}";
             }
         }
-        else selectedOrganText.text = "No Organ Selected";
+        else if (selectedBodyPart) selectedBodyPartText.text = selectedBodyPart.name;
 
     }
 
@@ -137,6 +133,22 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+    public void SelectSurgeryAction()
+    {
+        if (selectedBodyPart is null)
+        {
+            messageBox.text = "Please select an organ or limb.";
+        }
+        else if (selectedBodyPart is Organ)
+        {
+            SelectSurgeryActionOptions_Organ();
+        }
+        else if (selectedBodyPart is BodyPart)
+        {
+            SelectSurgeryActionOptions_BodyPart();
+        }
+    }
+
     public void SelectSurgeryActionOptions_BodyPart()
     {
         ClearAllButtons();
@@ -150,9 +162,9 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        AssignRemoveOrganButton(menuButtons[0], selectedOrgan);
-        AssignImplantOrganButton(menuButtons[1], selectedBodyPart, selectedOrgan);
-        AssignDestroyOrgan(menuButtons[2], selectedOrgan);
+        AssignRemoveOrganButton(menuButtons[0], (Organ)selectedBodyPart);
+        AssignImplantOrganOptions(menuButtons[1]);
+        AssignDestroyOrgan(menuButtons[2], (Organ)selectedBodyPart);
     }
 
     public void SelectWaitActionOptions()
@@ -161,6 +173,22 @@ public class ButtonActions : MonoBehaviour
 
         AssignWaitOneMinute(menuButtons[0]);
         AssignWaitOneHour(menuButtons[1]);
+    }
+
+    public void SelectBloodAction()
+    {
+        if (selectedBodyPart is null)
+        {
+            messageBox.text = "Please select an organ or limb.";
+        }
+        else if (selectedBodyPart is Organ)
+        {
+            SelectBloodActionOptions_Organ();
+        }
+        else if (selectedBodyPart is BodyPart)
+        {
+            SelectBloodActionOptions_BodyPart();
+        }
     }
 
     public void SelectBloodActionOptions_BodyPart()
@@ -177,8 +205,24 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        AssignAddBloodButton(menuButtons[0], selectedOrgan);
-        AssignRemoveBloodButton(menuButtons[1], selectedOrgan);
+        AssignAddBloodButton(menuButtons[0], selectedBodyPart);
+        AssignRemoveBloodButton(menuButtons[1], selectedBodyPart);
+    }
+
+    public void SelectMedicineAction()
+    {
+        if (selectedBodyPart is null)
+        {
+            messageBox.text = "Please select an organ or limb.";
+        }
+        else if (selectedBodyPart is Organ)
+        {
+            SelectMedicineActionOptions_Organ();
+        }
+        else if (selectedBodyPart is BodyPart)
+        {
+            SelectMedicineActionOptions_BodyPart();
+        }
     }
 
     public void SelectMedicineActionOptions_BodyPart()
@@ -197,13 +241,29 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        AssignInjectHealthPotionButton(menuButtons[0], selectedOrgan);
-        AssignInjectAntidoteButton(menuButtons[1], selectedOrgan);
-        AssignInjectSlowPoisonButton(menuButtons[2], selectedOrgan);
-        AssignInjectStasisPotionButton(menuButtons[3], selectedOrgan);
+        AssignInjectHealthPotionButton(menuButtons[0], selectedBodyPart);
+        AssignInjectAntidoteButton(menuButtons[1], selectedBodyPart);
+        AssignInjectSlowPoisonButton(menuButtons[2], selectedBodyPart);
+        AssignInjectStasisPotionButton(menuButtons[3], selectedBodyPart);
         AssignInjectHastePotionButton(menuButtons[4], selectedBodyPart);
-        AssignInjectCoagulantPotionButton(menuButtons[5], selectedOrgan);
+        AssignInjectCoagulantPotionButton(menuButtons[5], selectedBodyPart);
 
+    }
+
+    public void SelectCharmAction()
+    {
+        if (selectedBodyPart is null)
+        {
+            messageBox.text = "Please select an organ or limb.";
+        }
+        else if (selectedBodyPart is Organ)
+        {
+            SelectCharmActionOptions_Organ();
+        }
+        else if (selectedBodyPart is BodyPart)
+        {
+            SelectCharmActionOptions_BodyPart();
+        }
     }
 
     public void SelectCharmActionOptions_BodyPart()
@@ -220,10 +280,10 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        AssignApplyHeartCharm(menuButtons[0], selectedOrgan);
-        AssignApplyLungCharm(menuButtons[1], selectedOrgan);
-        AssignApplyPetrificationCharm(menuButtons[2], selectedOrgan);
-        AssignApplyBloodRegenCharm(menuButtons[3], selectedOrgan);
+        AssignApplyHeartCharm(menuButtons[0], selectedBodyPart);
+        AssignApplyLungCharm(menuButtons[1], selectedBodyPart);
+        AssignApplyPetrificationCharm(menuButtons[2], selectedBodyPart);
+        AssignApplyBloodRegenCharm(menuButtons[3], selectedBodyPart);
     }
 
     #region Selection
@@ -247,7 +307,7 @@ public class ButtonActions : MonoBehaviour
     //make a button select a given bodypart
     void AssignSelectOrgan(Button button, Organ organ)
     {
-        UnityEngine.Events.UnityAction action = () => { SelectOrgan(organ); };
+        UnityEngine.Events.UnityAction action = () => { SelectBodyPart(organ); };
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -259,12 +319,6 @@ public class ButtonActions : MonoBehaviour
         {
             buttonText.text = $"External : {organ.name}";
         }
-    }
-
-    //select a given bodypart
-    void SelectOrgan(Organ organ)
-    {
-        selectedOrgan = organ;
     }
 
     #endregion
@@ -699,6 +753,53 @@ public class ButtonActions : MonoBehaviour
 
     #region OrganSurgery
 
+    public void AssignImplantOrganOptions(Button button)
+    {
+        UnityEngine.Events.UnityAction action = null;
+        if (!(selectedBodyPart is Organ))
+        {
+            action = () => { messageBox.text = "You need to select something for that!"; };
+        }
+        else
+        {
+            action = () => { ImplantOrganOptions(true); };
+        }
+
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Implant organ into...";
+    }
+
+    public void ImplantOrganOptions(bool firstClick = true)
+    {
+        ClearAllButtons();
+        if (firstClick)
+        {
+            bodyPartMenuCounter = 0;
+        }
+
+        //put bodyparts on first 6 buttons
+        //TODO: Order this list somehow. Alphabetically, maybe?
+        int numBodyParts = bodyParts.Count();
+        int countStart = bodyPartMenuCounter;
+        while (bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 7))
+        {
+            //select bodypart
+            AssignImplantOrganButton(menuButtons[bodyPartMenuCounter - countStart], bodyParts[bodyPartMenuCounter], (Organ)selectedBodyPart);
+            bodyPartMenuCounter += 1;
+        }
+
+        if (bodyPartMenuCounter < numBodyParts)
+        {
+            //more bodyparts button
+            UnityEngine.Events.UnityAction action = () => { ImplantOrganOptions(false); };
+            menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
+            menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
+        }
+    }
+
+
     void AssignImplantOrganButton(Button button, BodyPart bodypart, Organ organ)
     {
         float seconds = 60.0f * 10.0f;
@@ -725,7 +826,7 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Implant organ into limb: {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Implant {organ.name} into {bodypart.name}: {seconds} seconds, {goldCost} gold";
     }
 
 
@@ -784,23 +885,11 @@ public class ButtonActions : MonoBehaviour
     {
         if (selectedBodyPart == null)
         {
-            messageBox.text = "You need to select a bodypart for that!";
+            messageBox.text = "You need to select a something for that!";
         }
         else
         {
             messageBox.text = selectedBodyPart.GenerateDescription();
-        }
-    }
-
-    public void ExamineSelectedOrgan()
-    {
-        if (selectedOrgan == null)
-        {
-            messageBox.text = "You need to select an organ for that!";
-        }
-        else
-        {
-            messageBox.text = selectedOrgan.GenerateDescription();
         }
     }
 

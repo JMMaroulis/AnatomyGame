@@ -498,7 +498,7 @@ public class BodyPart : MonoBehaviour
         if (this.GetComponent<PetrificationCharm>() != null)
         {
             PetrificationCharm petrificationCharm = this.GetComponent<PetrificationCharm>();
-            description += $"Petrificationk Charm: {petrificationCharm.expiryTime - petrificationCharm.timeElapsed} seconds remaining.\n";
+            description += $"Petrification Charm: {petrificationCharm.expiryTime - petrificationCharm.timeElapsed} seconds remaining.\n";
         }
 
         #endregion
