@@ -45,6 +45,19 @@ public static class Actions_SpawnBodyParts
         Object.FindObjectOfType<BodyPartSpawner>().SpawnBrain("newBrain");
     }
 
+    public static void SpawnEye(float seconds, int goldCost)
+    {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+        StaticCoroutine.Start(SpawnEyeCoroutine(seconds));
+    }
+
+    public static IEnumerator SpawnEyeCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Object.FindObjectOfType<BodyPartSpawner>().SpawnEye("newEye");
+    }
+
     #endregion
 
     #region bodyparts

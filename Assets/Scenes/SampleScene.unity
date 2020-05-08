@@ -974,7 +974,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257884925}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 238a2cb1c885dc44a9c3a7627f7ee8e4, type: 3}
   m_Name: 
@@ -6951,7 +6951,7 @@ PrefabInstance:
     - target: {fileID: 4013890393164018642, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: m_Name
-      value: newHead
+      value: Head
       objectReference: {fileID: 0}
     - target: {fileID: 2511398557098109629, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
@@ -7018,6 +7018,21 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 2124596269}
+    - target: {fileID: 5993855221413079724, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: m_Name
+      value: Brain
+      objectReference: {fileID: 0}
+    - target: {fileID: 6930367901528353511, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: m_Name
+      value: LeftEye
+      objectReference: {fileID: 0}
+    - target: {fileID: 415211415833209153, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: m_Name
+      value: RightEye
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a06dd97c5b85b054d9a3a1997c1739e7, type: 3}
 --- !u!1 &1975465494
