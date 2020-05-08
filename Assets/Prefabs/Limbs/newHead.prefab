@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2511398557098109629}
   - component: {fileID: 1387252113512761771}
   m_Layer: 0
-  m_Name: Head
+  m_Name: newHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
+  bloodMax: 0
   oxygen: 250
   oxygenMax: 500
   oxygenRequired: 5
@@ -64,6 +65,8 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
 --- !u!1001 &5513719288731100894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74,7 +77,7 @@ PrefabInstance:
     - target: {fileID: 2281875767903849586, guid: 7d602518fcc29924a8d45acd5833e779,
         type: 3}
       propertyPath: m_Name
-      value: Brain
+      value: newBrain
       objectReference: {fileID: 0}
     - target: {fileID: 1611717843537045965, guid: 7d602518fcc29924a8d45acd5833e779,
         type: 3}

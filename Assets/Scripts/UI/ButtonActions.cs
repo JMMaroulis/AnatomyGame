@@ -404,7 +404,7 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Inject Slow Potion (50 units): {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Inject Slow Poison (50 units): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -739,7 +739,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost); bodypart = null; messageBox.text = $"Destroying the {bodypart.name}..."; };
+            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost); messageBox.text = $"Destroying the {bodypart.name}..."; selectedBodyPart = null; };
         }
 
         button.onClick.AddListener(action);
@@ -866,8 +866,8 @@ public class ButtonActions : MonoBehaviour
             action = () => { messageBox.text = "That organ is still inside something!"; };
         }
         else
-        {
-            action = () => { Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost); organ = null; messageBox.text = $"Destroying the {organ.name}..."; };
+        {           
+            action = () => {  Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost); messageBox.text = $"Destroying the {organ.name}..."; selectedBodyPart = null; };
         }
 
         button.onClick.AddListener(action);

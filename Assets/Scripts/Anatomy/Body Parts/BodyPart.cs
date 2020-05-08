@@ -14,6 +14,7 @@ public class BodyPart : MonoBehaviour
     public float blood;
     public float bloodLossRate;
     public float bloodPumpRate;
+    public float bloodMax; //NOT CURRENTLY IMPLEMENTED
 
 
     //oxygen stuff

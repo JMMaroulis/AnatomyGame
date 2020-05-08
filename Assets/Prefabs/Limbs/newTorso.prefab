@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6675934801669765112}
   - component: {fileID: 5690681944904997238}
   m_Layer: 0
-  m_Name: Torso
+  m_Name: newTorso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
+  bloodMax: 0
   oxygen: 250
   oxygenMax: 500
   oxygenRequired: 5
@@ -68,6 +69,8 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
 --- !u!1001 &1616745545682970286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
       propertyPath: m_Name
-      value: Right Lung
+      value: newRightLung
       objectReference: {fileID: 0}
     - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
@@ -165,7 +168,7 @@ PrefabInstance:
     - target: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
       propertyPath: m_Name
-      value: Left Lung
+      value: newLeftLung
       objectReference: {fileID: 0}
     - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
@@ -252,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 4890087455251969224, guid: ebf6ab8e28d638947a30ddb09badbfa3,
         type: 3}
       propertyPath: m_Name
-      value: Heart
+      value: newHeart
       objectReference: {fileID: 0}
     - target: {fileID: 5862114816469363198, guid: ebf6ab8e28d638947a30ddb09badbfa3,
         type: 3}

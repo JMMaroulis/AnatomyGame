@@ -98,7 +98,7 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnHeadCoroutine(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("newHead");
+        Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("newHead");
     }
 
     #endregion

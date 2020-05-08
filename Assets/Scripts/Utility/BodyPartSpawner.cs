@@ -34,6 +34,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(heartPrefab);
         bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         return bodyPart;
     }
 
@@ -41,6 +42,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(lungPrefab);
         bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         return bodyPart;
     }
 
@@ -48,12 +50,14 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(brainPrefab);
         bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         return bodyPart;
     }
     public GameObject SpawnArm(string name)
     {
         GameObject bodyPart = Instantiate(armPrefab);
         bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         return bodyPart;
     }
 
@@ -61,6 +65,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(legPrefab);
         bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         return bodyPart;
     }
 
@@ -68,6 +73,11 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(torsoPrefab);
         bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+        foreach (Organ organ in bodyPart.GetComponent<BodyPart>().containedOrgans)
+        {
+            FindObjectOfType<BodyPartStatusManager>().AddStatus(organ.GetComponent<BodyPart>());
+        }
         return bodyPart;
     }
 
@@ -75,6 +85,11 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(headPrefab);
         bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+        foreach (Organ organ in bodyPart.GetComponent<BodyPart>().containedOrgans)
+        {
+            FindObjectOfType<BodyPartStatusManager>().AddStatus(organ.GetComponent<BodyPart>());
+        }
         return bodyPart;
     }
 

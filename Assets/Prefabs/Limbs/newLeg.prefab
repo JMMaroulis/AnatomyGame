@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5221314806615445398}
   - component: {fileID: 4761315825765617185}
   m_Layer: 0
-  m_Name: Leg
+  m_Name: newLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
+  bloodMax: 0
   oxygen: 250
   oxygenMax: 500
   oxygenRequired: 5
@@ -62,3 +63,5 @@ MonoBehaviour:
   antidote: 0
   slowPoison: 0
   stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
