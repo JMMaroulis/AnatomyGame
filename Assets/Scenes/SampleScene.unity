@@ -7605,6 +7605,16 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[4]
       value: 
       objectReference: {fileID: 58373987}
+    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenAbsorptionRate
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenAbsorptionRate
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 1063040508559663815, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
         type: 3}
       propertyPath: m_Name

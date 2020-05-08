@@ -369,7 +369,14 @@ public class BodyPart : MonoBehaviour
 
         float damageRatio = 1 - (damage / damageMax); //1 good, 0 bad
         float oxygenRatio = Mathf.Min((oxygen / oxygenRequired), 1); //1 good, 0 bad
-        efficiency = damageRatio * oxygenRatio * connectedBrainEfficiency;
+        if (this.gameObject.GetComponent<Brain>() != null)
+        {
+            efficiency = damageRatio * oxygenRatio;
+        }
+        else
+        {
+            efficiency = damageRatio * oxygenRatio * connectedBrainEfficiency;
+        }
 
     }
 

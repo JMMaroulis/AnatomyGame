@@ -25,12 +25,7 @@ public class Brain : Organ
             if (isTimePassing)
             {
 
-                ApplyDrugs(tempDeltaTime);
-                UpdateDamage(tempDeltaTime);
-                CheckForFunctionality();
-                UpdateEfficiency();
-                LoseBlood(tempDeltaTime);
-                ConsumeOxygen(tempDeltaTime);
+                UpdateBodyPart(tempDeltaTime);
 
             }
 

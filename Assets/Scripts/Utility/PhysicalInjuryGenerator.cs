@@ -180,7 +180,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
     public void Petrify(BodyPart bodyPart)
     {
-        Actions_Charms.ApplyPetrificationCharm((Organ)bodyPart, 1800, 0);
+        Actions_Charms.ApplyPetrificationCharm((Organ)bodyPart, 0, 0);
     }
 
     void PopulateBodyPartsList()
