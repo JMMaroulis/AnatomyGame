@@ -14,14 +14,18 @@ public class ButtonActions : MonoBehaviour
     private int organMenuCounter = 0;
     public Text selectedBodyPartText;
     public Text messageBox;
+    public Text examineBox;
     public LifeMonitor lifeMonitor;
     public Clock clock;
+
+    private float secondCounter;
 
     // Start is called before the first frame update
     void Start()
     {
         ClearAllButtons();
         PopulateBodyPartsList();
+        examineBox.text = "";
     }
 
     void PopulateBodyPartsList()
@@ -51,7 +55,6 @@ public class ButtonActions : MonoBehaviour
         PopulateOrgansList();
 
         //update selected bodypart name text
-        if (selectedBodyPart) selectedBodyPartText.text = selectedBodyPart.name;
         if (selectedBodyPart is Organ)
         {
             if (selectedBodyPart.connectedBodyParts.Count != 0)
@@ -64,6 +67,16 @@ public class ButtonActions : MonoBehaviour
             }
         }
         else if (selectedBodyPart) selectedBodyPartText.text = selectedBodyPart.name;
+
+        if (selectedBodyPart)
+        {
+            secondCounter += Time.unscaledDeltaTime;
+            if(secondCounter >= 0.5f || examineBox.text == "")
+            {
+                ExamineSelectedBodyPart();
+                secondCounter = 0.0f;
+            }
+        }        
 
     }
 
@@ -349,7 +362,7 @@ public class ButtonActions : MonoBehaviour
     void AssignInjectHealthPotionButton(Button button, BodyPart bodypart)
     {
         float seconds = 10.0f;
-        int goldCost = 50;
+        int goldCost = 30;
         UnityEngine.Events.UnityAction action = null;
         if (bodypart == null)
         {
@@ -363,7 +376,7 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Inject Health Potion (50 units): {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Inject Health Potion (100 units): {seconds} seconds, {goldCost} gold";
 
     }
 
@@ -886,11 +899,11 @@ public class ButtonActions : MonoBehaviour
     {
         if (selectedBodyPart == null)
         {
-            messageBox.text = "You need to select a something for that!";
+            examineBox.text = "You need to select a something for that!";
         }
         else
         {
-            messageBox.text = selectedBodyPart.GenerateDescription();
+            examineBox.text = selectedBodyPart.GenerateDescription();
         }
     }
 
