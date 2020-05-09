@@ -17,7 +17,7 @@ public class Clock : MonoBehaviour
     //private bool _isTimePassing;
 
     private float globalTimeScalingFactor;
-    private float timeUntilClockStops = 0.0f;
+    public float clockTarget = 0.0f;
     private float timeElapsed = 0.0f;
     public Text currentTime;
 
@@ -43,8 +43,7 @@ public class Clock : MonoBehaviour
         PopulateBodyPartsList();
 
         //checking if it's time for time to stop yet
-        timeUntilClockStops = Mathf.Max(timeUntilClockStops - Time.deltaTime, 0.0f);
-        if (timeUntilClockStops <= 0.0f)
+        if (timeElapsed >= clockTarget)
         {
             isTimePassing = false;
         }
@@ -53,9 +52,7 @@ public class Clock : MonoBehaviour
         deathMonitor.isTimePassing = isTimePassing;
         lifeMonitor.isTimePassing = isTimePassing;
 
-
-        UpdateCurrentTime();
-        
+        UpdateCurrentTime();       
 
     }
 
@@ -80,7 +77,7 @@ public class Clock : MonoBehaviour
     public void StartClockUntil(float ingameSeconds)
     {
         isTimePassing = true;
-        timeUntilClockStops = ingameSeconds;
+        clockTarget += ingameSeconds;
     }
 
     public static IEnumerator WaitForSecondsStatic(float seconds)
