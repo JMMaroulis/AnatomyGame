@@ -5597,6 +5597,7 @@ MonoBehaviour:
   deathMonitor: {fileID: 1124799829}
   lifeMonitor: {fileID: 714661424}
   isTimePassing: 1
+  clockTarget: 0
   currentTime: {fileID: 188086456}
   clockText: {fileID: 182947857}
   clockSlider: {fileID: 361797261}

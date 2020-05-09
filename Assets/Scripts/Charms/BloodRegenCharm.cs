@@ -30,7 +30,7 @@ public class BloodRegenCharm : Charm
     void RegenBlood(float deltaTime)
     {
         BodyPart bodyPart = this.gameObject.GetComponent<BodyPart>();
-        bodyPart.blood = Mathf.Min(700.0f, bodyPart.blood + deltaTime * 20.0f);
+        bodyPart.blood = Mathf.Min(bodyPart.bloodMax, bodyPart.blood + deltaTime * 30.0f);
     }
 
     new void CharmTimer(float seconds)

@@ -62,7 +62,6 @@ public class BodyPart : MonoBehaviour
     public void PumpBlood(float heartEfficiency, float deltaTime)
     {
         deltaTime *= timeScale;
-        float timeSinceLastPump = deltaTime;
 
         //pumping blood to contained organs in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
         List<BodyPart> allBodyParts = connectedBodyParts.Concat(containedOrgans).ToList<BodyPart>();
@@ -82,21 +81,22 @@ public class BodyPart : MonoBehaviour
             float tempHastePotionPumpRate =     Mathf.Max(Mathf.Min( (hastePotion / bodyPart.hastePotion),         5), 0.2f) * bloodPumpRate * heartEfficiency * 0.001f;
 
             //transport blood
-            float proposedBloodOut = tempBloodPumpRate * timeSinceLastPump;
-            float bloodOut = Mathf.Max(Mathf.Min(blood, proposedBloodOut), 0);
+            float proposedBloodOut = tempBloodPumpRate * deltaTime;
+            float bloodOut = Mathf.Min( Mathf.Min(blood, proposedBloodOut), (bodyPart.bloodMax - bodyPart.blood));
             bodyPart.blood += bloodOut;
             blood -= bloodOut;
 
             //transport oxygen, capped by blood transport
-            float proposedOxygenOut = Mathf.Min(tempOxygenPumpRate * timeSinceLastPump, bloodOut);
+            float proposedOxygenOut = Mathf.Min(tempOxygenPumpRate * deltaTime, bloodOut);
             float oxygenOut = Mathf.Max(Mathf.Min(oxygen, proposedOxygenOut), 0);
             bodyPart.oxygen += oxygenOut;
             oxygen -= oxygenOut;
+
             if (healthPotion > 0.0f)
             {
                 //transport health potion, capped by blood transport
-                float proposedHealthPotionOut = Mathf.Min(tempHealthPotionPumpRate * timeSinceLastPump, bloodOut);
-                float healthPotionOut = Mathf.Max(Mathf.Min(healthPotion, proposedHealthPotionOut), 0);
+                float proposedHealthPotionOut = Mathf.Min(tempHealthPotionPumpRate * deltaTime, bloodOut);
+                float healthPotionOut = Mathf.Min(healthPotion, proposedHealthPotionOut);
                 bodyPart.healthPotion += healthPotionOut;
                 healthPotion -= healthPotionOut;
             }
@@ -104,8 +104,8 @@ public class BodyPart : MonoBehaviour
             if (antidote > 0.0f)
             {
                 //transport antidote, capped by blood transport
-                float proposedAntidoteOut = Mathf.Min(tempAntidotePumpRate * timeSinceLastPump, bloodOut);
-                float antidoteOut = Mathf.Max(Mathf.Min(antidote, proposedAntidoteOut), 0);
+                float proposedAntidoteOut = Mathf.Min(tempAntidotePumpRate * deltaTime, bloodOut);
+                float antidoteOut = Mathf.Min(antidote, proposedAntidoteOut);
                 bodyPart.antidote += antidoteOut;
                 antidote -= antidoteOut;
             }
@@ -113,8 +113,8 @@ public class BodyPart : MonoBehaviour
             if (slowPoison > 0.0f)
             {
                 //transport slow poison, capped by blood transport
-                float proposedSlowPoisonOut = Mathf.Min(tempSlowPoisonPumpRate * timeSinceLastPump, bloodOut);
-                float slowPoisonOut = Mathf.Max(Mathf.Min(slowPoison, proposedSlowPoisonOut), 0);
+                float proposedSlowPoisonOut = Mathf.Min(tempSlowPoisonPumpRate * deltaTime, bloodOut);
+                float slowPoisonOut = Mathf.Min(slowPoison, proposedSlowPoisonOut);
                 bodyPart.slowPoison += slowPoisonOut;
                 slowPoison -= slowPoisonOut;
             }
@@ -122,8 +122,8 @@ public class BodyPart : MonoBehaviour
             if (stasisPotion > 0.0f)
             {
                 //transport stasis potion, capped by blood transport
-                float proposedStasisPotionOut = Mathf.Min(tempStasisPotionPumpRate * timeSinceLastPump, bloodOut);
-                float stasisPotionOut = Mathf.Max(Mathf.Min(stasisPotion, proposedStasisPotionOut), 0);
+                float proposedStasisPotionOut = Mathf.Min(tempStasisPotionPumpRate * deltaTime, bloodOut);
+                float stasisPotionOut = Mathf.Min(stasisPotion, proposedStasisPotionOut);
                 bodyPart.stasisPotion += stasisPotionOut;
                 stasisPotion -= stasisPotionOut;
             }
@@ -131,8 +131,8 @@ public class BodyPart : MonoBehaviour
             if (coagulantPotion > 0.0f)
             {
                 //transport stasis potion, capped by blood transport
-                float proposedCoagulantPotionOut = Mathf.Min(tempCoagulantPotionPumpRate * timeSinceLastPump, bloodOut);
-                float coagulantPotionOut = Mathf.Max(Mathf.Min(coagulantPotion, proposedCoagulantPotionOut), 0);
+                float proposedCoagulantPotionOut = Mathf.Min(tempCoagulantPotionPumpRate * deltaTime, bloodOut);
+                float coagulantPotionOut = Mathf.Min(coagulantPotion, proposedCoagulantPotionOut);
                 bodyPart.coagulantPotion += coagulantPotionOut;
                 coagulantPotion -= coagulantPotionOut;
             }
@@ -140,8 +140,8 @@ public class BodyPart : MonoBehaviour
             if (hastePotion > 0.0f)
             {
                 //transport stasis potion, capped by blood transport
-                float proposedHastePotionOut = Mathf.Min(tempHastePotionPumpRate * timeSinceLastPump, bloodOut);
-                float hastePotionOut = Mathf.Max(Mathf.Min(hastePotion, proposedHastePotionOut), 0);
+                float proposedHastePotionOut = Mathf.Min(tempHastePotionPumpRate * deltaTime, bloodOut);
+                float hastePotionOut = Mathf.Min(hastePotion, proposedHastePotionOut);
                 bodyPart.hastePotion += hastePotionOut;
                 hastePotion -= hastePotionOut;
             }

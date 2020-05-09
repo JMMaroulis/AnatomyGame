@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a9eeefa45b03b48a8f3aeed552c912, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingBodyPartInjuries: 10
+  startingBodyPartInjuries: 1
   startingOrganInjuries: 0
 --- !u!114 &1607601282
 MonoBehaviour:
