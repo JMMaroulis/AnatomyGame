@@ -221,7 +221,7 @@ public class BodyPart : MonoBehaviour
             else
             {
                 //decays at 1/100th unit per second, if no damage to be healed
-                healthPotion = Mathf.Max(0.0f, healthPotion - deltaTime * 0.01f);
+                healthPotion = Mathf.Max(0.0f, healthPotion - (deltaTime * 0.01f));
             }
         }
 
@@ -230,9 +230,15 @@ public class BodyPart : MonoBehaviour
         //decays at 1 unit per second regardless of poison
         if (antidote > 0.0f)
         {
-            float antidoteProcessed = Mathf.Min(antidote, deltaTime * 1.0f);
-            antidote = Mathf.Max(0.0f, antidote - antidoteProcessed);
-            slowPoison = Mathf.Max(0.0f, slowPoison - antidoteProcessed);
+            if (slowPoison > 0.0f)
+            {
+                //in 1 second, will neutralise 1 unit of poison
+                float antidoteProcessed = Mathf.Min(antidote, deltaTime * 1.0f);
+                antidote = Mathf.Max(0.0f, antidote - antidoteProcessed);
+                slowPoison = Mathf.Max(0.0f, slowPoison - antidoteProcessed);
+            }
+            //decays at 1/100th unit per second, if no poison to neutralise
+            slowPoison = Mathf.Max(0.0f, slowPoison - (deltaTime * 0.01f));
         }
 
         //slow poison
@@ -258,7 +264,7 @@ public class BodyPart : MonoBehaviour
             else
             {
                 //decays at 1/100th unit per second, if no bloodlossrate to be healed
-                coagulantPotion = Mathf.Max(0.0f, coagulantPotion - deltaTime * 0.01f);
+                coagulantPotion = Mathf.Max(0.0f, coagulantPotion - (deltaTime * 0.01f));
             }
         }
 

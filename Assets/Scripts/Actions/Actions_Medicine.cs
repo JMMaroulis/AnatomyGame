@@ -15,7 +15,7 @@ public static class Actions_Medicine
     public static IEnumerator InjectHealthPotionCoroutine(BodyPart bodyPartObject, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        bodyPartObject.healthPotion += 50.0f;
+        bodyPartObject.healthPotion += 100.0f;
     }
 
     public static void InjectAntidote(BodyPart bodyPartObject, float seconds, int goldCost)
