@@ -71,7 +71,7 @@ public class ButtonActions : MonoBehaviour
         if (selectedBodyPart)
         {
             secondCounter += Time.unscaledDeltaTime;
-            if(secondCounter >= 0.5f || examineBox.text == "")
+            if(secondCounter >= 0.3f || examineBox.text == "")
             {
                 ExamineSelectedBodyPart();
                 secondCounter = 0.0f;

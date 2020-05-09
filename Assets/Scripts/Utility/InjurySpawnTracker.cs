@@ -6,13 +6,15 @@ using UnityEngine.UI;
 
 public class InjurySpawnTracker : MonoBehaviour
 {
-    public int startingBodyPartInjuries;
-    public int startingOrganInjuries;
+    public int easyInjuries;
+    public int mediumInjuries;
+    public int hardInjuries;
+    public int patientNumber;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        patientNumber = 1;
     }
 
     // Update is called once per frame
@@ -21,16 +23,22 @@ public class InjurySpawnTracker : MonoBehaviour
 
     }
 
-    public void IncreaseInjuryNumber()
+    public void NextPatient()
     {
-        if (startingBodyPartInjuries/2 > startingOrganInjuries)
+        patientNumber += 1;
+
+        easyInjuries += 1;
+        if (easyInjuries == 3)
         {
-            startingOrganInjuries += 1;
+            easyInjuries = 0;
+            mediumInjuries += 1;
         }
-        else
+        if (mediumInjuries == 3)
         {
-            startingBodyPartInjuries += 1;
+            mediumInjuries = 0;
+            hardInjuries += 1;
         }
+
     }
 
 }

@@ -93,7 +93,7 @@ public class LifeMonitor : MonoBehaviour
             { new Lung().GetType(),  new List<int> {0,2}},
             { new Heart().GetType(), new List<int> {0,1}},
             { new Brain().GetType(), new List<int> {0,1}},
-            { new Eyes().GetType(),  new List<int> {0,2}}
+            { new Eye().GetType(),  new List<int> {0,2}}
         };
 
         foreach (BodyPart bodyPart in bodyParts)
@@ -162,7 +162,7 @@ public class LifeMonitor : MonoBehaviour
         {
             messageBox.text = "Congratulations, he'll live!\nYour payment is 500 gold.\nNew patient in 5 seconds...";
             GameObject.FindObjectOfType<GoldTracker>().goldAccumulated += 500;
-            GameObject.FindObjectOfType<InjurySpawnTracker>().IncreaseInjuryNumber();
+            GameObject.FindObjectOfType<InjurySpawnTracker>().NextPatient();
 
             yield return new WaitForSeconds(5 * Time.timeScale);
             ResetGame();

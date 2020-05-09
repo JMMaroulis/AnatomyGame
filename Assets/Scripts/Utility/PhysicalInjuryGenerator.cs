@@ -17,18 +17,19 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         InjurySpawnTracker injurySpawnTracker = GameObject.FindObjectOfType<InjurySpawnTracker>();
         PopulateBodyPartsList();
         PopulateOrgansList();
-        InjureRandomBodypart(injurySpawnTracker.startingBodyPartInjuries);
-        InjureRandomOrgan(injurySpawnTracker.startingOrganInjuries);
+        EasyInjuries(injurySpawnTracker.easyInjuries);
+        MediumInjuries(injurySpawnTracker.mediumInjuries);
+        HardInjuries(injurySpawnTracker.hardInjuries);
     }
 
     //select n random bodyparts
-    public void InjureRandomBodypart(int numberOfInjuries)
+    public void EasyInjuries(int numberOfInjuries)
     {
         for (int i = 0; i < numberOfInjuries; i++)
         {
             //selected bodypart to injure, and injury to apply
             BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
-            int injuryNumber = Random.Range(0, 6);
+            int injuryNumber = Random.Range(0, 5);
 
             //apply injury
             switch (injuryNumber)
@@ -63,17 +64,6 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     SlowPoison(bodyPart);
                     break;
 
-                case 5:
-                    if (bodyPart is Torso)
-                    {
-                        i -= 1;
-                        break;
-                    }
-                    Debug.Log($"Crushed {bodyPart.name}");
-                    injuryText += $"\nThe {bodyPart.name} has been severed.";
-                    Sever(bodyPart);
-                    break;
-
                 default:
                     break;
             }
@@ -82,13 +72,14 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         messageBox.text = injuryText;
     }
 
-    public void InjureRandomOrgan(int numberOfInjuries)
+    public void MediumInjuries(int numberOfInjuries)
     {
         for (int i = 0; i < numberOfInjuries; i++)
         {
             //selected bodypart to injure, and injury to apply
+            int injuryNumber = Random.Range(0, 6);
             Organ organ = organs[Random.Range(0, organs.Count)];
-            int injuryNumber = Random.Range(0, 5);
+            BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
 
             //apply injury
             switch (injuryNumber)
@@ -122,9 +113,54 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     break;
 
                 case 4:
+                    if (organ is Eye)
+                    {
+                        i -= 1;
+                        break;
+                    }
                     Debug.Log($"{organ.name} petrified");
                     injuryText += $"\nThe {organ.name} has been temporarily petrified.";
                     Petrify(organ);
+                    break;
+
+                case 5:
+                    if (bodyPart is Torso)
+                    {
+                        i -= 1;
+                        break;
+                    }
+                    Debug.Log($"Severed {bodyPart.name}");
+                    injuryText += $"\nThe {bodyPart.name} has been severed.";
+                    Sever(bodyPart);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        messageBox.text = injuryText;
+    }
+
+    public void HardInjuries(int numberOfInjuries)
+    {
+        for (int i = 0; i < numberOfInjuries; i++)
+        {
+            //selected bodypart to injure, and injury to apply
+            int injuryNumber = Random.Range(0, 1);
+            Organ organ = organs[Random.Range(0, organs.Count)];
+            BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
+
+            //apply injury
+            switch (injuryNumber)
+            {
+                case 0:
+                    BodyPart Torso = FindObjectOfType<Torso>();
+                    Sever(Torso);
+
+                    Debug.Log($"Severed {Torso.name}");
+                    injuryText += $"\nThe {Torso.name} has been stabbed.";
+                    Sever(Torso.connectedBodyParts[0]);
                     break;
 
                 default:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6317736935091072235}
   - component: {fileID: 6699302688172143296}
   m_Layer: 0
-  m_Name: newEyes
+  m_Name: newEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,18 +40,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 971546644430363128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a5acc85837e1c459b61ab2cc551fb4, type: 3}
+  m_Script: {fileID: 11500000, guid: a37769886d8e83f4cac9123ac5110abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
   timeScale: 1
-  isFunctioning: 0
+  isFunctioning: 1
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
   bloodMax: 700
-  oxygen: 250
+  oxygen: 450
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
