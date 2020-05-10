@@ -283,6 +283,7 @@ MonoBehaviour:
   easyInjuries: 1
   mediumInjuries: 0
   hardInjuries: 0
+  patientNumber: 0
 --- !u!114 &1607601282
 MonoBehaviour:
   m_ObjectHideFlags: 0

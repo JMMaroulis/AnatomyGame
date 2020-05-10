@@ -8,11 +8,7 @@ public class ddol : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("StartMenu");
     }
 
-    public void Yell()
-    {
-        Debug.Log("Yelling into the void!");
-    }
 }
