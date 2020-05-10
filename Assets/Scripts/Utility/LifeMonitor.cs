@@ -9,7 +9,6 @@ public class LifeMonitor : MonoBehaviour
     public bool isTimePassing;
     public Clock clock;
     public bool hasPlayerWon;
-    public float requiredVictoryWait;
     public Text messageBox;
 
     public GameObject body;
@@ -30,17 +29,11 @@ public class LifeMonitor : MonoBehaviour
 
     public void VictoryCheck()
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(requiredVictoryWait);
-        StaticCoroutine.Start(VictoryCheckCoroutine(requiredVictoryWait));
+        StaticCoroutine.Start(VictoryCheckCoroutine());
     }
 
-    public IEnumerator VictoryCheckCoroutine(float seconds)
+    public IEnumerator VictoryCheckCoroutine()
     {
-        //float oldTimeScalingFactor = clock.globalTimeScalingFactor;
-        //clock.globalTimeScalingFactor = 100.0f;
-        clock.StartClockUntil(seconds);
-        yield return new WaitForSeconds(seconds);
-
         messageBox.text = "";
         bool victory = true;
 
@@ -154,8 +147,6 @@ public class LifeMonitor : MonoBehaviour
                 victory = false;
             }
         }
-
-        //clock.globalTimeScalingFactor = oldTimeScalingFactor;
 
         hasPlayerWon = victory;
         if (victory)

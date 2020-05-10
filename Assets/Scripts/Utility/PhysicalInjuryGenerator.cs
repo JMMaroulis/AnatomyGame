@@ -59,7 +59,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     break;
 
                 case 4:
-                    Debug.Log($"Crushed {bodyPart.name}");
+                    Debug.Log($"Poisoned {bodyPart.name}");
                     injuryText += $"\nThe {bodyPart.name} has been poisoned.";
                     SlowPoison(bodyPart);
                     break;

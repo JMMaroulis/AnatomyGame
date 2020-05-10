@@ -17,6 +17,7 @@ public class ButtonActions : MonoBehaviour
     public Text examineBox;
     public LifeMonitor lifeMonitor;
     public Clock clock;
+    public ActionTimeBar actionTimeBar;
 
     private float secondCounter;
 
@@ -89,6 +90,7 @@ public class ButtonActions : MonoBehaviour
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "";
         }
     }
+
 
     public void SelectBodyPartOptions(bool firstClick = true)
     {
@@ -375,7 +377,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectHealthPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Health Potion into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectHealthPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Health Potion into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -396,7 +398,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectAntidote(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Antidote into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectAntidote(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Antidote into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -417,7 +419,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectSlowPoison(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Slow Poison into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectSlowPoison(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Slow Poison into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -438,7 +440,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -459,7 +461,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectHastePotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Haste Potion into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectHastePotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Haste Potion into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -480,7 +482,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Medicine.InjectCoagulantPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Coagulant Potion into the {bodypart.name}..."; };
+            action = () => { Actions_Medicine.InjectCoagulantPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Coagulant Potion into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -505,7 +507,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Charms.ApplyHeartCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Heart Charm to the {bodypart.name}..."; };
+            action = () => { Actions_Charms.ApplyHeartCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Heart Charm to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -526,7 +528,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Charms.ApplyLungCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Lung Charm to the {bodypart.name}..."; };
+            action = () => { Actions_Charms.ApplyLungCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Lung Charm to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -547,7 +549,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Charms.ApplyPetrificationCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Petrification Charm to the {bodypart.name}..."; };
+            action = () => { Actions_Charms.ApplyPetrificationCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Petrification Charm to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -568,7 +570,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Charms.ApplyBloodRegenCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Blood Regeneration Charm to the {bodypart.name}..."; };
+            action = () => { Actions_Charms.ApplyBloodRegenCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Blood Regeneration Charm to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -594,7 +596,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Blood.Bandages(bodypart, seconds, goldCost); messageBox.text = $"Applying bandages to the {bodypart.name}..."; };
+            action = () => { Actions_Blood.Bandages(bodypart, seconds, goldCost); messageBox.text = $"Applying bandages to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -614,7 +616,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Blood.Bloodletting(bodypart, seconds, goldCost); messageBox.text = $"Inducing bleeding in the {bodypart.name}..."; };
+            action = () => { Actions_Blood.Bloodletting(bodypart, seconds, goldCost); messageBox.text = $"Inducing bleeding in the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -633,7 +635,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Blood.AddBlood(bodypart, seconds, goldCost); messageBox.text = $"Injecting 100 units of blood into the {bodypart.name}..."; };
+            action = () => { Actions_Blood.AddBlood(bodypart, seconds, goldCost); messageBox.text = $"Injecting 100 units of blood into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -652,7 +654,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Blood.RemoveBlood(bodypart, seconds, goldCost); messageBox.text = $"Extracting 100 units of blood from the {bodypart.name}..."; };
+            action = () => { Actions_Blood.RemoveBlood(bodypart, seconds, goldCost); messageBox.text = $"Extracting 100 units of blood from the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -677,7 +679,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.RemoveBodyPart(bodypart, seconds, goldCost); messageBox.text = $"Removing the {bodypart.name}..."; };
+            action = () => { Actions_Surgery.RemoveBodyPart(bodypart, seconds, goldCost); messageBox.text = $"Removing the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -738,7 +740,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10 * 60.0f;
         int goldCost = 20;
-        UnityEngine.Events.UnityAction action = () => { Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost); messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost); messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}..."; actionTimeBar.Reset(seconds); };
         button.onClick.AddListener(action);
     }
 
@@ -758,7 +760,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost); messageBox.text = $"Destroying the {bodypart.name}..."; selectedBodyPart = null; };
+            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost); messageBox.text = $"Destroying the {bodypart.name}..."; selectedBodyPart = null; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -838,7 +840,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.ImplantOrgan(organ, bodypart, seconds, goldCost); messageBox.text = $"Implanting the {organ.name} into the {bodypart.name}..."; };
+            action = () => { Actions_Surgery.ImplantOrgan(organ, bodypart, seconds, goldCost); messageBox.text = $"Implanting the {organ.name} into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
         }
 
 
@@ -860,7 +862,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {
-            action = () => { Actions_Surgery.RemoveOrgan(organ, seconds, goldCost); messageBox.text = $"Extracting the {organ.name}..."; };
+            action = () => { Actions_Surgery.RemoveOrgan(organ, seconds, goldCost); messageBox.text = $"Extracting the {organ.name}..."; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -886,7 +888,7 @@ public class ButtonActions : MonoBehaviour
         }
         else
         {           
-            action = () => {  Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost); messageBox.text = $"Destroying the {organ.name}..."; selectedBodyPart = null; };
+            action = () => {  Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost); messageBox.text = $"Destroying the {organ.name}..."; selectedBodyPart = null; actionTimeBar.Reset(seconds); };
         }
 
         button.onClick.AddListener(action);
@@ -922,7 +924,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHeart(seconds, goldCost); messageBox.text = $"Spawning a new heart..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHeart(seconds, goldCost); messageBox.text = $"Spawning a new heart..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
@@ -935,7 +937,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLung(seconds, goldCost); messageBox.text = $"Spawning a new lung..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLung(seconds, goldCost); messageBox.text = $"Spawning a new lung..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
@@ -948,7 +950,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
@@ -960,7 +962,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new eye..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new eye..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
@@ -972,7 +974,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnArm(seconds, goldCost); messageBox.text = $"Spawning a new arm..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnArm(seconds, goldCost); messageBox.text = $"Spawning a new arm..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
@@ -985,7 +987,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLeg(seconds, goldCost); messageBox.text = $"Spawning a new leg..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLeg(seconds, goldCost); messageBox.text = $"Spawning a new leg..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
@@ -998,7 +1000,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnTorso(seconds, goldCost); messageBox.text = $"Spawning a new torso..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnTorso(seconds, goldCost); messageBox.text = $"Spawning a new torso..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
@@ -1011,7 +1013,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHead(seconds, goldCost); messageBox.text = $"Spawning a new head..."; };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHead(seconds, goldCost); messageBox.text = $"Spawning a new head..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
@@ -1024,7 +1026,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitTenSeconds(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(10.0f); messageBox.text = "Waiting ten seconds..."; };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(10.0f); messageBox.text = "Waiting ten seconds..."; actionTimeBar.Reset(10.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait ten seconds";
@@ -1032,7 +1034,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitThirtySeconds(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(30.0f); messageBox.text = "Waiting thirty seconds..."; };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(30.0f); messageBox.text = "Waiting thirty seconds..."; actionTimeBar.Reset(30.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait thirty seconds";
@@ -1040,7 +1042,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitOneMinute(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(60.0f); messageBox.text = "Waiting one minutes..."; };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(60.0f); messageBox.text = "Waiting one minutes..."; actionTimeBar.Reset(60.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait one minute";
@@ -1048,7 +1050,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitFiveMinutes(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(300.0f); messageBox.text = "Waiting five minutes..."; };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(300.0f); messageBox.text = "Waiting five minutes..."; actionTimeBar.Reset(300.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait five minutes";
@@ -1056,7 +1058,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitTenMinutes(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(600.0f); messageBox.text = "Waiting ten minutes..."; };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(600.0f); messageBox.text = "Waiting ten minutes..."; actionTimeBar.Reset(600.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait ten minutes";
@@ -1064,7 +1066,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitThirtyMinutes(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(1800.0f); messageBox.text = "Waiting thirty minutes..."; };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(1800.0f); messageBox.text = "Waiting thirty minutes..."; actionTimeBar.Reset(1800.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait thirty minutes";
@@ -1072,7 +1074,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitOneHour(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { lifeMonitor.VictoryCheck(); messageBox.text = "Waiting one hour..."; };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(3600.0f); lifeMonitor.VictoryCheck(); messageBox.text = "Waiting one hour..."; actionTimeBar.Reset(3600.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait an hour (Victory Check)";
