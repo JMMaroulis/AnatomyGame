@@ -1092,7 +1092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &257884926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7993,11 +7993,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
         type: 3}
-      propertyPath: connectedBodyParts.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 454939311}
@@ -8021,31 +8016,6 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[4]
       value: 
       objectReference: {fileID: 58373987}
-    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygenAbsorptionRate
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygenAbsorptionRate
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1063040508559663815, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_Name
-      value: Heart
-      objectReference: {fileID: 0}
-    - target: {fileID: 5655097960844865788, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_Name
-      value: LeftLung
-      objectReference: {fileID: 0}
-    - target: {fileID: 4858474195380291854, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_Name
-      value: RightLung
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82cbe099f0366de4eb27d17dcef6e5fa, type: 3}
 --- !u!1 &2078641865

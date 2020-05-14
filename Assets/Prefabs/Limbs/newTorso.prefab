@@ -24,13 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5947049902768832402}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.18242271, y: 3.0764737, z: -331.07306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2037829669182144497}
   - {fileID: 3993923982127463430}
   - {fileID: 4214086788054255092}
+  - {fileID: 8365560793312068054}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60,11 +61,17 @@ MonoBehaviour:
   damage: 0
   damageMax: 100
   efficiency: 1
-  connectedBodyParts: []
+  connectedBodyParts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   containedOrgans:
   - {fileID: 214810287498280842}
   - {fileID: 1602104620371625720}
   - {fileID: 1958472659007815434}
+  - {fileID: 6010449279388636963}
   healthPotion: 0
   antidote: 0
   slowPoison: 0
@@ -81,7 +88,7 @@ PrefabInstance:
     - target: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
       propertyPath: m_Name
-      value: newRightLung
+      value: RightLung
       objectReference: {fileID: 0}
     - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
@@ -148,6 +155,11 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 5690681944904997238}
+    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
+        type: 3}
+      propertyPath: oxygenAbsorptionRate
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb20dc88c5fd28349a5f0a8271e2d87c, type: 3}
 --- !u!4 &4214086788054255092 stripped
@@ -178,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
       propertyPath: m_Name
-      value: newLeftLung
+      value: LeftLung
       objectReference: {fileID: 0}
     - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
@@ -245,6 +257,11 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 5690681944904997238}
+    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
+        type: 3}
+      propertyPath: oxygenAbsorptionRate
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb20dc88c5fd28349a5f0a8271e2d87c, type: 3}
 --- !u!4 &3993923982127463430 stripped
@@ -275,7 +292,7 @@ PrefabInstance:
     - target: {fileID: 4890087455251969224, guid: ebf6ab8e28d638947a30ddb09badbfa3,
         type: 3}
       propertyPath: m_Name
-      value: newHeart
+      value: Heart
       objectReference: {fileID: 0}
     - target: {fileID: 5862114816469363198, guid: ebf6ab8e28d638947a30ddb09badbfa3,
         type: 3}
@@ -360,5 +377,102 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98465dd9e9f4d314db33d70a456c7bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &6955756964774027465
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6675934801669765112}
+    m_Modifications:
+    - target: {fileID: 3888702768378693778, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_Name
+      value: Liver
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 813.0798
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 471.36066
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 485.0022
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742130502005979114, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742130502005979114, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 5690681944904997238}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d2c34feab37ecc84ea365603ca25207f, type: 3}
+--- !u!4 &8365560793312068054 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1486083574775095583, guid: d2c34feab37ecc84ea365603ca25207f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6955756964774027465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6010449279388636963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3742130502005979114, guid: d2c34feab37ecc84ea365603ca25207f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6955756964774027465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41887bdc5fb64104c8680462cd837621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
