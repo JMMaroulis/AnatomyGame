@@ -351,6 +351,7 @@ public class ButtonActions : MonoBehaviour
         AssignSpawnLungButton(menuButtons[1]);
         AssignSpawnBrainButton(menuButtons[2]);
         AssignSpawnEyeButton(menuButtons[3]);
+        AssignSpawnLiverButton(menuButtons[4]);
     }
 
     public void SelectSpawnBodyPartActionOptions()
@@ -962,12 +963,24 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new eye..."; actionTimeBar.Reset(seconds); };
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnEye(seconds, goldCost); messageBox.text = $"Spawning a new eye..."; actionTimeBar.Reset(seconds); };
 
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new eye: {seconds} seconds, {goldCost} gold";
+    }
+
+    void AssignSpawnLiverButton(Button button)
+    {
+        float seconds = 60.0f * 5.0f;
+        int goldCost = 250;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLiver(seconds, goldCost); messageBox.text = $"Spawning a new liver..."; actionTimeBar.Reset(seconds); };
+
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a new liver: {seconds} seconds, {goldCost} gold";
     }
 
     void AssignSpawnArmButton(Button button)
@@ -1024,6 +1037,8 @@ public class ButtonActions : MonoBehaviour
 
     #endregion
 
+    #region wait
+
     void AssignWaitTenSeconds(Button button)
     {
         UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(10.0f); messageBox.text = "Waiting ten seconds..."; actionTimeBar.Reset(10.0f); };
@@ -1042,7 +1057,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitOneMinute(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(60.0f); messageBox.text = "Waiting one minutes..."; actionTimeBar.Reset(60.0f); };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(60.0f); messageBox.text = "Waiting one minute..."; actionTimeBar.Reset(60.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait one minute";
@@ -1079,4 +1094,7 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait an hour (Victory Check)";
     }
+
+    #endregion
+
 }

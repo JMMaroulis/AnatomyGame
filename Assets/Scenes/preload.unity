@@ -172,6 +172,8 @@ MonoBehaviour:
     type: 3}
   eyePrefab: {fileID: 971546644430363128, guid: 8e7a0264af45dcc498cbe9097eaa67a7,
     type: 3}
+  liverPrefab: {fileID: 3888702768378693778, guid: d2c34feab37ecc84ea365603ca25207f,
+    type: 3}
   armPrefab: {fileID: 7063653498281421542, guid: 8bc5ecc4b41800f478e922d04dcb28a4,
     type: 3}
   legPrefab: {fileID: 2943625929962649177, guid: 86f53adb390ec4a489cdcd685f7d2d49,

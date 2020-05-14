@@ -58,6 +58,19 @@ public static class Actions_SpawnBodyParts
         Object.FindObjectOfType<BodyPartSpawner>().SpawnEye("newEye");
     }
 
+    public static void SpawnLiver(float seconds, int goldCost)
+    {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+        StaticCoroutine.Start(SpawnLiverCoroutine(seconds));
+    }
+
+    public static IEnumerator SpawnLiverCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("newLiver");
+    }
+
     #endregion
 
     #region bodyparts
