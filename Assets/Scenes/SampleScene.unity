@@ -1092,7 +1092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &257884926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,6 +1325,21 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 2124596269}
+    - target: {fileID: 4761315825765617185, guid: 86f53adb390ec4a489cdcd685f7d2d49,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4761315825765617185, guid: 86f53adb390ec4a489cdcd685f7d2d49,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4761315825765617185, guid: 86f53adb390ec4a489cdcd685f7d2d49,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 2943625929962649177, guid: 86f53adb390ec4a489cdcd685f7d2d49,
         type: 3}
       propertyPath: m_Name
@@ -2867,6 +2882,21 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 2124596269}
+    - target: {fileID: 4761315825765617185, guid: 86f53adb390ec4a489cdcd685f7d2d49,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4761315825765617185, guid: 86f53adb390ec4a489cdcd685f7d2d49,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4761315825765617185, guid: 86f53adb390ec4a489cdcd685f7d2d49,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 2943625929962649177, guid: 86f53adb390ec4a489cdcd685f7d2d49,
         type: 3}
       propertyPath: m_Name
@@ -7354,6 +7384,21 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 2124596269}
+    - target: {fileID: 2260615919125716580, guid: 8bc5ecc4b41800f478e922d04dcb28a4,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260615919125716580, guid: 8bc5ecc4b41800f478e922d04dcb28a4,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260615919125716580, guid: 8bc5ecc4b41800f478e922d04dcb28a4,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bc5ecc4b41800f478e922d04dcb28a4, type: 3}
 --- !u!1001 &1835324328
@@ -7433,6 +7478,21 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 2124596269}
+    - target: {fileID: 2260615919125716580, guid: 8bc5ecc4b41800f478e922d04dcb28a4,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260615919125716580, guid: 8bc5ecc4b41800f478e922d04dcb28a4,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260615919125716580, guid: 8bc5ecc4b41800f478e922d04dcb28a4,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bc5ecc4b41800f478e922d04dcb28a4, type: 3}
 --- !u!1 &1841547540
@@ -7529,6 +7589,21 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 2124596269}
+    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 2511398557098109629, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7584,6 +7659,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7135807481301513890, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135807481301513890, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135807481301513890, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 4013890393164018642, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: m_Name
@@ -7603,6 +7693,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RightEye
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579948464050700767, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579948464050700767, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579948464050700767, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070909881794396793, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070909881794396793, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070909881794396793, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a06dd97c5b85b054d9a3a1997c1739e7, type: 3}
@@ -8016,6 +8136,96 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[4]
       value: 
       objectReference: {fileID: 58373987}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 214810287498280842, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 214810287498280842, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 214810287498280842, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenAbsorptionRate
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenAbsorptionRate
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: bloodProcessingRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygen
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: oxygenMax
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: bloodPumpRate
+      value: 70
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82cbe099f0366de4eb27d17dcef6e5fa, type: 3}
 --- !u!1 &2078641865

@@ -247,7 +247,7 @@ public class BodyPart : MonoBehaviour
         if (slowPoison > 0.0f)
         {
             float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * 0.001f);
-            slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
+            //slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
             //damage = Mathf.Min(damageMax, damage + (slowPoisonProcessed*100));            
             damage = Mathf.Max(0.0f, damage + slowPoison * deltaTime * 0.001f);
         }

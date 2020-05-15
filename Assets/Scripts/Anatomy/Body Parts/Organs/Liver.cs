@@ -15,12 +15,7 @@ public class Liver : Organ
 
     void BloodProcessing(float deltaTime)
     {
-        this.healthPotion     -= bloodProcessingRate * deltaTime;
-        this.antidote         -= bloodProcessingRate * deltaTime;
-        this.slowPoison       -= bloodProcessingRate * deltaTime;
-        this.stasisPotion     -= bloodProcessingRate * deltaTime;
-        this.coagulantPotion  -= bloodProcessingRate * deltaTime;
-        this.hastePotion      -= bloodProcessingRate * deltaTime;
+        this.slowPoison -= bloodProcessingRate * deltaTime * efficiency;
     }
 
 
