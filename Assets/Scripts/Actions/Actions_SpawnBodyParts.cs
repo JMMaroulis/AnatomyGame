@@ -71,6 +71,19 @@ public static class Actions_SpawnBodyParts
         Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("newLiver");
     }
 
+    public static void SpawnStomach(float seconds, int goldCost)
+    {
+        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+        StaticCoroutine.Start(SpawnStomachCoroutine(seconds));
+    }
+
+    public static IEnumerator SpawnStomachCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Object.FindObjectOfType<BodyPartSpawner>().SpawnStomach("newStomach");
+    }
+
     #endregion
 
     #region bodyparts

@@ -12,6 +12,7 @@ public class BodyPartSpawner : MonoBehaviour
     public GameObject brainPrefab;
     public GameObject eyePrefab;
     public GameObject liverPrefab;
+    public GameObject stomachPrefab;
 
     //limb prefabs
     public GameObject armPrefab;
@@ -67,6 +68,14 @@ public class BodyPartSpawner : MonoBehaviour
     public GameObject SpawnLiver(string name)
     {
         GameObject bodyPart = Instantiate(liverPrefab);
+        bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+        return bodyPart;
+    }
+
+    public GameObject SpawnStomach(string name)
+    {
+        GameObject bodyPart = Instantiate(stomachPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         return bodyPart;

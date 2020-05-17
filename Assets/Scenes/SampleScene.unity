@@ -8128,6 +8128,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
         type: 3}
+      propertyPath: containedOrgans.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 454939311}
@@ -8153,94 +8158,19 @@ PrefabInstance:
       objectReference: {fileID: 58373987}
     - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
         type: 3}
-      propertyPath: oxygen
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+      propertyPath: containedOrgans.Array.data[4]
+      value: 
+      objectReference: {fileID: 2125284917}
+    - target: {fileID: 7034212384505837750, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
         type: 3}
-      propertyPath: oxygenMax
-      value: 500
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+    - target: {fileID: 7034212384505837750, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
         type: 3}
-      propertyPath: bloodPumpRate
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 214810287498280842, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygen
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 214810287498280842, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygenMax
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 214810287498280842, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: bloodPumpRate
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygen
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygenMax
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygenAbsorptionRate
-      value: 220
-      objectReference: {fileID: 0}
-    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: bloodPumpRate
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygen
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygenMax
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygenAbsorptionRate
-      value: 220
-      objectReference: {fileID: 0}
-    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: bloodPumpRate
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: bloodProcessingRate
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygen
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: oxygenMax
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: bloodPumpRate
-      value: 70
-      objectReference: {fileID: 0}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 2124596269}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82cbe099f0366de4eb27d17dcef6e5fa, type: 3}
 --- !u!1 &2078641865
@@ -8354,6 +8284,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1813071349}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2125284917 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7034212384505837750, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069136854}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cf4011fa4c4bb4aa402d9f6b34ad8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2140890957
 GameObject:
   m_ObjectHideFlags: 0

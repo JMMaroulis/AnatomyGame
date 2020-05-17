@@ -352,6 +352,7 @@ public class ButtonActions : MonoBehaviour
         AssignSpawnBrainButton(menuButtons[2]);
         AssignSpawnEyeButton(menuButtons[3]);
         AssignSpawnLiverButton(menuButtons[4]);
+        AssignSpawnStomachButton(menuButtons[5]);
     }
 
     public void SelectSpawnBodyPartActionOptions()
@@ -981,6 +982,18 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new liver: {seconds} seconds, {goldCost} gold";
+    }
+
+    void AssignSpawnStomachButton(Button button)
+    {
+        float seconds = 60.0f * 5.0f;
+        int goldCost = 250;
+        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnStomach(seconds, goldCost); messageBox.text = $"Spawning a new stomach..."; actionTimeBar.Reset(seconds); };
+
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a new stomach: {seconds} seconds, {goldCost} gold";
     }
 
     void AssignSpawnArmButton(Button button)
