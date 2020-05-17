@@ -37,12 +37,52 @@ public class BodyPartStatusManager : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
 
-        //add everything
+        //add everything in a sensible order
         foreach (BodyPart bodyPart in bodyParts)
         {
-            AddStatus(bodyPart);
+            if (bodyPart is Head)
+            {
+                AddStatusIncludingContainedOrgans(bodyPart);
+            }
+        }
+        foreach (BodyPart bodyPart in bodyParts)
+        {
+            if (bodyPart is Torso)
+            {
+                AddStatusIncludingContainedOrgans(bodyPart);
+            }
+        }
+        foreach (BodyPart bodyPart in bodyParts)
+        {
+            if (bodyPart is Arm)
+            {
+                AddStatusIncludingContainedOrgans(bodyPart);
+            }
+        }
+        foreach (BodyPart bodyPart in bodyParts)
+        {
+            if (bodyPart is Leg)
+            {
+                AddStatusIncludingContainedOrgans(bodyPart);
+            }
+        }
+        foreach (BodyPart bodyPart in bodyParts)
+        {
+            if ((bodyPart is Organ) && bodyPart.connectedBodyParts.Count == 0)
+            {
+                AddStatus(bodyPart);
+            }
         }
 
+    }
+
+    public void AddStatusIncludingContainedOrgans(BodyPart bodyPart)
+    {
+        AddStatus(bodyPart);
+        foreach (BodyPart organ in bodyPart.containedOrgans)
+        {
+            AddStatus(organ);
+        }
     }
 
     public void AddStatus(BodyPart bodyPart)
@@ -50,7 +90,14 @@ public class BodyPartStatusManager : MonoBehaviour
         GameObject status = Instantiate(statusPrefab, statusPanel.transform);
         status.name = bodyPart.name;
 
-        status.transform.GetChild(0).GetComponent<Text>().text = bodyPart.name;
+        if (bodyPart is Organ)
+        {
+             status.transform.GetChild(0).GetComponent<Text>().text = "  " + bodyPart.name;
+        }
+        else
+        {
+            status.transform.GetChild(0).GetComponent<Text>().text = bodyPart.name;
+        }
 
         BloodBar bloodBar = status.transform.GetChild(1).GetChild(0).GetComponent<BloodBar>();
         OxygenBar oxygenBar = status.transform.GetChild(1).GetChild(1).GetComponent<OxygenBar>();

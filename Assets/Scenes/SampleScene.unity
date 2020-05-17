@@ -626,6 +626,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5688691428944469533, guid: 54bce29e8e62e4f4887583942e662fde,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.5849056
+      objectReference: {fileID: 0}
+    - target: {fileID: 5688691428944469533, guid: 54bce29e8e62e4f4887583942e662fde,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5849056
+      objectReference: {fileID: 0}
+    - target: {fileID: 5688691428944469533, guid: 54bce29e8e62e4f4887583942e662fde,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.5849056
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54bce29e8e62e4f4887583942e662fde, type: 3}
 --- !u!1 &182947854
@@ -1092,7 +1107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &257884926
 MonoBehaviour:
   m_ObjectHideFlags: 0
