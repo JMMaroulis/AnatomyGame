@@ -20,6 +20,8 @@ public class BodyPartSpawner : MonoBehaviour
     public GameObject torsoPrefab;
     public GameObject headPrefab;
 
+    //selector prefab
+    public GameObject selectorPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,10 @@ public class BodyPartSpawner : MonoBehaviour
         GameObject bodyPart = Instantiate(heartPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -46,6 +52,10 @@ public class BodyPartSpawner : MonoBehaviour
         GameObject bodyPart = Instantiate(lungPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -54,6 +64,10 @@ public class BodyPartSpawner : MonoBehaviour
         GameObject bodyPart = Instantiate(brainPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -62,6 +76,10 @@ public class BodyPartSpawner : MonoBehaviour
         GameObject bodyPart = Instantiate(eyePrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -70,6 +88,10 @@ public class BodyPartSpawner : MonoBehaviour
         GameObject bodyPart = Instantiate(liverPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -78,6 +100,10 @@ public class BodyPartSpawner : MonoBehaviour
         GameObject bodyPart = Instantiate(stomachPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -86,6 +112,10 @@ public class BodyPartSpawner : MonoBehaviour
         GameObject bodyPart = Instantiate(armPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -94,6 +124,10 @@ public class BodyPartSpawner : MonoBehaviour
         GameObject bodyPart = Instantiate(legPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -106,6 +140,10 @@ public class BodyPartSpawner : MonoBehaviour
         {
             FindObjectOfType<BodyPartStatusManager>().AddStatus(organ.GetComponent<BodyPart>());
         }
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
@@ -118,6 +156,10 @@ public class BodyPartSpawner : MonoBehaviour
         {
             FindObjectOfType<BodyPartStatusManager>().AddStatus(organ.GetComponent<BodyPart>());
         }
+
+        GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+
         return bodyPart;
     }
 
