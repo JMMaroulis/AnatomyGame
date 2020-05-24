@@ -27,15 +27,17 @@ public class LifeMonitor : MonoBehaviour
 
     }
 
-    public void VictoryCheck()
+    public void VictoryCheck(float secondsToWait)
     {
-        StaticCoroutine.Start(VictoryCheckCoroutine());
+        StaticCoroutine.Start(VictoryCheckCoroutine(secondsToWait));
     }
 
-    public IEnumerator VictoryCheckCoroutine()
+    public IEnumerator VictoryCheckCoroutine(float secondsToWait)
     {
         messageBox.text = "";
         bool victory = true;
+
+        yield return new WaitForSeconds(secondsToWait);
 
         //check the vital statistics of every bodypart in the body
         PopulateBodyPartsList();
@@ -86,7 +88,9 @@ public class LifeMonitor : MonoBehaviour
             { new Lung().GetType(),  new List<int> {0,2}},
             { new Heart().GetType(), new List<int> {0,1}},
             { new Brain().GetType(), new List<int> {0,1}},
-            { new Eye().GetType(),  new List<int> {0,2}}
+            { new Eye().GetType(),  new List<int> {0,2}},
+            { new Liver().GetType(), new List<int> {0,1}},
+            { new Stomach().GetType(), new List<int> {0,1}}
         };
 
         foreach (BodyPart bodyPart in bodyParts)
@@ -94,6 +98,7 @@ public class LifeMonitor : MonoBehaviour
             Debug.Log(bodyPart.GetType());
             typeCount[bodyPart.GetType()][0] += 1;
         }
+
         foreach (Organ organ in organs)
         {
             Debug.Log(organ.GetType());
@@ -151,19 +156,14 @@ public class LifeMonitor : MonoBehaviour
         hasPlayerWon = victory;
         if (victory)
         {
-            messageBox.text = "Congratulations, he'll live!\nYour payment is 500 gold.\nNew patient in 5 seconds...";
+            messageBox.text = "Congratulations, he'll live!\nYour payment is 500 gold.\n Transfer in 5 seconds...";
             GameObject.FindObjectOfType<GoldTracker>().goldAccumulated += 500;
-            GameObject.FindObjectOfType<InjurySpawnTracker>().NextPatient();
 
             yield return new WaitForSeconds(5 * Time.timeScale);
-            ResetGame();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("UnlockScreen");
+
         }
 
-    }
-
-    public void ResetGame()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
 

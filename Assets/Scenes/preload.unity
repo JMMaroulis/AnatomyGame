@@ -347,15 +347,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surgery: 1
-  medicine_poison: 1
-  medicine_speed: 1
-  medicine_blood: 1
-  charms_heart: 1
-  charms_lung: 1
-  charms_petrification: 1
-  charms_blood_regen: 1
+  medicine_poison: 0
+  medicine_speed: 0
+  medicine_blood: 0
+  charms_heart: 0
+  charms_lung: 0
+  charms_petrification: 0
+  charms_blood_regen: 0
   blood: 1
-  spawn: 1
+  spawn: 0
 --- !u!114 &1749921799
 MonoBehaviour:
   m_ObjectHideFlags: 0

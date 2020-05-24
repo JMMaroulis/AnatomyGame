@@ -1155,7 +1155,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitOneHour(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(3600.0f); lifeMonitor.VictoryCheck(); messageBox.text = "Waiting one hour..."; actionTimeBar.Reset(3600.0f); };
+        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(3600.0f); lifeMonitor.VictoryCheck(3600.0f); messageBox.text = "Waiting one hour..."; actionTimeBar.Reset(3600.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait an hour (Victory Check)";

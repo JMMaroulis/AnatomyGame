@@ -38,7 +38,7 @@ public class InjurySpawnTracker : MonoBehaviour
             mediumInjuries = 0;
             hardInjuries += 1;
         }
-
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
 }
