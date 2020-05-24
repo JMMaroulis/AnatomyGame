@@ -6,19 +6,25 @@ using System.Linq;
 public class ButtonActions : MonoBehaviour
 {
     public List<Button> menuButtons;
-    public BodyPart selectedBodyPart = null;
-    public GameObject body;
+    public List<Button> menuTabs;
     private List<BodyPart> bodyParts = new List<BodyPart>();
     private List<Organ> organs = new List<Organ>();
-    private int bodyPartMenuCounter = 0;
-    private int organMenuCounter = 0;
+
+    public BodyPart selectedBodyPart = null;
+    public GameObject body;
+
     public Text selectedBodyPartText;
     public Text messageBox;
     public Text examineBox;
+
+    private int bodyPartMenuCounter = 0;
+    private int organMenuCounter = 0;
+
     public LifeMonitor lifeMonitor;
     public Clock clock;
     public ActionTimeBar actionTimeBar;
 
+    private UnlockTracker unlocks;
     private float secondCounter;
 
     // Start is called before the first frame update
@@ -27,6 +33,15 @@ public class ButtonActions : MonoBehaviour
         ClearAllButtons();
         PopulateBodyPartsList();
         examineBox.text = "";
+
+        //enable/disable button tabs based on unlocks
+        unlocks = FindObjectOfType<UnlockTracker>();
+        menuTabs[2].gameObject.SetActive(unlocks.blood);
+        menuTabs[3].gameObject.SetActive(unlocks.surgery);
+        //menuTabs[4].gameObject.SetActive(unlocks.medicine); //medicine permissions on individual level
+        menuTabs[5].gameObject.SetActive(unlocks.charms_petrification || unlocks.charms_heart || unlocks.charms_lung || unlocks.charms_blood_regen); //charm permissions on individual level
+        menuTabs[6].gameObject.SetActive(unlocks.spawn);
+        menuTabs[7].gameObject.SetActive(unlocks.spawn);
     }
 
     void PopulateBodyPartsList()
@@ -248,26 +263,46 @@ public class ButtonActions : MonoBehaviour
     public void SelectMedicineActionOptions_BodyPart()
     {
         ClearAllButtons();
+        int n = 0;
 
-        AssignInjectHealthPotionButton(menuButtons[0], selectedBodyPart);
-        AssignInjectAntidoteButton(menuButtons[1], selectedBodyPart);
-        AssignInjectSlowPoisonButton(menuButtons[2], selectedBodyPart);
-        AssignInjectStasisPotionButton(menuButtons[3], selectedBodyPart);
-        AssignInjectHastePotionButton(menuButtons[4], selectedBodyPart);
-        AssignInjectCoagulantPotionButton(menuButtons[5], selectedBodyPart);
+        AssignInjectHealthPotionButton(menuButtons[n], selectedBodyPart); n++;
+        if (unlocks.medicine_blood) 
+        {
+            AssignInjectCoagulantPotionButton(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.medicine_poison) 
+        {
+            AssignInjectAntidoteButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectSlowPoisonButton(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.medicine_speed)
+        {
+            AssignInjectStasisPotionButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectHastePotionButton(menuButtons[n], selectedBodyPart); n++;
+        }
+ 
     }
 
     public void SelectMedicineActionOptions_Organ()
     {
         ClearAllButtons();
+        int n = 0;
 
-        AssignInjectHealthPotionButton(menuButtons[0], selectedBodyPart);
-        AssignInjectAntidoteButton(menuButtons[1], selectedBodyPart);
-        AssignInjectSlowPoisonButton(menuButtons[2], selectedBodyPart);
-        AssignInjectStasisPotionButton(menuButtons[3], selectedBodyPart);
-        AssignInjectHastePotionButton(menuButtons[4], selectedBodyPart);
-        AssignInjectCoagulantPotionButton(menuButtons[5], selectedBodyPart);
-
+        AssignInjectHealthPotionButton(menuButtons[n], selectedBodyPart); n++;
+        if (unlocks.medicine_blood)
+        {
+            AssignInjectCoagulantPotionButton(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.medicine_poison)
+        {
+            AssignInjectAntidoteButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectSlowPoisonButton(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.medicine_speed)
+        {
+            AssignInjectStasisPotionButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectHastePotionButton(menuButtons[n], selectedBodyPart); n++;
+        }
     }
 
     public void SelectCharmAction()
@@ -288,22 +323,46 @@ public class ButtonActions : MonoBehaviour
 
     public void SelectCharmActionOptions_BodyPart()
     {
+        int n = 0;
         ClearAllButtons();
-
-        AssignApplyHeartCharm(menuButtons[0], selectedBodyPart);
-        AssignApplyLungCharm(menuButtons[1], selectedBodyPart);
-        AssignApplyPetrificationCharm(menuButtons[2], selectedBodyPart);
-        AssignApplyBloodRegenCharm(menuButtons[3], selectedBodyPart);
+        if (unlocks.charms_heart)
+        {
+            AssignApplyHeartCharm(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.charms_lung)
+        {
+            AssignApplyLungCharm(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.charms_blood_regen)
+        {
+            AssignApplyBloodRegenCharm(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.charms_petrification)
+        {
+            AssignApplyPetrificationCharm(menuButtons[n], selectedBodyPart); n++;
+        }
     }
 
     public void SelectCharmActionOptions_Organ()
     {
+        int n = 0;
         ClearAllButtons();
-
-        AssignApplyHeartCharm(menuButtons[0], selectedBodyPart);
-        AssignApplyLungCharm(menuButtons[1], selectedBodyPart);
-        AssignApplyPetrificationCharm(menuButtons[2], selectedBodyPart);
-        AssignApplyBloodRegenCharm(menuButtons[3], selectedBodyPart);
+        if (unlocks.charms_heart)
+        {
+            AssignApplyHeartCharm(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.charms_lung)
+        {
+            AssignApplyLungCharm(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.charms_blood_regen)
+        {
+            AssignApplyBloodRegenCharm(menuButtons[n], selectedBodyPart); n++;
+        }
+        if (unlocks.charms_petrification)
+        {
+            AssignApplyPetrificationCharm(menuButtons[n], selectedBodyPart); n++;
+        }
     }
 
     #region Selection
@@ -584,7 +643,6 @@ public class ButtonActions : MonoBehaviour
 
     #endregion
 
-
     #region Blood
 
     void AssignBandagesButton(Button button, BodyPart bodypart)
@@ -666,7 +724,6 @@ public class ButtonActions : MonoBehaviour
     }
 
     #endregion
-
 
     #region BodyPartSurgery
 
@@ -772,7 +829,6 @@ public class ButtonActions : MonoBehaviour
     }
 
     #endregion
-
 
     #region OrganSurgery
 
@@ -901,7 +957,6 @@ public class ButtonActions : MonoBehaviour
 
     #endregion
 
-
     #region Examine
 
     public void ExamineSelectedBodyPart()
@@ -917,8 +972,6 @@ public class ButtonActions : MonoBehaviour
     }
 
     #endregion
-
-
 
     #region spawnBodyParts
 

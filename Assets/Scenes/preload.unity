@@ -184,6 +184,8 @@ MonoBehaviour:
     type: 3}
   headPrefab: {fileID: 4013890393164018642, guid: a06dd97c5b85b054d9a3a1997c1739e7,
     type: 3}
+  selectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
+    type: 3}
 --- !u!114 &1136662593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,4 +315,70 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1749921797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1749921800}
+  - component: {fileID: 1749921799}
+  - component: {fileID: 1749921798}
+  m_Layer: 0
+  m_Name: UnlockTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1749921798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749921797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998f20448dcdce149adf8b197e6422f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surgery: 1
+  medicine_poison: 1
+  medicine_speed: 1
+  medicine_blood: 1
+  charms_heart: 1
+  charms_lung: 1
+  charms_petrification: 1
+  charms_blood_regen: 1
+  blood: 1
+  spawn: 1
+--- !u!114 &1749921799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749921797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903f6057552a7d842be2ed9950d7ccf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1749921800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749921797}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.112565, y: 3.263585, z: -385.48465}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
