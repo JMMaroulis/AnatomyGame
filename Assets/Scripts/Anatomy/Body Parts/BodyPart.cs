@@ -477,13 +477,13 @@ public class BodyPart : MonoBehaviour
         //add stasis potion description
         if (stasisPotion > 0.0f)
         {
-            description += $"Stasis Postion: {stasisPotion} Units.\n";
+            description += $"Stasis Potion: {stasisPotion} Units.\n";
         }
 
         //add stasis potion description
         if (hastePotion > 0.0f)
         {
-            description += $"Haste Postion: {hastePotion} Units.\n";
+            description += $"Haste Potion: {hastePotion} Units.\n";
         }
 
         //add coagulant potion description
