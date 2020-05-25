@@ -24,12 +24,15 @@ public class ButtonActions : MonoBehaviour
     public Clock clock;
     public ActionTimeBar actionTimeBar;
 
+    private GoldTracker goldTracker;
     private UnlockTracker unlocks;
     private float secondCounter;
 
     // Start is called before the first frame update
     void Start()
     {
+        goldTracker = FindObjectOfType<GoldTracker>();
+
         ClearAllButtons();
         PopulateBodyPartsList();
         examineBox.text = "";
@@ -402,6 +405,7 @@ public class ButtonActions : MonoBehaviour
 
     #endregion
 
+
     public void SelectSpawnOrganActionOptions()
     {
         ClearAllButtons();
@@ -431,15 +435,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10.0f;
         int goldCost = 30;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Medicine.InjectHealthPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Health Potion into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Medicine.InjectHealthPotion(bodypart, seconds, goldCost);
+                messageBox.text = $"Injecting 50 units of Health Potion into the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -452,15 +464,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10.0f;
         int goldCost = 50;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Medicine.InjectAntidote(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Antidote into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Medicine.InjectAntidote(bodypart, seconds, goldCost);
+                messageBox.text = $"Injecting 50 units of Antidote into the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -473,15 +493,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10.0f;
         int goldCost = 50;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Medicine.InjectSlowPoison(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Slow Poison into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Medicine.InjectSlowPoison(bodypart, seconds, goldCost);
+                messageBox.text = $"Injecting 50 units of Slow Poison into the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -494,15 +522,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10.0f;
         int goldCost = 50;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost); 
+                messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}..."; 
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -515,15 +551,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10.0f;
         int goldCost = 50;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Medicine.InjectHastePotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Haste Potion into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost);
+                messageBox.text = $"Injecting 50 units of Stasis Potion into the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -536,21 +580,28 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10.0f;
         int goldCost = 50;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Medicine.InjectCoagulantPotion(bodypart, seconds, goldCost); messageBox.text = $"Injecting 50 units of Coagulant Potion into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Medicine.InjectCoagulantPotion(bodypart, seconds, goldCost); 
+                messageBox.text = $"Injecting 50 units of Coagulant Potion into the {bodypart.name}..."; 
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Coagulant Potion (50 units): {seconds} seconds, {goldCost} gold";
-
     }
 
     #endregion
@@ -561,15 +612,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 30.0f;
         int goldCost = 200;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Charms.ApplyHeartCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Heart Charm to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Charms.ApplyHeartCharm(bodypart, seconds, goldCost);
+                messageBox.text = $"Applying a Heart Charm to the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -582,15 +641,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 30.0f;
         int goldCost = 200;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Charms.ApplyLungCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Lung Charm to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Charms.ApplyLungCharm(bodypart, seconds, goldCost);
+                messageBox.text = $"Applying a Lung Charm to the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -603,16 +670,24 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 30.0f;
         int goldCost = 200;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Charms.ApplyPetrificationCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Petrification Charm to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
-
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Charms.ApplyPetrificationCharm(bodypart, seconds, goldCost);
+                messageBox.text = $"Applying a Petrification Charm to the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
+        
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -624,15 +699,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 30.0f;
         int goldCost = 200;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Charms.ApplyBloodRegenCharm(bodypart, seconds, goldCost); messageBox.text = $"Applying a Blood Regeneration Charm to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Charms.ApplyBloodRegenCharm(bodypart, seconds, goldCost);
+                messageBox.text = $"Applying a Blood Regeneration Charm to the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -649,15 +732,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 30.0f;
         int goldCost = 10;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select a bodypart for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Blood.Bandages(bodypart, seconds, goldCost); messageBox.text = $"Applying bandages to the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Blood.Bandages(bodypart, seconds, goldCost);
+                messageBox.text = $"Applying bandages to the {bodypart.name}..."; 
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -669,15 +760,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 30.0f;
         int goldCost = 0;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Blood.Bloodletting(bodypart, seconds, goldCost); messageBox.text = $"Inducing bleeding in the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Blood.Bloodletting(bodypart, seconds, goldCost); 
+                messageBox.text = $"Inducing bleeding in the {bodypart.name}..."; 
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -688,15 +787,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 20.0f;
         int goldCost = 20;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Blood.AddBlood(bodypart, seconds, goldCost); messageBox.text = $"Injecting 100 units of blood into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Blood.AddBlood(bodypart, seconds, goldCost);
+                messageBox.text = $"Injecting 100 units of blood into the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -707,16 +814,24 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 20.0f;
         int goldCost = 0;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select a bodypart for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Blood.RemoveBlood(bodypart, seconds, goldCost); messageBox.text = $"Extracting 100 units of blood from the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
-
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Blood.RemoveBlood(bodypart, seconds, goldCost); 
+                messageBox.text = $"Extracting 100 units of blood from the {bodypart.name}..."; 
+                actionTimeBar.Reset(seconds);
+            }
+        };
+        
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -731,15 +846,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select a bodypart for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Surgery.RemoveBodyPart(bodypart, seconds, goldCost); messageBox.text = $"Removing the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Surgery.RemoveBodyPart(bodypart, seconds, goldCost);
+                messageBox.text = $"Removing the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -747,25 +870,26 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = $"Amputate Bodypart: {seconds} seconds, {goldCost} gold";
     }
 
-
     void AssignAttachBodyPartButton(Button button, BodyPart bodypart)
     {
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select a bodypart for that!"; };
-        }
-        else
-        {
-            action = () => { SelectBodyPartToAttachOptions(bodypart); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select a bodypart for that!";
+            }
+            else
+            {
+                SelectBodyPartToAttachOptions(bodypart);
+            }
+        };
+
         bodyPartMenuCounter = 0;
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "ATTACH TO... (10 minutes)";
     }
-
 
     void SelectBodyPartToAttachOptions(BodyPart bodypart)
     {
@@ -794,12 +918,15 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-
     void AssignConnectTwoBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, Button button)
     {
         float seconds = 10 * 60.0f;
-        int goldCost = 20;
-        UnityEngine.Events.UnityAction action = () => { Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost); messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}..."; actionTimeBar.Reset(seconds); };
+        int goldCost = 0;
+        UnityEngine.Events.UnityAction action = () => {
+            Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost); 
+            messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}...";
+            actionTimeBar.Reset(seconds); 
+        };
         button.onClick.AddListener(action);
     }
 
@@ -807,20 +934,23 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
-        UnityEngine.Events.UnityAction action = null;
-
-        if (bodypart == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select a bodypart for that!"; };
-        }
-        else if (selectedBodyPart.connectedBodyParts.Count() != 0)
-        {
-            action = () => { messageBox.text = "That bodypart is still connected to things!"; };
-        }
-        else
-        {
-            action = () => { Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost); messageBox.text = $"Destroying the {bodypart.name}..."; selectedBodyPart = null; actionTimeBar.Reset(seconds); };
-        }
+            if (bodypart == null)
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost);
+                messageBox.text = $"Destroying the {bodypart.name}..."; selectedBodyPart = null;
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -834,15 +964,17 @@ public class ButtonActions : MonoBehaviour
 
     public void AssignImplantOrganOptions(Button button)
     {
-        UnityEngine.Events.UnityAction action = null;
-        if (!(selectedBodyPart is Organ))
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select something for that!"; };
-        }
-        else
-        {
-            action = () => { ImplantOrganOptions(true); };
-        }
+            if (!(selectedBodyPart is Organ))
+            {
+                messageBox.text = "You need to select something for that!";
+            }
+            else
+            {
+                ImplantOrganOptions(true);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -878,29 +1010,31 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-
     void AssignImplantOrganButton(Button button, BodyPart bodypart, Organ organ)
     {
         float seconds = 60.0f * 10.0f;
         int goldCost = 0;
-        UnityEngine.Events.UnityAction action = null;
-        if (bodypart == null || organ == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select both a bodypart and an organ for that!"; };
-        }
-        else if (bodypart.containedOrgans.Contains(organ))
-        {
-            action = () => { messageBox.text = "The organ is already in there!"; };
-        }
-        else if (organ.connectedBodyParts.Count != 0)
-        {
-            action = () => { messageBox.text = "The organ is already inside something else!"; };
-        }
-        else
-        {
-            action = () => { Actions_Surgery.ImplantOrgan(organ, bodypart, seconds, goldCost); messageBox.text = $"Implanting the {organ.name} into the {bodypart.name}..."; actionTimeBar.Reset(seconds); };
-        }
-
+            if (bodypart == null || organ == null)
+            {
+                messageBox.text = "You need to select both a bodypart and an organ for that!";
+            }
+            else if (bodypart.containedOrgans.Contains(organ))
+            {
+                messageBox.text = "The organ is already in there!";
+            }
+            else if (organ.connectedBodyParts.Count != 0)
+            {
+                messageBox.text = "The organ is already inside something else!";
+            }
+            else
+            {
+                Actions_Surgery.ImplantOrgan(organ, bodypart, seconds, goldCost);
+                messageBox.text = $"Implanting the {organ.name} into the {bodypart.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -908,20 +1042,23 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = $"Implant {organ.name} into {bodypart.name}: {seconds} seconds, {goldCost} gold";
     }
 
-
     void AssignRemoveOrganButton(Button button, Organ organ)
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
-        UnityEngine.Events.UnityAction action = null;
-        if (organ == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select an organ for that!"; };
-        }
-        else
-        {
-            action = () => { Actions_Surgery.RemoveOrgan(organ, seconds, goldCost); messageBox.text = $"Extracting the {organ.name}..."; actionTimeBar.Reset(seconds); };
-        }
+            if (organ == null)
+            {
+                messageBox.text = "You need to select an organ for that!";
+            }
+            else
+            {
+                Actions_Surgery.RemoveOrgan(organ, seconds, goldCost);
+                messageBox.text = $"Extracting the {organ.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -929,25 +1066,27 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = $"Extract Organ: {seconds} seconds, {goldCost} gold";
     }
 
-
     void AssignDestroyOrgan(Button button, Organ organ)
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
-        UnityEngine.Events.UnityAction action = null;
-
-        if (organ == null)
+        UnityEngine.Events.UnityAction action = () =>
         {
-            action = () => { messageBox.text = "You need to select a organ for that!"; };
-        }
-        else if (organ == null || organ.connectedBodyParts.Count() != 0)
-        {
-            action = () => { messageBox.text = "That organ is still inside something!"; };
-        }
-        else
-        {           
-            action = () => {  Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost); messageBox.text = $"Destroying the {organ.name}..."; selectedBodyPart = null; actionTimeBar.Reset(seconds); };
-        }
+            if (organ == null)
+            {
+                messageBox.text = "You need to select a organ for that!";
+            }
+            else if (organ == null || organ.connectedBodyParts.Count() != 0)
+            {
+                messageBox.text = "That organ is still inside something!";
+            }
+            else
+            {
+                Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost);
+                messageBox.text = $"Destroying the {organ.name}...";
+                selectedBodyPart = null; actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -979,7 +1118,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHeart(seconds, goldCost); messageBox.text = $"Spawning a new heart..."; actionTimeBar.Reset(seconds); };
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnHeart(seconds, goldCost);
+                messageBox.text = $"Spawning a new heart...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -992,7 +1143,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLung(seconds, goldCost); messageBox.text = $"Spawning a new lung..."; actionTimeBar.Reset(seconds); };
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnLung(seconds, goldCost); 
+                messageBox.text = $"Spawning a new lung...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -1005,7 +1168,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost); messageBox.text = $"Spawning a new brain..."; actionTimeBar.Reset(seconds); };
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost);
+                messageBox.text = $"Spawning a new brain...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -1017,7 +1192,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnEye(seconds, goldCost); messageBox.text = $"Spawning a new eye..."; actionTimeBar.Reset(seconds); };
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnEye(seconds, goldCost);
+                messageBox.text = $"Spawning a new eye...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
 
         button.onClick.AddListener(action);
 
@@ -1029,8 +1216,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLiver(seconds, goldCost); messageBox.text = $"Spawning a new liver..."; actionTimeBar.Reset(seconds); };
-
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnLiver(seconds, goldCost);
+                messageBox.text = $"Spawning a new liver...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -1041,8 +1239,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnStomach(seconds, goldCost); messageBox.text = $"Spawning a new stomach..."; actionTimeBar.Reset(seconds); };
-
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnStomach(seconds, goldCost);
+                messageBox.text = $"Spawning a new stomach...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -1053,8 +1262,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnArm(seconds, goldCost); messageBox.text = $"Spawning a new arm..."; actionTimeBar.Reset(seconds); };
-
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnArm(seconds, goldCost);
+                messageBox.text = $"Spawning a new arm...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -1066,8 +1286,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnLeg(seconds, goldCost); messageBox.text = $"Spawning a new leg..."; actionTimeBar.Reset(seconds); };
-
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnLeg(seconds, goldCost);
+                messageBox.text = $"Spawning a new leg...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -1079,8 +1310,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnTorso(seconds, goldCost); messageBox.text = $"Spawning a new torso..."; actionTimeBar.Reset(seconds); };
-
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnTorso(seconds, goldCost);
+                messageBox.text = $"Spawning a new torso...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
@@ -1092,8 +1334,19 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () => { Actions_SpawnBodyParts.SpawnHead(seconds, goldCost); messageBox.text = $"Spawning a new head..."; actionTimeBar.Reset(seconds); };
-
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnHead(seconds, goldCost);
+                messageBox.text = $"Spawning a new head...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
