@@ -10,7 +10,7 @@ public class Lung : Organ
     // Start is called before the first frame update
     void Start()
     {
-
+        clock = FindObjectOfType<Clock>();
     }
 
     void AbsorbOxygen(float deltaTime)
@@ -32,7 +32,7 @@ public class Lung : Organ
     {
         if (isTimePassing)
         {
-            float deltaTime = Time.deltaTime;
+            float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
             //capping deltatime at 1ms to stop inaccuracies
             while (deltaTime > 0.0f)
             {

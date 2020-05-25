@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class ActionTimeBar : MonoBehaviour
 {
     private Slider slider;
-    public Clock clock;
+    private Clock clock;
 
     // Start is called before the first frame update
     void Start()
     {
+        clock = FindObjectOfType<Clock>();
         slider = this.gameObject.GetComponent<Slider>();
     }
 
@@ -19,7 +20,7 @@ public class ActionTimeBar : MonoBehaviour
     {
         if (clock.isTimePassing)
         {
-            slider.value += Time.deltaTime;
+            slider.value += Time.deltaTime * clock.globalTimeScalingFactor;
         }
     }
 

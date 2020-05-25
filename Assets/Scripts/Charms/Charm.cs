@@ -8,10 +8,12 @@ public class Charm : MonoBehaviour
 
     public float expiryTime;
     public float timeElapsed;
+    public Clock clock;
 
     // Start is called before the first frame update
     void Start()
     {
+        clock = FindObjectOfType<Clock>();
         timeElapsed = 0.0f;
         expiryTime = 60.0f * 30.0f;
     }

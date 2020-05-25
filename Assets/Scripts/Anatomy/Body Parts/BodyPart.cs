@@ -8,6 +8,7 @@ public class BodyPart : MonoBehaviour
     public bool isTimePassing;
     public float timeScale;
     public bool isFunctioning;
+    public Clock clock;
 
     //blood stuff
     public float bloodRequiredToFunction;
@@ -31,7 +32,6 @@ public class BodyPart : MonoBehaviour
 
     private bool isConnectedToBrain;
     private float connectedBrainEfficiency;
-
 
     //drug stuff
     public float healthPotion;

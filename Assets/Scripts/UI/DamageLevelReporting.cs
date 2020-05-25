@@ -27,7 +27,6 @@ public class DamageLevelReporting : MonoBehaviour
         {
             UpdateDamageText();
             secondCounter = 0.0f;
-
         }
     }
 

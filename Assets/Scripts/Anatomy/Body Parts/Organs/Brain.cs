@@ -8,14 +8,14 @@ public class Brain : Organ
     // Start is called before the first frame update
     void Start()
     {
-
+        clock = FindObjectOfType<Clock>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        float deltaTime = Time.deltaTime;
+        float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
         //capping deltatime at 1ms to stop inaccuracies
         while (deltaTime > 0.0f)
         {

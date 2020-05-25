@@ -11,7 +11,7 @@ public class LungCharm : Charm
     {
         if (this.gameObject.GetComponent<BodyPart>().isTimePassing)
         {
-            float deltaTime = Time.deltaTime;
+            float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
             //capping deltatime at 100ms to stop inaccuracies
             while (deltaTime > 0.0f)
             {

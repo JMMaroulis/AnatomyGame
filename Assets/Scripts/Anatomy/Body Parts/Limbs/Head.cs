@@ -8,12 +8,12 @@ public class Head : BodyPart
     // Start is called before the first frame update
     void Start()
     {
-
+        clock = FindObjectOfType<Clock>();
     }
 
     void Update()
     {
-        float deltaTime = Time.deltaTime;
+        float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
         //capping deltatime at 1ms to stop inaccuracies
         while (deltaTime > 0.0f)
         {

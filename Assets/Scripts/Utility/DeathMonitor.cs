@@ -9,10 +9,12 @@ public class DeathMonitor : MonoBehaviour
     public bool isTimePassing;
     public float brainDeadDuration;
     public float brainDeadDurationLimit;
+    private Clock clock;
 
     // Start is called before the first frame update
     void Start()
     {
+        clock = FindObjectOfType<Clock>();
         brainDeadDuration = 0.0f;
     }
 
@@ -23,7 +25,7 @@ public class DeathMonitor : MonoBehaviour
         {
             if (IsBrainDead())
             {
-                brainDeadDuration += Time.deltaTime;
+                brainDeadDuration += Time.deltaTime * clock.globalTimeScalingFactor;
             }
         }
 

@@ -7,37 +7,40 @@ using UnityEngine.UI;
 public class Clock : MonoBehaviour
 {
 
-    public GameObject body;
-    public DeathMonitor deathMonitor;
-    public LifeMonitor lifeMonitor;
+    private DeathMonitor deathMonitor;
+    private LifeMonitor lifeMonitor;
     private List<BodyPart> bodyParts = new List<BodyPart>();
 
     //TODO: find some way to get this thing working as a public bool in the inspector with properties, rather than just updating every bodypart value every frame
     public bool isTimePassing; // { get { return _isTimePassing; } set { _isTimePassing = value; BodyPartsTimePaassing(); } }
-    //private bool _isTimePassing;
 
-    private float globalTimeScalingFactor;
-    public float clockTarget = 0.0f;
-    private float timeElapsed = 0.0f;
+    private float timeElapsed;
+    public float clockTarget;
+    public float globalTimeScalingFactor;
+
     public Text currentTime;
-
     public Text clockText;
     public Slider clockSlider;
 
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = globalTimeScalingFactor;
+        deathMonitor = FindObjectOfType<DeathMonitor>();
+        lifeMonitor = FindObjectOfType<LifeMonitor>();
+
+        //Time.timeScale = globalTimeScalingFactor;
         isTimePassing = false;
         PopulateBodyPartsList();
         currentTime.text = "00:00:00";
+        clockTarget = 0.0f;
+        timeElapsed = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         globalTimeScalingFactor = clockSlider.value;
-        Time.timeScale = globalTimeScalingFactor;
+        //Time.timeScale = globalTimeScalingFactor;
         clockText.text = $"Time Scaling: {globalTimeScalingFactor}x";
 
         PopulateBodyPartsList();
@@ -89,7 +92,7 @@ public class Clock : MonoBehaviour
     {
         if (isTimePassing)
         {
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.deltaTime * globalTimeScalingFactor;
             int timeElapsedTemp = (int)timeElapsed;
             currentTime.text = string.Format("{0:00}:{1:00}:{2:00}", timeElapsedTemp / 3600, (timeElapsedTemp / 60) % 60, timeElapsedTemp % 60);
         }

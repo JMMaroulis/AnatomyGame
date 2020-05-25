@@ -61,7 +61,7 @@ public class Heart : Organ
     // Start is called before the first frame update
     void Start()
     {
-
+        clock = FindObjectOfType<Clock>();
     }
 
     // Update is called once per frame
@@ -70,7 +70,7 @@ public class Heart : Organ
         if (isTimePassing)
         {
 
-            float deltaTime = Time.deltaTime;
+            float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
             //capping deltatime at 100ms to stop inaccuracies
             while (deltaTime > 0.0f)
             {

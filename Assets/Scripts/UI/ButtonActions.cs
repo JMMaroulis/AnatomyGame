@@ -21,17 +21,18 @@ public class ButtonActions : MonoBehaviour
     private int organMenuCounter = 0;
 
     public LifeMonitor lifeMonitor;
-    public Clock clock;
     public ActionTimeBar actionTimeBar;
 
     private GoldTracker goldTracker;
     private UnlockTracker unlocks;
+    private Clock clock;
     private float secondCounter;
 
     // Start is called before the first frame update
     void Start()
     {
         goldTracker = FindObjectOfType<GoldTracker>();
+        clock = FindObjectOfType<Clock>();
 
         ClearAllButtons();
         PopulateBodyPartsList();

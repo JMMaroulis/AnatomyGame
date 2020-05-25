@@ -7,18 +7,19 @@ public class LifeMonitor : MonoBehaviour
 {
 
     public bool isTimePassing;
-    public Clock clock;
     public bool hasPlayerWon;
     public Text messageBox;
 
     public GameObject body;
     private List<BodyPart> bodyParts;
     private List<Organ> organs;
+    private Clock clock;
 
     // Start is called before the first frame update
     void Start()
     {
         hasPlayerWon = false;
+        clock = FindObjectOfType<Clock>();
     }
 
     // Update is called once per frame

@@ -1448,7 +1448,6 @@ MonoBehaviour:
   messageBox: {fileID: 811546129}
   examineBox: {fileID: 1043374667}
   lifeMonitor: {fileID: 714661424}
-  clock: {fileID: 1294914373}
   actionTimeBar: {fileID: 1678832071}
 --- !u!4 &374478781
 Transform:
@@ -1462,7 +1461,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &383672839
 GameObject:
@@ -3470,7 +3469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  clock: {fileID: 1294914373}
   hasPlayerWon: 0
   messageBox: {fileID: 811546129}
   body: {fileID: 965609865}
@@ -6012,7 +6010,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1294914373
 MonoBehaviour:
@@ -6026,9 +6024,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28819a09b9a47264389fd78a2756739c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 965609865}
-  deathMonitor: {fileID: 1124799829}
-  lifeMonitor: {fileID: 714661424}
   isTimePassing: 1
   clockTarget: 0
   currentTime: {fileID: 188086456}
@@ -6924,7 +6919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf2eacfdae905b42b63e1c75766e14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clock: {fileID: 1294914373}
 --- !u!114 &1678832072
 MonoBehaviour:
   m_ObjectHideFlags: 0
