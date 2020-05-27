@@ -7,12 +7,6 @@ public class Liver : Organ
 
     public float bloodProcessingRate;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        clock = FindObjectOfType<Clock>();
-    }
-
     void BloodProcessing(float deltaTime)
     {
         this.slowPoison -= bloodProcessingRate * deltaTime * efficiency;

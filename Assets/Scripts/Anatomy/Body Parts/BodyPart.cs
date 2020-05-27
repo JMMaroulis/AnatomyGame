@@ -31,6 +31,9 @@ public class BodyPart : MonoBehaviour
     public List<Organ> containedOrgans;
 
     private bool isConnectedToBrain;
+    private bool isConnectedToHeart;
+    public List<Heart> connectedHearts;
+
     private float connectedBrainEfficiency;
 
     //drug stuff
@@ -41,21 +44,43 @@ public class BodyPart : MonoBehaviour
     public float coagulantPotion;
     public float hastePotion;
 
+    public void Start()
+    {
+        clock = FindObjectOfType<Clock>();
+        UpdateHeartConnections();
+
+    }
+
     public void UpdateBodyPart(float deltaTime)
     {
 
         if (isTimePassing)
         {
-
             ApplyDrugs(deltaTime);
             UpdateDamage(deltaTime);
             CheckForFunctionality();
             UpdateEfficiency();
             LoseBlood(deltaTime);
             ConsumeOxygen(deltaTime);
-
         }
 
+    }
+
+    public void UpdateHeartConnections()
+    {
+        //check if connected to heart
+        List<Heart> hearts = FindObjectsOfType<Heart>().ToList();
+        foreach (Heart heart in hearts)
+        {
+            if (IsConnectedToBodyPartStarter(heart))
+            {
+                connectedHearts.Add(heart);
+            }
+            else
+            {
+                connectedHearts.Remove(heart);
+            }
+        }
     }
 
     //Pumps blood, if there is blood left to pump.

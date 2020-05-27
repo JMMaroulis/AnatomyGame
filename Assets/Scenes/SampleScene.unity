@@ -1005,7 +1005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &257884926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 487535669}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 100
+  m_MaxValue: 200
   m_WholeNumbers: 1
   m_Value: 20
   m_OnValueChanged:
@@ -6026,6 +6026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isTimePassing: 1
   clockTarget: 0
+  globalTimeScalingFactor: 0
   currentTime: {fileID: 188086456}
   clockText: {fileID: 182947857}
   clockSlider: {fileID: 361797261}

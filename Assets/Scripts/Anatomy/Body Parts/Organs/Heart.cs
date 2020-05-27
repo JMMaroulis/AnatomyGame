@@ -27,7 +27,8 @@ public class Heart : Organ
         //but that wouldn't really be compatible with having multiple hearts
         foreach (int bodypartIndex in bodypartOrder)
         {
-            if (allBodyParts[bodypartIndex].IsConnectedToBodyPartStarter(this))
+            //if (allBodyParts[bodypartIndex].IsConnectedToBodyPartStarter(this))
+            if(allBodyParts[bodypartIndex].connectedHearts.Contains(this))
             {
                 //PumpBloodRecursive(allBodyParts[bodypartIndex], new List<BodyPart>(), deltaTime);
                 //break;
@@ -58,12 +59,6 @@ public class Heart : Organ
         
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        clock = FindObjectOfType<Clock>();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -78,7 +73,7 @@ public class Heart : Organ
                 PumpBloodMaster(tempDeltaTime);
                 UpdateBodyPart(tempDeltaTime);
 
-                deltaTime = Mathf.Max(0.0f, deltaTime - 0.2f);
+                deltaTime -= tempDeltaTime;
             }
 
         }

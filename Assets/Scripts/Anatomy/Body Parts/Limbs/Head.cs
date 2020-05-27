@@ -5,12 +5,6 @@ using UnityEngine;
 public class Head : BodyPart
 {
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        clock = FindObjectOfType<Clock>();
-    }
-
     void Update()
     {
         float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;

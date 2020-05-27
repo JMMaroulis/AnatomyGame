@@ -7,12 +7,6 @@ public class Lung : Organ
 
     public float oxygenAbsorptionRate;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        clock = FindObjectOfType<Clock>();
-    }
-
     void AbsorbOxygen(float deltaTime)
     {
         deltaTime *= timeScale;

@@ -7,13 +7,6 @@ public class Stomach : Organ
 {
     public List<Object> stomachContents; //TODO: Implement
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        clock = FindObjectOfType<Clock>();
-    }
-
     // Update is called once per frame
     void Update()
     {

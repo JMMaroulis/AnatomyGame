@@ -6,13 +6,6 @@ using UnityEngine;
 public class Eye : Organ
 {
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        clock = FindObjectOfType<Clock>();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -25,8 +18,7 @@ public class Eye : Organ
             {
                 float tempDeltaTime = Mathf.Min(deltaTime, 0.2f);
                 UpdateBodyPart(tempDeltaTime);
-
-                deltaTime = Mathf.Max(0.0f, deltaTime - 0.2f);
+                deltaTime -= tempDeltaTime;
             }
 
         }

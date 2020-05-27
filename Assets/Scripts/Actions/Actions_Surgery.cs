@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class Actions_Surgery
@@ -16,6 +17,7 @@ public static class Actions_Surgery
     {
         yield return new WaitForSeconds(seconds);
         bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
+        UpdateAllBodyPartHeartConnections();
     }
 
     public static void RemoveOrgan(Organ organObject, float seconds, int goldCost)
@@ -31,6 +33,7 @@ public static class Actions_Surgery
 
         //disconnect
         organObject.GetComponent<Organ>().SeverAllConnections();
+        UpdateAllBodyPartHeartConnections();
 
         //remove from being child of bodypart
         organObject.transform.SetParent(organObject.transform.parent.parent);
@@ -58,6 +61,7 @@ public static class Actions_Surgery
         //connect
         organ.CreateConnection(bodyPart);
         bodyPart.AddContainedOrgan(organ);
+        UpdateAllBodyPartHeartConnections();
 
         //make organ child of bodypart
         organ.transform.SetParent(bodyPart.transform);
@@ -77,6 +81,7 @@ public static class Actions_Surgery
         yield return new WaitForSeconds(seconds);
         bodyPart1.CreateConnection(bodyPart2);
         bodyPart2.CreateConnection(bodyPart1);
+        UpdateAllBodyPartHeartConnections();
     }
 
     public static void DeleteBodyPart(BodyPart bodyPart, float seconds, int goldCost)
@@ -96,6 +101,16 @@ public static class Actions_Surgery
         }
         GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
         GameObject.Destroy(bodyPart.gameObject);
+        UpdateAllBodyPartHeartConnections();
+    }
+
+    private static void UpdateAllBodyPartHeartConnections()
+    {
+        //List<BodyPart> bodyParts = FindObjectsOfType<BodyPart>().ToList();
+        //foreach(BodyPart bodyPart in bodyParts)
+        //{
+        //    bodyPart.UpdateHeartConnections();
+        //}
     }
 
 }

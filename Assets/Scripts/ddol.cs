@@ -9,6 +9,7 @@ public class ddol : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         UnityEngine.SceneManagement.SceneManager.LoadScene("StartMenu");
+        Application.targetFrameRate = 60;
     }
 
 }

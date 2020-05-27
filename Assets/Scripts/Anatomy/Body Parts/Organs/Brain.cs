@@ -5,12 +5,6 @@ using UnityEngine;
 public class Brain : Organ
 {
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        clock = FindObjectOfType<Clock>();
-    }
-
     // Update is called once per frame
     void Update()
     {
