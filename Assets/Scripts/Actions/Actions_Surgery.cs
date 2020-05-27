@@ -15,10 +15,19 @@ public static class Actions_Surgery
 
     public static IEnumerator RemoveBodyPartCoroutine(BodyPart bodyPartObject, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
         UpdateAllBodyPartHeartConnections();
     }
+
+
 
     public static void RemoveOrgan(Organ organObject, float seconds, int goldCost)
     {
@@ -29,7 +38,13 @@ public static class Actions_Surgery
 
     public static IEnumerator RemoveOrganCoroutine(Organ organObject, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
 
         //disconnect
         organObject.GetComponent<Organ>().SeverAllConnections();
@@ -56,7 +71,13 @@ public static class Actions_Surgery
 
     public static IEnumerator ImplantOrganCoroutine(Organ organ, BodyPart bodyPart, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
 
         //connect
         organ.CreateConnection(bodyPart);
@@ -78,7 +99,14 @@ public static class Actions_Surgery
 
     public static IEnumerator ConnectBodyPartCoroutine(BodyPart bodyPart1, BodyPart bodyPart2, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         bodyPart1.CreateConnection(bodyPart2);
         bodyPart2.CreateConnection(bodyPart1);
         UpdateAllBodyPartHeartConnections();
@@ -93,8 +121,15 @@ public static class Actions_Surgery
 
     public static IEnumerator DeleteBodyPartCoroutine(BodyPart bodyPart, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
-        foreach(Organ organ in bodyPart.containedOrgans)
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
+        foreach (Organ organ in bodyPart.containedOrgans)
         {
             GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
             GameObject.Destroy(organ.gameObject);

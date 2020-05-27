@@ -13,7 +13,14 @@ public static class Actions_Charms
 
     public static IEnumerator ApplyHeartCharmCoroutine(BodyPart bodyPartObject, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         bodyPartObject.gameObject.AddComponent<HeartCharm>();
     }
 
@@ -26,7 +33,14 @@ public static class Actions_Charms
 
     public static IEnumerator ApplyLungCharmCoroutine(BodyPart bodyPartObject, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         bodyPartObject.gameObject.AddComponent<LungCharm>();
     }
 
@@ -39,7 +53,14 @@ public static class Actions_Charms
 
     public static IEnumerator ApplyPetrificationCharmCoroutine(BodyPart bodyPartObject, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         bodyPartObject.gameObject.AddComponent<PetrificationCharm>();
     }
 
@@ -52,7 +73,14 @@ public static class Actions_Charms
 
     public static IEnumerator ApplyBloodRegenCharmCoroutine(BodyPart bodyPartObject, float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         bodyPartObject.gameObject.AddComponent<BloodRegenCharm>();
     }
 

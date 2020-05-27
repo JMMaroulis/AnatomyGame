@@ -38,7 +38,13 @@ public class LifeMonitor : MonoBehaviour
         messageBox.text = "";
         bool victory = true;
 
-        yield return new WaitForSeconds(secondsToWait);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < secondsToWait)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
 
         //check the vital statistics of every bodypart in the body
         PopulateBodyPartsList();

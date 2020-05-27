@@ -15,7 +15,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnHeartCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnHeart("newHeart");
     }
 
@@ -28,7 +35,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnLungCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnLung("newLung");
     }
 
@@ -41,7 +55,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnBrainCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnBrain("newBrain");
     }
 
@@ -54,7 +75,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnEyeCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnEye("newEye");
     }
 
@@ -67,7 +95,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnLiverCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("newLiver");
     }
 
@@ -80,7 +115,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnStomachCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnStomach("newStomach");
     }
 
@@ -97,7 +139,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnArmCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnArm("newArm");
     }
 
@@ -110,7 +159,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnLegCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnLeg("newLeg");
     }
 
@@ -123,7 +179,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnTorsoCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("newTorso");
     }
 
@@ -136,7 +199,14 @@ public static class Actions_SpawnBodyParts
 
     public static IEnumerator SpawnHeadCoroutine(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
+
         Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("newHead");
     }
 

@@ -85,7 +85,13 @@ public class Clock : MonoBehaviour
 
     public static IEnumerator WaitForSecondsStatic(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        float timer = 0.0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime * clock.globalTimeScalingFactor;
+            yield return null;
+        }
     }
 
     void UpdateCurrentTime()
