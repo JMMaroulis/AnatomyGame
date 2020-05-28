@@ -5,40 +5,9 @@ using UnityEngine;
 public class Brain : Organ
 {
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
-        //capping deltatime at 1ms to stop inaccuracies
-        while (deltaTime > 0.0f)
-        {
-            float tempDeltaTime = Mathf.Min(deltaTime, 0.2f);
-
-            //overriding bodypart update, to avoid brain damage spiralling the efficiency
-            if (isTimePassing)
-            {
-
-                UpdateBodyPart(tempDeltaTime);
-
-            }
-
-            deltaTime = Mathf.Max(0.0f, deltaTime - 0.2f);
-        }
-
-    }
-
     public void SeverConnection(GameObject connectedBodyPart)
     {
         throw new System.NotImplementedException();
-    }
-
-    //brain needs a version of this that doesn't multiply by it's own efficiency, else it'ss spiral to 0 as soon as it goes down from 1 at all
-    new public void UpdateEfficiency()
-    {
-        float damageRatio = 1 - (damage / damageMax); //1 good, 0 bad
-        float oxygenRatio = Mathf.Min((oxygen / oxygenRequired), 1); //1 good, 0 bad
-        efficiency = damageRatio * oxygenRatio;
     }
 
     new public void SeverAllConnections()

@@ -60,23 +60,11 @@ public class Heart : Organ
     }
 
     // Update is called once per frame
-    void Update()
+    public override void UpdateBodyPart(float deltaTime)
     {
-        if (isTimePassing)
-        {
-
-            float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
-            //capping deltatime at 100ms to stop inaccuracies
-            while (deltaTime > 0.0f)
-            {
-                float tempDeltaTime = Mathf.Min(deltaTime, 0.2f);
-                PumpBloodMaster(tempDeltaTime);
-                UpdateBodyPart(tempDeltaTime);
-
-                deltaTime -= tempDeltaTime;
-            }
-
-        }
+        float tempDeltaTime = Mathf.Min(deltaTime, 0.2f);
+        PumpBloodMaster(tempDeltaTime);
+        UpdateSelf(tempDeltaTime);
     }
 
     public void SeverConnection(GameObject connectedBodyPart)

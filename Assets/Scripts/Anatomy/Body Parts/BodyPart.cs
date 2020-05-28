@@ -51,9 +51,13 @@ public class BodyPart : MonoBehaviour
 
     }
 
-    public void UpdateBodyPart(float deltaTime)
+    public virtual void UpdateBodyPart(float deltaTime)
     {
+        UpdateSelf(deltaTime);
+    }
 
+    public void UpdateSelf(float deltaTime)
+    {
         if (isTimePassing)
         {
             ApplyDrugs(deltaTime);
@@ -63,7 +67,6 @@ public class BodyPart : MonoBehaviour
             LoseBlood(deltaTime);
             ConsumeOxygen(deltaTime);
         }
-
     }
 
     public void UpdateHeartConnections()
