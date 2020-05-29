@@ -110,6 +110,27 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+    public void DisableAllButtons()
+    {
+        foreach (Button button in menuButtons)
+        {
+            button.interactable = false;
+        }
+    }
+
+    public void EnableAllButtons()
+    {
+        foreach (Button button in menuButtons)
+        {
+            button.interactable = true;
+        }
+    }
+
+    public void CancelAction()
+    {
+        clock.StopClock();
+        actionTimeBar.Reset(1.0f);
+    }
 
     public void SelectBodyPartOptions(bool firstClick = true)
     {
@@ -1361,7 +1382,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitTenSeconds(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(10.0f); messageBox.text = "Waiting ten seconds..."; actionTimeBar.Reset(10.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(10.0f); messageBox.text = "Waiting ten seconds..."; actionTimeBar.Reset(10.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait ten seconds";
@@ -1369,7 +1390,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitThirtySeconds(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(30.0f); messageBox.text = "Waiting thirty seconds..."; actionTimeBar.Reset(30.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(30.0f); messageBox.text = "Waiting thirty seconds..."; actionTimeBar.Reset(30.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait thirty seconds";
@@ -1377,7 +1398,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitOneMinute(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(60.0f); messageBox.text = "Waiting one minute..."; actionTimeBar.Reset(60.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(60.0f); messageBox.text = "Waiting one minute..."; actionTimeBar.Reset(60.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait one minute";
@@ -1385,7 +1406,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitFiveMinutes(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(300.0f); messageBox.text = "Waiting five minutes..."; actionTimeBar.Reset(300.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(300.0f); messageBox.text = "Waiting five minutes..."; actionTimeBar.Reset(300.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait five minutes";
@@ -1393,7 +1414,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitTenMinutes(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(600.0f); messageBox.text = "Waiting ten minutes..."; actionTimeBar.Reset(600.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(600.0f); messageBox.text = "Waiting ten minutes..."; actionTimeBar.Reset(600.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait ten minutes";
@@ -1401,7 +1422,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitThirtyMinutes(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(1800.0f); messageBox.text = "Waiting thirty minutes..."; actionTimeBar.Reset(1800.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(2800.0f); messageBox.text = "Waiting thirty minutes..."; actionTimeBar.Reset(1800.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait thirty minutes";
@@ -1409,7 +1430,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitOneHour(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { clock.StartClockUntil(3600.0f); lifeMonitor.VictoryCheck(3600.0f); messageBox.text = "Waiting one hour..."; actionTimeBar.Reset(3600.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(3600.0f); lifeMonitor.VictoryCheck(3600.0f); messageBox.text = "Waiting one hour..."; actionTimeBar.Reset(3600.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait an hour (Victory Check)";

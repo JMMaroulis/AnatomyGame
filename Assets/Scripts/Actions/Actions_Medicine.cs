@@ -15,14 +15,23 @@ public static class Actions_Medicine
     public static IEnumerator InjectHealthPotionCoroutine(BodyPart bodyPartObject, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        bodyPartObject.healthPotion += 100.0f;
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPartObject.healthPotion += 100.0f;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void InjectAntidote(BodyPart bodyPartObject, float seconds, int goldCost)
@@ -35,14 +44,23 @@ public static class Actions_Medicine
     public static IEnumerator InjectAntidoteCoroutine(BodyPart bodyPartObject, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        bodyPartObject.antidote += 50.0f;
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPartObject.antidote += 50.0f;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void InjectSlowPoison(BodyPart bodyPartObject, float seconds, int goldCost)
@@ -55,14 +73,23 @@ public static class Actions_Medicine
     public static IEnumerator InjectSlowPoisonCoroutine(BodyPart bodyPartObject, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        bodyPartObject.slowPoison += 50.0f;
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPartObject.slowPoison += 50.0f;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void InjectStasisPotion(BodyPart bodyPartObject, float seconds, int goldCost)
@@ -75,14 +102,23 @@ public static class Actions_Medicine
     public static IEnumerator InjectStasisPotionCoroutine(BodyPart bodyPartObject, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        bodyPartObject.stasisPotion += 50.0f;
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPartObject.stasisPotion += 50.0f;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void InjectHastePotion(BodyPart bodyPartObject, float seconds, int goldCost)
@@ -95,14 +131,23 @@ public static class Actions_Medicine
     public static IEnumerator InjectHastePotionCoroutine(BodyPart bodyPartObject, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        bodyPartObject.hastePotion += 50.0f;
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPartObject.hastePotion += 50.0f;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void InjectCoagulantPotion(BodyPart bodyPartObject, float seconds, int goldCost)
@@ -115,13 +160,22 @@ public static class Actions_Medicine
     public static IEnumerator InjectCoagulantPotionCoroutine(BodyPart bodyPartObject, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        bodyPartObject.coagulantPotion += 50.0f;
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPartObject.coagulantPotion += 50.0f;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 }

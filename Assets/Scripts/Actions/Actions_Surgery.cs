@@ -16,12 +16,16 @@ public static class Actions_Surgery
     public static IEnumerator RemoveBodyPartCoroutine(BodyPart bodyPartObject, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
         float timer = 0.0f;
+        buttonActions.DisableAllButtons();
         while (timer < seconds)
         {
             timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
+        buttonActions.EnableAllButtons();
 
         bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
         UpdateAllBodyPartHeartConnections();
@@ -39,12 +43,16 @@ public static class Actions_Surgery
     public static IEnumerator RemoveOrganCoroutine(Organ organObject, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
         float timer = 0.0f;
+        buttonActions.DisableAllButtons();
         while (timer < seconds)
         {
             timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
+        buttonActions.EnableAllButtons();
 
         //disconnect
         organObject.GetComponent<Organ>().SeverAllConnections();
@@ -72,12 +80,16 @@ public static class Actions_Surgery
     public static IEnumerator ImplantOrganCoroutine(Organ organ, BodyPart bodyPart, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
         float timer = 0.0f;
+        buttonActions.DisableAllButtons();
         while (timer < seconds)
         {
             timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
+        buttonActions.EnableAllButtons();
 
         //connect
         organ.CreateConnection(bodyPart);
@@ -100,12 +112,16 @@ public static class Actions_Surgery
     public static IEnumerator ConnectBodyPartCoroutine(BodyPart bodyPart1, BodyPart bodyPart2, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
         float timer = 0.0f;
+        buttonActions.DisableAllButtons();
         while (timer < seconds)
         {
             timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
+        buttonActions.EnableAllButtons();
 
         bodyPart1.CreateConnection(bodyPart2);
         bodyPart2.CreateConnection(bodyPart1);
@@ -122,12 +138,16 @@ public static class Actions_Surgery
     public static IEnumerator DeleteBodyPartCoroutine(BodyPart bodyPart, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
         float timer = 0.0f;
+        buttonActions.DisableAllButtons();
         while (timer < seconds)
         {
             timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
+        buttonActions.EnableAllButtons();
 
         foreach (Organ organ in bodyPart.containedOrgans)
         {

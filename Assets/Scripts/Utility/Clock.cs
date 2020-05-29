@@ -17,6 +17,7 @@ public class Clock : MonoBehaviour
     private float timeElapsed;
     public float clockTarget;
     public float globalTimeScalingFactor;
+    public bool actionCancelFlag;
 
     public Text currentTime;
     public Text clockText;
@@ -83,15 +84,10 @@ public class Clock : MonoBehaviour
         clockTarget += ingameSeconds;
     }
 
-    public static IEnumerator WaitForSecondsStatic(float seconds)
+    public void StopClock()
     {
-        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
-        {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
-            yield return null;
-        }
+        actionCancelFlag = true;
+        clockTarget = timeElapsed;
     }
 
     void UpdateCurrentTime()

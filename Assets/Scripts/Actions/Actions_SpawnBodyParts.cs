@@ -16,14 +16,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnHeartCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnHeart("newHeart");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnHeart("newHeart");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void SpawnLung(float seconds, int goldCost)
@@ -36,14 +45,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnLungCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnLung("newLung");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnLung("newLung");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void SpawnBrain(float seconds, int goldCost)
@@ -56,14 +74,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnBrainCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnBrain("newBrain");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnBrain("newBrain");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void SpawnEye(float seconds, int goldCost)
@@ -76,14 +103,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnEyeCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnEye("newEye");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnEye("newEye");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void SpawnLiver(float seconds, int goldCost)
@@ -96,14 +132,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnLiverCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("newLiver");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("newLiver");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void SpawnStomach(float seconds, int goldCost)
@@ -116,14 +161,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnStomachCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnStomach("newStomach");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnStomach("newStomach");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     #endregion
@@ -140,14 +194,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnArmCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnArm("newArm");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnArm("newArm");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void SpawnLeg(float seconds, int goldCost)
@@ -160,14 +223,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnLegCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnLeg("newLeg");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnLeg("newLeg");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void SpawnTorso(float seconds, int goldCost)
@@ -180,14 +252,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnTorsoCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("newTorso");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("newTorso");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void SpawnHead(float seconds, int goldCost)
@@ -200,14 +281,23 @@ public static class Actions_SpawnBodyParts
     public static IEnumerator SpawnHeadCoroutine(float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("newHead");
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("newHead");
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     #endregion

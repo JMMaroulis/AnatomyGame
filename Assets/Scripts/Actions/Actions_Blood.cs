@@ -17,14 +17,23 @@ public static class Actions_Blood
     private static IEnumerator BanadagesCoroutine(BodyPart bodyPart, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        bodyPart.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().bloodLossRate - 10);
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPart.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().bloodLossRate - 10);
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void Bloodletting(BodyPart bodyPart, float seconds, int goldCost)
@@ -38,14 +47,23 @@ public static class Actions_Blood
     private static IEnumerator BloodlettingCoroutine(BodyPart bodyPart, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
-
-        bodyPart.GetComponent<BodyPart>().bloodLossRate += 10;
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPart.GetComponent<BodyPart>().bloodLossRate += 10;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void AddBlood(BodyPart bodyPart, float seconds, int goldCost)
@@ -59,14 +77,24 @@ public static class Actions_Blood
     private static IEnumerator AddBloodCoroutine(BodyPart bodyPart, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
+        buttonActions.EnableAllButtons();
 
-        bodyPart.GetComponent<BodyPart>().blood += 100;
+        if (!clock.actionCancelFlag)
+        {
+            bodyPart.GetComponent<BodyPart>().blood += 100;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
     public static void RemoveBlood(BodyPart bodyPart, float seconds, int goldCost)
@@ -80,14 +108,24 @@ public static class Actions_Blood
     private static IEnumerator RemoveBloodCoroutine(BodyPart bodyPart, float seconds)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
-        float timer = 0.0f;
-        while (timer < seconds)
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
+        buttonActions.EnableAllButtons();
 
-        bodyPart.GetComponent<BodyPart>().blood = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().blood - 100);
+        if (!clock.actionCancelFlag)
+        {
+            bodyPart.GetComponent<BodyPart>().blood = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().blood - 100);
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
     }
 
 }
