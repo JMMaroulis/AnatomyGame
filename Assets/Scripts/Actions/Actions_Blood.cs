@@ -29,6 +29,7 @@ public static class Actions_Blood
         if (!clock.actionCancelFlag)
         {
             bodyPart.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().bloodLossRate - 10);
+            MonoBehaviour.FindObjectOfType<ActionTracker>().blood_bandages += 1;
         }
         else
         {
@@ -59,6 +60,7 @@ public static class Actions_Blood
         if (!clock.actionCancelFlag)
         {
             bodyPart.GetComponent<BodyPart>().bloodLossRate += 10;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().blood_lettings += 1;
         }
         else
         {
@@ -90,6 +92,7 @@ public static class Actions_Blood
         if (!clock.actionCancelFlag)
         {
             bodyPart.GetComponent<BodyPart>().blood += 100;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().blood_injected += 100;
         }
         else
         {
@@ -121,6 +124,7 @@ public static class Actions_Blood
         if (!clock.actionCancelFlag)
         {
             bodyPart.GetComponent<BodyPart>().blood = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().blood - 100);
+            MonoBehaviour.FindObjectOfType<ActionTracker>().blood_extracted += 100;
         }
         else
         {

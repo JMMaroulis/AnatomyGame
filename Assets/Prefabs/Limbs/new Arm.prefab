@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2943625929962649177
+--- !u!1 &7063653498281421542
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,57 +8,60 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5221314806615445398}
-  - component: {fileID: 4761315825765617185}
+  - component: {fileID: 735718014088381853}
+  - component: {fileID: 2260615919125716580}
   m_Layer: 0
-  m_Name: newLeg
+  m_Name: newArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5221314806615445398
+--- !u!4 &735718014088381853
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2943625929962649177}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 7063653498281421542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.18242271, y: 3.0764737, z: -331.07306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4761315825765617185
+--- !u!114 &2260615919125716580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2943625929962649177}
+  m_GameObject: {fileID: 7063653498281421542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2911f39dccc614ea3f99b0199ad821, type: 3}
+  m_Script: {fileID: 11500000, guid: deb7cfbc1ed22f047bb379a79198b4d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
+  clock: {fileID: 0}
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
-  bloodPumpRate: 50
+  bloodPumpRate: 70
   bloodMax: 700
-  oxygen: 250
+  oxygen: 500
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
   damageMax: 100
   efficiency: 1
-  connectedBodyParts: []
+  connectedBodyParts:
+  - {fileID: 0}
   containedOrgans: []
+  connectedHearts: []
   healthPotion: 0
   antidote: 0
   slowPoison: 0

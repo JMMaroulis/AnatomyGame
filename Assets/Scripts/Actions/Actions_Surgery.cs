@@ -28,6 +28,8 @@ public static class Actions_Surgery
         buttonActions.EnableAllButtons();
 
         bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
+
         UpdateAllBodyPartHeartConnections();
     }
 
@@ -60,6 +62,8 @@ public static class Actions_Surgery
 
         //remove from being child of bodypart
         organObject.transform.SetParent(organObject.transform.parent.parent);
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
 
     }
 
@@ -99,6 +103,8 @@ public static class Actions_Surgery
         //make organ child of bodypart
         organ.transform.SetParent(bodyPart.transform);
 
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
+
     }
 
 
@@ -126,6 +132,9 @@ public static class Actions_Surgery
         bodyPart1.CreateConnection(bodyPart2);
         bodyPart2.CreateConnection(bodyPart1);
         UpdateAllBodyPartHeartConnections();
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_attachments += 1;
+
     }
 
     public static void DeleteBodyPart(BodyPart bodyPart, float seconds, int goldCost)
@@ -157,6 +166,9 @@ public static class Actions_Surgery
         GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
         GameObject.Destroy(bodyPart.gameObject);
         UpdateAllBodyPartHeartConnections();
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_destroyed += 1;
+
     }
 
     private static void UpdateAllBodyPartHeartConnections()

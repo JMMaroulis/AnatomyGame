@@ -27,6 +27,7 @@ public static class Actions_Medicine
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.healthPotion += 100.0f;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_health += 100;
         }
         else
         {
@@ -56,6 +57,7 @@ public static class Actions_Medicine
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.antidote += 50.0f;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_antidote += 50;
         }
         else
         {
@@ -85,6 +87,7 @@ public static class Actions_Medicine
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.slowPoison += 50.0f;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_slowpoison += 50;
         }
         else
         {
@@ -114,6 +117,7 @@ public static class Actions_Medicine
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.stasisPotion += 50.0f;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_stasis += 50;
         }
         else
         {
@@ -143,6 +147,7 @@ public static class Actions_Medicine
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.hastePotion += 50.0f;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_haste += 50;
         }
         else
         {
@@ -172,6 +177,7 @@ public static class Actions_Medicine
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.coagulantPotion += 50.0f;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_coagulant += 50;
         }
         else
         {

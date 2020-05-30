@@ -27,6 +27,7 @@ public static class Actions_Charms
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.gameObject.AddComponent<HeartCharm>();
+            MonoBehaviour.FindObjectOfType<ActionTracker>().charm_heart += 1;
         }
         else
         {
@@ -57,6 +58,7 @@ public static class Actions_Charms
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.gameObject.AddComponent<LungCharm>();
+            MonoBehaviour.FindObjectOfType<ActionTracker>().charm_lung += 1;
         }
         else
         {
@@ -87,6 +89,7 @@ public static class Actions_Charms
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.gameObject.AddComponent<PetrificationCharm>();
+            MonoBehaviour.FindObjectOfType<ActionTracker>().charm_petrification += 1;
         }
         else
         {
@@ -117,6 +120,7 @@ public static class Actions_Charms
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.gameObject.AddComponent<BloodRegenCharm>();
+            MonoBehaviour.FindObjectOfType<ActionTracker>().charm_petrification += 1;
         }
         else
         {

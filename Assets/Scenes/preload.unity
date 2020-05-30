@@ -120,6 +120,82 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &675533210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 675533213}
+  - component: {fileID: 675533212}
+  - component: {fileID: 675533211}
+  m_Layer: 0
+  m_Name: ActionTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &675533211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675533210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b4924a8e09307643be34cd452cbc70b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blood_injected: 0
+  blood_extracted: 0
+  blood_bandages: 0
+  blood_lettings: 0
+  surgery_amputations: 0
+  surgery_attachments: 0
+  surgery_organremovals: 0
+  surgery_organtransplant: 0
+  surgery_destroyed: 0
+  spawn_spawned: 0
+  medicine_health: 0
+  medicine_antidote: 0
+  medicine_slowpoison: 0
+  medicine_stasis: 0
+  medicine_haste: 0
+  medicine_coagulant: 0
+  charm_heart: 0
+  charm_lung: 0
+  charm_petrification: 0
+  charm_bloodregen: 0
+--- !u!114 &675533212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675533210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903f6057552a7d842be2ed9950d7ccf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &675533213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675533210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.112565, y: 3.263585, z: -385.48465}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1136662590
 GameObject:
   m_ObjectHideFlags: 0

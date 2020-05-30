@@ -470,7 +470,7 @@ public class ButtonActions : MonoBehaviour
             else
             {
                 Actions_Medicine.InjectHealthPotion(bodypart, seconds, goldCost);
-                messageBox.text = $"Injecting 50 units of Health Potion into the {bodypart.name}...";
+                messageBox.text = $"Injecting 100 units of Health Potion into the {bodypart.name}...";
                 actionTimeBar.Reset(seconds);
             }
         };

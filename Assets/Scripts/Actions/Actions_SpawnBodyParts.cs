@@ -28,6 +28,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnHeart("newHeart");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -57,6 +58,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLung("newLung");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -86,6 +88,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnBrain("newBrain");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -115,6 +118,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnEye("newEye");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -144,6 +148,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("newLiver");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -173,6 +178,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnStomach("newStomach");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -206,6 +212,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnArm("newArm");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -235,6 +242,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeg("newLeg");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -264,6 +272,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("newTorso");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
@@ -293,6 +302,7 @@ public static class Actions_SpawnBodyParts
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("newHead");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
         }
         else
         {
