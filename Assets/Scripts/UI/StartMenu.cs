@@ -19,15 +19,11 @@ public class StartMenu : MonoBehaviour
 
     public void NewGame()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        FindObjectOfType<NewGameManager>().NewGame();
     }
 
     public void NewDailyChallenge()
     {
-        string today = DateTime.Today.ToString("yyyyMMdd");
-        Debug.Log(DateTime.Today);
-        Debug.Log((int)long.Parse(today));
-        UnityEngine.Random.InitState((int)long.Parse(today));
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        FindObjectOfType<NewGameManager>().NewDailyChallenge();
     }
 }

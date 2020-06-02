@@ -16,4 +16,18 @@ public class UnlockTracker : MonoBehaviour
     public bool charms_blood_regen;
     public bool blood;
     public bool spawn;
+
+    public void Reset()
+    {
+        surgery = false;
+        medicine_poison = false;
+        medicine_speed = false;
+        medicine_blood = false;
+        charms_heart = false;
+        charms_lung = false;
+        charms_petrification = false;
+        charms_blood_regen = false;
+        blood = false;
+        spawn = false;
+    }
 }

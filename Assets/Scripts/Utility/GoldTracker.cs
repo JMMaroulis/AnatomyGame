@@ -21,4 +21,10 @@ public class GoldTracker : MonoBehaviour
 
     }
 
+    public void Reset()
+    {
+        goldSpent = 0;
+        goldAccumulated = 0;
+    }
+
 }

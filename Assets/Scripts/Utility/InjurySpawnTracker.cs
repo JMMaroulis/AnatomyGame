@@ -41,4 +41,12 @@ public class InjurySpawnTracker : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
+    public void Reset()
+    {
+        easyInjuries = 0;
+        mediumInjuries = 0;
+        hardInjuries = 0;
+        patientNumber = 0;
+    }
+
 }
