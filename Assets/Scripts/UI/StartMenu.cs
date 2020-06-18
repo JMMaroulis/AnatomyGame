@@ -22,6 +22,11 @@ public class StartMenu : MonoBehaviour
         FindObjectOfType<NewGameManager>().NewGame();
     }
 
+    public void LoadGame()
+    { 
+        FindObjectOfType<NewGameManager>().LoadGame();
+    }
+
     public void NewDailyChallenge()
     {
         FindObjectOfType<NewGameManager>().NewDailyChallenge();

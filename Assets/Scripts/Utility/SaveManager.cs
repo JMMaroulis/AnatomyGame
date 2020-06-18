@@ -12,39 +12,6 @@ public class SaveManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*
-        List<Head> bodyParts = FindObjectsOfType<Head>().ToList<Head>();
-        List<string> encoded = new List<string>();
-
-        foreach (Head bodyPart in bodyParts)
-        {
-            encoded.Add(JsonUtility.ToJson(bodyParts[0]));
-            Destroy(bodyPart.gameObject);
-        }
-
-        foreach (string bodyPart in encoded)
-        {
-            GameObject bob = new GameObject();
-            bob.AddComponent<Head>();
-            JsonUtility.FromJsonOverwrite(bodyPart, bob);
-        }
-
-        */
-
-        /*
-        Head head = FindObjectOfType<Head>();
-        Debug.Log(head.GetInstanceID());
-        string encoded = JsonUtility.ToJson(head);
-        Debug.Log(encoded);
-        Destroy(head);
-        GameObject bob = new GameObject();
-        bob.AddComponent<Head>();
-        JsonUtility.FromJsonOverwrite(encoded, bob);
-        Instantiate(bob);
-        Debug.Log(bob.GetInstanceID());
-        */
-
-        System.IO.File.WriteAllText(@"savegame.json", "{" + EncodeTrackers() + "}");
 
     }
 
@@ -54,7 +21,17 @@ public class SaveManager : MonoBehaviour
 
     }
 
-    private string EncodeTrackers()
+    [System.Serializable]
+    private class Encoders{
+
+        public string goldTracker;
+        public string injurySpawnTracker;
+        public string unlockTracker;
+        public string actionTracker;
+        public string randomTracker;
+    }
+
+    public void EncodeTrackers()
     {
         string encodedTrackers = "";
 
@@ -70,14 +47,49 @@ public class SaveManager : MonoBehaviour
         ActionTracker actionTracker = FindObjectOfType<ActionTracker>();
         encodedTrackers += "\"actionTracker\": " + JsonUtility.ToJson(actionTracker);
 
+        RandomTracker randomTracker = FindObjectOfType<RandomTracker>();
+        encodedTrackers += "\"randomTracker\": " + JsonUtility.ToJson(randomTracker);
 
-        //JsonUtility.FromJson(encoded);
 
-        return encodedTrackers;
-        //GameObject bob = new GameObject();
-        //bob.AddComponent<GoldTracker>();
-        //JsonUtility.FromJsonOverwrite(encoded, bob.GetComponent<GoldTracker>());
+        Encoders encoders = new Encoders();
+        encoders.goldTracker = JsonUtility.ToJson(goldTracker);
+        encoders.injurySpawnTracker = JsonUtility.ToJson(injurySpawnTracker);
+        encoders.unlockTracker = JsonUtility.ToJson(unlockTracker);
+        encoders.actionTracker = JsonUtility.ToJson(actionTracker);
+        encoders.randomTracker = JsonUtility.ToJson(randomTracker);
+
+        string json = JsonUtility.ToJson(encoders);
+        System.IO.File.WriteAllText(@"savegame.json", json);
     }
 
+    public void DecodeTrackers()
+    {
+        using (StreamReader r = new StreamReader(@"savegame.json"))
+        {
+            string json = r.ReadToEnd();
+            Encoders encoders = JsonUtility.FromJson<Encoders>(json);
 
+            GoldTracker goldTracker = FindObjectOfType<GoldTracker>();
+            JsonUtility.FromJsonOverwrite(encoders.goldTracker, goldTracker);
+            goldTracker.OnLoad();
+
+            InjurySpawnTracker injurySpawnTracker = FindObjectOfType<InjurySpawnTracker>();
+            JsonUtility.FromJsonOverwrite(encoders.injurySpawnTracker, injurySpawnTracker);
+            injurySpawnTracker.OnLoad();
+
+            UnlockTracker unlockTracker = FindObjectOfType<UnlockTracker>();
+            JsonUtility.FromJsonOverwrite(encoders.unlockTracker, unlockTracker);
+            unlockTracker.OnLoad();
+
+            ActionTracker actionTracker = FindObjectOfType<ActionTracker>();
+            JsonUtility.FromJsonOverwrite(encoders.actionTracker, actionTracker);
+            actionTracker.OnLoad();
+
+            RandomTracker randomTracker = FindObjectOfType<RandomTracker>();
+            JsonUtility.FromJsonOverwrite(encoders.randomTracker, randomTracker);
+            randomTracker.OnLoad();
+
+        }
+
+    }
 }

@@ -14,9 +14,7 @@ public class NewGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        unlockTracker = FindObjectOfType<UnlockTracker>();
-        goldTracker = FindObjectOfType<GoldTracker>();
-        injurySpawnTracker = FindObjectOfType<InjurySpawnTracker>();
+
     }
 
     // Update is called once per frame
@@ -27,10 +25,7 @@ public class NewGameManager : MonoBehaviour
 
     public void NewGame()
     {
-        unlockTracker.Reset();
-        goldTracker.Reset();
-        injurySpawnTracker.Reset();
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+        FindObjectOfType<LevelManager>().LevelStart();
     }
 
     public void NewDailyChallenge()
@@ -39,6 +34,12 @@ public class NewGameManager : MonoBehaviour
         Debug.Log(DateTime.Today);
         Debug.Log((int)long.Parse(today));
         UnityEngine.Random.InitState((int)long.Parse(today));
+        NewGame();
+    }
+
+    public void LoadGame()
+    {
+        FindObjectOfType<SaveManager>().DecodeTrackers();
         NewGame();
     }
 

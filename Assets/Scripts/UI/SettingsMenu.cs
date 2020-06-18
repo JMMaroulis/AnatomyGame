@@ -16,6 +16,12 @@ public class SettingsMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void SaveAndQuit()
+    {
+        FindObjectOfType<SaveManager>().EncodeTrackers();
+        Quit();
+    }
+
     public void CloseDialogue()
     {
         Debug.Log("go back");

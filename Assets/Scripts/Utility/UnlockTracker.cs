@@ -17,6 +17,17 @@ public class UnlockTracker : MonoBehaviour
     public bool blood;
     public bool spawn;
 
+    public bool levelstart_surgery;
+    public bool levelstart_medicine_poison;
+    public bool levelstart_medicine_speed;
+    public bool levelstart_medicine_blood;
+    public bool levelstart_charms_heart;
+    public bool levelstart_charms_lung;
+    public bool levelstart_charms_petrification;
+    public bool levelstart_charms_blood_regen;
+    public bool levelstart_blood;
+    public bool levelstart_spawn;
+
     public void Reset()
     {
         surgery = false;
@@ -29,5 +40,33 @@ public class UnlockTracker : MonoBehaviour
         charms_blood_regen = false;
         blood = false;
         spawn = false;
+    }
+
+    public void LevelStart()
+    {
+        levelstart_surgery                =   surgery;
+        levelstart_medicine_poison        =   medicine_poison;
+        levelstart_medicine_speed         =   medicine_speed;
+        levelstart_medicine_blood         =   medicine_blood;
+        levelstart_charms_heart           =   charms_heart;
+        levelstart_charms_lung            =   charms_lung;
+        levelstart_charms_petrification   =   charms_petrification;
+        levelstart_charms_blood_regen     =   charms_blood_regen;
+        levelstart_blood                  =   blood;
+        levelstart_spawn                  =   spawn;
+    }
+
+    public void OnLoad()
+    {
+        surgery = levelstart_surgery;
+        medicine_poison = levelstart_medicine_poison;
+        medicine_speed = levelstart_medicine_speed;
+        medicine_blood = levelstart_medicine_blood;
+        charms_heart = levelstart_charms_heart;
+        charms_lung = levelstart_charms_lung;
+        charms_petrification = levelstart_charms_petrification;
+        charms_blood_regen = levelstart_charms_blood_regen;
+        blood = levelstart_blood;
+        spawn = levelstart_spawn;
     }
 }

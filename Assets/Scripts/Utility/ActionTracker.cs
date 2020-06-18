@@ -27,6 +27,27 @@ public class ActionTracker : MonoBehaviour
     public int charm_petrification;
     public int charm_bloodregen;
 
+    public int levelstart_blood_injected;
+    public int levelstart_blood_extracted;
+    public int levelstart_blood_bandages;
+    public int levelstart_blood_lettings;
+    public int levelstart_surgery_amputations;
+    public int levelstart_surgery_attachments;
+    public int levelstart_surgery_organremovals;
+    public int levelstart_surgery_organtransplant;
+    public int levelstart_surgery_destroyed;
+    public int levelstart_spawn_spawned;
+    public int levelstart_medicine_health;
+    public int levelstart_medicine_antidote;
+    public int levelstart_medicine_slowpoison;
+    public int levelstart_medicine_stasis;
+    public int levelstart_medicine_haste;
+    public int levelstart_medicine_coagulant;
+    public int levelstart_charm_heart;
+    public int levelstart_charm_lung;
+    public int levelstart_charm_petrification;
+    public int levelstart_charm_bloodregen;
+
     public string ActionSummary()
     {
         string output = "";
@@ -55,27 +76,51 @@ public class ActionTracker : MonoBehaviour
         return output;
     }
 
-    public void Reset()
+    public void LevelStart()
     {
-        blood_injected = 0;
-        blood_extracted = 0;
-        blood_bandages = 0;
-        blood_lettings = 0;
-        surgery_amputations = 0;
-        surgery_attachments = 0;
-        surgery_organremovals = 0;
-        surgery_organtransplant = 0;
-        surgery_destroyed = 0;
-        spawn_spawned = 0;
-        medicine_health = 0;
-        medicine_antidote = 0;
-        medicine_slowpoison = 0;
-        medicine_stasis = 0;
-        medicine_haste = 0;
-        medicine_coagulant = 0;
-        charm_heart = 0;
-        charm_lung = 0;
-        charm_petrification = 0;
-        charm_bloodregen = 0;
+        levelstart_blood_injected =  blood_injected;
+        levelstart_blood_extracted = blood_extracted;
+        levelstart_blood_bandages = blood_bandages;
+        levelstart_blood_lettings = blood_lettings;
+        levelstart_surgery_amputations = surgery_amputations;
+        levelstart_surgery_attachments = surgery_attachments;
+        levelstart_surgery_organremovals = surgery_organremovals;
+        levelstart_surgery_organtransplant = surgery_organtransplant;
+        levelstart_surgery_destroyed = surgery_destroyed;
+        levelstart_spawn_spawned = spawn_spawned;
+        levelstart_medicine_health = medicine_health;
+        levelstart_medicine_antidote = medicine_antidote;
+        levelstart_medicine_slowpoison = medicine_slowpoison;
+        levelstart_medicine_stasis = medicine_stasis;
+        levelstart_medicine_haste = medicine_haste;
+        levelstart_medicine_coagulant = medicine_coagulant;
+        levelstart_charm_heart = charm_heart;
+        levelstart_charm_lung = charm_lung;
+        levelstart_charm_petrification = charm_petrification;
+        levelstart_charm_bloodregen = charm_bloodregen;
+    }
+
+    public void OnLoad()
+    {
+        blood_injected = levelstart_blood_injected;
+        blood_extracted = levelstart_blood_extracted;
+        blood_bandages = levelstart_blood_bandages;
+        blood_lettings = levelstart_blood_lettings;
+        surgery_amputations = levelstart_surgery_amputations;
+        surgery_attachments = levelstart_surgery_attachments;
+        surgery_organremovals = levelstart_surgery_organremovals;
+        surgery_organtransplant = levelstart_surgery_organtransplant;
+        surgery_destroyed = levelstart_surgery_destroyed;
+        spawn_spawned = levelstart_spawn_spawned;
+        medicine_health = levelstart_medicine_health;
+        medicine_antidote = levelstart_medicine_antidote;
+        medicine_slowpoison = levelstart_medicine_slowpoison;
+        medicine_stasis = levelstart_medicine_stasis;
+        medicine_haste = levelstart_medicine_haste;
+        medicine_coagulant = levelstart_medicine_coagulant;
+        charm_heart = levelstart_charm_heart;
+        charm_lung = levelstart_charm_lung;
+        charm_petrification = levelstart_charm_petrification;
+        charm_bloodregen = levelstart_charm_bloodregen;
     }
 }

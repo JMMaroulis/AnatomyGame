@@ -19,7 +19,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[0].interactable = false;
         }
-        action = () => { unlockTracker.medicine_poison = true; NextPatient(); };
+        action = () => { unlockTracker.medicine_poison = true; LevelStart(); };
         buttons[0].onClick.AddListener(action);
         buttons[0].transform.GetChild(0).GetComponent<Text>().text = "Poison Medication License";
 
@@ -27,7 +27,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[1].interactable = false;
         }
-        action = () => { unlockTracker.medicine_speed = true; NextPatient(); };
+        action = () => { unlockTracker.medicine_speed = true; LevelStart(); };
         buttons[1].onClick.AddListener(action);
         buttons[1].transform.GetChild(0).GetComponent<Text>().text = "Temporal Medication License";
 
@@ -35,7 +35,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[2].interactable = false;
         }
-        action = () => { unlockTracker.medicine_blood = true; NextPatient(); };
+        action = () => { unlockTracker.medicine_blood = true; LevelStart(); };
         buttons[2].onClick.AddListener(action);
         buttons[2].transform.GetChild(0).GetComponent<Text>().text = "Blood Medication License";
 
@@ -43,7 +43,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[3].interactable = false;
         }
-        action = () => { unlockTracker.charms_heart = true; NextPatient(); };
+        action = () => { unlockTracker.charms_heart = true; LevelStart(); };
         buttons[3].onClick.AddListener(action);
         buttons[3].transform.GetChild(0).GetComponent<Text>().text = "Heart Charm License";
 
@@ -51,7 +51,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[4].interactable = false;
         }
-        action = () => { unlockTracker.charms_lung = true; NextPatient(); };
+        action = () => { unlockTracker.charms_lung = true; LevelStart(); };
         buttons[4].onClick.AddListener(action);
         buttons[4].transform.GetChild(0).GetComponent<Text>().text = "Lung Charm License";
 
@@ -59,7 +59,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[5].interactable = false;
         }
-        action = () => { unlockTracker.charms_blood_regen = true; NextPatient(); };
+        action = () => { unlockTracker.charms_blood_regen = true; LevelStart(); };
         buttons[5].onClick.AddListener(action);
         buttons[5].transform.GetChild(0).GetComponent<Text>().text = "Blood Regeneration Charm License";
 
@@ -67,7 +67,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[6].interactable = false;
         }
-        action = () => { unlockTracker.charms_petrification = true; NextPatient(); };
+        action = () => { unlockTracker.charms_petrification = true; LevelStart(); };
         buttons[6].onClick.AddListener(action);
         buttons[6].transform.GetChild(0).GetComponent<Text>().text = "Petrification Charm License";
 
@@ -75,7 +75,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[7].interactable = false;
         }
-        action = () => { unlockTracker.spawn = true; NextPatient(); };
+        action = () => { unlockTracker.spawn = true; LevelStart(); };
         buttons[7].onClick.AddListener(action);
         buttons[7].transform.GetChild(0).GetComponent<Text>().text = "Bodypart Delivery Service";
 
@@ -87,9 +87,9 @@ public class UnlockManager : MonoBehaviour
 
     }
 
-    public void NextPatient()
+    public void LevelStart()
     {
-        GameObject.FindObjectOfType<InjurySpawnTracker>().NextPatient();
+        FindObjectOfType<LevelManager>().LevelStart();
     }
 
 }

@@ -11,10 +11,15 @@ public class InjurySpawnTracker : MonoBehaviour
     public int hardInjuries;
     public int patientNumber;
 
+    public int levelstart_easyInjuries;
+    public int levelstart_mediumInjuries;
+    public int levelstart_hardInjuries;
+    public int levelstart_patientNumber;
+
     // Start is called before the first frame update
     void Start()
     {
-        patientNumber = 1;
+        patientNumber = 0;
     }
 
     // Update is called once per frame
@@ -38,15 +43,23 @@ public class InjurySpawnTracker : MonoBehaviour
             mediumInjuries = 0;
             hardInjuries += 1;
         }
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
     }
 
-    public void Reset()
+    public void LevelStart()
     {
-        easyInjuries = 0;
-        mediumInjuries = 0;
-        hardInjuries = 0;
-        patientNumber = 0;
+        levelstart_easyInjuries = easyInjuries;
+        levelstart_mediumInjuries = mediumInjuries;
+        levelstart_hardInjuries = hardInjuries;
+        levelstart_patientNumber = patientNumber;
+        NextPatient();
+    }
+
+    public void OnLoad()
+    {
+        easyInjuries = levelstart_easyInjuries;
+        mediumInjuries = levelstart_mediumInjuries;
+        hardInjuries   = levelstart_hardInjuries;
+        patientNumber  = levelstart_patientNumber;
     }
 
 }
