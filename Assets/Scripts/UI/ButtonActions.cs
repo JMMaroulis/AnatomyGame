@@ -107,6 +107,7 @@ public class ButtonActions : MonoBehaviour
         {
             button.onClick.RemoveAllListeners();
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "";
+            button.transform.GetComponentInChildren<MouseOver>().mouseoverEnabled = false;
         }
     }
 
@@ -1086,6 +1087,12 @@ public class ButtonActions : MonoBehaviour
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Extract Organ: {seconds} seconds, {goldCost} gold";
+
+        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
+        mouseover.mouseoverEnabled = true;
+
+        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        mouseOverText.text = "removes the organ";
     }
 
     void AssignDestroyOrgan(Button button, Organ organ)

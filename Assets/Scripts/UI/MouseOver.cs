@@ -10,6 +10,13 @@ public class MouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private float timePassed;
     private bool timePassing;
 
+    private float mouseoverPanelSizeX;
+    private float mouseoverPanelSizeY;
+
+    public bool mouseoverEnabled;
+    public GameObject mouseoverPanel;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +26,24 @@ public class MouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     // Update is called once per frame
     void Update()
     {
+        mouseoverPanelSizeX = mouseoverPanel.GetComponent<Image>().rectTransform.rect.size.x;
+        mouseoverPanelSizeY = mouseoverPanel.GetComponent<Image>().rectTransform.rect.size.y;
+
         if (timePassing == true)
         {
             timePassed += Time.deltaTime;
+        }
+
+        if (timePassed >= 0.5f && mouseoverEnabled)
+        {
+            // TODO: figure out what the hell is going on here, so I can replace the manual inputs with automatic geometry
+            Vector3 newPosition = new Vector3(Input.mousePosition.x + 105, Input.mousePosition.y + 23, mouseoverPanel.transform.position.z);
+            mouseoverPanel.transform.position = newPosition;
+            mouseoverPanel.SetActive(true);
+        }
+        else
+        {
+            mouseoverPanel.SetActive(false);
         }
     }
 
