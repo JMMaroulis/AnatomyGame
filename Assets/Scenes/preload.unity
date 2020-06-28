@@ -627,15 +627,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surgery: 1
-  medicine_poison: 0
-  medicine_speed: 0
-  medicine_blood: 0
-  charms_heart: 0
-  charms_lung: 0
-  charms_petrification: 0
-  charms_blood_regen: 0
+  medicine_poison: 1
+  medicine_speed: 1
+  medicine_blood: 1
+  charms_heart: 1
+  charms_lung: 1
+  charms_petrification: 1
+  charms_blood_regen: 1
   blood: 1
-  spawn: 0
+  spawn: 1
   levelstart_surgery: 0
   levelstart_medicine_poison: 0
   levelstart_medicine_speed: 0

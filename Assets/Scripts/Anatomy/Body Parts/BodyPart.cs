@@ -270,7 +270,7 @@ public class BodyPart : MonoBehaviour
         }
 
         //slow poison
-        //0.01% of poison amount as damage per second
+        //0.001% of poison amount as damage per second
         //processes at 0.001 units per seconds
         if (slowPoison > 0.0f)
         {
