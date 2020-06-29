@@ -34,10 +34,10 @@ public class MouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             timePassed += Time.deltaTime;
         }
 
-        if (timePassed >= 0.5f && mouseoverEnabled)
+        if (timePassed >= 1.0f && mouseoverEnabled)
         {
             // TODO: figure out what the hell is going on here, so I can replace the manual inputs with automatic geometry
-            Vector3 newPosition = new Vector3(Input.mousePosition.x + 105, Input.mousePosition.y + 23, mouseoverPanel.transform.position.z);
+            Vector3 newPosition = new Vector3(Input.mousePosition.x + 215, Input.mousePosition.y + 40, mouseoverPanel.transform.position.z);
             mouseoverPanel.transform.position = newPosition;
             mouseoverPanel.SetActive(true);
         }
@@ -45,6 +45,11 @@ public class MouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             mouseoverPanel.SetActive(false);
         }
+    }
+
+    public void ResetTimer()
+    {
+        timePassed = 0.0f;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -58,7 +63,7 @@ public class MouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         //The mouse is no longer hovering over the GameObject so output this message each frame
         Debug.Log("Mouse is no longer on GameObject" + ": " + timePassed);
-        timePassed = 0.0f;
+        ResetTimer();
         timePassing = false;
     }
 }
