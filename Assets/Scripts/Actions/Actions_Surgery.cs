@@ -18,19 +18,19 @@ public static class Actions_Surgery
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        float timer = 0.0f;
         buttonActions.DisableAllButtons();
-        while (timer < seconds)
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
         buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
+            UpdateAllBodyPartHeartConnections();
+        }
 
-        bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
-        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
-
-        UpdateAllBodyPartHeartConnections();
     }
 
 
@@ -47,23 +47,23 @@ public static class Actions_Surgery
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        float timer = 0.0f;
         buttonActions.DisableAllButtons();
-        while (timer < seconds)
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
         buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            //disconnect
+            organObject.GetComponent<Organ>().SeverAllConnections();
+            UpdateAllBodyPartHeartConnections();
 
-        //disconnect
-        organObject.GetComponent<Organ>().SeverAllConnections();
-        UpdateAllBodyPartHeartConnections();
+            //remove from being child of bodypart
+            organObject.transform.SetParent(organObject.transform.parent.parent);
 
-        //remove from being child of bodypart
-        organObject.transform.SetParent(organObject.transform.parent.parent);
-
-        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
+        }
 
     }
 
@@ -86,24 +86,24 @@ public static class Actions_Surgery
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        float timer = 0.0f;
         buttonActions.DisableAllButtons();
-        while (timer < seconds)
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
         buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            //connect
+            organ.CreateConnection(bodyPart);
+            bodyPart.AddContainedOrgan(organ);
+            UpdateAllBodyPartHeartConnections();
 
-        //connect
-        organ.CreateConnection(bodyPart);
-        bodyPart.AddContainedOrgan(organ);
-        UpdateAllBodyPartHeartConnections();
+            //make organ child of bodypart
+            organ.transform.SetParent(bodyPart.transform);
 
-        //make organ child of bodypart
-        organ.transform.SetParent(bodyPart.transform);
-
-        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
+        }
 
     }
 
@@ -120,20 +120,20 @@ public static class Actions_Surgery
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        float timer = 0.0f;
         buttonActions.DisableAllButtons();
-        while (timer < seconds)
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
         buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            bodyPart1.CreateConnection(bodyPart2);
+            bodyPart2.CreateConnection(bodyPart1);
+            UpdateAllBodyPartHeartConnections();
 
-        bodyPart1.CreateConnection(bodyPart2);
-        bodyPart2.CreateConnection(bodyPart1);
-        UpdateAllBodyPartHeartConnections();
-
-        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_attachments += 1;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_attachments += 1;
+        }
 
     }
 
@@ -149,35 +149,35 @@ public static class Actions_Surgery
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        float timer = 0.0f;
         buttonActions.DisableAllButtons();
-        while (timer < seconds)
+        while (clock.isTimePassing)
         {
-            timer += Time.deltaTime * clock.globalTimeScalingFactor;
             yield return null;
         }
         buttonActions.EnableAllButtons();
-
-        foreach (Organ organ in bodyPart.containedOrgans)
+        if (!clock.actionCancelFlag)
         {
-            GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
-            GameObject.Destroy(organ.gameObject);
-        }
-        GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
-        GameObject.Destroy(bodyPart.gameObject);
-        UpdateAllBodyPartHeartConnections();
+            foreach (Organ organ in bodyPart.containedOrgans)
+            {
+                GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
+                GameObject.Destroy(organ.gameObject);
+            }
+            GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
+            GameObject.Destroy(bodyPart.gameObject);
+            UpdateAllBodyPartHeartConnections();
 
-        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_destroyed += 1;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_destroyed += 1;
+        }
 
     }
 
     private static void UpdateAllBodyPartHeartConnections()
     {
-        //List<BodyPart> bodyParts = FindObjectsOfType<BodyPart>().ToList();
-        //foreach(BodyPart bodyPart in bodyParts)
-        //{
-        //    bodyPart.UpdateHeartConnections();
-        //}
+        List<BodyPart> bodyParts = GameObject.FindObjectsOfType<BodyPart>().ToList();
+        foreach(BodyPart bodyPart in bodyParts)
+        {
+            bodyPart.UpdateHeartConnections();
+        }
     }
 
 }
