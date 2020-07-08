@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 735718014088381853}
   - component: {fileID: 2260615919125716580}
   m_Layer: 0
-  m_Name: newArm
+  m_Name: new Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,6 +62,16 @@ MonoBehaviour:
   - {fileID: 0}
   containedOrgans: []
   connectedHearts: []
+  maxArms: 0
+  maxLegs: 0
+  maxHeads: 0
+  maxTorsos: 1
+  maxBrains: 0
+  maxEyes: 0
+  maxHearts: 0
+  maxLivers: 0
+  maxLungs: 0
+  maxStomachs: 0
   healthPotion: 0
   antidote: 0
   slowPoison: 0

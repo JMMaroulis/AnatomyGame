@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5862114816469363198}
   - component: {fileID: 5757449452893809029}
   m_Layer: 0
-  m_Name: newHeart
+  m_Name: new Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
+  clock: {fileID: 0}
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
@@ -59,6 +60,17 @@ MonoBehaviour:
   efficiency: 1
   connectedBodyParts: []
   containedOrgans: []
+  connectedHearts: []
+  maxArms: 0
+  maxLegs: 0
+  maxHeads: 0
+  maxTorsos: 1
+  maxBrains: 0
+  maxEyes: 0
+  maxHearts: 0
+  maxLivers: 0
+  maxLungs: 0
+  maxStomachs: 0
   healthPotion: 0
   antidote: 0
   slowPoison: 0

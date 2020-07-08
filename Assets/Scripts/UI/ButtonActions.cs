@@ -146,11 +146,13 @@ public class ButtonActions : MonoBehaviour
         //TODO: Order this list somehow. Alphabetically, maybe?
         int numBodyParts = bodyParts.Count();
         int countStart = bodyPartMenuCounter;
-        while(bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 7))
+        int menuCount = 0;
+        while(menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyParts.Count())
         {
             //select bodypart
             AssignSelectBodyPart(menuButtons[bodyPartMenuCounter - countStart], bodyParts[bodyPartMenuCounter]);
             bodyPartMenuCounter += 1;
+            menuCount += 1;
         }
 
         if (bodyPartMenuCounter < numBodyParts)
@@ -160,6 +162,7 @@ public class ButtonActions : MonoBehaviour
             menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
             menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
         }
+
     }
 
     public void SelectOrganOptions(bool firstClick)
@@ -1016,13 +1019,23 @@ public class ButtonActions : MonoBehaviour
         //TODO: Order this list somehow. Alphabetically, maybe?
         int numBodyParts = bodyParts.Count();
         int countStart = bodyPartMenuCounter;
-        while (bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 6))
+        int menuCount = 0;
+        while (menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyParts.Count())
         {
-            Button menuButton = menuButtons[bodyPartMenuCounter - countStart];
+            Button menuButton = menuButtons[menuCount];
+            BodyPart bodyPartToAttach = bodyParts[bodyPartMenuCounter];
 
-            //assign button to connect chosen with selected, then go back to default
-            AssignConnectTwoBodyParts(bodypart, bodyParts[bodyPartMenuCounter], menuButton);
-            menuButton.transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyParts[bodyPartMenuCounter].name;
+            if( !selectedBodyPart.connectedBodyParts.Contains(bodyPartToAttach) 
+                && !bodyPartToAttach.connectedBodyParts.Contains(selectedBodyPart) 
+                && bodyPartToAttach.CheckConnectionValidity(selectedBodyPart) 
+                && selectedBodyPart.CheckConnectionValidity(bodyPartToAttach))
+            {
+                //assign button to connect chosen with selected, then go back to default
+                AssignConnectTwoBodyParts(bodypart, bodyPartToAttach, menuButton);
+                menuButton.transform.GetChild(0).gameObject.GetComponent<Text>().text = bodyPartToAttach.name;
+                menuCount += 1;
+            }
+
             bodyPartMenuCounter += 1;
         }
 
@@ -1040,9 +1053,17 @@ public class ButtonActions : MonoBehaviour
         float seconds = 10 * 60.0f;
         int goldCost = 0;
         UnityEngine.Events.UnityAction action = () => {
-            Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost); 
-            messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}...";
-            actionTimeBar.Reset(seconds); 
+            if (bodyPart1.connectedBodyParts.Contains(bodyPart2) || bodyPart2.connectedBodyParts.Contains(bodyPart1))
+            {
+                messageBox.text = $"Those are already connected!";
+            }
+            else
+            {
+                Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost);
+                messageBox.text = $"connecting the {bodyPart1.name} to the {bodyPart2.name}...";
+                actionTimeBar.Reset(seconds);
+            }
+
         };
         button.onClick.AddListener(action);
 
@@ -1123,11 +1144,20 @@ public class ButtonActions : MonoBehaviour
         //TODO: Order this list somehow. Alphabetically, maybe?
         int numBodyParts = bodyParts.Count();
         int countStart = bodyPartMenuCounter;
-        while (bodyPartMenuCounter < Mathf.Min(numBodyParts, countStart + 7))
+        int menuCount = 0;
+        while (menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyParts.Count())
         {
-            //select bodypart
-            AssignImplantOrganButton(menuButtons[bodyPartMenuCounter - countStart], bodyParts[bodyPartMenuCounter], (Organ)selectedBodyPart);
+            BodyPart bodyPart = bodyParts[bodyPartMenuCounter];
+
+            if (bodyPart.CheckImplantValidity((Organ)selectedBodyPart))
+            {
+                //select bodypart
+                AssignImplantOrganButton(menuButtons[bodyPartMenuCounter - countStart], bodyPart, (Organ)selectedBodyPart);
+                menuCount += 1;
+            }
+
             bodyPartMenuCounter += 1;
+
         }
 
         if (bodyPartMenuCounter < numBodyParts)

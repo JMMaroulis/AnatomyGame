@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2511398557098109629}
   - component: {fileID: 1387252113512761771}
   m_Layer: 0
-  m_Name: newHead
+  m_Name: new Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
+  clock: {fileID: 0}
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
@@ -65,6 +66,17 @@ MonoBehaviour:
   - {fileID: 7135807481301513890}
   - {fileID: 3579948464050700767}
   - {fileID: 6070909881794396793}
+  connectedHearts: []
+  maxArms: 0
+  maxLegs: 0
+  maxHeads: 0
+  maxTorsos: 1
+  maxBrains: 1
+  maxEyes: 2
+  maxHearts: 0
+  maxLivers: 0
+  maxLungs: 0
+  maxStomachs: 0
   healthPotion: 0
   antidote: 0
   slowPoison: 0
@@ -165,7 +177,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a5acc85837e1c459b61ab2cc551fb4, type: 3}
+  m_Script: {fileID: 11500000, guid: a37769886d8e83f4cac9123ac5110abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5513719288731100894
@@ -359,6 +371,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a5acc85837e1c459b61ab2cc551fb4, type: 3}
+  m_Script: {fileID: 11500000, guid: a37769886d8e83f4cac9123ac5110abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

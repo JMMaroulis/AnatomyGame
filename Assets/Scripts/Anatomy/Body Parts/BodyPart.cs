@@ -17,7 +17,6 @@ public class BodyPart : MonoBehaviour
     public float bloodPumpRate;
     public float bloodMax;
 
-
     //oxygen stuff
     public float oxygen;
     public float oxygenMax;
@@ -27,14 +26,30 @@ public class BodyPart : MonoBehaviour
     public float damageMax;
     public float efficiency;
 
+    //connections
+    //NB: connectedHearts and connectedOrgans are NOT MUTUALLY EXCLUSIVE LISTS
     public List<BodyPart> connectedBodyParts;
     public List<Organ> containedOrgans;
+    public List<Heart> connectedHearts;
 
     private bool isConnectedToBrain;
     private bool isConnectedToHeart;
-    public List<Heart> connectedHearts;
 
     private float connectedBrainEfficiency;
+
+    //expected limb numbers
+    public int maxArms;
+    public int maxLegs;
+    public int maxHeads;
+    public int maxTorsos;
+
+    //expected organ numbers
+    public int maxBrains;
+    public int maxEyes;
+    public int maxHearts;
+    public int maxLivers;
+    public int maxLungs;
+    public int maxStomachs;
 
     //drug stuff
     public float healthPotion;
@@ -395,6 +410,68 @@ public class BodyPart : MonoBehaviour
 
         return false;
 
+    }
+
+    public bool CheckConnectionValidity(BodyPart bodyPart)
+    {
+        //don't get me wrong, this is a horrify piece of code, that's going to need expanding every time we add a bodypart/organ type
+        //but for now, it works, and that'll have to do
+        if (bodyPart is Arm)
+        {
+            return (connectedBodyParts.OfType<Arm>().Count() < maxArms);
+        }
+
+        if (bodyPart is Head)
+        {
+            return (connectedBodyParts.OfType<Head>().Count() < maxHeads);
+        }
+
+        if (bodyPart is Leg)
+        {
+            return (connectedBodyParts.OfType<Leg>().Count() < maxLegs);
+        }
+
+        if (bodyPart is Torso)
+        {
+            return (connectedBodyParts.OfType<Torso>().Count() < maxTorsos);
+        }
+
+        return false;
+    }
+
+    public bool CheckImplantValidity(Organ organ)
+    {
+        if (organ is Brain)
+        {
+            return (connectedBodyParts.OfType<Brain>().Count() < maxBrains);
+        }
+
+        if (organ is Eye)
+        {
+            return (connectedBodyParts.OfType<Eye>().Count() < maxEyes);
+        }
+
+        if (organ is Heart)
+        {
+            return (connectedBodyParts.OfType<Heart>().Count() < maxHearts);
+        }
+
+        if (organ is Liver)
+        {
+            return (connectedBodyParts.OfType<Liver>().Count() < maxLivers);
+        }
+
+        if (organ is Lung)
+        {
+            return (connectedBodyParts.OfType<Lung>().Count() < maxLungs);
+        }
+
+        if (organ is Stomach)
+        {
+            return (connectedBodyParts.OfType<Stomach>().Count() < maxStomachs);
+        }
+
+        return false;
     }
 
     public void UpdateEfficiency()

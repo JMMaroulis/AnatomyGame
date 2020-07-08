@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6675934801669765112}
   - component: {fileID: 5690681944904997238}
   m_Layer: 0
-  m_Name: newTorso
+  m_Name: new Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
+  clock: {fileID: 0}
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
@@ -73,6 +74,17 @@ MonoBehaviour:
   - {fileID: 1602104620371625720}
   - {fileID: 1958472659007815434}
   - {fileID: 6010449279388636963}
+  connectedHearts: []
+  maxArms: 2
+  maxLegs: 2
+  maxHeads: 1
+  maxTorsos: 0
+  maxBrains: 0
+  maxEyes: 0
+  maxHearts: 1
+  maxLivers: 1
+  maxLungs: 2
+  maxStomachs: 1
   healthPotion: 0
   antidote: 0
   slowPoison: 0
