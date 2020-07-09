@@ -8,17 +8,16 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnHeart(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnHeartCoroutine(seconds));
+
+        StaticCoroutine.Start(SpawnHeartCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnHeartCoroutine(float seconds)
+    public static IEnumerator SpawnHeartCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -29,6 +28,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnHeart("newHeart");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -38,14 +38,13 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnLung(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnLungCoroutine(seconds));
+        StaticCoroutine.Start(SpawnLungCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnLungCoroutine(float seconds)
+    public static IEnumerator SpawnLungCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
         
@@ -59,6 +58,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLung("newLung");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -68,16 +68,14 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnBrain(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnBrainCoroutine(seconds));
+        StaticCoroutine.Start(SpawnBrainCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnBrainCoroutine(float seconds)
+    public static IEnumerator SpawnBrainCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
-
         
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
@@ -89,6 +87,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnBrain("newBrain");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -98,17 +97,15 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnEye(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnEyeCoroutine(seconds));
+        StaticCoroutine.Start(SpawnEyeCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnEyeCoroutine(float seconds)
+    public static IEnumerator SpawnEyeCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -119,6 +116,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnEye("newEye");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -128,17 +126,15 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnLiver(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnLiverCoroutine(seconds));
+        StaticCoroutine.Start(SpawnLiverCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnLiverCoroutine(float seconds)
+    public static IEnumerator SpawnLiverCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -149,6 +145,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("newLiver");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -158,17 +155,15 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnStomach(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnStomachCoroutine(seconds));
+        StaticCoroutine.Start(SpawnStomachCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnStomachCoroutine(float seconds)
+    public static IEnumerator SpawnStomachCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -179,6 +174,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnStomach("newStomach");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -192,17 +188,15 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnArm(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnArmCoroutine(seconds));
+        StaticCoroutine.Start(SpawnArmCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnArmCoroutine(float seconds)
+    public static IEnumerator SpawnArmCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -213,6 +207,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnArm("newArm");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -222,17 +217,15 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnLeg(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnLegCoroutine(seconds));
+        StaticCoroutine.Start(SpawnLegCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnLegCoroutine(float seconds)
+    public static IEnumerator SpawnLegCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -243,6 +236,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeg("newLeg");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -252,17 +246,15 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnTorso(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnTorsoCoroutine(seconds));
+        StaticCoroutine.Start(SpawnTorsoCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnTorsoCoroutine(float seconds)
+    public static IEnumerator SpawnTorsoCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -273,6 +265,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("newTorso");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -282,17 +275,15 @@ public static class Actions_SpawnBodyParts
 
     public static void SpawnHead(float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(SpawnHeadCoroutine(seconds));
+        StaticCoroutine.Start(SpawnHeadCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnHeadCoroutine(float seconds)
+    public static IEnumerator SpawnHeadCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -303,6 +294,7 @@ public static class Actions_SpawnBodyParts
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("newHead");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {

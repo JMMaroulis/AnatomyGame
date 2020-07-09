@@ -7,16 +7,14 @@ public static class Actions_Medicine
 
     public static void InjectHealthPotion(BodyPart bodyPartObject, float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(InjectHealthPotionCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(InjectHealthPotionCoroutine(bodyPartObject, seconds, goldCost));
     }
 
-    public static IEnumerator InjectHealthPotionCoroutine(BodyPart bodyPartObject, float seconds)
+    public static IEnumerator InjectHealthPotionCoroutine(BodyPart bodyPartObject, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
-
         
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
@@ -28,6 +26,7 @@ public static class Actions_Medicine
         {
             bodyPartObject.healthPotion += 100.0f;
             MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_health += 100;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -37,17 +36,15 @@ public static class Actions_Medicine
 
     public static void InjectAntidote(BodyPart bodyPartObject, float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(InjectAntidoteCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(InjectAntidoteCoroutine(bodyPartObject, seconds, goldCost));
     }
 
-    public static IEnumerator InjectAntidoteCoroutine(BodyPart bodyPartObject, float seconds)
+    public static IEnumerator InjectAntidoteCoroutine(BodyPart bodyPartObject, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -58,6 +55,7 @@ public static class Actions_Medicine
         {
             bodyPartObject.antidote += 50.0f;
             MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_antidote += 50;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -67,17 +65,15 @@ public static class Actions_Medicine
 
     public static void InjectSlowPoison(BodyPart bodyPartObject, float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(InjectSlowPoisonCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(InjectSlowPoisonCoroutine(bodyPartObject, seconds, goldCost));
     }
 
-    public static IEnumerator InjectSlowPoisonCoroutine(BodyPart bodyPartObject, float seconds)
+    public static IEnumerator InjectSlowPoisonCoroutine(BodyPart bodyPartObject, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -88,6 +84,7 @@ public static class Actions_Medicine
         {
             bodyPartObject.slowPoison += 50.0f;
             MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_slowpoison += 50;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -97,17 +94,15 @@ public static class Actions_Medicine
 
     public static void InjectStasisPotion(BodyPart bodyPartObject, float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(InjectStasisPotionCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(InjectStasisPotionCoroutine(bodyPartObject, seconds, goldCost));
     }
 
-    public static IEnumerator InjectStasisPotionCoroutine(BodyPart bodyPartObject, float seconds)
+    public static IEnumerator InjectStasisPotionCoroutine(BodyPart bodyPartObject, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -118,6 +113,7 @@ public static class Actions_Medicine
         {
             bodyPartObject.stasisPotion += 50.0f;
             MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_stasis += 50;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -127,17 +123,15 @@ public static class Actions_Medicine
 
     public static void InjectHastePotion(BodyPart bodyPartObject, float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(InjectHastePotionCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(InjectHastePotionCoroutine(bodyPartObject, seconds, goldCost));
     }
 
-    public static IEnumerator InjectHastePotionCoroutine(BodyPart bodyPartObject, float seconds)
+    public static IEnumerator InjectHastePotionCoroutine(BodyPart bodyPartObject, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -148,6 +142,7 @@ public static class Actions_Medicine
         {
             bodyPartObject.hastePotion += 50.0f;
             MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_haste += 50;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
@@ -157,17 +152,15 @@ public static class Actions_Medicine
 
     public static void InjectCoagulantPotion(BodyPart bodyPartObject, float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        StaticCoroutine.Start(InjectCoagulantPotionCoroutine(bodyPartObject, seconds));
+        StaticCoroutine.Start(InjectCoagulantPotionCoroutine(bodyPartObject, seconds, goldCost));
     }
 
-    public static IEnumerator InjectCoagulantPotionCoroutine(BodyPart bodyPartObject, float seconds)
+    public static IEnumerator InjectCoagulantPotionCoroutine(BodyPart bodyPartObject, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        
         buttonActions.DisableAllButtons();
         while (clock.isTimePassing)
         {
@@ -178,6 +171,7 @@ public static class Actions_Medicine
         {
             bodyPartObject.coagulantPotion += 50.0f;
             MonoBehaviour.FindObjectOfType<ActionTracker>().medicine_coagulant += 50;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
         else
         {
