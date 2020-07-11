@@ -58,8 +58,7 @@ MonoBehaviour:
   damage: 0
   damageMax: 100
   efficiency: 1
-  connectedBodyParts:
-  - {fileID: 0}
+  connectedBodyParts: []
   containedOrgans: []
   connectedHearts: []
   maxArms: 0

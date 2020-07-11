@@ -21,7 +21,7 @@ public class BodyPartStatusManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //TODO: go over all selectors, delete any that don't have a body part anymore
     }
 
     void PopulateBodyPartsList()

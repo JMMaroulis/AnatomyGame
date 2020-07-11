@@ -6,14 +6,16 @@ using UnityEngine;
 public class BodyPartManager : MonoBehaviour
 {
     private Clock clock;
+    public List<BodyPart> bodyParts;
+
     public void Start()
     {
         clock = FindObjectOfType<Clock>();
+        bodyParts = FindObjectsOfType<BodyPart>().ToList();
     }
 
     void Update()
     {
-        List<BodyPart> bodyParts = FindObjectsOfType<BodyPart>().ToList();
         if (clock.isTimePassing)
         {
             float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
