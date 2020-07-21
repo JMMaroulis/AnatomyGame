@@ -27,7 +27,11 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         buttonActions.selectedBodyPart = bodyPart;
-        Debug.Log("Click");
+        if (!(bodyPart is Organ))
+        {
+            FindObjectOfType<BodyPartSelectorManager>().SelectBodyPart(bodyPart);
+        }
+        FindObjectOfType<ButtonActions>().ClearAllButtons();
     }
 
 }

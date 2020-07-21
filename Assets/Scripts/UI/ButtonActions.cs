@@ -101,7 +101,7 @@ public class ButtonActions : MonoBehaviour
     }
 
     //remove all text and actions from all buttons
-    void ClearAllButtons()
+    public void ClearAllButtons()
     {
         foreach (Button button in menuButtons)
         {
@@ -411,6 +411,7 @@ public class ButtonActions : MonoBehaviour
     void SelectBodyPart(BodyPart bodyPart)
     {
         selectedBodyPart = bodyPart;
+        FindObjectOfType<BodyPartSelectorManager>().SelectBodyPart(bodyPart);
     }
 
     //make a button select a given bodypart

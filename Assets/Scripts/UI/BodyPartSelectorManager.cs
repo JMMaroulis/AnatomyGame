@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BodyPartSelectorManager : MonoBehaviour
 {
@@ -29,10 +30,21 @@ public class BodyPartSelectorManager : MonoBehaviour
     public GameObject rightLegSelectorsPanel;
     public GameObject rightLegSelectorPrefab;
 
+    public List<BodyPartSelector> organSelectors;
+    public GameObject organSelectorsPanel;
+    public GameObject organSelectorPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        List<BodyPart> bodyParts = FindObjectsOfType<BodyPart>().ToList();
+        foreach (BodyPart bodyPart in bodyParts)
+        {
+            if (!(bodyPart is Organ))
+            {
+                NewBodyPart(bodyPart);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -80,14 +92,37 @@ public class BodyPartSelectorManager : MonoBehaviour
             {
                 GameObject selector = GameObject.Instantiate(leftLegSelectorPrefab, leftLegSelectorsPanel.transform);
                 selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                headSelectors.Add(selector.GetComponent<BodyPartSelector>());
+                leftLegSelectors.Add(selector.GetComponent<BodyPartSelector>());
             }
             else
             {
                 GameObject selector = GameObject.Instantiate(rightLegSelectorPrefab, rightLegSelectorsPanel.transform);
                 selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                headSelectors.Add(selector.GetComponent<BodyPartSelector>());
+                rightLegSelectors.Add(selector.GetComponent<BodyPartSelector>());
             }
+        }
+    }
+
+    private void NewOrgan(Organ organ)
+    {
+        GameObject selector = GameObject.Instantiate(organSelectorPrefab, organSelectorsPanel.transform);
+        selector.GetComponent<BodyPartSelector>().bodyPart = organ;
+        organSelectors.Add(selector.GetComponent<BodyPartSelector>());
+    }
+
+    public void SelectBodyPart(BodyPart selectedBodyPart)
+    {
+        //clear old organ selectors
+        for (int i = 0; i < organSelectors.Count; i++)
+        {
+            Destroy(organSelectors[i].gameObject);
+        }
+        organSelectors = new List<BodyPartSelector>();
+
+        //make new organ selectors
+        foreach (Organ organ in selectedBodyPart.containedOrgans)
+        {
+            NewOrgan(organ);
         }
     }
 

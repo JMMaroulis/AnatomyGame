@@ -24,7 +24,10 @@ public class BodyPartManager : MonoBehaviour
                 float tempDeltaTime = Mathf.Min(deltaTime, 0.2f);
                 foreach (BodyPart bodyPart in bodyParts)
                 {
-                    bodyPart.UpdateBodyPart(tempDeltaTime);
+                    if (bodyPart.enabled == true)
+                    {
+                        bodyPart.UpdateBodyPart(tempDeltaTime);
+                    }
                 }
                 deltaTime -= tempDeltaTime;
             }
