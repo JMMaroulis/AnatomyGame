@@ -20,7 +20,11 @@ public class BodyPartStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //should cease to exist if the bodypart doesn't exist
+        if (bodyPart is null)
+        {
+            Destroy(this);
+        }
     }
 
 }

@@ -38,7 +38,6 @@ public static class Actions_Surgery
 
     public static void RemoveOrgan(Organ organObject, float seconds, int goldCost)
     {
-
         StaticCoroutine.Start(RemoveOrganCoroutine(organObject, seconds, goldCost));
     }
 
@@ -144,8 +143,6 @@ public static class Actions_Surgery
 
     public static void DeleteBodyPart(BodyPart bodyPart, float seconds, int goldCost)
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         StaticCoroutine.Start(DeleteBodyPartCoroutine(bodyPart, seconds, goldCost));
     }
 
@@ -169,6 +166,8 @@ public static class Actions_Surgery
                 GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
                 GameObject.Destroy(organ.gameObject);
             }
+
+            bodyPart.SeverAllConnections();
             GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
             GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(bodyPart);
             GameObject.Destroy(bodyPart.gameObject);

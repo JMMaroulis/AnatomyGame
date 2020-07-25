@@ -21,7 +21,11 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        
+        //should cease to exist if the bodypart doesn't exist
+        if (bodyPart == null)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
