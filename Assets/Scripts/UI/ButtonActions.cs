@@ -13,7 +13,6 @@ public class ButtonActions : MonoBehaviour
     public BodyPart selectedBodyPart = null;
     public GameObject body;
 
-    public Text selectedBodyPartText;
     public Text messageBox;
     public Text examineBox;
 
@@ -74,20 +73,7 @@ public class ButtonActions : MonoBehaviour
         PopulateBodyPartsList();
         PopulateOrgansList();
 
-        //update selected bodypart name text
-        if (selectedBodyPart is Organ)
-        {
-            if (selectedBodyPart.connectedBodyParts.Count != 0)
-            {
-                selectedBodyPartText.text = $"{selectedBodyPart.connectedBodyParts[0]} : {selectedBodyPart.name}";
-            }
-            else
-            {
-                selectedBodyPartText.text = $"External : {selectedBodyPart.name}";
-            }
-        }
-        else if (selectedBodyPart) selectedBodyPartText.text = selectedBodyPart.name;
-
+        //update bodypart examination textbox every x seconds
         if (selectedBodyPart)
         {
             secondCounter += Time.unscaledDeltaTime;

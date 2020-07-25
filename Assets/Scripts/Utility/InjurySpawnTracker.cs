@@ -19,7 +19,7 @@ public class InjurySpawnTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        patientNumber = 0;
+
     }
 
     // Update is called once per frame

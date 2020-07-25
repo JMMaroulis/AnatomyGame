@@ -87,21 +87,22 @@ public class BodyPartStatusManager : MonoBehaviour
 
     public void AddStatus(BodyPart bodyPart)
     {
-        GameObject status = Instantiate(statusPrefab, statusPanel.transform);
+        GameObject statusGameObject = Instantiate(statusPrefab, statusPanel.transform);
+        BodyPartStatus status = statusGameObject.GetComponent<BodyPartStatus>();
         status.name = bodyPart.name;
 
         if (bodyPart is Organ)
         {
-             status.transform.GetChild(0).GetComponent<Text>().text = "  " + bodyPart.name;
+             status.partName.text = "  " + bodyPart.name;
         }
         else
         {
-            status.transform.GetChild(0).GetComponent<Text>().text = bodyPart.name;
+            status.partName.text = bodyPart.name;
         }
 
-        BloodBar bloodBar = status.transform.GetChild(1).GetChild(0).GetComponent<BloodBar>();
-        OxygenBar oxygenBar = status.transform.GetChild(1).GetChild(1).GetComponent<OxygenBar>();
-        HealthBar healthBar = status.transform.GetChild(1).GetChild(2).GetComponent<HealthBar>();
+        BloodBar bloodBar = status.bloodBar;
+        OxygenBar oxygenBar = status.oxygenBar;
+        HealthBar healthBar = status.healthBar;
 
         bloodBar.bodyPart = bodyPart;
         bloodBar.MinMax();
