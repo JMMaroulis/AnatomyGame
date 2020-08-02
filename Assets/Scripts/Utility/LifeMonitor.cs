@@ -85,11 +85,14 @@ public class LifeMonitor : MonoBehaviour
             }
         }
 
+        //TODO: rejig this to deal with the bodypart-specific definitions of what should be connected
         //check there's an appropriate number of each organ and limb
         Dictionary<System.Type, List<int>> typeCount = new Dictionary<System.Type, List<int>>{
             //{number the body has, number the body needs}
-            { new Arm().GetType(),   new List<int> {0,2}},
-            { new Leg().GetType(),   new List<int> {0,2}},
+            { new LeftArm().GetType(),   new List<int> {0,1}},
+            { new RightArm().GetType(),   new List<int> {0,1}},
+            { new LeftLeg().GetType(),   new List<int> {0,1}},
+            { new RightLeg().GetType(),   new List<int> {0,1}},
             { new Head().GetType(),  new List<int> {0,1}},
             { new Torso().GetType(), new List<int> {0,1}},
             { new Lung().GetType(),  new List<int> {0,2}},

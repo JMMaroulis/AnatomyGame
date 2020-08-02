@@ -333,10 +333,12 @@ MonoBehaviour:
     type: 3}
   stomachPrefab: {fileID: 3127633483755530073, guid: 9be7e5e062d0f7544affec32730a9666,
     type: 3}
-  armPrefab: {fileID: 7063653498281421542, guid: 8bc5ecc4b41800f478e922d04dcb28a4,
+  leftArmPrefab: {fileID: 2268493196242816365, guid: 5e798ed622559524a9a3583c62aa8a26,
     type: 3}
-  legPrefab: {fileID: 2943625929962649177, guid: 86f53adb390ec4a489cdcd685f7d2d49,
+  rightArmPrefab: {fileID: 2277114606650625870, guid: cd904326e7a47334f9d5a8192c39ec60,
     type: 3}
+  leftLegPrefab: {fileID: 0}
+  rightLegPrefab: {fileID: 0}
   torsoPrefab: {fileID: 5947049902768832402, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
     type: 3}
   headPrefab: {fileID: 4013890393164018642, guid: a06dd97c5b85b054d9a3a1997c1739e7,
@@ -635,7 +637,7 @@ MonoBehaviour:
   charms_petrification: 0
   charms_blood_regen: 0
   blood: 1
-  spawn: 0
+  spawn: 1
   levelstart_surgery: 0
   levelstart_medicine_poison: 0
   levelstart_medicine_speed: 0

@@ -397,7 +397,7 @@ public class ButtonActions : MonoBehaviour
     void SelectBodyPart(BodyPart bodyPart)
     {
         selectedBodyPart = bodyPart;
-        FindObjectOfType<BodyPartSelectorManager>().SelectBodyPart(bodyPart);
+        FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     //make a button select a given bodypart
@@ -436,10 +436,12 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        AssignSpawnArmButton(menuButtons[0]);
-        AssignSpawnLegButton(menuButtons[1]);
-        AssignSpawnHeadButton(menuButtons[2]);
-        AssignSpawnTorsoButton(menuButtons[3]);
+        AssignSpawnLeftArmButton(menuButtons[0]);
+        AssignSpawnRightArmButton(menuButtons[1]);
+        AssignSpawnLeftLegButton(menuButtons[2]);
+        AssignSpawnRightLegButton(menuButtons[3]);
+        AssignSpawnHeadButton(menuButtons[4]);
+        AssignSpawnTorsoButton(menuButtons[5]);
     }
 
 
@@ -1458,7 +1460,7 @@ public class ButtonActions : MonoBehaviour
         mouseOverText.text = "Creates a new Stomach, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
     }
 
-    void AssignSpawnArmButton(Button button)
+    void AssignSpawnLeftArmButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
@@ -1470,7 +1472,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_SpawnBodyParts.SpawnArm(seconds, goldCost);
+                Actions_SpawnBodyParts.SpawnLeftArm(seconds, goldCost);
                 messageBox.text = $"Spawning a new arm...";
                 actionTimeBar.Reset(seconds);
             }
@@ -1478,17 +1480,17 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new arm: {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Spawn a new left arm: {seconds} seconds, {goldCost} gold";
 
         MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
         mouseover.mouseoverEnabled = true;
         mouseover.ResetTimer();
         Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        mouseOverText.text = "Creates a new Left Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
 
     }
 
-    void AssignSpawnLegButton(Button button)
+    void AssignSpawnRightArmButton(Button button)
     {
         float seconds = 60.0f * 5.0f;
         int goldCost = 250;
@@ -1500,7 +1502,37 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_SpawnBodyParts.SpawnLeg(seconds, goldCost);
+                Actions_SpawnBodyParts.SpawnRightArm(seconds, goldCost);
+                messageBox.text = $"Spawning a new arm...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a new right arm: {seconds} seconds, {goldCost} gold";
+
+        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
+        mouseover.mouseoverEnabled = true;
+        mouseover.ResetTimer();
+        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        mouseOverText.text = "Creates a new Right Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+
+    }
+
+    void AssignSpawnLeftLegButton(Button button)
+    {
+        float seconds = 60.0f * 5.0f;
+        int goldCost = 250;
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnLeftLeg(seconds, goldCost);
                 messageBox.text = $"Spawning a new leg...";
                 actionTimeBar.Reset(seconds);
             }
@@ -1508,13 +1540,43 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new leg: {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Spawn a new left leg: {seconds} seconds, {goldCost} gold";
 
         MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
         mouseover.mouseoverEnabled = true;
         mouseover.ResetTimer();
         Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        mouseOverText.text = "Creates a new Left Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+
+    }
+
+    void AssignSpawnRightLegButton(Button button)
+    {
+        float seconds = 60.0f * 5.0f;
+        int goldCost = 250;
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                messageBox.text = "Insufficient funds.";
+            }
+            else
+            {
+                Actions_SpawnBodyParts.SpawnRightLeg(seconds, goldCost);
+                messageBox.text = $"Spawning a new leg...";
+                actionTimeBar.Reset(seconds);
+            }
+        };
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a new right leg: {seconds} seconds, {goldCost} gold";
+
+        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
+        mouseover.mouseoverEnabled = true;
+        mouseover.ResetTimer();
+        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        mouseOverText.text = "Creates a new Right Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
 
     }
 

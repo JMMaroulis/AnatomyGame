@@ -24,7 +24,7 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
         //should cease to exist if the bodypart doesn't exist
         if (bodyPart == null)
         {
-            Destroy(this.gameObject);
+            FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
         }
     }
 
@@ -33,7 +33,7 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
         buttonActions.selectedBodyPart = bodyPart;
         if (!(bodyPart is Organ))
         {
-            FindObjectOfType<BodyPartSelectorManager>().SelectBodyPart(bodyPart);
+            FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
         }
         FindObjectOfType<ButtonActions>().ClearAllButtons();
     }

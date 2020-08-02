@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.UI;
-using TMPro;
 
 public class BodyPartStatusManager : MonoBehaviour
 {
@@ -54,14 +51,14 @@ public class BodyPartStatusManager : MonoBehaviour
         }
         foreach (BodyPart bodyPart in bodyParts)
         {
-            if (bodyPart is Arm)
+            if (bodyPart is LeftArm || bodyPart is RightArm)
             {
                 AddStatusIncludingContainedOrgans(bodyPart);
             }
         }
         foreach (BodyPart bodyPart in bodyParts)
         {
-            if (bodyPart is Leg)
+            if (bodyPart is LeftLeg || bodyPart is RightLeg)
             {
                 AddStatusIncludingContainedOrgans(bodyPart);
             }

@@ -186,12 +186,12 @@ public static class Actions_SpawnBodyParts
 
     #region bodyparts
 
-    public static void SpawnArm(float seconds, int goldCost)
+    public static void SpawnLeftArm(float seconds, int goldCost)
     {
-        StaticCoroutine.Start(SpawnArmCoroutine(seconds, goldCost));
+        StaticCoroutine.Start(SpawnLeftArmCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnArmCoroutine(float seconds, int goldCost)
+    public static IEnumerator SpawnLeftArmCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -205,7 +205,7 @@ public static class Actions_SpawnBodyParts
         buttonActions.EnableAllButtons();
         if (!clock.actionCancelFlag)
         {
-            Object.FindObjectOfType<BodyPartSpawner>().SpawnArm("newArm");
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftArm("newLeftArm");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
@@ -215,12 +215,12 @@ public static class Actions_SpawnBodyParts
         }
     }
 
-    public static void SpawnLeg(float seconds, int goldCost)
+    public static void SpawnRightArm(float seconds, int goldCost)
     {
-        StaticCoroutine.Start(SpawnLegCoroutine(seconds, goldCost));
+        StaticCoroutine.Start(SpawnRightArmCoroutine(seconds, goldCost));
     }
 
-    public static IEnumerator SpawnLegCoroutine(float seconds, int goldCost)
+    public static IEnumerator SpawnRightArmCoroutine(float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -234,7 +234,66 @@ public static class Actions_SpawnBodyParts
         buttonActions.EnableAllButtons();
         if (!clock.actionCancelFlag)
         {
-            Object.FindObjectOfType<BodyPartSpawner>().SpawnLeg("newLeg");
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnRightArm("newRightArm");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
+    }
+
+
+    public static void SpawnLeftLeg(float seconds, int goldCost)
+    {
+        StaticCoroutine.Start(SpawnLeftLegCoroutine(seconds, goldCost));
+    }
+
+    public static IEnumerator SpawnLeftLegCoroutine(float seconds, int goldCost)
+    {
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
+        {
+            yield return null;
+        }
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftLeg("newLeftLeg");
+            MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+        }
+        else
+        {
+            clock.actionCancelFlag = false;
+        }
+    }
+
+    public static void SpawnRightLeg(float seconds, int goldCost)
+    {
+        StaticCoroutine.Start(SpawnRightLegCoroutine(seconds, goldCost));
+    }
+
+    public static IEnumerator SpawnRightLegCoroutine(float seconds, int goldCost)
+    {
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        buttonActions.DisableAllButtons();
+        while (clock.isTimePassing)
+        {
+            yield return null;
+        }
+        buttonActions.EnableAllButtons();
+        if (!clock.actionCancelFlag)
+        {
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnRightLeg("newRightLeg");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }

@@ -134,6 +134,7 @@ public static class Actions_Surgery
             bodyPart1.CreateConnection(bodyPart2);
             bodyPart2.CreateConnection(bodyPart1);
             UpdateAllBodyPartHeartConnections();
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_attachments += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
@@ -171,6 +172,7 @@ public static class Actions_Surgery
             GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
             GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(bodyPart);
             GameObject.Destroy(bodyPart.gameObject);
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             UpdateAllBodyPartHeartConnections();
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_destroyed += 1;

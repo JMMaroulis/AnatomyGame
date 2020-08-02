@@ -15,8 +15,10 @@ public class BodyPartSpawner : MonoBehaviour
     public GameObject stomachPrefab;
 
     //limb prefabs
-    public GameObject armPrefab;
-    public GameObject legPrefab;
+    public GameObject leftArmPrefab;
+    public GameObject rightArmPrefab;
+    public GameObject leftLegPrefab;
+    public GameObject rightLegPrefab;
     public GameObject torsoPrefab;
     public GameObject headPrefab;
 
@@ -42,8 +44,7 @@ public class BodyPartSpawner : MonoBehaviour
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
 
-        //GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
-        //selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -55,8 +56,7 @@ public class BodyPartSpawner : MonoBehaviour
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
 
-        //GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
-        //selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -68,8 +68,7 @@ public class BodyPartSpawner : MonoBehaviour
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
 
-        //GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
-        //selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -81,8 +80,7 @@ public class BodyPartSpawner : MonoBehaviour
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
 
-        //GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
-        //selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -94,8 +92,7 @@ public class BodyPartSpawner : MonoBehaviour
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
 
-        //GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
-        //selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -107,15 +104,14 @@ public class BodyPartSpawner : MonoBehaviour
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
 
-        //GameObject selector = Instantiate(selectorPrefab, GameObject.FindGameObjectWithTag("BodySelectors").transform);
-        //selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart.GetComponent<BodyPart>();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
         return bodyPart.GetComponent<BodyPart>();
     }
 
-    public BodyPart SpawnArm(string name)
+    public BodyPart SpawnLeftArm(string name)
     {
-        GameObject bodyPart = Instantiate(armPrefab);
+        GameObject bodyPart = Instantiate(leftArmPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
@@ -125,9 +121,33 @@ public class BodyPartSpawner : MonoBehaviour
         return bodyPart.GetComponent<BodyPart>();
     }
 
-    public BodyPart SpawnLeg(string name)
+    public BodyPart SpawnRightArm(string name)
     {
-        GameObject bodyPart = Instantiate(legPrefab);
+        GameObject bodyPart = Instantiate(rightArmPrefab);
+        bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnLeftLeg(string name)
+    {
+        GameObject bodyPart = Instantiate(leftLegPrefab);
+        bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnRightLeg(string name)
+    {
+        GameObject bodyPart = Instantiate(rightLegPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());

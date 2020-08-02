@@ -8,7 +8,7 @@ public class BodyPart : MonoBehaviour
     public bool isTimePassing;
     public float timeScale;
     public bool isFunctioning;
-    public Clock clock;
+    private Clock clock;
 
     //blood stuff
     public float bloodRequiredToFunction;
@@ -38,10 +38,14 @@ public class BodyPart : MonoBehaviour
     private float connectedBrainEfficiency;
 
     //expected limb numbers
-    public int maxArms;
-    public int maxLegs;
+    public int maxLeftArms;
+    public int maxRightArms;
+    public int maxLeftLegs;
+    public int maxRightLegs;
     public int maxHeads;
     public int maxTorsos;
+
+    public bool isPartOfMainBody;
 
     //expected organ numbers
     public int maxBrains;
@@ -414,11 +418,16 @@ public class BodyPart : MonoBehaviour
 
     public bool CheckConnectionValidity(BodyPart bodyPart)
     {
-        //don't get me wrong, this is a horrify piece of code, that's going to need expanding every time we add a bodypart/organ type
+        //don't get me wrong, this is a horrifying piece of code, that's going to need expanding every time we add a bodypart/organ type
         //but for now, it works, and that'll have to do
-        if (bodyPart is Arm)
+        if (bodyPart is LeftArm)
         {
-            return (connectedBodyParts.OfType<Arm>().Count() < maxArms);
+            return (connectedBodyParts.OfType<LeftArm>().Count() < maxLeftArms);
+        }
+
+        if (bodyPart is RightArm)
+        {
+            return (connectedBodyParts.OfType<RightArm>().Count() < maxRightArms);
         }
 
         if (bodyPart is Head)
@@ -426,9 +435,14 @@ public class BodyPart : MonoBehaviour
             return (connectedBodyParts.OfType<Head>().Count() < maxHeads);
         }
 
-        if (bodyPart is Leg)
+        if (bodyPart is LeftLeg)
         {
-            return (connectedBodyParts.OfType<Leg>().Count() < maxLegs);
+            return (connectedBodyParts.OfType<LeftLeg>().Count() < maxLeftLegs);
+        }
+
+        if (bodyPart is RightLeg)
+        {
+            return (connectedBodyParts.OfType<RightLeg>().Count() < maxRightLegs);
         }
 
         if (bodyPart is Torso)
@@ -527,6 +541,11 @@ public class BodyPart : MonoBehaviour
     public void CreateConnection(BodyPart bodyPartToConnect)
     {
         connectedBodyParts.Add(bodyPartToConnect);
+        if (isPartOfMainBody || bodyPartToConnect.isPartOfMainBody)
+        {
+            isPartOfMainBody = true;
+            bodyPartToConnect.isPartOfMainBody = true;
+        }
     }
 
     public void AddContainedOrgan(Organ organToImplant)

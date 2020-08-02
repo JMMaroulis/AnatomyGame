@@ -71,10 +71,13 @@ MonoBehaviour:
   - {fileID: 6010449279388636963}
   - {fileID: 7034212384505837750}
   connectedHearts: []
-  maxArms: 2
-  maxLegs: 2
+  maxLeftArms: 1
+  maxRightArms: 1
+  maxLeftLegs: 1
+  maxRightLegs: 1
   maxHeads: 1
   maxTorsos: 0
+  isPartOfMainBody: 0
   maxBrains: 0
   maxEyes: 0
   maxHearts: 1
@@ -97,7 +100,7 @@ PrefabInstance:
     - target: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
       propertyPath: m_Name
-      value: RightLung
+      value: Right Lung
       objectReference: {fileID: 0}
     - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
@@ -176,6 +179,11 @@ PrefabInstance:
       objectReference: {fileID: 5690681944904997238}
     - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
+      propertyPath: isPartOfMainBody
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
+        type: 3}
       propertyPath: oxygenAbsorptionRate
       value: 220
       objectReference: {fileID: 0}
@@ -209,7 +217,7 @@ PrefabInstance:
     - target: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
       propertyPath: m_Name
-      value: LeftLung
+      value: Left Lung
       objectReference: {fileID: 0}
     - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
@@ -286,6 +294,11 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 5690681944904997238}
+    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
+        type: 3}
+      propertyPath: isPartOfMainBody
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
         type: 3}
       propertyPath: oxygenAbsorptionRate
@@ -377,6 +390,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801852058679057251, guid: 9be7e5e062d0f7544affec32730a9666,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801852058679057251, guid: 9be7e5e062d0f7544affec32730a9666,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 5690681944904997238}
+    - target: {fileID: 4801852058679057251, guid: 9be7e5e062d0f7544affec32730a9666,
+        type: 3}
+      propertyPath: isPartOfMainBody
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9be7e5e062d0f7544affec32730a9666, type: 3}
@@ -485,6 +513,11 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 5690681944904997238}
+    - target: {fileID: 5757449452893809029, guid: ebf6ab8e28d638947a30ddb09badbfa3,
+        type: 3}
+      propertyPath: isPartOfMainBody
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebf6ab8e28d638947a30ddb09badbfa3, type: 3}
 --- !u!4 &2037829669182144497 stripped
@@ -592,6 +625,11 @@ PrefabInstance:
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 5690681944904997238}
+    - target: {fileID: 3742130502005979114, guid: d2c34feab37ecc84ea365603ca25207f,
+        type: 3}
+      propertyPath: isPartOfMainBody
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3742130502005979114, guid: d2c34feab37ecc84ea365603ca25207f,
         type: 3}
       propertyPath: bloodProcessingRate

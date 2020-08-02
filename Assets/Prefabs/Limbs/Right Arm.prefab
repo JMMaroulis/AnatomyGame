@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2277114606650625870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3394578811718627986}
+  - component: {fileID: 8843438954638605625}
+  m_Layer: 0
+  m_Name: Right Arm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3394578811718627986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277114606650625870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8843438954638605625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2277114606650625870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcbe294a13fe50429c73abb1931fcab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTimePassing: 0
+  timeScale: 1
+  isFunctioning: 1
+  clock: {fileID: 0}
+  bloodRequiredToFunction: 100
+  blood: 500
+  bloodLossRate: 0
+  bloodPumpRate: 70
+  bloodMax: 700
+  oxygen: 500
+  oxygenMax: 500
+  oxygenRequired: 5
+  damage: 0
+  damageMax: 100
+  efficiency: 1
+  connectedBodyParts: []
+  containedOrgans: []
+  connectedHearts: []
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
+  maxHeads: 0
+  maxTorsos: 1
+  isPartOfMainBody: 0
+  maxBrains: 0
+  maxEyes: 0
+  maxHearts: 0
+  maxLivers: 0
+  maxLungs: 0
+  maxStomachs: 0
+  healthPotion: 0
+  antidote: 0
+  slowPoison: 0
+  stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
