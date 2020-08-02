@@ -11,7 +11,7 @@ public class Organ : BodyPart
 
     void Update()
     {
-        if (connectedBodyParts[0])
+        if (connectedBodyParts.Count != 0)
         {
             isPartOfMainBody = connectedBodyParts[0].isPartOfMainBody;
         }

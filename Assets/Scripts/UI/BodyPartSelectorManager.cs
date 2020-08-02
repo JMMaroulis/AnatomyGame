@@ -181,10 +181,10 @@ public class BodyPartSelectorManager : MonoBehaviour
         ClearAllSelectors();
         BodyPart selectedBodyPart = FindObjectOfType<ButtonActions>().selectedBodyPart;
 
-        //make new organ selectors
-        if (selectedBodyPart)
+        //organ selectors for external organs, and organs inside selected bodypart
+        foreach (Organ organ in FindObjectsOfType<Organ>())
         {
-            foreach (Organ organ in selectedBodyPart.containedOrgans)
+            if (organ.connectedBodyParts.Count == 0 || organ.connectedBodyParts[0] == selectedBodyPart)
             {
                 NewOrgan(organ);
             }

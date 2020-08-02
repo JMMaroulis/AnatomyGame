@@ -2409,7 +2409,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1421815737}
-        m_MethodName: NextPatient
+        m_MethodName: LevelStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

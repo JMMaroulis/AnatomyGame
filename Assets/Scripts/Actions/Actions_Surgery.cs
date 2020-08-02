@@ -29,12 +29,11 @@ public static class Actions_Surgery
             bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             UpdateAllBodyPartHeartConnections();
         }
 
     }
-
-
 
     public static void RemoveOrgan(Organ organObject, float seconds, int goldCost)
     {
@@ -58,6 +57,7 @@ public static class Actions_Surgery
         {
             //disconnect
             organObject.GetComponent<Organ>().SeverAllConnections();
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             UpdateAllBodyPartHeartConnections();
 
             //remove from being child of bodypart
@@ -85,6 +85,8 @@ public static class Actions_Surgery
     public static IEnumerator ImplantOrganCoroutine(Organ organ, BodyPart bodyPart, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
+
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
         buttonActions.DisableAllButtons();
@@ -98,6 +100,7 @@ public static class Actions_Surgery
             //connect
             organ.CreateConnection(bodyPart);
             bodyPart.AddContainedOrgan(organ);
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             UpdateAllBodyPartHeartConnections();
 
             //make organ child of bodypart
@@ -109,7 +112,6 @@ public static class Actions_Surgery
         }
 
     }
-
 
     public static void ConnectBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, float seconds, int goldCost)
     {

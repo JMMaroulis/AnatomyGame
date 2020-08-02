@@ -536,6 +536,7 @@ public class BodyPart : MonoBehaviour
 
         //sever *this* connection to *those*
         connectedBodyParts = new List<BodyPart>();
+        isPartOfMainBody = false;
     }
 
     public void CreateConnection(BodyPart bodyPartToConnect)
