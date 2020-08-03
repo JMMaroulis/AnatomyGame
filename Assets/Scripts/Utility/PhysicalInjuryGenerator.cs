@@ -155,7 +155,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     break;
 
                 case 5:
-                    if (bodyPart is Torso)
+                    if (bodyPart is Torso || bodyPart is Head)
                     {
                         i -= 1;
                         break;
@@ -199,21 +199,15 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                 case 0:
                     BodyPart Torso = FindObjectOfType<Torso>();
                     Sever(Torso);
-
                     Debug.Log($"Severed {Torso.name}");
                     injuryText += $"\nThe {Torso.name} has been severed from all limbs.";
-                    Sever(Torso.connectedBodyParts[0]);
                     break;
 
                 case 1:
-                    if (!(organ is Brain))
-                    {
-                        i -= 1;
-                        break;
-                    }
-                    Debug.Log($"{organ.name} petrified");
-                    injuryText += $"\nThe {organ.name} has been temporarily petrified.";
-                    Petrify(organ);
+                    BodyPart head = FindObjectOfType<Torso>();
+                    Sever(head);
+                    Debug.Log($"Severed {head.name}");
+                    injuryText += $"\nDecapitation!";
                     break;
 
                 case 2:
@@ -228,6 +222,17 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     break;
 
                 case 3:
+                    if (!(organ is Brain))
+                    {
+                        i -= 1;
+                        break;
+                    }
+                    Debug.Log($"{organ.name} petrified");
+                    injuryText += $"\nThe {organ.name} has been temporarily petrified.";
+                    Petrify(organ);
+                    break;
+
+                case 4:
                     if ((organ is Heart && !unlockTracker.charms_heart) || (organ is Lung && !unlockTracker.charms_lung) || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart))
                     {
                         if (!(organ is Heart || organ is Lung || organ is Brain))
@@ -241,7 +246,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                     Remove(organ);
                     break;
 
-                case 4:
+                case 5:
                     if (!unlockTracker.spawn || (organ is Heart && !unlockTracker.charms_heart) || (organ is Lung && !unlockTracker.charms_lung) || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart))
                     {
                         if (!(organ is Heart || organ is Lung || organ is Brain))
