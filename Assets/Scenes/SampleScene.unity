@@ -7577,25 +7577,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headSelectorsPanel: {fileID: 474656696}
-  headSelectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
+  headSelectorPrefab: {fileID: 5017211689231872245, guid: 1d2b7becd9985bc408310ab5b977fa11,
     type: 3}
   torsoSelectorsPanel: {fileID: 19733032}
-  torsoSelectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
+  torsoSelectorPrefab: {fileID: 5017211689231872245, guid: fa2739dd2be91204eacaa7f15e0f364f,
     type: 3}
   leftArmSelectorsPanel: {fileID: 1739933585}
-  leftArmSelectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
+  leftArmSelectorPrefab: {fileID: 5017211689231872245, guid: d7604e35eed8d0545a52b1b67516c1af,
     type: 3}
   rightArmSelectorsPanel: {fileID: 920316079}
-  rightArmSelectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
+  rightArmSelectorPrefab: {fileID: 5017211689231872245, guid: 10fbf00e62860934e9977ee9f77a275f,
     type: 3}
   leftLegSelectorsPanel: {fileID: 266766652}
   leftLegSelectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
     type: 3}
   rightLegSelectorsPanel: {fileID: 1712658390}
-  rightLegSelectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
+  rightLegSelectorPrefab: {fileID: 5017211689231872245, guid: bdcae6c575c19ac4ab5ee70c20ab5799,
     type: 3}
   organSelectorsPanel: {fileID: 458757137}
-  organSelectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
+  organSelectorPrefab: {fileID: 5017211689231872245, guid: ead9f12e6dc05e04f95fa6f8a0c0a3da,
+    type: 3}
+  lungSelectorPrefab: {fileID: 5017211689231872245, guid: e59975dcabfb9924eb67a801aecfdcde,
+    type: 3}
+  heartSelectorPrefab: {fileID: 5017211689231872245, guid: 58898250c676ba04daa31d66fe407809,
+    type: 3}
+  brainSelectorPrefab: {fileID: 5017211689231872245, guid: d1d08aae73b074346b439eba885bf73d,
+    type: 3}
+  eyeSelectorPrefab: {fileID: 5017211689231872245, guid: d60f8a224ac87244987f4f0d19305f3f,
+    type: 3}
+  liverSelectorPrefab: {fileID: 5017211689231872245, guid: c979dee0d6c57df4cbc66a759ab9bdae,
+    type: 3}
+  stomachSelectorPrefab: {fileID: 5017211689231872245, guid: d14f6c7edd35dcf42910fc5cefb32dad,
     type: 3}
   externalSelectorsPanel: {fileID: 681536218}
 --- !u!1 &1527814401

@@ -22,9 +22,6 @@ public class BodyPartSpawner : MonoBehaviour
     public GameObject torsoPrefab;
     public GameObject headPrefab;
 
-    //selector prefab
-    public GameObject selectorPrefab;
-
     // Start is called before the first frame update
     void Start()
     {

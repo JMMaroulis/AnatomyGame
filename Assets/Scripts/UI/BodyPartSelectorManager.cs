@@ -34,6 +34,13 @@ public class BodyPartSelectorManager : MonoBehaviour
     public GameObject organSelectorsPanel;
     public GameObject organSelectorPrefab;
 
+    public GameObject lungSelectorPrefab;
+    public GameObject heartSelectorPrefab;
+    public GameObject brainSelectorPrefab;
+    public GameObject eyeSelectorPrefab;
+    public GameObject liverSelectorPrefab;
+    public GameObject stomachSelectorPrefab;
+
     private List<BodyPartSelector> externalSelectors = new List<BodyPartSelector>();
     public GameObject externalSelectorsPanel;
 
@@ -62,117 +69,83 @@ public class BodyPartSelectorManager : MonoBehaviour
 
         if (bodyPart is Head)
         {
-            if (bodyPart.isPartOfMainBody)
-            {
-                GameObject selector = Instantiate(headSelectorPrefab, headSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                headSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
-            else
-            {
-                GameObject selector = Instantiate(headSelectorPrefab, externalSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
-
+            NewSelector(bodyPart, headSelectorPrefab, headSelectorsPanel);
         }
 
         else if (bodyPart is Torso)
         {
-            if (bodyPart.isPartOfMainBody)
-            {
-                GameObject selector = Instantiate(torsoSelectorPrefab, torsoSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                torsoSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
-            else
-            {
-                GameObject selector = Instantiate(torsoSelectorPrefab, externalSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
+            NewSelector(bodyPart, torsoSelectorPrefab, torsoSelectorsPanel);
         }
 
         else if (bodyPart is LeftArm)
         {
-            if (bodyPart.isPartOfMainBody)
-            {
-                GameObject selector = Instantiate(leftArmSelectorPrefab, leftArmSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                leftArmSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
-            else
-            {
-                GameObject selector = Instantiate(leftArmSelectorPrefab, externalSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
+            NewSelector(bodyPart, leftArmSelectorPrefab, leftArmSelectorsPanel);
         }
 
         else if (bodyPart is RightArm)
         {
-            if (bodyPart.isPartOfMainBody)
-            {
-                GameObject selector = Instantiate(rightArmSelectorPrefab, rightArmSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                rightArmSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
-            else
-            {
-                GameObject selector = Instantiate(rightArmSelectorPrefab, externalSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
+            NewSelector(bodyPart, rightArmSelectorPrefab, rightArmSelectorsPanel);
         }
 
         else if (bodyPart is LeftLeg)
         {
-
-            if (bodyPart.isPartOfMainBody)
-            {
-                GameObject selector = Instantiate(leftLegSelectorPrefab, leftLegSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                leftLegSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
-            else
-            {
-                GameObject selector = Instantiate(leftLegSelectorPrefab, externalSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
+            NewSelector(bodyPart, leftLegSelectorPrefab, leftLegSelectorsPanel);
         }
 
         else if (bodyPart is RightLeg)
         {
-            if (bodyPart.isPartOfMainBody)
-            {
-                GameObject selector = Instantiate(rightLegSelectorPrefab, rightLegSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                rightLegSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
-            else
-            {
-                GameObject selector = Instantiate(rightLegSelectorPrefab, externalSelectorsPanel.transform);
-                selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
-                externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            }
+            NewSelector(bodyPart, rightLegSelectorPrefab, rightLegSelectorsPanel);
         }
 
     }
 
     public void NewOrgan(Organ organ)
     {
-        if (organ.isPartOfMainBody)
+        if (organ is Lung)
         {
-            GameObject selector = GameObject.Instantiate(organSelectorPrefab, organSelectorsPanel.transform);
+            NewSelector(organ, lungSelectorPrefab, organSelectorsPanel);
+        }
+
+        if (organ is Heart)
+        {
+            NewSelector(organ, heartSelectorPrefab, organSelectorsPanel);
+        }
+
+        if (organ is Brain)
+        {
+            NewSelector(organ, brainSelectorPrefab, organSelectorsPanel);
+        }
+
+        if (organ is Eye)
+        {
+            NewSelector(organ, eyeSelectorPrefab, organSelectorsPanel);
+        }
+
+        if (organ is Liver)
+        {
+            NewSelector(organ, liverSelectorPrefab, organSelectorsPanel);
+        }
+
+        if (organ is Stomach)
+        {
+            NewSelector(organ, stomachSelectorPrefab, organSelectorsPanel);
+        }
+
+    }
+
+    private void NewSelector(BodyPart bodyPart, GameObject selectorPrefab, GameObject panel)
+    {
+        if (bodyPart.isPartOfMainBody)
+        {
+            GameObject selector = GameObject.Instantiate(selectorPrefab, panel.transform);
             organSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            selector.GetComponent<BodyPartSelector>().bodyPart = organ;
+            selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
         }
         else
         {
-            GameObject selector = GameObject.Instantiate(organSelectorPrefab, externalSelectorsPanel.transform);
+            GameObject selector = GameObject.Instantiate(selectorPrefab, externalSelectorsPanel.transform);
             externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
-            selector.GetComponent<BodyPartSelector>().bodyPart = organ;
+            selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
         }
     }
 
