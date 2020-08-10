@@ -7,15 +7,17 @@ using UnityEngine.UI;
 public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
 {
     public BodyPart bodyPart;
+    public Text text;
+    public Image connectedImage;
+    public Image disconnectedImage;
     private ButtonActions buttonActions;
-    private Text text;
 
     // Start is called before the first frame update
     void Start()
     {
         buttonActions = FindObjectOfType<ButtonActions>();
-        text = transform.GetChild(0).GetComponent<Text>();
         text.text = bodyPart.name;
+
     }
 
     // Update is called once per frame
@@ -26,6 +28,9 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
         {
             FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
         }
+
+        connectedImage.enabled = bodyPart.connectedBodyParts.Count > 0;
+        disconnectedImage.enabled = bodyPart.connectedBodyParts.Count == 0;
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -570,7 +570,7 @@ MonoBehaviour:
   patientNumber: 0
   levelstart_easyInjuries: 0
   levelstart_mediumInjuries: 0
-  levelstart_hardInjuries: 1
+  levelstart_hardInjuries: 0
   levelstart_patientNumber: 0
 --- !u!114 &1607601282
 MonoBehaviour:
@@ -637,7 +637,7 @@ MonoBehaviour:
   charms_petrification: 0
   charms_blood_regen: 0
   blood: 1
-  spawn: 0
+  spawn: 1
   levelstart_surgery: 0
   levelstart_medicine_poison: 0
   levelstart_medicine_speed: 0

@@ -614,7 +614,7 @@ public class BodyPart : MonoBehaviour
         //add coagulant potion description
         if (coagulantPotion > 0.0f)
         {
-            description += $"Coagulant Postion: {coagulantPotion} Units.\n";
+            description += $"Coagulant Potion: {coagulantPotion} Units.\n";
         }
         #endregion
 
