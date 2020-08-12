@@ -1687,7 +1687,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitThirtyMinutes(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(2800.0f); messageBox.text = "Waiting thirty minutes..."; actionTimeBar.Reset(1800.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(1800.0f); messageBox.text = "Waiting thirty minutes..."; actionTimeBar.Reset(1800.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait thirty minutes";

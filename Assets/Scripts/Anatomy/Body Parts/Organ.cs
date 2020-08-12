@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
+﻿
 public class Organ : BodyPart
 {
     //I *REALLY* don't like this solution, but until I can think of a better answer, we're going to insist that all organs only even have one object in the bodypart connection lists
