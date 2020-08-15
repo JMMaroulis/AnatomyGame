@@ -33,10 +33,12 @@ public class BodyPartSelectorManager : MonoBehaviour
     public GameObject organSelectorsPanel;
     public GameObject organSelectorPrefab;
 
-    public GameObject lungSelectorPrefab;
+    public GameObject rightLungSelectorPrefab;
+    public GameObject leftLungSelectorPrefab;
     public GameObject heartSelectorPrefab;
     public GameObject brainSelectorPrefab;
-    public GameObject eyeSelectorPrefab;
+    public GameObject leftEyeyeSelectorPrefab;
+    public GameObject rightEyeyeSelectorPrefab;
     public GameObject liverSelectorPrefab;
     public GameObject stomachSelectorPrefab;
 
@@ -68,71 +70,80 @@ public class BodyPartSelectorManager : MonoBehaviour
 
         if (bodyPart is Head)
         {
-            NewSelector(bodyPart, headSelectorPrefab, headSelectorsPanel);
+            NewSelector(bodyPart, headSelectorPrefab, headSelectorsPanel, headSelectorsPanel);
         }
 
         else if (bodyPart is Torso)
         {
-            NewSelector(bodyPart, torsoSelectorPrefab, torsoSelectorsPanel);
+            NewSelector(bodyPart, torsoSelectorPrefab, torsoSelectorsPanel, torsoSelectorsPanel);
         }
 
         else if (bodyPart is LeftArm)
         {
-            NewSelector(bodyPart, leftArmSelectorPrefab, leftArmSelectorsPanel);
+            NewSelector(bodyPart, leftArmSelectorPrefab, leftArmSelectorsPanel, leftArmSelectorsPanel);
         }
 
         else if (bodyPart is RightArm)
         {
-            NewSelector(bodyPart, rightArmSelectorPrefab, rightArmSelectorsPanel);
+            NewSelector(bodyPart, rightArmSelectorPrefab, rightArmSelectorsPanel, rightArmSelectorsPanel);
         }
 
         else if (bodyPart is LeftLeg)
         {
-            NewSelector(bodyPart, leftLegSelectorPrefab, leftLegSelectorsPanel);
+            NewSelector(bodyPart, leftLegSelectorPrefab, leftLegSelectorsPanel, leftLegSelectorsPanel);
         }
 
         else if (bodyPart is RightLeg)
         {
-            NewSelector(bodyPart, rightLegSelectorPrefab, rightLegSelectorsPanel);
+            NewSelector(bodyPart, rightLegSelectorPrefab, rightLegSelectorsPanel, rightLegSelectorsPanel);
         }
 
     }
 
     public void NewOrgan(Organ organ)
     {
-        if (organ is Lung)
+        if (organ is LeftLung)
         {
-            NewSelector(organ, lungSelectorPrefab, organSelectorsPanel);
+            NewSelector(organ, leftLungSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
 
-        if (organ is Heart)
+        else if (organ is RightLung)
         {
-            NewSelector(organ, heartSelectorPrefab, organSelectorsPanel);
+            NewSelector(organ, rightLungSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
 
-        if (organ is Brain)
+        else if (organ is Heart)
         {
-            NewSelector(organ, brainSelectorPrefab, organSelectorsPanel);
+            NewSelector(organ, heartSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
 
-        if (organ is Eye)
+        else if (organ is Brain)
         {
-            NewSelector(organ, eyeSelectorPrefab, organSelectorsPanel);
+            NewSelector(organ, brainSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
 
-        if (organ is Liver)
+        else if (organ is LeftEye)
         {
-            NewSelector(organ, liverSelectorPrefab, organSelectorsPanel);
+            NewSelector(organ, leftEyeyeSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+        else if (organ is RightEye)
+        {
+            NewSelector(organ, rightEyeyeSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
 
-        if (organ is Stomach)
+        else if (organ is Liver)
         {
-            NewSelector(organ, stomachSelectorPrefab, organSelectorsPanel);
+            NewSelector(organ, liverSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+
+        else if (organ is Stomach)
+        {
+            NewSelector(organ, stomachSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
 
     }
 
-    private void NewSelector(BodyPart bodyPart, GameObject selectorPrefab, GameObject panel)
+    private void NewSelector(BodyPart bodyPart, GameObject selectorPrefab, GameObject panel, GameObject notPartOfMainPanel)
     {
         if (bodyPart.isPartOfMainBody)
         {
@@ -142,7 +153,7 @@ public class BodyPartSelectorManager : MonoBehaviour
         }
         else
         {
-            GameObject selector = GameObject.Instantiate(selectorPrefab, externalSelectorsPanel.transform);
+            GameObject selector = GameObject.Instantiate(selectorPrefab, notPartOfMainPanel.transform);
             externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
             selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
         }

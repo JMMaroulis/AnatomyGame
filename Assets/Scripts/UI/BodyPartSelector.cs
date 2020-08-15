@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
 {
     public BodyPart bodyPart;
-    public Text text;
     public Image connectedImage;
     public Image disconnectedImage;
     private ButtonActions buttonActions;
@@ -14,8 +13,6 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         buttonActions = FindObjectOfType<ButtonActions>();
-        text.text = bodyPart.name;
-
     }
 
     // Update is called once per frame

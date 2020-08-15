@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Head
+  m_Text: Heart
 --- !u!1 &5017211689231872245
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5017211689231872234}
   - component: {fileID: 5017211689231872235}
   m_Layer: 5
-  m_Name: BodyPartSelector
+  m_Name: HeartSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: {fileID: 0}
-  text: {fileID: 5017211688956074277}
   connectedImage: {fileID: 1531945711232823889}
   disconnectedImage: {fileID: 2765419000476017710}
 --- !u!1 &5606483727676721009

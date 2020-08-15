@@ -213,7 +213,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -1362,7 +1362,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 2
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -1636,6 +1636,62 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &370354530 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4858474195380291854, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069136854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &370354533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370354530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56340ad2f530b3043a21a3e9104f3851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTimePassing: 0
+  timeScale: 0
+  isFunctioning: 0
+  bloodRequiredToFunction: 0
+  blood: 0
+  bloodLossRate: 0
+  bloodPumpRate: 0
+  bloodMax: 0
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
+  damage: 0
+  damageMax: 0
+  efficiency: 0
+  connectedBodyParts:
+  - {fileID: 2124596269}
+  containedOrgans: []
+  connectedHearts: []
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
+  maxHeads: 0
+  maxTorsos: 0
+  isPartOfMainBody: 1
+  maxBrains: 0
+  maxEyes: 0
+  maxHearts: 0
+  maxLivers: 0
+  maxLungs: 0
+  maxStomachs: 0
+  healthPotion: 0
+  antidote: 0
+  slowPoison: 0
+  stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
+  oxygenAbsorptionRate: 0
 --- !u!1 &374478779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,7 +2507,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 458757137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -2460,13 +2516,12 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 150, y: 150}
+  m_Spacing: {x: 10, y: 10}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!114 &458757140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2677,7 +2732,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 7
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -3984,6 +4039,117 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715555981}
   m_CullTransparentMesh: 0
+--- !u!1 &725280520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6930367901528353511, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1857451259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &725280523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725280520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba02633a7d903d643a06fd162f0e13c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTimePassing: 0
+  timeScale: 0
+  isFunctioning: 0
+  bloodRequiredToFunction: 0
+  blood: 0
+  bloodLossRate: 0
+  bloodPumpRate: 0
+  bloodMax: 0
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
+  damage: 0
+  damageMax: 0
+  efficiency: 0
+  connectedBodyParts:
+  - {fileID: 454939311}
+  containedOrgans: []
+  connectedHearts: []
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
+  maxHeads: 0
+  maxTorsos: 0
+  isPartOfMainBody: 1
+  maxBrains: 0
+  maxEyes: 0
+  maxHearts: 0
+  maxLivers: 0
+  maxLungs: 0
+  maxStomachs: 0
+  healthPotion: 0
+  antidote: 0
+  slowPoison: 0
+  stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
+--- !u!1 &783080584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5655097960844865788, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 2069136854}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &783080587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783080584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05cd3062adad5742a52e1357e1db63b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTimePassing: 0
+  timeScale: 0
+  isFunctioning: 0
+  bloodRequiredToFunction: 0
+  blood: 0
+  bloodLossRate: 0
+  bloodPumpRate: 0
+  bloodMax: 0
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
+  damage: 0
+  damageMax: 0
+  efficiency: 0
+  connectedBodyParts:
+  - {fileID: 2124596269}
+  containedOrgans: []
+  connectedHearts: []
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
+  maxHeads: 0
+  maxTorsos: 0
+  isPartOfMainBody: 1
+  maxBrains: 0
+  maxEyes: 0
+  maxHearts: 0
+  maxLivers: 0
+  maxLungs: 0
+  maxStomachs: 0
+  healthPotion: 0
+  antidote: 0
+  slowPoison: 0
+  stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
+  oxygenAbsorptionRate: 0
 --- !u!1 &784820325
 GameObject:
   m_ObjectHideFlags: 0
@@ -4685,7 +4851,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 3
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -5019,6 +5185,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993413398}
   m_CullTransparentMesh: 0
+--- !u!1 &1014017438 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 415211415833209153, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1857451259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1014017439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014017438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088c662bf4a58a147b34e5be94bd7bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTimePassing: 0
+  timeScale: 0
+  isFunctioning: 0
+  bloodRequiredToFunction: 0
+  blood: 0
+  bloodLossRate: 0
+  bloodPumpRate: 0
+  bloodMax: 0
+  oxygen: 0
+  oxygenMax: 0
+  oxygenRequired: 0
+  damage: 0
+  damageMax: 0
+  efficiency: 0
+  connectedBodyParts:
+  - {fileID: 454939311}
+  containedOrgans: []
+  connectedHearts: []
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
+  maxHeads: 0
+  maxTorsos: 0
+  isPartOfMainBody: 1
+  maxBrains: 0
+  maxEyes: 0
+  maxHearts: 0
+  maxLivers: 0
+  maxLungs: 0
+  maxStomachs: 0
+  healthPotion: 0
+  antidote: 0
+  slowPoison: 0
+  stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
 --- !u!1 &1014325168
 GameObject:
   m_ObjectHideFlags: 0
@@ -7597,13 +7818,17 @@ MonoBehaviour:
   organSelectorsPanel: {fileID: 458757137}
   organSelectorPrefab: {fileID: 5017211689231872245, guid: ead9f12e6dc05e04f95fa6f8a0c0a3da,
     type: 3}
-  lungSelectorPrefab: {fileID: 5017211689231872245, guid: e59975dcabfb9924eb67a801aecfdcde,
+  rightLungSelectorPrefab: {fileID: 5017211689231872245, guid: c6a4e1190519d7a42b44926cd82e0fe5,
+    type: 3}
+  leftLungSelectorPrefab: {fileID: 5017211689231872245, guid: e59975dcabfb9924eb67a801aecfdcde,
     type: 3}
   heartSelectorPrefab: {fileID: 5017211689231872245, guid: 58898250c676ba04daa31d66fe407809,
     type: 3}
   brainSelectorPrefab: {fileID: 5017211689231872245, guid: d1d08aae73b074346b439eba885bf73d,
     type: 3}
-  eyeSelectorPrefab: {fileID: 5017211689231872245, guid: d60f8a224ac87244987f4f0d19305f3f,
+  leftEyeyeSelectorPrefab: {fileID: 5017211689231872245, guid: d60f8a224ac87244987f4f0d19305f3f,
+    type: 3}
+  rightEyeyeSelectorPrefab: {fileID: 5017211689231872245, guid: 0f13b81aaee6f024781dce3d7de436f0,
     type: 3}
   liverSelectorPrefab: {fileID: 5017211689231872245, guid: c979dee0d6c57df4cbc66a759ab9bdae,
     type: 3}
@@ -8845,7 +9070,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 5
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -9174,6 +9399,16 @@ PrefabInstance:
       propertyPath: clock
       value: 
       objectReference: {fileID: 1294914373}
+    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: containedOrgans.Array.data[1]
+      value: 
+      objectReference: {fileID: 725280523}
+    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: containedOrgans.Array.data[2]
+      value: 
+      objectReference: {fileID: 1014017439}
     - target: {fileID: 7135807481301513890, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: oxygen
@@ -9646,6 +9881,16 @@ PrefabInstance:
       propertyPath: clock
       value: 
       objectReference: {fileID: 1294914373}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: containedOrgans.Array.data[1]
+      value: 
+      objectReference: {fileID: 783080587}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: containedOrgans.Array.data[2]
+      value: 
+      objectReference: {fileID: 370354533}
     - target: {fileID: 214810287498280842, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
         type: 3}
       propertyPath: clock
