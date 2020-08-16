@@ -19,6 +19,7 @@ public class DeathMonitor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (isTimePassing)
         {
             if (IsBrainDead())
@@ -32,10 +33,12 @@ public class DeathMonitor : MonoBehaviour
         {
             Debug.Log("Game Over: Brain Death");
         }
+        */
     }
 
     private bool IsBrainDead()
     {
+
         return brain.damage >= brain.damageMax;
     }
 }

@@ -435,7 +435,7 @@ PrefabInstance:
         type: 3}
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
-      objectReference: {fileID: 2124596269}
+      objectReference: {fileID: 707550386}
     - target: {fileID: 8843438954638605625, guid: cd904326e7a47334f9d5a8192c39ec60,
         type: 3}
       propertyPath: isPartOfMainBody
@@ -745,7 +745,7 @@ PrefabInstance:
         type: 3}
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
-      objectReference: {fileID: 2124596269}
+      objectReference: {fileID: 707550386}
     - target: {fileID: 2074061886740979805, guid: 5e798ed622559524a9a3583c62aa8a26,
         type: 3}
       propertyPath: isPartOfMainBody
@@ -1636,62 +1636,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!1 &370354530 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4858474195380291854, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-    type: 3}
-  m_PrefabInstance: {fileID: 2069136854}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &370354533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370354530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56340ad2f530b3043a21a3e9104f3851, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTimePassing: 0
-  timeScale: 0
-  isFunctioning: 0
-  bloodRequiredToFunction: 0
-  blood: 0
-  bloodLossRate: 0
-  bloodPumpRate: 0
-  bloodMax: 0
-  oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
-  damage: 0
-  damageMax: 0
-  efficiency: 0
-  connectedBodyParts:
-  - {fileID: 2124596269}
-  containedOrgans: []
-  connectedHearts: []
-  maxLeftArms: 0
-  maxRightArms: 0
-  maxLeftLegs: 0
-  maxRightLegs: 0
-  maxHeads: 0
-  maxTorsos: 0
-  isPartOfMainBody: 1
-  maxBrains: 0
-  maxEyes: 0
-  maxHearts: 0
-  maxLivers: 0
-  maxLungs: 0
-  maxStomachs: 0
-  healthPotion: 0
-  antidote: 0
-  slowPoison: 0
-  stasisPotion: 0
-  coagulantPotion: 0
-  hastePotion: 0
-  oxygenAbsorptionRate: 0
 --- !u!1 &374478779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3835,6 +3779,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695377228}
   m_CullTransparentMesh: 0
+--- !u!4 &707550385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1001733943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &707550386 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1001733943}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca33a1b888d7eef47801768797802d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &714661423
 GameObject:
   m_ObjectHideFlags: 0
@@ -4094,62 +4056,6 @@ MonoBehaviour:
   stasisPotion: 0
   coagulantPotion: 0
   hastePotion: 0
---- !u!1 &783080584 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5655097960844865788, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-    type: 3}
-  m_PrefabInstance: {fileID: 2069136854}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &783080587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 783080584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f05cd3062adad5742a52e1357e1db63b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTimePassing: 0
-  timeScale: 0
-  isFunctioning: 0
-  bloodRequiredToFunction: 0
-  blood: 0
-  bloodLossRate: 0
-  bloodPumpRate: 0
-  bloodMax: 0
-  oxygen: 0
-  oxygenMax: 0
-  oxygenRequired: 0
-  damage: 0
-  damageMax: 0
-  efficiency: 0
-  connectedBodyParts:
-  - {fileID: 2124596269}
-  containedOrgans: []
-  connectedHearts: []
-  maxLeftArms: 0
-  maxRightArms: 0
-  maxLeftLegs: 0
-  maxRightLegs: 0
-  maxHeads: 0
-  maxTorsos: 0
-  isPartOfMainBody: 1
-  maxBrains: 0
-  maxEyes: 0
-  maxHearts: 0
-  maxLivers: 0
-  maxLungs: 0
-  maxStomachs: 0
-  healthPotion: 0
-  antidote: 0
-  slowPoison: 0
-  stasisPotion: 0
-  coagulantPotion: 0
-  hastePotion: 0
-  oxygenAbsorptionRate: 0
 --- !u!1 &784820325
 GameObject:
   m_ObjectHideFlags: 0
@@ -5044,7 +4950,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 454939312}
-  - {fileID: 2124596270}
+  - {fileID: 707550385}
   - {fileID: 177593602}
   - {fileID: 115400272}
   - {fileID: 401156561915064056}
@@ -5185,6 +5091,110 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993413398}
   m_CullTransparentMesh: 0
+--- !u!1001 &1001733943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 965609866}
+    m_Modifications:
+    - target: {fileID: 5947049902768832402, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_Name
+      value: Torso
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.18242271
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.0764737
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -331.07306
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: isPartOfMainBody
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 454939311}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[1]
+      value: 
+      objectReference: {fileID: 177593603}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[2]
+      value: 
+      objectReference: {fileID: 115400273}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[4]
+      value: 
+      objectReference: {fileID: 2009521277006516595}
+    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[3]
+      value: 
+      objectReference: {fileID: 401156561915064057}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 82cbe099f0366de4eb27d17dcef6e5fa, type: 3}
 --- !u!1 &1014017438 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 415211415833209153, guid: a06dd97c5b85b054d9a3a1997c1739e7,
@@ -9373,11 +9383,11 @@ PrefabInstance:
         type: 3}
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
-      objectReference: {fileID: 2124596269}
+      objectReference: {fileID: 707550386}
     - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: oxygen
-      value: 500
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
@@ -9437,7 +9447,7 @@ PrefabInstance:
     - target: {fileID: 3579948464050700767, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: oxygen
-      value: 500
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 3579948464050700767, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
@@ -9457,7 +9467,7 @@ PrefabInstance:
     - target: {fileID: 6070909881794396793, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: oxygen
-      value: 500
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 6070909881794396793, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
@@ -9774,150 +9784,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988583316}
   m_CullTransparentMesh: 0
---- !u!1001 &2069136854
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 965609866}
-    m_Modifications:
-    - target: {fileID: 5947049902768832402, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_Name
-      value: Torso
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.18242271
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.0764737
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -331.07306
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: connectedBodyParts.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: connectedBodyParts.Array.data[0]
-      value: 
-      objectReference: {fileID: 454939311}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: connectedBodyParts.Array.data[1]
-      value: 
-      objectReference: {fileID: 177593603}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: connectedBodyParts.Array.data[2]
-      value: 
-      objectReference: {fileID: 115400273}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: connectedBodyParts.Array.data[3]
-      value: 
-      objectReference: {fileID: 401156561915064057}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: connectedBodyParts.Array.data[4]
-      value: 
-      objectReference: {fileID: 2009521277006516595}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: isPartOfMainBody
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: clock
-      value: 
-      objectReference: {fileID: 1294914373}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: containedOrgans.Array.data[1]
-      value: 
-      objectReference: {fileID: 783080587}
-    - target: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: containedOrgans.Array.data[2]
-      value: 
-      objectReference: {fileID: 370354533}
-    - target: {fileID: 214810287498280842, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: clock
-      value: 
-      objectReference: {fileID: 1294914373}
-    - target: {fileID: 1602104620371625720, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: clock
-      value: 
-      objectReference: {fileID: 1294914373}
-    - target: {fileID: 1958472659007815434, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: clock
-      value: 
-      objectReference: {fileID: 1294914373}
-    - target: {fileID: 6010449279388636963, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: clock
-      value: 
-      objectReference: {fileID: 1294914373}
-    - target: {fileID: 7034212384505837750, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-        type: 3}
-      propertyPath: clock
-      value: 
-      objectReference: {fileID: 1294914373}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 82cbe099f0366de4eb27d17dcef6e5fa, type: 3}
 --- !u!1 &2078641865
 GameObject:
   m_ObjectHideFlags: 0
@@ -9993,24 +9859,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078641865}
   m_CullTransparentMesh: 0
---- !u!114 &2124596269 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5690681944904997238, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-    type: 3}
-  m_PrefabInstance: {fileID: 2069136854}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca33a1b888d7eef47801768797802d1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2124596270 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6675934801669765112, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
-    type: 3}
-  m_PrefabInstance: {fileID: 2069136854}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2126252752
 GameObject:
   m_ObjectHideFlags: 0
@@ -10382,7 +10230,7 @@ PrefabInstance:
         type: 3}
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
-      objectReference: {fileID: 2124596269}
+      objectReference: {fileID: 707550386}
     - target: {fileID: 4383202514063231700, guid: 2c01b5b80ac635c41a6cdedf651ade2e,
         type: 3}
       propertyPath: isPartOfMainBody
@@ -10489,7 +10337,7 @@ PrefabInstance:
         type: 3}
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
-      objectReference: {fileID: 2124596269}
+      objectReference: {fileID: 707550386}
     - target: {fileID: 3500867073680270525, guid: 296ce040bee025245b85915bdd9e49de,
         type: 3}
       propertyPath: isPartOfMainBody

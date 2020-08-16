@@ -95,10 +95,12 @@ public class LifeMonitor : MonoBehaviour
             { new RightLeg().GetType(),   new List<int> {0,1}},
             { new Head().GetType(),  new List<int> {0,1}},
             { new Torso().GetType(), new List<int> {0,1}},
-            { new Lung().GetType(),  new List<int> {0,2}},
+            { new LeftLung().GetType(),  new List<int> {0,1}},
+            { new RightLung().GetType(),  new List<int> {0,1}},
             { new Heart().GetType(), new List<int> {0,1}},
             { new Brain().GetType(), new List<int> {0,1}},
-            { new Eye().GetType(),  new List<int> {0,2}},
+            { new LeftEye().GetType(),  new List<int> {0,1}},
+            { new RightEye().GetType(),  new List<int> {0,1}},
             { new Liver().GetType(), new List<int> {0,1}},
             { new Stomach().GetType(), new List<int> {0,1}}
         };

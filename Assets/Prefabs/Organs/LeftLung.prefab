@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &971546644430363128
+--- !u!1 &6125758644491104160
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,51 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6317736935091072235}
-  - component: {fileID: 6699302688172143296}
+  - component: {fileID: 3176344065558242138}
+  - component: {fileID: 955379963146099108}
   m_Layer: 0
-  m_Name: new Eye
+  m_Name: new LeftLung
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6317736935091072235
+--- !u!4 &3176344065558242138
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971546644430363128}
+  m_GameObject: {fileID: 6125758644491104160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.112565, y: 3.263585, z: -385.48465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6699302688172143296
+--- !u!114 &955379963146099108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971546644430363128}
+  m_GameObject: {fileID: 6125758644491104160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a37769886d8e83f4cac9123ac5110abc, type: 3}
+  m_Script: {fileID: 11500000, guid: f05cd3062adad5742a52e1357e1db63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  clock: {fileID: 0}
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
-  bloodPumpRate: 50
-  bloodMax: 700
-  oxygen: 450
+  bloodPumpRate: 70
+  bloodMax: 500
+  oxygen: 500
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -61,10 +60,13 @@ MonoBehaviour:
   connectedBodyParts: []
   containedOrgans: []
   connectedHearts: []
-  maxArms: 0
-  maxLegs: 0
-  maxHeads: 1
-  maxTorsos: 0
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
+  maxHeads: 0
+  maxTorsos: 1
+  isPartOfMainBody: 0
   maxBrains: 0
   maxEyes: 0
   maxHearts: 0
@@ -77,3 +79,4 @@ MonoBehaviour:
   stasisPotion: 0
   coagulantPotion: 0
   hastePotion: 0
+  oxygenAbsorptionRate: 0

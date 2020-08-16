@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2037829669182144497}
-  - {fileID: 3993923982127463430}
+  - {fileID: 2697441150873520948}
   - {fileID: 4214086788054255092}
   - {fileID: 8365560793312068054}
   - {fileID: 4186760496834661187}
@@ -51,7 +51,6 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  clock: {fileID: 0}
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
@@ -66,7 +65,7 @@ MonoBehaviour:
   connectedBodyParts: []
   containedOrgans:
   - {fileID: 214810287498280842}
-  - {fileID: 1602104620371625720}
+  - {fileID: 304460773567754698}
   - {fileID: 1958472659007815434}
   - {fileID: 6010449279388636963}
   - {fileID: 7034212384505837750}
@@ -90,6 +89,103 @@ MonoBehaviour:
   stasisPotion: 0
   coagulantPotion: 0
   hastePotion: 0
+--- !u!1001 &683307401592612974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6675934801669765112}
+    m_Modifications:
+    - target: {fileID: 6125758644491104160, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_Name
+      value: LeftLung
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.112565
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.263585
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -385.48465
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 955379963146099108, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 955379963146099108, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 5690681944904997238}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 359102c77b89f1f4ab0a7b19b484b81c, type: 3}
+--- !u!4 &2697441150873520948 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3176344065558242138, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+    type: 3}
+  m_PrefabInstance: {fileID: 683307401592612974}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &304460773567754698 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 955379963146099108, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+    type: 3}
+  m_PrefabInstance: {fileID: 683307401592612974}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05cd3062adad5742a52e1357e1db63b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1616745545682970286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -204,124 +300,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb1e170829a252f4ea85ced1992fa02a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &1979860532871176028
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6675934801669765112}
-    m_Modifications:
-    - target: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_Name
-      value: Left Lung
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.112565
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.263585
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -385.48465
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: connectedBodyParts.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: bloodPumpRate
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: oxygen
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: connectedBodyParts.Array.data[0]
-      value: 
-      objectReference: {fileID: 5690681944904997238}
-    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: isPartOfMainBody
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-        type: 3}
-      propertyPath: oxygenAbsorptionRate
-      value: 220
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fb20dc88c5fd28349a5f0a8271e2d87c, type: 3}
---- !u!4 &3993923982127463430 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3176344065558242138, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1979860532871176028}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1602104620371625720 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 955379963146099108, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1979860532871176028}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb1e170829a252f4ea85ced1992fa02a, type: 3}
+  m_Script: {fileID: 11500000, guid: 56340ad2f530b3043a21a3e9104f3851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2539205438416921557
