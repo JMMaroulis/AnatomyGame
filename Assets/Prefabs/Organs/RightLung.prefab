@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3176344065558242138}
   - component: {fileID: 955379963146099108}
   m_Layer: 0
-  m_Name: new RightLung
+  m_Name: RightLung
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,4 +79,4 @@ MonoBehaviour:
   stasisPotion: 0
   coagulantPotion: 0
   hastePotion: 0
-  oxygenAbsorptionRate: 0
+  oxygenAbsorptionRate: 220

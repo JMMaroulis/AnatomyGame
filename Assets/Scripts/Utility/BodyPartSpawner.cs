@@ -4,9 +4,11 @@ public class BodyPartSpawner : MonoBehaviour
 {
     //organ prefabs
     public GameObject heartPrefab;
-    public GameObject lungPrefab;
+    public GameObject leftLungPrefab;
+    public GameObject rightLungPrefab;
     public GameObject brainPrefab;
-    public GameObject eyePrefab;
+    public GameObject leftEyePrefab;
+    public GameObject rightEyePrefab;
     public GameObject liverPrefab;
     public GameObject stomachPrefab;
 
@@ -42,9 +44,21 @@ public class BodyPartSpawner : MonoBehaviour
         return bodyPart.GetComponent<BodyPart>();
     }
 
-    public BodyPart SpawnLung(string name)
+    public BodyPart SpawnLeftLung(string name)
     {
-        GameObject bodyPart = Instantiate(lungPrefab);
+        GameObject bodyPart = Instantiate(leftLungPrefab);
+        bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnRightLung(string name)
+    {
+        GameObject bodyPart = Instantiate(rightLungPrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
@@ -66,9 +80,21 @@ public class BodyPartSpawner : MonoBehaviour
         return bodyPart.GetComponent<BodyPart>();
     }
 
-    public BodyPart SpawnEye(string name)
+    public BodyPart SpawnLeftEye(string name)
     {
-        GameObject bodyPart = Instantiate(eyePrefab);
+        GameObject bodyPart = Instantiate(leftEyePrefab);
+        bodyPart.name = name;
+        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnRightEye(string name)
+    {
+        GameObject bodyPart = Instantiate(rightEyePrefab);
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());

@@ -48,10 +48,12 @@ public class BodyPart : MonoBehaviour
 
     //expected organ numbers
     public int maxBrains;
-    public int maxEyes;
+    public int maxLeftEyes;
+    public int maxRightEyes;
     public int maxHearts;
     public int maxLivers;
-    public int maxLungs;
+    public int maxLeftLungs;
+    public int maxRightLungs;
     public int maxStomachs;
 
     //drug stuff
@@ -116,7 +118,7 @@ public class BodyPart : MonoBehaviour
         foreach (int bodyPartIndex in bodypartPumpOrder)
         {
             BodyPart bodyPart = allBodyParts[bodyPartIndex];
-            //cap blood and oxygen transfer rate at between 0.2 and 5 times the blood pump rate
+            //cap blood and oxygen transfer rate at between 0.2 and 5 times the blood pump rate, plus slowdown factor for more localised substances
             float tempBloodPumpRate =           Mathf.Max(Mathf.Min( (blood / bodyPart.blood),                     5), 0.2f) * bloodPumpRate * heartEfficiency;
             float tempOxygenPumpRate =          Mathf.Max(Mathf.Min( (oxygen / bodyPart.oxygen),                   5), 0.2f) * bloodPumpRate * heartEfficiency;
             float tempHealthPotionPumpRate =    Mathf.Max(Mathf.Min( (healthPotion / bodyPart.healthPotion),       5), 0.2f) * bloodPumpRate * heartEfficiency * 0.001f;
@@ -254,6 +256,26 @@ public class BodyPart : MonoBehaviour
 
         deltaTime *= timeScale;
 
+        //stasis potion
+        //TODO: needs to stick around long enough for an organ to be removed/replaced, figure out the numbers
+        // currently setting the timeScale = -(1/50) * potion + 1
+        //IMPORTANT NOTE: the decay rate of the stasis potion is independant of its own effect on the timescale,
+        //otherwise we end up in weird reverse temporal singularities from which there is no escape. Which is cool and all,
+        //but there being no way out of them is no bueno
+        if (stasisPotion > 0.0f)
+        {
+            float stasisPotionProcessed = Mathf.Min(stasisPotion, deltaTime * 0.01f);
+            stasisPotion = Mathf.Max(0.0f, stasisPotion - stasisPotionProcessed);
+        }
+        if (hastePotion > 0.0f)
+        {
+            float hastePotionProcessed = Mathf.Min(hastePotion, deltaTime * 0.01f);
+            hastePotion = Mathf.Max(0.0f, hastePotion - hastePotionProcessed);
+        }
+
+        timeScale = (-(1.0f / 60.0f) * stasisPotion) + ((1.0f / 60.0f) * hastePotion) + 1.0f;
+
+
         //health potion
         if (healthPotion > 0.0f)
         {
@@ -284,7 +306,7 @@ public class BodyPart : MonoBehaviour
                 slowPoison = Mathf.Max(0.0f, slowPoison - antidoteProcessed);
             }
             //decays at 1/100th unit per second, if no poison to neutralise
-            slowPoison = Mathf.Max(0.0f, slowPoison - (deltaTime * 0.01f));
+            antidote = Mathf.Max(0.0f, antidote - (deltaTime * 0.01f));
         }
 
         //slow poison
@@ -293,8 +315,7 @@ public class BodyPart : MonoBehaviour
         if (slowPoison > 0.0f)
         {
             float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * 0.001f);
-            //slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
-            //damage = Mathf.Min(damageMax, damage + (slowPoisonProcessed*100));            
+            slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
             damage = Mathf.Max(0.0f, damage + slowPoison * deltaTime * 0.001f);
         }
 
@@ -303,7 +324,7 @@ public class BodyPart : MonoBehaviour
         {
             if (bloodLossRate > 0.0f)
             {
-                float coagulantPotionProcessed = Mathf.Min(coagulantPotion, (deltaTime / timeScale) * 0.5f);
+                float coagulantPotionProcessed = Mathf.Min(coagulantPotion, deltaTime * 0.5f);
                 bloodLossRate = Mathf.Max(0, bloodLossRate - coagulantPotionProcessed);
                 coagulantPotion = Mathf.Max(0.0f, coagulantPotion - coagulantPotionProcessed);
             }
@@ -314,23 +335,6 @@ public class BodyPart : MonoBehaviour
             }
         }
 
-        //stasis potion
-        //TODO: needs to stick around long enough for an organ to be removed/replaced, figure out the numbers
-        // currently setting the timeScale = -(1/50) * potion + 1
-        //IMPORTANT NOTE: the decay rate of the stasis potion is independant of its own effect on the timescale,
-        //otherwise we end up in weird reverse temporal singularities from which there is no escape. Which is cool and all,
-        //but there being no way out of them is no bueno
-        if (stasisPotion > 0.0f)
-        {
-            float stasisPotionProcessed = Mathf.Min(stasisPotion, (deltaTime/timeScale) * 0.01f);
-            stasisPotion = Mathf.Max(0.0f, stasisPotion - stasisPotionProcessed);
-        }
-        if (hastePotion > 0.0f)
-        {
-            float hastePotionProcessed = Mathf.Min(hastePotion, (deltaTime / timeScale) * 0.01f);
-            hastePotion = Mathf.Max(0.0f, hastePotion - hastePotionProcessed);
-        }
-        timeScale = (-(1.0f / 60.0f) * stasisPotion) + ((1.0f / 60.0f) * hastePotion) +1.0f;
 
 
 
@@ -459,9 +463,14 @@ public class BodyPart : MonoBehaviour
             return (connectedBodyParts.OfType<Brain>().Count() < maxBrains);
         }
 
-        if (organ is Eye)
+        if (organ is LeftEye)
         {
-            return (connectedBodyParts.OfType<Eye>().Count() < maxEyes);
+            return (connectedBodyParts.OfType<LeftEye>().Count() < maxLeftEyes);
+        }
+
+        if (organ is RightEye)
+        {
+            return (connectedBodyParts.OfType<RightEye>().Count() < maxRightEyes);
         }
 
         if (organ is Heart)
@@ -474,9 +483,14 @@ public class BodyPart : MonoBehaviour
             return (connectedBodyParts.OfType<Liver>().Count() < maxLivers);
         }
 
-        if (organ is Lung)
+        if (organ is LeftLung)
         {
-            return (connectedBodyParts.OfType<Lung>().Count() < maxLungs);
+            return (connectedBodyParts.OfType<Lung>().Count() < maxLeftLungs);
+        }
+
+        if (organ is RightLung)
+        {
+            return (connectedBodyParts.OfType<Lung>().Count() < maxRightLungs);
         }
 
         if (organ is Stomach)

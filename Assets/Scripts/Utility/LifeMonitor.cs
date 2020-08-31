@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LifeMonitor : MonoBehaviour
 {
 
     public bool isTimePassing;
     public bool hasPlayerWon;
-    public Text messageBox;
+    public TextLog textLog;
 
     public GameObject body;
     private List<BodyPart> bodyParts;
@@ -35,7 +34,7 @@ public class LifeMonitor : MonoBehaviour
 
     public IEnumerator VictoryCheckCoroutine(float secondsToWait)
     {
-        messageBox.text = "";
+        textLog.NewLogEntry("Checking patient condition:");
         bool victory = true;
 
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
@@ -52,17 +51,17 @@ public class LifeMonitor : MonoBehaviour
         {
             if (bodyPart.blood < bodyPart.bloodRequiredToFunction)
             {
-                messageBox.text += $"{bodyPart.name} doesn't have enough blood.\n";
+                textLog.NewLogEntry($"{bodyPart.name} doesn't have enough blood.\n");
                 victory = false;
             }
             if (bodyPart.oxygen < bodyPart.oxygenRequired)
             {
-                messageBox.text += $"{bodyPart.name} doesn't have enough oxygen.\n";
+                textLog.NewLogEntry($"{bodyPart.name} doesn't have enough oxygen.\n");
                 victory = false;
             }
             if (bodyPart.damage > (bodyPart.damageMax / 5.0f))
             {
-                messageBox.text += $"{bodyPart.name} is above 20% damage.\n";
+                textLog.NewLogEntry($"{bodyPart.name} is above 20% damage.\n");
                 victory = false;
             }
         }
@@ -70,17 +69,17 @@ public class LifeMonitor : MonoBehaviour
         {
             if (organ.blood < organ.bloodRequiredToFunction)
             {
-                messageBox.text += $"{organ.name} doesn't have enough blood.\n";
+                textLog.NewLogEntry($"{organ.name} doesn't have enough blood.\n");
                 victory = false;
             }
             if (organ.oxygen < organ.oxygenRequired)
             {
-                messageBox.text += $"{organ.name} doesn't have enough oxygen.\n";
+                textLog.NewLogEntry($"{organ.name} doesn't have enough oxygen.\n");
                 victory = false;
             }
             if (organ.damage > (organ.damageMax / 5.0f))
             {
-                messageBox.text += $"{organ.name} is above 20% damage.\n";
+                textLog.NewLogEntry($"{organ.name} is above 20% damage.\n");
                 victory = false;
             }
         }
@@ -122,7 +121,7 @@ public class LifeMonitor : MonoBehaviour
         {
             if (typeCount[key][0] != typeCount[key][1])
             {
-                messageBox.text += $"Patient should have {typeCount[key][1]} {key.Name}s, has {typeCount[key][0]}.\n";
+                textLog.NewLogEntry($"Patient should have {typeCount[key][1]} {key.Name}s, has {typeCount[key][0]}.\n");
                 victory = false;
             }
         }
@@ -133,7 +132,7 @@ public class LifeMonitor : MonoBehaviour
         {
             if (bodyPart.slowPoison > 0)
             {
-                messageBox.text += $"{bodyPart.name} is still poisoned.\n";
+                textLog.NewLogEntry($"{bodyPart.name} is still poisoned.\n");
                 victory = false;
             }
         }
@@ -141,7 +140,7 @@ public class LifeMonitor : MonoBehaviour
         {
             if (organ.slowPoison > 0)
             {
-                messageBox.text += $"{organ.name} is still poisoned.\n";
+                textLog.NewLogEntry($"{organ.name} is still poisoned.\n");
                 victory = false;
             }
         }
@@ -152,7 +151,7 @@ public class LifeMonitor : MonoBehaviour
         {
             if (bodyPart.GetComponent<Charm>() != null)
             {
-                messageBox.text += $"{bodyPart.name} is still charmed.\n";
+                textLog.NewLogEntry($"{bodyPart.name} is still charmed.\n");
                 victory = false;
             }
         }
@@ -160,7 +159,7 @@ public class LifeMonitor : MonoBehaviour
         {
             if (organ.GetComponent<Charm>() != null)
             {
-                messageBox.text += $"{organ.name} is still charmed.\n";
+                textLog.NewLogEntry($"{organ.name} is still charmed.\n");
                 victory = false;
             }
         }
@@ -168,7 +167,7 @@ public class LifeMonitor : MonoBehaviour
         hasPlayerWon = victory;
         if (victory)
         {
-            messageBox.text = "Congratulations, he'll live!\nYour payment is 500 gold.\n Transfer in 5 seconds...";
+            textLog.NewLogEntry("Congratulations, he'll live!\nYour payment is 500 gold.\n Transfer in 5 seconds...");
             GameObject.FindObjectOfType<GoldTracker>().goldAccumulated += 500;
 
             yield return new WaitForSeconds(5 * Time.timeScale);

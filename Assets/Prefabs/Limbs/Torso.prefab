@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6675934801669765112}
   - component: {fileID: 5690681944904997238}
   m_Layer: 0
-  m_Name: new Torso
+  m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,10 +78,12 @@ MonoBehaviour:
   maxTorsos: 0
   isPartOfMainBody: 0
   maxBrains: 0
-  maxEyes: 0
+  maxLeftEyes: 0
+  maxRightEyes: 0
   maxHearts: 1
   maxLivers: 1
-  maxLungs: 2
+  maxLeftLungs: 1
+  maxRightLungs: 1
   maxStomachs: 1
   healthPotion: 0
   antidote: 0

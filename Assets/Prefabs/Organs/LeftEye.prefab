@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6317736935091072235}
   - component: {fileID: 6699302688172143296}
   m_Layer: 0
-  m_Name: new LeftEye
+  m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   bloodLossRate: 0
   bloodPumpRate: 70
   bloodMax: 700
-  oxygen: 250
+  oxygen: 500
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0

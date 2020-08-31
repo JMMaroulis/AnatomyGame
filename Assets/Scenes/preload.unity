@@ -323,11 +323,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heartPrefab: {fileID: 4890087455251969224, guid: ebf6ab8e28d638947a30ddb09badbfa3,
     type: 3}
-  lungPrefab: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
+  leftLungPrefab: {fileID: 6125758644491104160, guid: 359102c77b89f1f4ab0a7b19b484b81c,
+    type: 3}
+  rightLungPrefab: {fileID: 6125758644491104160, guid: fb20dc88c5fd28349a5f0a8271e2d87c,
     type: 3}
   brainPrefab: {fileID: 2281875767903849586, guid: 7d602518fcc29924a8d45acd5833e779,
     type: 3}
-  eyePrefab: {fileID: 971546644430363128, guid: 8e7a0264af45dcc498cbe9097eaa67a7,
+  leftEyePrefab: {fileID: 971546644430363128, guid: 8e7a0264af45dcc498cbe9097eaa67a7,
+    type: 3}
+  rightEyePrefab: {fileID: 971546644430363128, guid: d78d2dcd5506db6499f4d989c2fd2e54,
     type: 3}
   liverPrefab: {fileID: 3888702768378693778, guid: d2c34feab37ecc84ea365603ca25207f,
     type: 3}
@@ -637,7 +641,7 @@ MonoBehaviour:
   charms_petrification: 0
   charms_blood_regen: 0
   blood: 1
-  spawn: 1
+  spawn: 0
   levelstart_surgery: 0
   levelstart_medicine_poison: 0
   levelstart_medicine_speed: 0

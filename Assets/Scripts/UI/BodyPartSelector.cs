@@ -13,6 +13,7 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         buttonActions = FindObjectOfType<ButtonActions>();
+        Update();
     }
 
     // Update is called once per frame

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2511398557098109629}
   - component: {fileID: 1387252113512761771}
   m_Layer: 0
-  m_Name: new Head
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
   bloodLossRate: 0
   bloodPumpRate: 50
   bloodMax: 700
-  oxygen: 250
+  oxygen: 500
   oxygenMax: 500
   oxygenRequired: 5
   damage: 0
@@ -74,10 +74,12 @@ MonoBehaviour:
   maxTorsos: 1
   isPartOfMainBody: 0
   maxBrains: 1
-  maxEyes: 2
+  maxLeftEyes: 1
+  maxRightEyes: 1
   maxHearts: 0
   maxLivers: 0
-  maxLungs: 0
+  maxLeftLungs: 0
+  maxRightLungs: 0
   maxStomachs: 0
   healthPotion: 0
   antidote: 0
