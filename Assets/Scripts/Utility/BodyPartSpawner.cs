@@ -38,6 +38,7 @@ public class BodyPartSpawner : MonoBehaviour
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
 
         GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
@@ -50,6 +51,7 @@ public class BodyPartSpawner : MonoBehaviour
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
 
         GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
@@ -62,6 +64,7 @@ public class BodyPartSpawner : MonoBehaviour
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
 
         GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
@@ -74,6 +77,7 @@ public class BodyPartSpawner : MonoBehaviour
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
 
         GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
@@ -86,6 +90,7 @@ public class BodyPartSpawner : MonoBehaviour
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
 
         GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
@@ -98,6 +103,7 @@ public class BodyPartSpawner : MonoBehaviour
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
 
         GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
@@ -110,6 +116,7 @@ public class BodyPartSpawner : MonoBehaviour
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
 
         GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 
@@ -122,6 +129,7 @@ public class BodyPartSpawner : MonoBehaviour
         bodyPart.name = name;
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
 
         GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
 

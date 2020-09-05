@@ -7,8 +7,6 @@ public class ButtonActions : MonoBehaviour
 {
     public List<Button> menuButtons;
     public List<Button> menuTabs;
-    private List<BodyPart> bodyParts = new List<BodyPart>();
-    private List<Organ> organs = new List<Organ>();
 
     public BodyPart selectedBodyPart = null;
     public GameObject body;
@@ -26,15 +24,16 @@ public class ButtonActions : MonoBehaviour
     private UnlockTracker unlocks;
     private Clock clock;
     private float secondCounter;
+    private BodyPartManager bodyPartManager;
 
     // Start is called before the first frame update
     void Start()
     {
         goldTracker = FindObjectOfType<GoldTracker>();
         clock = FindObjectOfType<Clock>();
+        bodyPartManager = FindObjectOfType<BodyPartManager>();
 
         ClearAllButtons();
-        PopulateBodyPartsList();
         examineBox.text = "";
 
         //enable/disable button tabs based on unlocks
@@ -47,31 +46,9 @@ public class ButtonActions : MonoBehaviour
         menuTabs[7].gameObject.SetActive(unlocks.spawn);
     }
 
-    void PopulateBodyPartsList()
-    {
-        bodyParts = new List<BodyPart>();
-        
-
-        foreach (BodyPart bodypart in FindObjectsOfType<BodyPart>().ToList<BodyPart>())
-        {
-            if (!(bodypart is Organ))
-            {
-                bodyParts.Add(bodypart);
-            }
-        }
-        //bodyParts.Sort();
-    }
-
-    void PopulateOrgansList()
-    {
-        organs = FindObjectsOfType<Organ>().ToList<Organ>();
-    }
-
     // Update is called once per frame
     void Update()
     {
-        PopulateBodyPartsList();
-        PopulateOrgansList();
 
         //update bodypart examination textbox every x seconds
         if (selectedBodyPart)
@@ -130,13 +107,13 @@ public class ButtonActions : MonoBehaviour
 
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
-        int numBodyParts = bodyParts.Count();
+        int numBodyParts = bodyPartManager.bodyParts.Count();
         int countStart = bodyPartMenuCounter;
         int menuCount = 0;
-        while(menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyParts.Count())
+        while(menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyPartManager.bodyParts.Count())
         {
             //select bodypart
-            AssignSelectBodyPart(menuButtons[bodyPartMenuCounter - countStart], bodyParts[bodyPartMenuCounter]);
+            AssignSelectBodyPart(menuButtons[bodyPartMenuCounter - countStart], bodyPartManager.bodyParts[bodyPartMenuCounter]);
             bodyPartMenuCounter += 1;
             menuCount += 1;
         }
@@ -161,12 +138,12 @@ public class ButtonActions : MonoBehaviour
 
         //put organs on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
-        int numOrgans = organs.Count();
+        int numOrgans = bodyPartManager.organs.Count();
         int countStart = organMenuCounter;
         while (organMenuCounter < Mathf.Min(numOrgans, countStart + 7))
         {
             //select organ
-            AssignSelectOrgan(menuButtons[organMenuCounter - countStart], organs[organMenuCounter]);
+            AssignSelectOrgan(menuButtons[organMenuCounter - countStart], bodyPartManager.organs[organMenuCounter]);
             organMenuCounter += 1;
         }
 
@@ -1008,13 +985,13 @@ public class ButtonActions : MonoBehaviour
 
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
-        int numBodyParts = bodyParts.Count();
+        int numBodyParts = bodyPartManager.bodyParts.Count();
         int countStart = bodyPartMenuCounter;
         int menuCount = 0;
-        while (menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyParts.Count())
+        while (menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyPartManager.bodyParts.Count())
         {
             Button menuButton = menuButtons[menuCount];
-            BodyPart bodyPartToAttach = bodyParts[bodyPartMenuCounter];
+            BodyPart bodyPartToAttach = bodyPartManager.bodyParts[bodyPartMenuCounter];
 
             if( !selectedBodyPart.connectedBodyParts.Contains(bodyPartToAttach) 
                 && !bodyPartToAttach.connectedBodyParts.Contains(selectedBodyPart) 
@@ -1133,12 +1110,12 @@ public class ButtonActions : MonoBehaviour
 
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
-        int numBodyParts = bodyParts.Count();
+        int numBodyParts = bodyPartManager.bodyParts.Count();
         int countStart = bodyPartMenuCounter;
         int menuCount = 0;
-        while (menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyParts.Count())
+        while (menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyPartManager.bodyParts.Count())
         {
-            BodyPart bodyPart = bodyParts[bodyPartMenuCounter];
+            BodyPart bodyPart = bodyPartManager.bodyParts[bodyPartMenuCounter];
 
             if (bodyPart.CheckImplantValidity((Organ)selectedBodyPart))
             {

@@ -8,7 +8,6 @@ public class Clock : MonoBehaviour
 
     private DeathMonitor deathMonitor;
     private LifeMonitor lifeMonitor;
-    private List<BodyPart> bodyParts = new List<BodyPart>();
 
     //TODO: find some way to get this thing working as a public bool in the inspector with properties, rather than just updating every bodypart value every frame
     public bool isTimePassing; // { get { return _isTimePassing; } set { _isTimePassing = value; BodyPartsTimePaassing(); } }
@@ -22,15 +21,17 @@ public class Clock : MonoBehaviour
     public Text clockText;
     public Slider clockSlider;
 
+    private BodyPartManager bodyPartManager;
+
     // Start is called before the first frame update
     void Start()
     {
         deathMonitor = FindObjectOfType<DeathMonitor>();
         lifeMonitor = FindObjectOfType<LifeMonitor>();
+        bodyPartManager = FindObjectOfType<BodyPartManager>();
 
         //Time.timeScale = globalTimeScalingFactor;
         isTimePassing = false;
-        PopulateBodyPartsList();
         currentTime.text = "00:00:00";
         clockTarget = 0.0f;
         timeElapsed = 0.0f;
@@ -42,8 +43,6 @@ public class Clock : MonoBehaviour
         globalTimeScalingFactor = clockSlider.value;
         //Time.timeScale = globalTimeScalingFactor;
         clockText.text = $"Time Scaling: {globalTimeScalingFactor}x";
-
-        PopulateBodyPartsList();
 
         //checking if it's time for time to stop yet
         if (timeElapsed >= clockTarget)
@@ -59,17 +58,11 @@ public class Clock : MonoBehaviour
 
     }
 
-
-    void PopulateBodyPartsList()
-    {
-        bodyParts = FindObjectsOfType<BodyPart>().ToList<BodyPart>();
-    }
-
     //would be great if we could trigger this on isTimePassing changing, rather than invoking it manually every frame
     public void BodyPartsTimePassing()
     {
 
-        foreach (BodyPart bodyPart in bodyParts)
+        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
             bodyPart.isTimePassing = isTimePassing;
         }

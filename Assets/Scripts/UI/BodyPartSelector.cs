@@ -8,10 +8,12 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
     public Image connectedImage;
     public Image disconnectedImage;
     private ButtonActions buttonActions;
+    private BodyPartSelectorManager bodyPartSelectorManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        bodyPartSelectorManager = FindObjectOfType<BodyPartSelectorManager>();
         buttonActions = FindObjectOfType<ButtonActions>();
         Update();
     }
@@ -22,7 +24,7 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
         //should cease to exist if the bodypart doesn't exist
         if (bodyPart == null)
         {
-            FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            bodyPartSelectorManager.ResetSelectors();
         }
 
         connectedImage.enabled = bodyPart.connectedBodyParts.Count > 0;
@@ -34,9 +36,9 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
         buttonActions.selectedBodyPart = bodyPart;
         if (!(bodyPart is Organ))
         {
-            FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            bodyPartSelectorManager.ResetSelectors();
         }
-        FindObjectOfType<ButtonActions>().ClearAllButtons();
+        buttonActions.ClearAllButtons();
     }
 
 }

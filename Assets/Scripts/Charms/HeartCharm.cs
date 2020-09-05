@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class HeartCharm : Charm
 {
+    private BodyPartManager bodyPartManager;
+
+    void Start()
+    {
+        bodyPartManager = FindObjectOfType<BodyPartManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,7 +36,7 @@ public class HeartCharm : Charm
     void PumpBloodMaster(float deltaTime)
     {
         //starting from a random bodypart that is connected to this charm:
-        BodyPart[] allBodyParts = FindObjectsOfType<BodyPart>();
+        List<BodyPart> allBodyParts = bodyPartManager.bodyParts;
         List<int> bodypartOrder = Enumerable.Range(0, allBodyParts.Count()).ToList<int>();
         IListExtensions.Shuffle<int>(bodypartOrder);
 

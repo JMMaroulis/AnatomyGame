@@ -33,6 +33,8 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnLeftLung(float seconds, int goldCost)
@@ -63,6 +65,8 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnRightLung(float seconds, int goldCost)
@@ -93,6 +97,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnBrain(float seconds, int goldCost)
@@ -122,6 +127,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnLeftEye(float seconds, int goldCost)
@@ -151,6 +157,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnRightEye(float seconds, int goldCost)
@@ -180,6 +187,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnLiver(float seconds, int goldCost)
@@ -209,6 +217,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnStomach(float seconds, int goldCost)
@@ -238,6 +247,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     #endregion
@@ -271,6 +281,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnRightArm(float seconds, int goldCost)
@@ -300,6 +311,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
 
@@ -330,6 +342,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnRightLeg(float seconds, int goldCost)
@@ -359,6 +372,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnTorso(float seconds, int goldCost)
@@ -388,6 +402,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     public static void SpawnHead(float seconds, int goldCost)
@@ -409,7 +424,7 @@ public static class Actions_SpawnBodyParts
         buttonActions.EnableAllButtons();
         if (!clock.actionCancelFlag)
         {
-            Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("nead");
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("head");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
@@ -417,6 +432,7 @@ public static class Actions_SpawnBodyParts
         {
             clock.actionCancelFlag = false;
         }
+        MonoBehaviour.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
     #endregion

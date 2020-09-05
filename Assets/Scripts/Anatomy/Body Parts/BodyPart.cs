@@ -7,7 +7,6 @@ public class BodyPart : MonoBehaviour
     public bool isTimePassing;
     public float timeScale;
     public bool isFunctioning;
-    private Clock clock;
 
     //blood stuff
     public float bloodRequiredToFunction;
@@ -31,9 +30,6 @@ public class BodyPart : MonoBehaviour
     public List<Organ> containedOrgans;
     public List<Heart> connectedHearts;
 
-    private bool isConnectedToBrain;
-    private bool isConnectedToHeart;
-
     private float connectedBrainEfficiency;
 
     //expected limb numbers
@@ -45,6 +41,7 @@ public class BodyPart : MonoBehaviour
     public int maxTorsos;
 
     public bool isPartOfMainBody;
+    public bool isConnectedToBrain;
 
     //expected organ numbers
     public int maxBrains;
@@ -64,9 +61,11 @@ public class BodyPart : MonoBehaviour
     public float coagulantPotion;
     public float hastePotion;
 
+    public BodyPartManager bodyPartManager;
+
     public void Start()
     {
-        clock = FindObjectOfType<Clock>();
+        bodyPartManager = FindObjectOfType<BodyPartManager>();
         UpdateHeartConnections();
 
     }
@@ -80,6 +79,8 @@ public class BodyPart : MonoBehaviour
     {
         if (isTimePassing)
         {
+            deltaTime *= timeScale;
+
             ApplyDrugs(deltaTime);
             UpdateDamage(deltaTime);
             CheckForFunctionality();
@@ -112,12 +113,11 @@ public class BodyPart : MonoBehaviour
         deltaTime *= timeScale;
 
         //pumping blood to contained organs in a random order, to prevent loops forming between pairs of bodyparts, trapping blood between them
-        List<BodyPart> allBodyParts = connectedBodyParts.Concat(containedOrgans).ToList<BodyPart>();
-        List<int> bodypartPumpOrder = Enumerable.Range(0, allBodyParts.Count()).ToList<int>();
-        IListExtensions.Shuffle<int>(bodypartPumpOrder);
-        foreach (int bodyPartIndex in bodypartPumpOrder)
+        List<BodyPart> allBodyParts = connectedBodyParts.Concat(containedOrgans).ToList();
+        IListExtensions.Shuffle(allBodyParts);
+
+        foreach (BodyPart bodyPart in allBodyParts)
         {
-            BodyPart bodyPart = allBodyParts[bodyPartIndex];
             //cap blood and oxygen transfer rate at between 0.2 and 5 times the blood pump rate, plus slowdown factor for more localised substances
             float tempBloodPumpRate =           Mathf.Max(Mathf.Min( (blood / bodyPart.blood),                     5), 0.2f) * bloodPumpRate * heartEfficiency;
             float tempOxygenPumpRate =          Mathf.Max(Mathf.Min( (oxygen / bodyPart.oxygen),                   5), 0.2f) * bloodPumpRate * heartEfficiency;
@@ -200,8 +200,6 @@ public class BodyPart : MonoBehaviour
     //applies blood loss rate
     public void LoseBlood(float deltaTime)
     {
-        deltaTime *= timeScale;
-
         float timeSinceLastLoss = deltaTime;
         float bloodLost = bloodLossRate * timeSinceLastLoss;
 
@@ -243,7 +241,6 @@ public class BodyPart : MonoBehaviour
 
     public void ConsumeOxygen(float deltaTime)
     {
-        deltaTime *= timeScale;
         float oxygenconsumed = oxygenRequired * deltaTime;
         oxygen = Mathf.Max(oxygen - oxygenconsumed, 0);
     }
@@ -253,9 +250,6 @@ public class BodyPart : MonoBehaviour
     //consider scaling effects of drugs with amount of drug present
     public void ApplyDrugs(float deltaTime)
     {
-
-        deltaTime *= timeScale;
-
         //stasis potion
         //TODO: needs to stick around long enough for an organ to be removed/replaced, figure out the numbers
         // currently setting the timeScale = -(1/50) * potion + 1
@@ -342,16 +336,7 @@ public class BodyPart : MonoBehaviour
 
     public void CheckForFunctionality()
     {
-        if (blood < bloodRequiredToFunction)
-        { isFunctioning = false; }
-        if (oxygen <= 0)
-        { isFunctioning = false; }
-
-        else
-        {
-            isFunctioning = true;
-        }
-
+        isFunctioning = (blood > bloodRequiredToFunction) && (oxygen > 0);
     }
 
     //kicks off recursive process for finding brain, and efficiency thereof
@@ -520,8 +505,6 @@ public class BodyPart : MonoBehaviour
 
     public void UpdateDamage(float deltaTime)
     {
-        deltaTime *= timeScale;
-
         float oxygenRatio = 1 - Mathf.Min((oxygen / oxygenRequired), 1); //0 good, 1 bad
         damage = Mathf.Min(damage + (oxygenRatio * deltaTime * 0.2f), damageMax);
     }

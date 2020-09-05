@@ -173,6 +173,12 @@ public static class Actions_Surgery
             bodyPart.SeverAllConnections();
             GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
             GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(bodyPart);
+
+            if (bodyPart is Organ)
+            {
+                GameObject.FindObjectOfType<BodyPartManager>().organs.Remove((Organ)bodyPart);
+            }
+
             GameObject.Destroy(bodyPart.gameObject);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             UpdateAllBodyPartHeartConnections();

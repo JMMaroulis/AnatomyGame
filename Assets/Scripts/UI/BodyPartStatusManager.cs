@@ -4,26 +4,15 @@ using System.Linq;
 
 public class BodyPartStatusManager : MonoBehaviour
 {
-    private List<BodyPart> bodyParts;
     public GameObject statusPrefab;
     public GameObject statusPanel;
+    private BodyPartManager bodyPartManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        PopulateBodyPartsList();
+        bodyPartManager = FindObjectOfType<BodyPartManager>();
         UpdateStatusCollection();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //TODO: go over all selectors, delete any that don't have a body part anymore
-    }
-
-    void PopulateBodyPartsList()
-    {
-        bodyParts = FindObjectsOfType<BodyPart>().ToList();
     }
 
     void UpdateStatusCollection()
@@ -35,35 +24,35 @@ public class BodyPartStatusManager : MonoBehaviour
         }
 
         //add everything in a sensible order
-        foreach (BodyPart bodyPart in bodyParts)
+        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
             if (bodyPart is Head)
             {
                 AddStatusIncludingContainedOrgans(bodyPart);
             }
         }
-        foreach (BodyPart bodyPart in bodyParts)
+        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
             if (bodyPart is Torso)
             {
                 AddStatusIncludingContainedOrgans(bodyPart);
             }
         }
-        foreach (BodyPart bodyPart in bodyParts)
+        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
             if (bodyPart is LeftArm || bodyPart is RightArm)
             {
                 AddStatusIncludingContainedOrgans(bodyPart);
             }
         }
-        foreach (BodyPart bodyPart in bodyParts)
+        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
             if (bodyPart is LeftLeg || bodyPart is RightLeg)
             {
                 AddStatusIncludingContainedOrgans(bodyPart);
             }
         }
-        foreach (BodyPart bodyPart in bodyParts)
+        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
             if ((bodyPart is Organ) && bodyPart.connectedBodyParts.Count == 0)
             {
