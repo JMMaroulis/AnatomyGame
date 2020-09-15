@@ -18,12 +18,12 @@ public static class Actions_Surgery
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
@@ -47,12 +47,12 @@ public static class Actions_Surgery
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             //disconnect
@@ -89,12 +89,12 @@ public static class Actions_Surgery
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             //connect
@@ -125,12 +125,12 @@ public static class Actions_Surgery
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPart1.CreateConnection(bodyPart2);
@@ -156,12 +156,12 @@ public static class Actions_Surgery
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             foreach (Organ organ in bodyPart.containedOrgans)

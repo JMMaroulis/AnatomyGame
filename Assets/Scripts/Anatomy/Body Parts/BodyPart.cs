@@ -32,6 +32,9 @@ public class BodyPart : MonoBehaviour
 
     private float connectedBrainEfficiency;
 
+    public bool isPartOfMainBody;
+    public bool isConnectedToBrain;
+
     //expected limb numbers
     public int maxLeftArms;
     public int maxRightArms;
@@ -39,9 +42,6 @@ public class BodyPart : MonoBehaviour
     public int maxRightLegs;
     public int maxHeads;
     public int maxTorsos;
-
-    public bool isPartOfMainBody;
-    public bool isConnectedToBrain;
 
     //expected organ numbers
     public int maxBrains;

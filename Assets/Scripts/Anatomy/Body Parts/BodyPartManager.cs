@@ -19,8 +19,6 @@ public class BodyPartManager : MonoBehaviour
     {
         if (clock.isTimePassing)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-
             float deltaTime = Time.deltaTime * clock.globalTimeScalingFactor;
             while (deltaTime > 0.0f)
             {
@@ -34,8 +32,6 @@ public class BodyPartManager : MonoBehaviour
                 }
                 deltaTime -= tempDeltaTime;
             }
-            watch.Stop();
-            Debug.Log($"Update all bodyparts: {watch.ElapsedMilliseconds}");
         }
     }
 

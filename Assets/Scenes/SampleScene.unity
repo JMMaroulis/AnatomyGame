@@ -1725,6 +1725,7 @@ MonoBehaviour:
   - {fileID: 1265245172}
   - {fileID: 254215602}
   - {fileID: 383672841}
+  cancelActionButton: {fileID: 2126252754}
   selectedBodyPart: {fileID: 0}
   body: {fileID: 965609865}
   textLog: {fileID: 746780209}
@@ -4366,6 +4367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyParts: []
+  organs: []
 --- !u!4 &784820327
 Transform:
   m_ObjectHideFlags: 0

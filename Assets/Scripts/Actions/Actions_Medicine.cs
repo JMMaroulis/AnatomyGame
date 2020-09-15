@@ -16,12 +16,12 @@ public static class Actions_Medicine
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
         
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.healthPotion += 100.0f;
@@ -45,12 +45,12 @@ public static class Actions_Medicine
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.antidote += 50.0f;
@@ -74,12 +74,12 @@ public static class Actions_Medicine
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.slowPoison += 50.0f;
@@ -103,12 +103,12 @@ public static class Actions_Medicine
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.stasisPotion += 50.0f;
@@ -132,12 +132,12 @@ public static class Actions_Medicine
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.hastePotion += 50.0f;
@@ -161,12 +161,12 @@ public static class Actions_Medicine
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPartObject.coagulantPotion += 50.0f;

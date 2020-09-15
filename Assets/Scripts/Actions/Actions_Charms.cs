@@ -15,12 +15,12 @@ public static class Actions_Charms
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
         
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
 
         if (!clock.actionCancelFlag)
         {
@@ -45,12 +45,12 @@ public static class Actions_Charms
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
 
         if (!clock.actionCancelFlag)
         {
@@ -75,12 +75,12 @@ public static class Actions_Charms
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
 
         if (!clock.actionCancelFlag)
         {
@@ -105,12 +105,12 @@ public static class Actions_Charms
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
 
         if (!clock.actionCancelFlag)
         {

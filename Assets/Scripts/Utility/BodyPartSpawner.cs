@@ -36,11 +36,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(heartPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -49,11 +45,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(leftLungPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -62,11 +54,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(rightLungPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -75,11 +63,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(brainPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -88,11 +72,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(leftEyePrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -101,11 +81,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(rightEyePrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -114,11 +90,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(liverPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -127,11 +99,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(stomachPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -140,10 +108,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(leftArmPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -152,11 +117,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(rightArmPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
-
+        Faff(bodyPart);
         return bodyPart.GetComponent<BodyPart>();
     }
 
@@ -164,11 +125,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(leftLegPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
-
+        Faff(bodyPart);
         return bodyPart.GetComponent<BodyPart>();
     }
 
@@ -176,10 +133,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(rightLegPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -188,14 +142,7 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(torsoPrefab);
         bodyPart.name = name;
-        FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
-        FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
-        foreach (Organ organ in bodyPart.GetComponent<BodyPart>().containedOrgans)
-        {
-            FindObjectOfType<BodyPartStatusManager>().AddStatus(organ.GetComponent<BodyPart>());
-        }
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
+        Faff(bodyPart);
 
         return bodyPart.GetComponent<BodyPart>();
     }
@@ -204,16 +151,25 @@ public class BodyPartSpawner : MonoBehaviour
     {
         GameObject bodyPart = Instantiate(headPrefab);
         bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+
+    private void Faff(GameObject bodyPart)
+    {
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+        if (bodyPart.GetComponent<Organ>() != null)
+        {
+            FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
+        }
         foreach (Organ organ in bodyPart.GetComponent<BodyPart>().containedOrgans)
         {
             FindObjectOfType<BodyPartStatusManager>().AddStatus(organ.GetComponent<BodyPart>());
         }
-
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
-
-        return bodyPart.GetComponent<BodyPart>();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
     }
 
 }

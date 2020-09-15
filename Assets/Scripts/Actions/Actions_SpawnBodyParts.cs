@@ -17,12 +17,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnHeart("Heart");
@@ -49,12 +49,12 @@ public static class Actions_SpawnBodyParts
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
         
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftLung("Left Lung");
@@ -81,12 +81,12 @@ public static class Actions_SpawnBodyParts
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnRightLung("Right Lung");
@@ -111,12 +111,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
         
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnBrain("Brain");
@@ -141,12 +141,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftEye("Left Eye");
@@ -171,12 +171,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnRightEye("Right Eye");
@@ -201,12 +201,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("Liver");
@@ -231,12 +231,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnStomach("Stomach");
@@ -265,12 +265,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftArm("Left Arm");
@@ -295,12 +295,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnRightArm("Right Arm");
@@ -326,12 +326,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftLeg("Left Leg");
@@ -356,15 +356,15 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            Object.FindObjectOfType<BodyPartSpawner>().SpawnRightLeg("Righ tLeg");
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnRightLeg("Right Leg");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
@@ -386,12 +386,12 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("Torso");
@@ -416,15 +416,15 @@ public static class Actions_SpawnBodyParts
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("head");
+            Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("Head");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }

@@ -16,12 +16,12 @@ public static class Actions_Blood
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
         
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPart.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().bloodLossRate - 10);
@@ -45,12 +45,12 @@ public static class Actions_Blood
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
             bodyPart.GetComponent<BodyPart>().bloodLossRate += 10;
@@ -74,12 +74,12 @@ public static class Actions_Blood
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
 
         if (!clock.actionCancelFlag)
         {
@@ -104,12 +104,12 @@ public static class Actions_Blood
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
 
-        buttonActions.DisableAllButtons();
+        buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
-        buttonActions.EnableAllButtons();
+        buttonActions.ActionFinished();
 
         if (!clock.actionCancelFlag)
         {

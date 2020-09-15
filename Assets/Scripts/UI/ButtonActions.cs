@@ -8,6 +8,8 @@ public class ButtonActions : MonoBehaviour
     public List<Button> menuButtons;
     public List<Button> menuTabs;
 
+    public Button cancelActionButton;
+
     public BodyPart selectedBodyPart = null;
     public GameObject body;
 
@@ -35,6 +37,7 @@ public class ButtonActions : MonoBehaviour
 
         ClearAllButtons();
         examineBox.text = "";
+        cancelActionButton.interactable = false;
 
         //enable/disable button tabs based on unlocks
         unlocks = FindObjectOfType<UnlockTracker>();
@@ -75,20 +78,24 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void DisableAllButtons()
+    public void ActionInProgress()
     {
         foreach (Button button in menuButtons)
         {
             button.interactable = false;
         }
+
+        cancelActionButton.interactable = true;
     }
 
-    public void EnableAllButtons()
+    public void ActionFinished()
     {
         foreach (Button button in menuButtons)
         {
             button.interactable = true;
         }
+
+        cancelActionButton.interactable = false;
     }
 
     public void CancelAction()
@@ -1735,7 +1742,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitOneHour(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitSeconds(3600.0f); lifeMonitor.VictoryCheck(3600.0f); textLog.NewLogEntry("Waiting one hour..."); actionTimeBar.Reset(3600.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitOneHour(); textLog.NewLogEntry("Waiting one hour..."); actionTimeBar.Reset(3600.0f); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait an hour (Victory Check)";

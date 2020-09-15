@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1486083574775095583}
   - component: {fileID: 3742130502005979114}
   m_Layer: 0
-  m_Name: new Liver
+  m_Name: Liver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,6 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  clock: {fileID: 0}
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
@@ -61,15 +60,21 @@ MonoBehaviour:
   connectedBodyParts: []
   containedOrgans: []
   connectedHearts: []
-  maxArms: 0
-  maxLegs: 0
+  isPartOfMainBody: 0
+  isConnectedToBrain: 0
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
   maxHeads: 0
   maxTorsos: 1
   maxBrains: 0
-  maxEyes: 0
+  maxLeftEyes: 0
+  maxRightEyes: 0
   maxHearts: 0
-  maxLivers: 1
-  maxLungs: 0
+  maxLivers: 0
+  maxLeftLungs: 0
+  maxRightLungs: 0
   maxStomachs: 0
   healthPotion: 0
   antidote: 0
@@ -77,4 +82,5 @@ MonoBehaviour:
   stasisPotion: 0
   coagulantPotion: 0
   hastePotion: 0
+  bodyPartManager: {fileID: 0}
   bloodProcessingRate: 0.2
