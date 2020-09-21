@@ -85,7 +85,7 @@ public class BodyPart : MonoBehaviour
             UpdateDamage(deltaTime);
             CheckForFunctionality();
             UpdateEfficiency();
-            LoseBlood(deltaTime);
+            LoseBloodTime(deltaTime);
             ConsumeOxygen(deltaTime);
         }
     }
@@ -198,44 +198,36 @@ public class BodyPart : MonoBehaviour
     }
 
     //applies blood loss rate
-    public void LoseBlood(float deltaTime)
+    public void LoseBloodTime(float deltaTime)
     {
-        float timeSinceLastLoss = deltaTime;
-        float bloodLost = bloodLossRate * timeSinceLastLoss;
-
-        //if bodypart doesn't have enough blood to lose, inflict the remaining loss on neighbouring parts instead
-        //otherwise, lose it from this bodypart
-        if (bloodLost > blood && connectedBodyParts.Count > 0)
-        {
-            float bloodLostRemainder = bloodLost - blood;
-            blood = Mathf.Max(blood - bloodLost, 0);
-            connectedBodyParts[Random.Range(0, connectedBodyParts.Count)].LoseBloodChain(bloodLostRemainder, 0);
-        }
-        else
-        {
-            blood = Mathf.Max(blood - bloodLost, 0);
-        }
+        float bloodLost = bloodLossRate * deltaTime;
+        LoseBloodAmount(bloodLost);
     }
 
-    //searches random attached bodyparts for the remaining blood to lose
-    //TODO: this really is a terrible, terrible thing, but it works for now.
-    //Probably won't hold up on bodies with more parts
-    public void LoseBloodChain(float bloodLost, int stepCount)
+    public void LoseBloodAmount(float bloodLost, int stepcount = 0)
     {
-        stepCount += 1;
-        if (stepCount > 3) { return; }
+        float bloodLostRemainder = bloodLost - blood;
+        float bloodLossProportion = Mathf.Min(bloodLost / (blood), 1);
+
+        blood = Mathf.Max(blood - bloodLost, 0);
+        oxygen *= 1 - bloodLossProportion;
+        healthPotion *= 1 - bloodLossProportion;
+        antidote *= 1 - bloodLossProportion;
+        slowPoison *= 1 - bloodLossProportion;
+        stasisPotion *= 1 - bloodLossProportion;
+        hastePotion *= 1 - bloodLossProportion;
+        coagulantPotion *= 1 - bloodLossProportion;
 
         //if bodypart doesn't have enough blood to lose, inflict the remaining loss on neighbouring parts instead
-        //otherwise, lose it from this bodypart
-        if (bloodLost > blood)
+        if (bloodLostRemainder > 0 && connectedBodyParts.Count > 0 && stepcount < 3)
         {
-            float bloodLostRemainder = bloodLost - blood;
-            blood = Mathf.Max(blood - bloodLost, 0);
-            connectedBodyParts[Random.Range(0, connectedBodyParts.Count)].LoseBloodChain(bloodLostRemainder, stepCount);
+            connectedBodyParts[Random.Range(0, connectedBodyParts.Count)].LoseBloodAmount(bloodLostRemainder, stepcount + 1);
         }
-        else
+
+        //then start draining organs
+        if (bloodLostRemainder > 0 && containedOrgans.Count > 0 && stepcount < 3)
         {
-            blood = Mathf.Max(blood - bloodLost, 0);
+            containedOrgans[Random.Range(0, containedOrgans.Count)].LoseBloodAmount(bloodLostRemainder, stepcount + 1);
         }
     }
 
@@ -527,7 +519,7 @@ public class BodyPart : MonoBehaviour
         //sever *that* connection to *this*
         foreach (BodyPart connectedBodyPart in connectedBodyParts)
         {
-            connectedBodyPart.SeverConnectionOutgoing(this.gameObject, 20);
+            connectedBodyPart.SeverConnectionOutgoing(this.gameObject, 0);
         }
 
         //sever *this* connection to *those*

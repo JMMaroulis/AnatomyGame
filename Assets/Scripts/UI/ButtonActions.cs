@@ -1127,7 +1127,7 @@ public class ButtonActions : MonoBehaviour
             if (bodyPart.CheckImplantValidity((Organ)selectedBodyPart))
             {
                 //select bodypart
-                AssignImplantOrganButton(menuButtons[bodyPartMenuCounter - countStart], bodyPart, (Organ)selectedBodyPart);
+                AssignImplantOrganButton(menuButtons[menuCount], bodyPart, (Organ)selectedBodyPart);
                 menuCount += 1;
             }
 

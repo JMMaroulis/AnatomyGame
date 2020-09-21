@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class HeartCharm : Charm
 {
-    private BodyPartManager bodyPartManager;
-
-    void Start()
-    {
-        bodyPartManager = FindObjectOfType<BodyPartManager>();
-    }
 
     // Update is called once per frame
     void Update()

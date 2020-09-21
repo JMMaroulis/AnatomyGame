@@ -4266,7 +4266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 844759054}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -4337,6 +4337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 844759056}
   scrollbar: {fileID: 450570105}
+  scrollRect: {fileID: 746780206}
 --- !u!1 &784820325
 GameObject:
   m_ObjectHideFlags: 0
@@ -4417,7 +4418,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.00003051794}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &844759055
@@ -6505,6 +6506,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isPartOfMainBody
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6663226823775160270, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
+        type: 3}
+      propertyPath: m_Name
+      value: Left Lung
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82cbe099f0366de4eb27d17dcef6e5fa, type: 3}
@@ -10043,12 +10049,12 @@ PrefabInstance:
     - target: {fileID: 38696759639743268, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: m_Name
-      value: RightEye
+      value: Right Eye
       objectReference: {fileID: 0}
     - target: {fileID: 504386271684019420, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: m_Name
-      value: LeftEye
+      value: Left Eye
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a06dd97c5b85b054d9a3a1997c1739e7, type: 3}

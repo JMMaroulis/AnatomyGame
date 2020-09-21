@@ -211,7 +211,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         break;
 
                     case 1:
-                        BodyPart head = FindObjectOfType<Torso>();
+                        BodyPart head = FindObjectOfType<Head>();
                         Sever(head);
                         Debug.Log($"Severed {head.name}");
                         textLog.NewLogEntry($"Decapitation!");

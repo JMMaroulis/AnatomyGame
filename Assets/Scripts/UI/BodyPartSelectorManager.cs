@@ -145,7 +145,7 @@ public class BodyPartSelectorManager : MonoBehaviour
 
     private void NewSelector(BodyPart bodyPart, GameObject selectorPrefab, GameObject panel, GameObject notPartOfMainPanel)
     {
-        if (bodyPart.isPartOfMainBody)
+        if ((bodyPart.isPartOfMainBody && bodyPart is BodyPart) || (bodyPart.connectedBodyParts.Count == 1 && bodyPart is Organ))
         {
             GameObject selector = GameObject.Instantiate(selectorPrefab, panel.transform);
             organSelectors.Add(selector.GetComponent<BodyPartSelector>());

@@ -113,7 +113,7 @@ public static class Actions_Blood
 
         if (!clock.actionCancelFlag)
         {
-            bodyPart.GetComponent<BodyPart>().blood = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().blood - 100);
+            bodyPart.GetComponent<BodyPart>().LoseBloodAmount(100);
             MonoBehaviour.FindObjectOfType<ActionTracker>().blood_extracted += 100;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         }
