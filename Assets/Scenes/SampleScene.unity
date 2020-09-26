@@ -1296,6 +1296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 965609865}
   textLog: {fileID: 746780209}
+  bullet: {fileID: 4163447092566984401, guid: 39720435f53879940a98c8847e5e4f78, type: 3}
 --- !u!4 &257884927
 Transform:
   m_ObjectHideFlags: 0

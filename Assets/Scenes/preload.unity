@@ -636,7 +636,7 @@ MonoBehaviour:
   medicine_poison: 0
   medicine_speed: 0
   medicine_blood: 0
-  charms_heart: 0
+  charms_heart: 1
   charms_lung: 0
   charms_petrification: 0
   charms_blood_regen: 0

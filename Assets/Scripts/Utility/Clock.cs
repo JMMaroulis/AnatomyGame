@@ -11,6 +11,7 @@ public class Clock : MonoBehaviour
 
     //TODO: find some way to get this thing working as a public bool in the inspector with properties, rather than just updating every bodypart value every frame
     public bool isTimePassing; // { get { return _isTimePassing; } set { _isTimePassing = value; BodyPartsTimePaassing(); } }
+    private bool isTimePassingLastFrame;
 
     private float timeElapsed;
     public float clockTarget;
@@ -61,12 +62,15 @@ public class Clock : MonoBehaviour
     //would be great if we could trigger this on isTimePassing changing, rather than invoking it manually every frame
     public void BodyPartsTimePassing()
     {
-
-        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
+        if (isTimePassing != isTimePassingLastFrame)
         {
-            bodyPart.isTimePassing = isTimePassing;
-        }
+            isTimePassingLastFrame = isTimePassing;
 
+            foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
+            {
+                bodyPart.isTimePassing = isTimePassing;
+            }
+        }
     }
 
     //sets time passing for all bodyparts for [ingameSeconds] of IN-GAME-TIME

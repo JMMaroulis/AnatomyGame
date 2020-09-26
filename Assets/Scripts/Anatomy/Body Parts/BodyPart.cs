@@ -29,6 +29,7 @@ public class BodyPart : MonoBehaviour
     public List<BodyPart> connectedBodyParts;
     public List<Organ> containedOrgans;
     public List<Heart> connectedHearts;
+    public List<EmbeddedObject> embeddedObjects;
 
     private float connectedBrainEfficiency;
 
@@ -286,10 +287,10 @@ public class BodyPart : MonoBehaviour
         {
             if (slowPoison > 0.0f)
             {
-                //in 1 second, will neutralise 1 unit of poison
+                //in 1 second, will neutralise 2 units of poison
                 float antidoteProcessed = Mathf.Min(antidote, deltaTime * 1.0f);
                 antidote = Mathf.Max(0.0f, antidote - antidoteProcessed);
-                slowPoison = Mathf.Max(0.0f, slowPoison - antidoteProcessed);
+                slowPoison = Mathf.Max(0.0f, slowPoison - 2.0f * antidoteProcessed);
             }
             //decays at 1/100th unit per second, if no poison to neutralise
             antidote = Mathf.Max(0.0f, antidote - (deltaTime * 0.01f));

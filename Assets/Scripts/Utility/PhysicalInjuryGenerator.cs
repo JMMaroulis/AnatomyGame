@@ -10,6 +10,8 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     private List<Organ> organs;
     private UnlockTracker unlockTracker;
 
+    public GameObject bullet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -286,6 +288,9 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     {
         bodyPart.damage = Mathf.Min(bodyPart.damage + 30, bodyPart.damageMax);
         bodyPart.bloodLossRate += 10;
+
+        GameObject newBullet = Instantiate(bullet);
+        newBullet.GetComponent<Bullet>().Embed(bodyPart);
     }
 
     public void Crush(BodyPart bodyPart)
