@@ -122,7 +122,6 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         Debug.Log($"Shot {organ.name}");
                         textLog.NewLogEntry($"The {organ.name} has been shot.");
                         Shoot(organ);
-                        Shoot(organ.connectedBodyParts[0]);
                         break;
 
                     case 2:
@@ -288,6 +287,13 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     {
         bodyPart.damage = Mathf.Min(bodyPart.damage + 30, bodyPart.damageMax);
         bodyPart.bloodLossRate += 10;
+
+        if (bodyPart is Organ && bodyPart.connectedBodyParts.Count > 0)
+        {
+            BodyPart parentBodyPart = bodyPart.connectedBodyParts[0];
+            parentBodyPart.damage = Mathf.Min(parentBodyPart.damage + 30, parentBodyPart.damageMax);
+            parentBodyPart.bloodLossRate += 10;
+        }
 
         GameObject newBullet = Instantiate(bullet);
         newBullet.GetComponent<Bullet>().Embed(bodyPart);

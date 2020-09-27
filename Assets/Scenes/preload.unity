@@ -569,7 +569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   easyInjuries: 0
-  mediumInjuries: 0
+  mediumInjuries: 1
   hardInjuries: 0
   patientNumber: 0
   levelstart_easyInjuries: 0
@@ -635,11 +635,11 @@ MonoBehaviour:
   surgery: 1
   medicine_poison: 0
   medicine_speed: 0
-  medicine_blood: 0
-  charms_heart: 1
+  medicine_blood: 1
+  charms_heart: 0
   charms_lung: 0
   charms_petrification: 0
-  charms_blood_regen: 0
+  charms_blood_regen: 1
   blood: 1
   spawn: 0
   levelstart_surgery: 0

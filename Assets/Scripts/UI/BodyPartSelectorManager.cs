@@ -167,7 +167,15 @@ public class BodyPartSelectorManager : MonoBehaviour
         //organ selectors for external organs, and organs inside selected bodypart
         foreach (Organ organ in FindObjectsOfType<Organ>())
         {
-            if (organ.connectedBodyParts.Count == 0 || organ.connectedBodyParts[0] == selectedBodyPart)
+            BodyPart tempSelectedBodyPart = selectedBodyPart;
+
+            //if selected an organ, use parent bodypart for determining which organs to display
+            if (selectedBodyPart is Organ)
+            {
+                tempSelectedBodyPart = selectedBodyPart.connectedBodyParts[0];
+            }
+
+            if (organ.connectedBodyParts.Count == 0 || organ.connectedBodyParts[0] == tempSelectedBodyPart)
             {
                 NewOrgan(organ);
             }

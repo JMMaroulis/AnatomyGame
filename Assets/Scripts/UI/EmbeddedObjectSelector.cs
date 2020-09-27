@@ -2,20 +2,16 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
+public class EmbeddedObjectSelector : MonoBehaviour, IPointerClickHandler
 {
-    public BodyPart bodyPart;
-    public Image connectedImage;
-    public Image disconnectedImage;
+    public EmbeddedObject embeddedObject;
+    public Image image;
     private ButtonActions buttonActions;
-    private BodyPartSelectorManager bodyPartSelectorManager;
     private EmbeddedObjectSelectorManager embeddedObjectSelectorManager;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        bodyPartSelectorManager = FindObjectOfType<BodyPartSelectorManager>();
         embeddedObjectSelectorManager = FindObjectOfType<EmbeddedObjectSelectorManager>();
         buttonActions = FindObjectOfType<ButtonActions>();
         Update();
@@ -25,20 +21,15 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
     void Update()
     {
         //should cease to exist if the bodypart doesn't exist
-        if (bodyPart == null)
+        if (embeddedObject == null)
         {
-            bodyPartSelectorManager.ResetSelectors();
             embeddedObjectSelectorManager.ResetSelectors();
         }
 
-        connectedImage.enabled = bodyPart.connectedBodyParts.Count > 0;
-        disconnectedImage.enabled = bodyPart.connectedBodyParts.Count == 0;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        buttonActions.selectedBodyPart = bodyPart;
-        bodyPartSelectorManager.ResetSelectors();
         embeddedObjectSelectorManager.ResetSelectors();
         buttonActions.ClearAllButtons();
     }
