@@ -5,6 +5,7 @@ using System.Linq;
 public class EmbeddedObjectSelectorManager : MonoBehaviour
 {
     public GameObject embeddedObjectSelectorsPanel;
+    public GameObject externalEmbeddedObjectSelectorsPanel;
 
     private List<EmbeddedObjectSelector> embeddedObjectSelectors = new List<EmbeddedObjectSelector>();
 
@@ -28,28 +29,57 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
 
         if (embeddedObject is Bullet)
         {
-            NewSelector(embeddedObject, bulletSelectorPrefab);
+            NewSelector(embeddedObject, bulletSelectorPrefab, externalEmbeddedObjectSelectorsPanel);
         }
 
     }
 
-    private void NewSelector(EmbeddedObject embeddedObject, GameObject selectorPrefab)
+    private void NewSelector(EmbeddedObject embeddedObject, GameObject selectorPrefab, GameObject notPartOfMainPanel)
     {
-        GameObject selector = GameObject.Instantiate(selectorPrefab, embeddedObjectSelectorsPanel.transform);
-        embeddedObjectSelectors.Add(selector.GetComponent<EmbeddedObjectSelector>());
-        selector.GetComponent<EmbeddedObjectSelector>().embeddedObject = embeddedObject;
+        if (!(embeddedObject.parentBodyPart is null))
+        {
+            GameObject selector = GameObject.Instantiate(selectorPrefab, embeddedObjectSelectorsPanel.transform);
+            embeddedObjectSelectors.Add(selector.GetComponent<EmbeddedObjectSelector>());
+            selector.GetComponent<EmbeddedObjectSelector>().embeddedObject = embeddedObject;
+        }
+        else
+        {
+            GameObject selector = GameObject.Instantiate(selectorPrefab, notPartOfMainPanel.transform);
+            embeddedObjectSelectors.Add(selector.GetComponent<EmbeddedObjectSelector>());
+            selector.GetComponent<EmbeddedObjectSelector>().embeddedObject = embeddedObject;
+        }
     }
 
     public void ResetSelectors()
     {
         ClearAllSelectors();
-        BodyPart selectedBodyPart = FindObjectOfType<ButtonActions>().selectedBodyPart;
+        GameObject selectedGameObject = FindObjectOfType<ButtonActions>().selectedGameObject;
 
-        //make new bodypart selectors
-        foreach (EmbeddedObject embeddedObject in selectedBodyPart.embeddedObjects)
+        //make selector for each embeddedobject in currently selected bodypart
+        if (!(selectedGameObject.GetComponent<BodyPart>() is null))
         {
-             NewEmbeddedObject(embeddedObject);
+            foreach (EmbeddedObject embeddedObject in selectedGameObject.GetComponent<BodyPart>().embeddedObjects)
+            {
+                NewEmbeddedObject(embeddedObject);
+            }
         }
+
+        //make selector if currently selected object is an embeddedobject
+        else if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
+        {
+            NewEmbeddedObject(selectedGameObject.GetComponent<EmbeddedObject>());
+        }
+
+        //make selector for all embeddedobjects not currently embedded in something
+        foreach (EmbeddedObject embeddedObject in FindObjectsOfType<EmbeddedObject>())
+        {
+            if (embeddedObject.parentBodyPart is null)
+            {
+                NewEmbeddedObject(embeddedObject);
+            }
+        }
+
+
     }
 
     private void ClearAllSelectors()

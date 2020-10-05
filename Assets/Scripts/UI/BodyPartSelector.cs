@@ -37,7 +37,7 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        buttonActions.selectedBodyPart = bodyPart;
+        buttonActions.selectedGameObject = bodyPart.gameObject;
         bodyPartSelectorManager.ResetSelectors();
         embeddedObjectSelectorManager.ResetSelectors();
         buttonActions.ClearAllButtons();

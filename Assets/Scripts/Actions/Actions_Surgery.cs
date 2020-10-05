@@ -26,7 +26,7 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            bodyPartObject.GetComponent<BodyPart>().SeverAllConnections();
+            bodyPartObject.SeverAllConnections();
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
@@ -56,12 +56,49 @@ public static class Actions_Surgery
         if (!clock.actionCancelFlag)
         {
             //disconnect
-            organObject.GetComponent<Organ>().SeverAllConnections();
+            organObject.SeverAllConnections();
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             UpdateAllBodyPartHeartConnections();
 
             //remove from being child of bodypart
             organObject.transform.SetParent(organObject.transform.parent.parent);
+
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+
+        }
+
+    }
+
+    public static void RemoveEmbeddedObject(EmbeddedObject embeddedObject, float seconds, int goldCost)
+    {
+        StaticCoroutine.Start(RemoveEmbeddedObjectCoroutine(embeddedObject, seconds, goldCost));
+    }
+
+    public static IEnumerator RemoveEmbeddedObjectCoroutine(EmbeddedObject embeddedObject, float seconds, int goldCost)
+    {
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
+
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        buttonActions.ActionInProgress();
+        while (clock.isTimePassing)
+        {
+            yield return null;
+        }
+        buttonActions.ActionFinished();
+        if (!clock.actionCancelFlag)
+        {
+            //disconnect
+            embeddedObject.parentBodyPart.embeddedObjects.Remove(embeddedObject);
+            embeddedObject.parentBodyPart = null;
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            UpdateAllBodyPartHeartConnections();
+
+            //remove from being child of bodypart
+            embeddedObject.transform.SetParent(MonoBehaviour.FindObjectOfType<EmbeddedObjectSelectorManager>().transform);
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
@@ -105,6 +142,50 @@ public static class Actions_Surgery
 
             //make organ child of bodypart
             organ.transform.SetParent(bodyPart.transform);
+
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+
+        }
+
+    }
+
+    public static void EmbedObject(EmbeddedObject embeddedObject, BodyPart bodyPart, float seconds, int goldCost)
+    {
+
+        if (!(embeddedObject.parentBodyPart is null))
+        {
+            Debug.Log("That object is already inside something! Don't do that!");
+            return;
+        }
+
+        StaticCoroutine.Start(EmbedObjectCoroutine(embeddedObject, bodyPart, seconds, goldCost));
+    }
+
+    public static IEnumerator EmbedObjectCoroutine(EmbeddedObject embeddedObject, BodyPart bodyPart, float seconds, int goldCost)
+    {
+        Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
+        clock.StartClockUntil(seconds);
+
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        buttonActions.ActionInProgress();
+        while (clock.isTimePassing)
+        {
+            yield return null;
+        }
+        buttonActions.ActionFinished();
+        if (!clock.actionCancelFlag)
+        {
+            //connect
+            bodyPart.embeddedObjects.Add(embeddedObject);
+            embeddedObject.parentBodyPart = bodyPart;
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            UpdateAllBodyPartHeartConnections();
+
+            //make organ child of bodypart
+            embeddedObject.transform.SetParent(bodyPart.transform);
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;

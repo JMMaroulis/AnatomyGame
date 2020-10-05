@@ -10,7 +10,7 @@ public class ButtonActions : MonoBehaviour
 
     public Button cancelActionButton;
 
-    public BodyPart selectedBodyPart = null;
+    public GameObject selectedGameObject = null;
     public GameObject body;
 
     public TextLog textLog;
@@ -54,12 +54,12 @@ public class ButtonActions : MonoBehaviour
     {
 
         //update bodypart examination textbox every x seconds
-        if (selectedBodyPart)
+        if (selectedGameObject)
         {
             secondCounter += Time.unscaledDeltaTime;
             if(secondCounter >= 0.3f || examineBox.text == "")
             {
-                ExamineSelectedBodyPart();
+                ExamineSelectedGameObject();
                 secondCounter = 0.0f;
             }
         }        
@@ -98,6 +98,7 @@ public class ButtonActions : MonoBehaviour
         cancelActionButton.interactable = false;
     }
 
+    //set as onclick in editor
     public void CancelAction()
     {
         clock.StopClock();
@@ -163,17 +164,22 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
+    //set as onclick in editor
     public void SelectSurgeryAction()
     {
-        if (selectedBodyPart is null)
+        if (selectedGameObject is null)
         {
             textLog.NewLogEntry("Please select an organ or limb.");
         }
-        else if (selectedBodyPart is Organ)
+        else if (!(selectedGameObject.GetComponent<Organ>() is null))
         {
             SelectSurgeryActionOptions_Organ();
         }
-        else if (selectedBodyPart is BodyPart)
+        else if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
+        {
+            SelectSurgeryActionOptions_EmbeddedObject();
+        }
+        else if (!(selectedGameObject.GetComponent<BodyPart>() is null))
         {
             SelectSurgeryActionOptions_BodyPart();
         }
@@ -183,20 +189,33 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        AssignRemoveBodyPartButton(menuButtons[0], selectedBodyPart);
-        AssignAttachBodyPartButton(menuButtons[1], selectedBodyPart);
-        AssignDestroyBodyPart(menuButtons[2], selectedBodyPart);
+        AssignRemoveBodyPartButton(menuButtons[0], selectedGameObject.GetComponent<BodyPart>());
+        AssignAttachBodyPartButton(menuButtons[1], selectedGameObject.GetComponent<BodyPart>());
+        AssignDestroyBodyPart(menuButtons[2], selectedGameObject.GetComponent<BodyPart>());
     }
 
     public void SelectSurgeryActionOptions_Organ()
     {
         ClearAllButtons();
 
-        AssignRemoveOrganButton(menuButtons[0], (Organ)selectedBodyPart);
+        AssignRemoveOrganButton(menuButtons[0], (Organ)selectedGameObject.GetComponent<BodyPart>());
         AssignImplantOrganOptions(menuButtons[1]);
-        AssignDestroyOrgan(menuButtons[2], (Organ)selectedBodyPart);
+        AssignDestroyOrgan(menuButtons[2], (Organ)selectedGameObject.GetComponent<BodyPart>());
     }
 
+    public void SelectSurgeryActionOptions_EmbeddedObject()
+    {
+        ClearAllButtons();
+
+        Debug.Log("AAAAA");
+
+        AssignRemoveEmbeddedObjectButton(menuButtons[0], selectedGameObject.GetComponent<EmbeddedObject>());
+        AssignImplantEmbeddedObjectOptions(menuButtons[1]);
+        //AssignDestroyEmbeddedObject(menuButtons[2], selectedGameObject.GetComponent<EmbeddedObject>());
+    }
+
+
+    //set as onclick in editor
     public void SelectWaitActionOptions()
     {
         ClearAllButtons();
@@ -210,19 +229,24 @@ public class ButtonActions : MonoBehaviour
         AssignWaitOneHour(menuButtons[6]);
     }
 
+    //set as onclick in editor
     public void SelectBloodAction()
     {
-        if (selectedBodyPart is null)
+        if (selectedGameObject is null)
         {
             textLog.NewLogEntry("Please select an organ or limb.");
         }
-        else if (selectedBodyPart is Organ)
+        else if (selectedGameObject.GetComponent<BodyPart>() is Organ)
         {
             SelectBloodActionOptions_Organ();
         }
-        else if (selectedBodyPart is BodyPart)
+        else if (!(selectedGameObject.GetComponent<BodyPart>() is null))
         {
             SelectBloodActionOptions_BodyPart();
+        }
+        else if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
+        {
+            SelectBloodActionOptions_EmbeddedObject();
         }
     }
 
@@ -230,33 +254,47 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        AssignBandagesButton(menuButtons[0], selectedBodyPart);
-        AssignBloodlettingButton(menuButtons[1], selectedBodyPart);
-        AssignAddBloodButton(menuButtons[2], selectedBodyPart);
-        AssignRemoveBloodButton(menuButtons[3], selectedBodyPart);
+        AssignBandagesButton(menuButtons[0], selectedGameObject.GetComponent<BodyPart>());
+        AssignBloodlettingButton(menuButtons[1], selectedGameObject.GetComponent<BodyPart>());
+        AssignAddBloodButton(menuButtons[2], selectedGameObject.GetComponent<BodyPart>());
+        AssignRemoveBloodButton(menuButtons[3], selectedGameObject.GetComponent<BodyPart>());
     }
 
     public void SelectBloodActionOptions_Organ()
     {
         ClearAllButtons();
 
-        AssignAddBloodButton(menuButtons[0], selectedBodyPart);
-        AssignRemoveBloodButton(menuButtons[1], selectedBodyPart);
+        AssignAddBloodButton(menuButtons[0], selectedGameObject.GetComponent<BodyPart>());
+        AssignRemoveBloodButton(menuButtons[1], selectedGameObject.GetComponent<BodyPart>());
     }
 
+    public void SelectBloodActionOptions_EmbeddedObject()
+    {
+        ClearAllButtons();
+
+        Debug.Log("AAAAA");
+    }
+
+
+
+    //set as onclick in editor
     public void SelectMedicineAction()
     {
-        if (selectedBodyPart is null)
+        if (selectedGameObject is null)
         {
             textLog.NewLogEntry("Please select an organ or limb.");
         }
-        else if (selectedBodyPart is Organ)
+        else if (selectedGameObject.GetComponent<BodyPart>() is Organ)
         {
             SelectMedicineActionOptions_Organ();
         }
-        else if (selectedBodyPart is BodyPart)
+        else if (!(selectedGameObject.GetComponent<BodyPart>() is null))
         {
             SelectMedicineActionOptions_BodyPart();
+        }
+        else if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
+        {
+            SelectMedicineActionOptions_EmbeddedObject();
         }
     }
 
@@ -265,20 +303,20 @@ public class ButtonActions : MonoBehaviour
         ClearAllButtons();
         int n = 0;
 
-        AssignInjectHealthPotionButton(menuButtons[n], selectedBodyPart); n++;
+        AssignInjectHealthPotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         if (unlocks.medicine_blood) 
         {
-            AssignInjectCoagulantPotionButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectCoagulantPotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.medicine_poison) 
         {
-            AssignInjectAntidoteButton(menuButtons[n], selectedBodyPart); n++;
-            AssignInjectSlowPoisonButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectAntidoteButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
+            AssignInjectSlowPoisonButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.medicine_speed)
         {
-            AssignInjectStasisPotionButton(menuButtons[n], selectedBodyPart); n++;
-            AssignInjectHastePotionButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectStasisPotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
+            AssignInjectHastePotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
  
     }
@@ -288,37 +326,50 @@ public class ButtonActions : MonoBehaviour
         ClearAllButtons();
         int n = 0;
 
-        AssignInjectHealthPotionButton(menuButtons[n], selectedBodyPart); n++;
+        AssignInjectHealthPotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         if (unlocks.medicine_blood)
         {
-            AssignInjectCoagulantPotionButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectCoagulantPotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.medicine_poison)
         {
-            AssignInjectAntidoteButton(menuButtons[n], selectedBodyPart); n++;
-            AssignInjectSlowPoisonButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectAntidoteButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
+            AssignInjectSlowPoisonButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.medicine_speed)
         {
-            AssignInjectStasisPotionButton(menuButtons[n], selectedBodyPart); n++;
-            AssignInjectHastePotionButton(menuButtons[n], selectedBodyPart); n++;
+            AssignInjectStasisPotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
+            AssignInjectHastePotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
     }
 
+    public void SelectMedicineActionOptions_EmbeddedObject()
+    {
+        ClearAllButtons();
+
+        Debug.Log("AAAAA");
+    }
+
+    //set as onclick in editor
     public void SelectCharmAction()
     {
-        if (selectedBodyPart is null)
+        if (selectedGameObject is null)
         {
             textLog.NewLogEntry("Please select an organ or limb.");
         }
-        else if (selectedBodyPart is Organ)
+        else if (selectedGameObject.GetComponent<BodyPart>() is Organ)
         {
             SelectCharmActionOptions_Organ();
         }
-        else if (selectedBodyPart is BodyPart)
+        else if (!(selectedGameObject.GetComponent<BodyPart>() is null))
         {
             SelectCharmActionOptions_BodyPart();
         }
+        else if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
+        {
+            SelectCharmActionOptions_EmbeddedObject();
+        }
+
     }
 
     public void SelectCharmActionOptions_BodyPart()
@@ -327,19 +378,19 @@ public class ButtonActions : MonoBehaviour
         ClearAllButtons();
         if (unlocks.charms_heart)
         {
-            AssignApplyHeartCharm(menuButtons[n], selectedBodyPart); n++;
+            AssignApplyHeartCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.charms_lung)
         {
-            AssignApplyLungCharm(menuButtons[n], selectedBodyPart); n++;
+            AssignApplyLungCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.charms_blood_regen)
         {
-            AssignApplyBloodRegenCharm(menuButtons[n], selectedBodyPart); n++;
+            AssignApplyBloodRegenCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.charms_petrification)
         {
-            AssignApplyPetrificationCharm(menuButtons[n], selectedBodyPart); n++;
+            AssignApplyPetrificationCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
     }
 
@@ -349,20 +400,27 @@ public class ButtonActions : MonoBehaviour
         ClearAllButtons();
         if (unlocks.charms_heart)
         {
-            AssignApplyHeartCharm(menuButtons[n], selectedBodyPart); n++;
+            AssignApplyHeartCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.charms_lung)
         {
-            AssignApplyLungCharm(menuButtons[n], selectedBodyPart); n++;
+            AssignApplyLungCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.charms_blood_regen)
         {
-            AssignApplyBloodRegenCharm(menuButtons[n], selectedBodyPart); n++;
+            AssignApplyBloodRegenCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
         if (unlocks.charms_petrification)
         {
-            AssignApplyPetrificationCharm(menuButtons[n], selectedBodyPart); n++;
+            AssignApplyPetrificationCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
         }
+    }
+
+    public void SelectCharmActionOptions_EmbeddedObject()
+    {
+        ClearAllButtons();
+
+        Debug.Log("AAAAA");
     }
 
     #region Selection
@@ -380,7 +438,7 @@ public class ButtonActions : MonoBehaviour
     //select a given bodypart
     void SelectBodyPart(BodyPart bodyPart)
     {
-        selectedBodyPart = bodyPart;
+        selectedGameObject = bodyPart.gameObject;
         FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
     }
 
@@ -404,6 +462,7 @@ public class ButtonActions : MonoBehaviour
     #endregion
 
 
+    //set as onclick in editor
     public void SelectSpawnOrganActionOptions()
     {
         ClearAllButtons();
@@ -418,6 +477,7 @@ public class ButtonActions : MonoBehaviour
         AssignSpawnStomachButton(menuButtons[7]);
     }
 
+    //set as onclick in editor
     public void SelectSpawnBodyPartActionOptions()
     {
         ClearAllButtons();
@@ -1000,10 +1060,10 @@ public class ButtonActions : MonoBehaviour
             Button menuButton = menuButtons[menuCount];
             BodyPart bodyPartToAttach = bodyPartManager.bodyParts[bodyPartMenuCounter];
 
-            if( !selectedBodyPart.connectedBodyParts.Contains(bodyPartToAttach) 
-                && !bodyPartToAttach.connectedBodyParts.Contains(selectedBodyPart) 
-                && bodyPartToAttach.CheckConnectionValidity(selectedBodyPart) 
-                && selectedBodyPart.CheckConnectionValidity(bodyPartToAttach))
+            if(    !selectedGameObject.GetComponent<BodyPart>().connectedBodyParts.Contains(bodyPartToAttach) 
+                && !bodyPartToAttach.connectedBodyParts.Contains(selectedGameObject.GetComponent<BodyPart>()) 
+                && bodyPartToAttach.CheckConnectionValidity(selectedGameObject.GetComponent<BodyPart>()) 
+                && selectedGameObject.GetComponent<BodyPart>().CheckConnectionValidity(bodyPartToAttach))
             {
                 //assign button to connect chosen with selected, then go back to default
                 AssignConnectTwoBodyParts(bodypart, bodyPartToAttach, menuButton);
@@ -1065,8 +1125,8 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Surgery.DeleteBodyPart(selectedBodyPart, seconds, goldCost);
-                textLog.NewLogEntry($"Destroying the {bodypart.name}..."); selectedBodyPart = null;
+                Actions_Surgery.DeleteBodyPart(selectedGameObject.GetComponent<BodyPart>(), seconds, goldCost);
+                textLog.NewLogEntry($"Destroying the {bodypart.name}..."); selectedGameObject = null;
                 actionTimeBar.Reset(seconds);
             }
         };
@@ -1091,7 +1151,7 @@ public class ButtonActions : MonoBehaviour
     {
         UnityEngine.Events.UnityAction action = () =>
         {
-            if (!(selectedBodyPart is Organ))
+            if (selectedGameObject.GetComponent<Organ>() is null)
             {
                 textLog.NewLogEntry("You need to select something for that!");
             }
@@ -1107,6 +1167,26 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = $"Implant organ into...";
     }
 
+    public void AssignImplantEmbeddedObjectOptions(Button button)
+    {
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if (selectedGameObject.GetComponent<EmbeddedObject>() is null)
+            {
+                textLog.NewLogEntry("You need to select something for that!");
+            }
+            else
+            {
+                ImplantEmbeddedObjectOptions(true);
+            }
+        };
+
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Implant embedded object into...";
+    }
+
     public void ImplantOrganOptions(bool firstClick = true)
     {
         ClearAllButtons();
@@ -1120,14 +1200,14 @@ public class ButtonActions : MonoBehaviour
         int numBodyParts = bodyPartManager.bodyParts.Count();
         int countStart = bodyPartMenuCounter;
         int menuCount = 0;
-        while (menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyPartManager.bodyParts.Count())
+        while (menuCount < menuButtons.Count()-1 && bodyPartMenuCounter < bodyPartManager.bodyParts.Count()-1)
         {
             BodyPart bodyPart = bodyPartManager.bodyParts[bodyPartMenuCounter];
 
-            if (bodyPart.CheckImplantValidity((Organ)selectedBodyPart))
+            if (bodyPart.CheckImplantValidity((Organ)selectedGameObject.GetComponent<BodyPart>()))
             {
                 //select bodypart
-                AssignImplantOrganButton(menuButtons[menuCount], bodyPart, (Organ)selectedBodyPart);
+                AssignImplantOrganButton(menuButtons[menuCount], bodyPart, (Organ)selectedGameObject.GetComponent<BodyPart>());
                 menuCount += 1;
             }
 
@@ -1139,6 +1219,43 @@ public class ButtonActions : MonoBehaviour
         {
             //more bodyparts button
             UnityEngine.Events.UnityAction action = () => { ImplantOrganOptions(false); };
+            menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
+            menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
+        }
+    }
+
+    public void ImplantEmbeddedObjectOptions(bool firstClick = true)
+    {
+        ClearAllButtons();
+        if (firstClick)
+        {
+            bodyPartMenuCounter = 0;
+        }
+
+        //put bodyparts on first 7 buttons
+        //TODO: Order this list somehow. Alphabetically, maybe?
+        int numBodyParts = bodyPartManager.bodyParts.Count();
+        int countStart = bodyPartMenuCounter;
+        int menuCount = 0;
+        while (menuCount < menuButtons.Count()-1 && bodyPartMenuCounter < bodyPartManager.bodyParts.Count()-1)
+        {
+            BodyPart bodyPart = bodyPartManager.bodyParts[bodyPartMenuCounter];
+
+            if (bodyPart.CheckEmbeddedObjectValidity(selectedGameObject.GetComponent<EmbeddedObject>()))
+            {
+                //select bodypart
+                AssignEmbedObjectButton(menuButtons[menuCount], bodyPart, selectedGameObject.GetComponent<EmbeddedObject>());
+                menuCount += 1;
+            }
+
+            bodyPartMenuCounter += 1;
+
+        }
+
+        if (bodyPartMenuCounter < numBodyParts)
+        {
+            //more bodyparts button
+            UnityEngine.Events.UnityAction action = () => { ImplantEmbeddedObjectOptions(false); };
             menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
             menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
         }
@@ -1182,6 +1299,44 @@ public class ButtonActions : MonoBehaviour
         mouseOverText.text = "Implants the selected organ into the selected bodypart.";
     }
 
+    void AssignEmbedObjectButton(Button button, BodyPart bodypart, EmbeddedObject embeddedObject)
+    {
+        float seconds = 60.0f * 10.0f;
+        int goldCost = 0;
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if (bodypart == null || embeddedObject == null)
+            {
+                textLog.NewLogEntry("You need to select both a bodypart and an organ for that!");
+            }
+            else if (bodypart.embeddedObjects.Contains(embeddedObject))
+            {
+                textLog.NewLogEntry("The organ is already in there!");
+            }
+            else if (!(embeddedObject.parentBodyPart is null))
+            {
+                textLog.NewLogEntry("The organ is already inside something else!");
+            }
+            else
+            {
+                Actions_Surgery.EmbedObject(embeddedObject, bodypart, seconds, goldCost);
+                textLog.NewLogEntry($"Implanting the {embeddedObject.name} into the {bodypart.name}...");
+                actionTimeBar.Reset(seconds);
+            }
+        };
+
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Implant {embeddedObject.name} into {bodypart.name}: {seconds} seconds, {goldCost} gold";
+
+        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
+        mouseover.mouseoverEnabled = true;
+        mouseover.ResetTimer();
+        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        mouseOverText.text = "Implants the selected organ into the selected bodypart.";
+    }
+
     void AssignRemoveOrganButton(Button button, Organ organ)
     {
         float seconds = 10 * 60.0f;
@@ -1212,6 +1367,36 @@ public class ButtonActions : MonoBehaviour
         mouseOverText.text = "Removes the selected organ from the containing bodypart.";
     }
 
+    void AssignRemoveEmbeddedObjectButton(Button button, EmbeddedObject embeddedObject)
+    {
+        float seconds = 10 * 60.0f;
+        int goldCost = 0;
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if (embeddedObject == null)
+            {
+                textLog.NewLogEntry("You need to select an embedded object for that!");
+            }
+            else
+            {
+                Actions_Surgery.RemoveEmbeddedObject(embeddedObject, seconds, goldCost);
+                textLog.NewLogEntry($"Extracting the {embeddedObject.name}...");
+                actionTimeBar.Reset(seconds);
+            }
+        };
+
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Extract Embedded Object: {seconds} seconds, {goldCost} gold";
+
+        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
+        mouseover.mouseoverEnabled = true;
+        mouseover.ResetTimer();
+        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        mouseOverText.text = "Removes the selected embedded object from the containing bodypart.";
+    }
+
     void AssignDestroyOrgan(Button button, Organ organ)
     {
         float seconds = 10 * 60.0f;
@@ -1230,7 +1415,7 @@ public class ButtonActions : MonoBehaviour
             {
                 Actions_Surgery.DeleteBodyPart(organ, seconds, goldCost);
                 textLog.NewLogEntry($"Destroying the {organ.name}...");
-                selectedBodyPart = null; actionTimeBar.Reset(seconds);
+                selectedGameObject = null; actionTimeBar.Reset(seconds);
             }
         };
 
@@ -1250,15 +1435,19 @@ public class ButtonActions : MonoBehaviour
 
     #region Examine
 
-    public void ExamineSelectedBodyPart()
+    public void ExamineSelectedGameObject()
     {
-        if (selectedBodyPart == null)
+        if (selectedGameObject == null)
         {
             examineBox.text = "You need to select a something for that!";
         }
-        else
+        else if(!(selectedGameObject.GetComponent<BodyPart>() is null))
         {
-            examineBox.text = selectedBodyPart.GenerateDescription();
+            examineBox.text = selectedGameObject.GetComponent<BodyPart>().GenerateDescription();
+        }
+        else if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
+        {
+            examineBox.text = selectedGameObject.GetComponent<EmbeddedObject>().GenerateDescription();
         }
     }
 

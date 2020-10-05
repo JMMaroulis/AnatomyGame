@@ -23,4 +23,9 @@ public class EmbeddedObject : MonoBehaviour
         parentBodyPart = null;
     }
 
+    public string GenerateDescription()
+    {
+        return "This is an embedded object!";
+    }
+
 }

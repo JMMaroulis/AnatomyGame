@@ -162,7 +162,7 @@ public class BodyPartSelectorManager : MonoBehaviour
     public void ResetSelectors()
     {
         ClearAllSelectors();
-        BodyPart selectedBodyPart = FindObjectOfType<ButtonActions>().selectedBodyPart;
+        BodyPart selectedBodyPart = FindObjectOfType<ButtonActions>().selectedGameObject.GetComponent<BodyPart>();
 
         //organ selectors for external organs, and organs inside selected bodypart
         foreach (Organ organ in FindObjectsOfType<Organ>())

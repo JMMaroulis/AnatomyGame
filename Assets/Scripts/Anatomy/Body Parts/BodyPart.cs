@@ -479,6 +479,11 @@ public class BodyPart : MonoBehaviour
         return false;
     }
 
+    public bool CheckEmbeddedObjectValidity(EmbeddedObject embeddedObject)
+    {
+        return true;
+    }
+
     public void UpdateEfficiency()
     {
         IsConnectedToBrainStarter();
