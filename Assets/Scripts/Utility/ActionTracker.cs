@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//TODO: Actually maintain this; it's not actually used by anything at the moment, so it's fine. If it is, though, chances are it's wildy out of date.
+
 public class ActionTracker : MonoBehaviour
 {
     public int blood_injected;
@@ -11,6 +13,8 @@ public class ActionTracker : MonoBehaviour
     public int surgery_organremovals;
     public int surgery_organtransplant;
     public int surgery_destroyed;
+    public int surgery_implants;
+    public int surgery_remove_implants;
     public int spawn_spawned;
     public int medicine_health;
     public int medicine_antidote;
@@ -32,6 +36,8 @@ public class ActionTracker : MonoBehaviour
     public int levelstart_surgery_organremovals;
     public int levelstart_surgery_organtransplant;
     public int levelstart_surgery_destroyed;
+    public int levelstart_surgery_implants;
+    public int levelstart_surgery_remove_implants;
     public int levelstart_spawn_spawned;
     public int levelstart_medicine_health;
     public int levelstart_medicine_antidote;
@@ -48,26 +54,29 @@ public class ActionTracker : MonoBehaviour
     {
         string output = "";
 
-        output += "Blood injected: ${blood_injected} units\n";
-        output += "Blood extracted: ${blood_extracted}\n";
-        output += "Bandages applied: ${blood_bandages}\n";
-        output += "Blood lettings: ${ blood_lettings}\n";
-        output += "Limb amputations: ${ surgery_amputations}\n";
-        output += "Limb attatchments:${ surgery_attachments}\n";
-        output += "Organs removed: ${ surgery_organremovals}\n";
-        output += "Organs transplanted: ${ surgery_organtransplant}\n";
-        output += "Body parts destroyed: ${ surgery_destroyed}\n";
-        output += "Body parts ordered: ${ spawn_spawned}\n";
-        output += "Health potion injected: ${ medicine_health}\n";
-        output += "Antidote injected: ${ medicine_antidote}\n";
-        output += "Slow poison injected: ${ medicine_slowpoison}\n";
-        output += "Stasis potion injected: ${ medicine_stasis}\n";
-        output += "Haste potion injected: ${ medicine_haste}\n";
-        output += "Coagulant potion injected: ${ medicine_coagulant}\n";
-        output += "Heart charms applied: ${ charm_heart}\n";
-        output += "Lung charms applied: ${ charm_lung}\n";
-        output += "Petrification charms applied: ${ charm_petrification}\n";
-        output += "Blood regen charms applied: ${ charm_bloodregen}\n";
+        output += $"Blood injected: {blood_injected} units\n";
+        output += $"Blood extracted: {blood_extracted}\n";
+        output += $"Bandages applied: {blood_bandages}\n";
+        output += $"Blood lettings: { blood_lettings}\n";
+        output += $"Limb amputations: { surgery_amputations}\n";
+        output += $"Limb attatchments:{ surgery_attachments}\n";
+        output += $"Organs removed: { surgery_organremovals}\n";
+        output += $"Organs transplanted: { surgery_organtransplant}\n";
+        output += $"Body parts destroyed: { surgery_destroyed}\n";
+        output += $"Body parts ordered: { spawn_spawned}\n";
+        output += $"Health potion injected: { medicine_health}\n";
+        output += $"Antidote injected: { medicine_antidote}\n";
+        output += $"Slow poison injected: { medicine_slowpoison}\n";
+        output += $"Stasis potion injected: { medicine_stasis}\n";
+        output += $"Haste potion injected: { medicine_haste}\n";
+        output += $"Coagulant potion injected: { medicine_coagulant}\n";
+        output += $"Heart charms applied: { charm_heart}\n";
+        output += $"Lung charms applied: { charm_lung}\n";
+        output += $"Petrification charms applied: { charm_petrification}\n";
+        output += $"Blood regen charms applied: { charm_bloodregen}\n";
+        output += $"Objects implanted: ${ surgery_implants}\n";
+        output += $"Objects removed: ${ surgery_remove_implants}\n";
+
 
         return output;
     }
@@ -83,6 +92,8 @@ public class ActionTracker : MonoBehaviour
         levelstart_surgery_organremovals = surgery_organremovals;
         levelstart_surgery_organtransplant = surgery_organtransplant;
         levelstart_surgery_destroyed = surgery_destroyed;
+        levelstart_surgery_implants = surgery_implants;
+        levelstart_surgery_remove_implants = surgery_remove_implants;
         levelstart_spawn_spawned = spawn_spawned;
         levelstart_medicine_health = medicine_health;
         levelstart_medicine_antidote = medicine_antidote;
@@ -107,6 +118,8 @@ public class ActionTracker : MonoBehaviour
         surgery_organremovals = levelstart_surgery_organremovals;
         surgery_organtransplant = levelstart_surgery_organtransplant;
         surgery_destroyed = levelstart_surgery_destroyed;
+        surgery_remove_implants = levelstart_surgery_remove_implants;
+        surgery_implants = levelstart_surgery_implants;
         spawn_spawned = levelstart_spawn_spawned;
         medicine_health = levelstart_medicine_health;
         medicine_antidote = levelstart_medicine_antidote;

@@ -91,8 +91,7 @@ public static class Actions_Surgery
         if (!clock.actionCancelFlag)
         {
             //disconnect
-            embeddedObject.parentBodyPart.embeddedObjects.Remove(embeddedObject);
-            embeddedObject.parentBodyPart = null;
+            embeddedObject.Remove();
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
             UpdateAllBodyPartHeartConnections();
@@ -100,7 +99,7 @@ public static class Actions_Surgery
             //remove from being child of bodypart
             embeddedObject.transform.SetParent(MonoBehaviour.FindObjectOfType<EmbeddedObjectSelectorManager>().transform);
 
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_remove_implants += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
 
         }
@@ -150,7 +149,7 @@ public static class Actions_Surgery
 
     }
 
-    public static void EmbedObject(EmbeddedObject embeddedObject, BodyPart bodyPart, float seconds, int goldCost)
+    public static void EmbedObject(EmbeddedObject embeddedObject, BodyPart bodypart, float seconds, int goldCost)
     {
 
         if (!(embeddedObject.parentBodyPart is null))
@@ -159,10 +158,16 @@ public static class Actions_Surgery
             return;
         }
 
-        StaticCoroutine.Start(EmbedObjectCoroutine(embeddedObject, bodyPart, seconds, goldCost));
+        if (!embeddedObject.EmbedValidity(bodypart))
+        {
+            Debug.Log("That is not a valid bodypart to implant that object into!");
+            return;
+        }
+
+        StaticCoroutine.Start(EmbedObjectCoroutine(embeddedObject, bodypart, seconds, goldCost));
     }
 
-    public static IEnumerator EmbedObjectCoroutine(EmbeddedObject embeddedObject, BodyPart bodyPart, float seconds, int goldCost)
+    public static IEnumerator EmbedObjectCoroutine(EmbeddedObject embeddedObject, BodyPart bodypart, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -178,16 +183,12 @@ public static class Actions_Surgery
         if (!clock.actionCancelFlag)
         {
             //connect
-            bodyPart.embeddedObjects.Add(embeddedObject);
-            embeddedObject.parentBodyPart = bodyPart;
+            embeddedObject.Embed(bodypart);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
             UpdateAllBodyPartHeartConnections();
 
-            //make organ child of bodypart
-            embeddedObject.transform.SetParent(bodyPart.transform);
-
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_implants += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
 
         }

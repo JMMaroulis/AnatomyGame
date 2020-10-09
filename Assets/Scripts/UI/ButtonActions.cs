@@ -1307,15 +1307,15 @@ public class ButtonActions : MonoBehaviour
         {
             if (bodypart == null || embeddedObject == null)
             {
-                textLog.NewLogEntry("You need to select both a bodypart and an organ for that!");
+                textLog.NewLogEntry("You need to select both a bodypart and an object for that!");
             }
             else if (bodypart.embeddedObjects.Contains(embeddedObject))
             {
-                textLog.NewLogEntry("The organ is already in there!");
+                textLog.NewLogEntry("The object is already in there!");
             }
             else if (!(embeddedObject.parentBodyPart is null))
             {
-                textLog.NewLogEntry("The organ is already inside something else!");
+                textLog.NewLogEntry("The object is already inside something else!");
             }
             else
             {

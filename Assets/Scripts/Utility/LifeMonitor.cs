@@ -217,6 +217,17 @@ public class LifeMonitor : MonoBehaviour
             }
         }
 
+        //check if there are any embedded objects in bodyparts
+        //(later, we'll probably want specific embedded objects to be acceptable)
+        foreach(EmbeddedObject embeddedObject in FindObjectsOfType<EmbeddedObject>())
+        {
+            if (!(embeddedObject.parentBodyPart is null))
+            {
+                textLog.NewLogEntry($"Something is embedded inside the {embeddedObject.parentBodyPart.name}.");
+                victory = false;
+            }
+        }
+
         hasPlayerWon = victory;
         if (victory)
         {

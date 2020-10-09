@@ -63,13 +63,7 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
                 NewEmbeddedObject(embeddedObject);
             }
         }
-
-        //make selector if currently selected object is an embeddedobject
-        else if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
-        {
-            NewEmbeddedObject(selectedGameObject.GetComponent<EmbeddedObject>());
-        }
-
+        
         //make selector for all embeddedobjects not currently embedded in something
         foreach (EmbeddedObject embeddedObject in FindObjectsOfType<EmbeddedObject>())
         {
