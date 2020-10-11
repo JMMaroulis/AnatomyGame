@@ -29,7 +29,10 @@ public static class Actions_Surgery
             bodyPartObject.SeverAllConnections();
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
             UpdateAllBodyPartHeartConnections();
         }
 
@@ -58,6 +61,8 @@ public static class Actions_Surgery
             //disconnect
             organObject.SeverAllConnections();
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
             UpdateAllBodyPartHeartConnections();
 
             //remove from being child of bodypart
@@ -94,6 +99,7 @@ public static class Actions_Surgery
             embeddedObject.Remove();
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
             UpdateAllBodyPartHeartConnections();
 
             //remove from being child of bodypart
@@ -137,6 +143,8 @@ public static class Actions_Surgery
             organ.CreateConnection(bodyPart);
             bodyPart.AddContainedOrgan(organ);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
             UpdateAllBodyPartHeartConnections();
 
             //make organ child of bodypart
@@ -186,6 +194,7 @@ public static class Actions_Surgery
             embeddedObject.Embed(bodypart);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
             UpdateAllBodyPartHeartConnections();
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_implants += 1;
@@ -217,8 +226,10 @@ public static class Actions_Surgery
         {
             bodyPart1.CreateConnection(bodyPart2);
             bodyPart2.CreateConnection(bodyPart1);
-            UpdateAllBodyPartHeartConnections();
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
+            UpdateAllBodyPartHeartConnections();
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_attachments += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
@@ -263,6 +274,8 @@ public static class Actions_Surgery
 
             GameObject.Destroy(bodyPart.gameObject);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
             UpdateAllBodyPartHeartConnections();
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_destroyed += 1;

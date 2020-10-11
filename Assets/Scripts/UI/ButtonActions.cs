@@ -75,6 +75,7 @@ public class ButtonActions : MonoBehaviour
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "";
             button.transform.GetComponentInChildren<MouseOver>().mouseoverEnabled = false;
             button.transform.GetComponentInChildren<MouseOver>().ResetTimer();
+            button.interactable = true;
         }
     }
 
@@ -189,28 +190,63 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
 
-        AssignRemoveBodyPartButton(menuButtons[0], selectedGameObject.GetComponent<BodyPart>());
-        AssignAttachBodyPartButton(menuButtons[1], selectedGameObject.GetComponent<BodyPart>());
-        AssignDestroyBodyPart(menuButtons[2], selectedGameObject.GetComponent<BodyPart>());
+        BodyPart bodypart = selectedGameObject.GetComponent<BodyPart>();
+
+        AssignRemoveBodyPartButton(menuButtons[0], bodypart);
+        if (bodypart.connectedBodyParts.Count() == 0)
+        {
+            menuButtons[0].interactable = false;
+        }
+
+        AssignAttachBodyPartButton(menuButtons[1], bodypart);
+        AssignDestroyBodyPart(menuButtons[2], bodypart);
+        if (bodypart.connectedBodyParts.Count() != 0)
+        {
+            menuButtons[2].interactable = false;
+        }
     }
 
     public void SelectSurgeryActionOptions_Organ()
     {
         ClearAllButtons();
+        Organ organ = (Organ)selectedGameObject.GetComponent<BodyPart>();
 
-        AssignRemoveOrganButton(menuButtons[0], (Organ)selectedGameObject.GetComponent<BodyPart>());
+        AssignRemoveOrganButton(menuButtons[0], organ);
+        if (organ.connectedBodyParts.Count() == 0)
+        {
+            menuButtons[0].interactable = false;
+        }
+
         AssignImplantOrganOptions(menuButtons[1]);
-        AssignDestroyOrgan(menuButtons[2], (Organ)selectedGameObject.GetComponent<BodyPart>());
+        if (organ.connectedBodyParts.Count() != 0)
+        {
+            menuButtons[1].interactable = false;
+        }
+
+        AssignDestroyOrgan(menuButtons[2], organ);
+        if (organ.connectedBodyParts.Count() != 0)
+        {
+            menuButtons[2].interactable = false;
+        }
     }
 
     public void SelectSurgeryActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
 
-        Debug.Log("AAAAA");
+        EmbeddedObject embeddedObject = selectedGameObject.GetComponent<EmbeddedObject>();
 
-        AssignRemoveEmbeddedObjectButton(menuButtons[0], selectedGameObject.GetComponent<EmbeddedObject>());
+        AssignRemoveEmbeddedObjectButton(menuButtons[0], embeddedObject);
+        if (embeddedObject.parentBodyPart is null)
+        {
+            menuButtons[0].interactable = false;
+        }
+
         AssignImplantEmbeddedObjectOptions(menuButtons[1]);
+        if (!(embeddedObject.parentBodyPart is null))
+        {
+            menuButtons[1].interactable = false;
+        }
         //AssignDestroyEmbeddedObject(menuButtons[2], selectedGameObject.GetComponent<EmbeddedObject>());
     }
 
@@ -1001,7 +1037,11 @@ public class ButtonActions : MonoBehaviour
             {
                 textLog.NewLogEntry("You need to select something for that!");
             }
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            else if (bodypart.connectedBodyParts.Count() == 0)
+            {
+                textLog.NewLogEntry("That isn't connected to anything!");
+            }
+            else if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
             {
                 textLog.NewLogEntry("insufficient funds.");
             }
@@ -1119,7 +1159,11 @@ public class ButtonActions : MonoBehaviour
             {
                 textLog.NewLogEntry("You need to select something for that!");
             }
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            else if (bodypart.connectedBodyParts.Count() != 0)
+            {
+                textLog.NewLogEntry("That bodypart is still connected to something!");
+            }
+            else if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
             {
                 textLog.NewLogEntry("insufficient funds.");
             }
