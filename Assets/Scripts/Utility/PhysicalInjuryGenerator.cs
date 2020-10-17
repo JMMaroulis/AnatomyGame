@@ -148,7 +148,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         break;
 
                     case 4:
-                        if (organ is Eye || organ is Stomach || organ is Liver || organ is Brain)
+                        if (organ is Eye || organ is Stomach || organ is Liver || organ is Brain || !(organ.gameObject.GetComponent<PetrificationCharm>() is null) )
                         {
                             i -= 1;
                             break;
@@ -296,6 +296,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         }
 
         GameObject newBullet = Instantiate(bullet);
+        newBullet.name = "Bullet";
         newBullet.GetComponent<Bullet>().Embed(bodyPart);
     }
 

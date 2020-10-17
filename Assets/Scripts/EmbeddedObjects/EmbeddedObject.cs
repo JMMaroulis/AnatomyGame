@@ -57,7 +57,20 @@ public class EmbeddedObject : MonoBehaviour
 
     public string GenerateDescription()
     {
-        return "This is an embedded object!";
+        string description = "";
+
+        description += $"Examining {this.gameObject.name}:";
+
+        if (parentBodyPart is null)
+        {
+            description += "\nLocation: External";
+        }
+        else
+        {
+            description += $"\nLocation: Embedded in {parentBodyPart.gameObject.name}";
+        }
+
+        return description;
     }
 
 }

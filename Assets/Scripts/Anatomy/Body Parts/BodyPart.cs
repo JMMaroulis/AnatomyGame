@@ -554,90 +554,63 @@ public class BodyPart : MonoBehaviour
 
         description += $"Examining {this.gameObject.name}:\n";
 
-        #region damage description
-        //add damage description
+
         description += $"Damage: {damage} / {damageMax}\n";
-        #endregion
 
-        #region blood description
-        //add blood description
         description += $"Blood: {blood} units, requires {bloodRequiredToFunction} to function.\n";
-        #endregion
 
-        #region blood loss description
-        //add blood description
         description += $"Losing {bloodLossRate} units of blood per second.\n";
-        #endregion
 
-        #region oxygen description
-        //add oxygen description
         description += $"Oxygen: {oxygen} / {oxygenMax}, requires {oxygenRequired} per second to function.\n";
-        #endregion
 
-        #region drugs description
-        //add health potion description
         if (healthPotion > 0.0f)
         {
             description += $"Health Potion: {healthPotion} Units.\n";
         }
 
-        //add antidote description
         if (antidote > 0.0f)
         {
             description += $"Antidote: {antidote} Units.\n";
         }
 
-        //add slow poison description
         if (slowPoison > 0.0f)
         {
             description += $"Slow Poison: {slowPoison} Units.\n";
         }
 
-        //add stasis potion description
         if (stasisPotion > 0.0f)
         {
             description += $"Stasis Potion: {stasisPotion} Units.\n";
         }
 
-        //add stasis potion description
         if (hastePotion > 0.0f)
         {
             description += $"Haste Potion: {hastePotion} Units.\n";
         }
 
-        //add coagulant potion description
         if (coagulantPotion > 0.0f)
         {
             description += $"Coagulant Potion: {coagulantPotion} Units.\n";
         }
-        #endregion
 
-        #region charms description
-        //add heart charm description
         if (this.GetComponent<HeartCharm>() != null)
         {
             HeartCharm heartCharm = this.GetComponent<HeartCharm>();
             description += $"Heart Charm: {heartCharm.expiryTime - heartCharm.timeElapsed} seconds remaining.\n";
         }
 
-        //add lung charm description
         if (this.GetComponent<LungCharm>() != null)
         {
             LungCharm lungCharm = this.GetComponent<LungCharm>();
             description += $"Lung Charm: {lungCharm.expiryTime - lungCharm.timeElapsed} seconds remaining.\n";
         }
 
-        //add petrification charm description
         if (this.GetComponent<PetrificationCharm>() != null)
         {
             PetrificationCharm petrificationCharm = this.GetComponent<PetrificationCharm>();
             description += $"Petrification Charm: {petrificationCharm.expiryTime - petrificationCharm.timeElapsed} seconds remaining.\n";
         }
 
-        #endregion
-
-        #region connections description
-        //add connections description
         description += "Connected to: ";
         for (int i = 0; i < connectedBodyParts.Count; i++)
         {
@@ -645,7 +618,6 @@ public class BodyPart : MonoBehaviour
             if (i != connectedBodyParts.Count - 1)
             { description += ", "; }
         }
-        #endregion
 
         return description;
 

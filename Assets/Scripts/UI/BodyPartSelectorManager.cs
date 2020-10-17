@@ -159,25 +159,37 @@ public class BodyPartSelectorManager : MonoBehaviour
         }
     }
 
-    public void ResetSelectors()
+    public void ResetSelectors(BodyPart selectedBodyPartOverride = null)
     {
         ClearAllSelectors();
-        BodyPart selectedBodyPart = FindObjectOfType<ButtonActions>().selectedGameObject.GetComponent<BodyPart>();
 
-        //organ selectors for external organs, and organs inside selected bodypart
-        foreach (Organ organ in FindObjectsOfType<Organ>())
+        BodyPart selectedBodyPart;
+        try
         {
-            BodyPart tempSelectedBodyPart = selectedBodyPart;
+            selectedBodyPart = selectedBodyPartOverride ?? FindObjectOfType<ButtonActions>().selectedGameObject.GetComponent<BodyPart>();
+        }
+        catch (System.Exception)
+        {
+            selectedBodyPart = null;
+        }
 
-            //if selected an organ, use parent bodypart for determining which organs to display
-            if (selectedBodyPart is Organ)
+        if (!(selectedBodyPart is null))
+        {
+            //organ selectors for external organs, and organs inside selected bodypart
+            foreach (Organ organ in FindObjectsOfType<Organ>())
             {
-                tempSelectedBodyPart = selectedBodyPart.connectedBodyParts[0];
-            }
+                BodyPart tempSelectedBodyPart = selectedBodyPart;
 
-            if (organ.connectedBodyParts.Count == 0 || organ.connectedBodyParts[0] == tempSelectedBodyPart)
-            {
-                NewOrgan(organ);
+                //if selected an organ, use parent bodypart for determining which organs to display
+                if (selectedBodyPart is Organ && selectedBodyPart.connectedBodyParts.Count() > 0)
+                {
+                    tempSelectedBodyPart = selectedBodyPart.connectedBodyParts[0];
+                }
+
+                if (organ.connectedBodyParts.Count == 0 || organ.connectedBodyParts[0] == tempSelectedBodyPart)
+                {
+                    NewOrgan(organ);
+                }
             }
         }
 

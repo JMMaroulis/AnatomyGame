@@ -159,6 +159,8 @@ MonoBehaviour:
   surgery_organremovals: 0
   surgery_organtransplant: 0
   surgery_destroyed: 0
+  surgery_implants: 0
+  surgery_remove_implants: 0
   spawn_spawned: 0
   medicine_health: 0
   medicine_antidote: 0
@@ -179,6 +181,8 @@ MonoBehaviour:
   levelstart_surgery_organremovals: 0
   levelstart_surgery_organtransplant: 0
   levelstart_surgery_destroyed: 0
+  levelstart_surgery_implants: 0
+  levelstart_surgery_remove_implants: 0
   levelstart_spawn_spawned: 0
   levelstart_medicine_health: 0
   levelstart_medicine_antidote: 0
@@ -638,7 +642,7 @@ MonoBehaviour:
   medicine_blood: 0
   charms_heart: 0
   charms_lung: 0
-  charms_petrification: 0
+  charms_petrification: 1
   charms_blood_regen: 0
   blood: 1
   spawn: 0

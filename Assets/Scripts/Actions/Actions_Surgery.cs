@@ -43,7 +43,7 @@ public static class Actions_Surgery
         StaticCoroutine.Start(RemoveOrganCoroutine(organObject, seconds, goldCost));
     }
 
-    public static IEnumerator RemoveOrganCoroutine(Organ organObject, float seconds, int goldCost)
+    public static IEnumerator RemoveOrganCoroutine(Organ organ, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -59,14 +59,15 @@ public static class Actions_Surgery
         if (!clock.actionCancelFlag)
         {
             //disconnect
-            organObject.SeverAllConnections();
-            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            BodyPart organParent = organ.connectedBodyParts[0];
+            organ.SeverAllConnections();
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors(organParent);
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
             UpdateAllBodyPartHeartConnections();
 
             //remove from being child of bodypart
-            organObject.transform.SetParent(organObject.transform.parent.parent);
+            organ.transform.SetParent(organ.transform.parent.parent);
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;

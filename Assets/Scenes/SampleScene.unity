@@ -641,7 +641,7 @@ PrefabInstance:
     - target: {fileID: 8312640732153975280, guid: 54bce29e8e62e4f4887583942e662fde,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8312640732153975280, guid: 54bce29e8e62e4f4887583942e662fde,
         type: 3}
@@ -3703,7 +3703,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 133.4, y: 75}
+  m_CellSize: {x: 125, y: 125}
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -4249,7 +4249,7 @@ RectTransform:
   - {fileID: 471428339}
   - {fileID: 450570104}
   m_Father: {fileID: 1627910456}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4421,7 +4421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000000001380399}
+  m_AnchoredPosition: {x: 0, y: 0.000030839637}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &844759055
@@ -7330,10 +7330,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 133.4, y: 75}
+  m_CellSize: {x: 125, y: 125}
   m_Spacing: {x: 5, y: 5}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!114 &1266759016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8592,8 +8592,8 @@ RectTransform:
   - {fileID: 2126252753}
   - {fileID: 1678832070}
   - {fileID: 323925263}
-  - {fileID: 626930742}
   - {fileID: 746780205}
+  - {fileID: 626930742}
   m_Father: {fileID: 1105771188}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
