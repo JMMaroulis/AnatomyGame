@@ -1726,13 +1726,20 @@ MonoBehaviour:
   - {fileID: 1265245172}
   - {fileID: 254215602}
   - {fileID: 383672841}
-  cancelActionButton: {fileID: 2126252754}
   selectedGameObject: {fileID: 0}
   body: {fileID: 965609865}
   textLog: {fileID: 746780209}
   examineBox: {fileID: 1043374667}
   lifeMonitor: {fileID: 714661424}
   actionTimeBar: {fileID: 1678832071}
+  bloodButton: {fileID: 1049714857}
+  surgeryButton: {fileID: 689218935}
+  medicineButton: {fileID: 993413400}
+  charmsButton: {fileID: 851796576}
+  spawnLimbButton: {fileID: 1265245172}
+  spawnOrganButton: {fileID: 254215602}
+  waitButton: {fileID: 383672841}
+  cancelActionButton: {fileID: 2126252754}
 --- !u!4 &374478781
 Transform:
   m_ObjectHideFlags: 0

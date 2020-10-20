@@ -8,7 +8,6 @@ public class ButtonActions : MonoBehaviour
     public List<Button> menuButtons;
     public List<Button> menuTabs;
 
-    public Button cancelActionButton;
 
     public GameObject selectedGameObject = null;
     public GameObject body;
@@ -28,6 +27,17 @@ public class ButtonActions : MonoBehaviour
     private float secondCounter;
     private BodyPartManager bodyPartManager;
 
+
+    public Button bloodButton;
+    public Button surgeryButton;
+    public Button medicineButton;
+    public Button charmsButton;
+    public Button spawnLimbButton;
+    public Button spawnOrganButton;
+    public Button waitButton;
+    public Button cancelActionButton;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,15 +49,24 @@ public class ButtonActions : MonoBehaviour
         examineBox.text = "";
         cancelActionButton.interactable = false;
 
-        //enable/disable button tabs based on unlocks
-        unlocks = FindObjectOfType<UnlockTracker>();
-        menuTabs[2].gameObject.SetActive(unlocks.blood);
-        menuTabs[3].gameObject.SetActive(unlocks.surgery);
-        //menuTabs[4].gameObject.SetActive(unlocks.medicine); //medicine permissions on individual level
-        menuTabs[5].gameObject.SetActive(unlocks.charms_petrification || unlocks.charms_heart || unlocks.charms_lung || unlocks.charms_blood_regen); //charm permissions on individual level
-        menuTabs[6].gameObject.SetActive(unlocks.spawn);
-        menuTabs[7].gameObject.SetActive(unlocks.spawn);
+        EnableMenuTabs();
+        UpdateMenuTabsInteractivity();
+
     }
+
+    //enable/disable button tabs based on unlocks
+    void EnableMenuTabs()
+    {
+        unlocks = FindObjectOfType<UnlockTracker>();
+        bloodButton.gameObject.SetActive(unlocks.blood);
+        surgeryButton.gameObject.SetActive(unlocks.surgery);
+        medicineButton.gameObject.SetActive(unlocks.medicine_blood || unlocks.medicine_poison || unlocks.medicine_speed); //medicine permissions on individual level
+        charmsButton.gameObject.SetActive(unlocks.charms_petrification || unlocks.charms_heart || unlocks.charms_lung || unlocks.charms_blood_regen); //charm permissions on individual level
+        spawnLimbButton.gameObject.SetActive(unlocks.spawn);
+        spawnOrganButton.gameObject.SetActive(unlocks.spawn);
+        waitButton.gameObject.SetActive(true);
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -66,6 +85,57 @@ public class ButtonActions : MonoBehaviour
 
     }
 
+    void UpdateMenuTabsInteractivity()
+    {
+        if (selectedGameObject == null)
+        {
+            bloodButton.interactable = false;
+            surgeryButton.interactable = false;
+            medicineButton.interactable = false;
+            charmsButton.interactable = false;
+            spawnLimbButton.interactable = true;
+            spawnOrganButton.interactable = true;
+            waitButton.interactable = true;
+            return;
+        }
+
+        else if (!(selectedGameObject.GetComponent<BodyPart>() is null) && (selectedGameObject.GetComponent<Organ>() is null))
+        {
+            bloodButton.interactable = true;
+            surgeryButton.interactable = true;
+            medicineButton.interactable = true;
+            charmsButton.interactable = true;
+            spawnLimbButton.interactable = true;
+            spawnOrganButton.interactable = true;
+            waitButton.interactable = true;
+            return;
+        }
+
+        else if (!(selectedGameObject.GetComponent<Organ>() is null))
+        {
+            bloodButton.interactable = true;
+            surgeryButton.interactable = true;
+            medicineButton.interactable = true;
+            charmsButton.interactable = true;
+            spawnLimbButton.interactable = true;
+            spawnOrganButton.interactable = true;
+            waitButton.interactable = true;
+            return;
+        }
+
+        else if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
+        {
+            bloodButton.interactable = false;
+            surgeryButton.interactable = true;
+            medicineButton.interactable = false;
+            charmsButton.interactable = false;
+            spawnLimbButton.interactable = true;
+            spawnOrganButton.interactable = true;
+            waitButton.interactable = true;
+            return;
+        }
+    }
+
     //remove all text and actions from all buttons
     public void ClearAllButtons()
     {
@@ -77,6 +147,7 @@ public class ButtonActions : MonoBehaviour
             button.transform.GetComponentInChildren<MouseOver>().ResetTimer();
             button.interactable = true;
         }
+        UpdateMenuTabsInteractivity();
     }
 
     public void ActionInProgress()
@@ -168,9 +239,10 @@ public class ButtonActions : MonoBehaviour
     //set as onclick in editor
     public void SelectSurgeryAction()
     {
-        if (selectedGameObject is null)
+        if (selectedGameObject == null)
         {
             textLog.NewLogEntry("Please select an organ or limb.");
+            return;
         }
         else if (!(selectedGameObject.GetComponent<Organ>() is null))
         {
@@ -268,9 +340,10 @@ public class ButtonActions : MonoBehaviour
     //set as onclick in editor
     public void SelectBloodAction()
     {
-        if (selectedGameObject is null)
+        if (selectedGameObject == null)
         {
             textLog.NewLogEntry("Please select an organ or limb.");
+            return;
         }
         else if (selectedGameObject.GetComponent<BodyPart>() is Organ)
         {
@@ -316,9 +389,10 @@ public class ButtonActions : MonoBehaviour
     //set as onclick in editor
     public void SelectMedicineAction()
     {
-        if (selectedGameObject is null)
+        if (selectedGameObject == null)
         {
             textLog.NewLogEntry("Please select an organ or limb.");
+            return;
         }
         else if (selectedGameObject.GetComponent<BodyPart>() is Organ)
         {
@@ -389,9 +463,10 @@ public class ButtonActions : MonoBehaviour
     //set as onclick in editor
     public void SelectCharmAction()
     {
-        if (selectedGameObject is null)
+        if (selectedGameObject == null)
         {
             textLog.NewLogEntry("Please select an organ or limb.");
+            return;
         }
         else if (selectedGameObject.GetComponent<BodyPart>() is Organ)
         {
@@ -1036,6 +1111,7 @@ public class ButtonActions : MonoBehaviour
             if (bodypart == null)
             {
                 textLog.NewLogEntry("You need to select something for that!");
+                return;
             }
             else if (bodypart.connectedBodyParts.Count() == 0)
             {
@@ -1072,6 +1148,7 @@ public class ButtonActions : MonoBehaviour
             if (bodypart == null)
             {
                 textLog.NewLogEntry("You need to select a bodypart for that!");
+                return;
             }
             else
             {
@@ -1158,6 +1235,7 @@ public class ButtonActions : MonoBehaviour
             if (bodypart == null)
             {
                 textLog.NewLogEntry("You need to select something for that!");
+                return;
             }
             else if (bodypart.connectedBodyParts.Count() != 0)
             {
@@ -1198,6 +1276,7 @@ public class ButtonActions : MonoBehaviour
             if (selectedGameObject.GetComponent<Organ>() is null)
             {
                 textLog.NewLogEntry("You need to select something for that!");
+                return;
             }
             else
             {
@@ -1218,6 +1297,7 @@ public class ButtonActions : MonoBehaviour
             if (selectedGameObject.GetComponent<EmbeddedObject>() is null)
             {
                 textLog.NewLogEntry("You need to select something for that!");
+                return;
             }
             else
             {
