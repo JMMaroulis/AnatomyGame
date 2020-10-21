@@ -520,12 +520,12 @@ public class BodyPart : MonoBehaviour
     }
 
     //severs all connections between self and connecting bodyparts (BOTH WAYS)
-    public void SeverAllConnections()
+    public void SeverAllConnections(float inducedBleedingPerSeverance = 0)
     {
         //sever *that* connection to *this*
         foreach (BodyPart connectedBodyPart in connectedBodyParts)
         {
-            connectedBodyPart.SeverConnectionOutgoing(this.gameObject, 0);
+            connectedBodyPart.SeverConnectionOutgoing(this.gameObject, inducedBleedingPerSeverance);
         }
 
         //sever *this* connection to *those*

@@ -261,7 +261,13 @@ public static class Actions_Surgery
             foreach (Organ organ in bodyPart.containedOrgans)
             {
                 GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
+                GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(organ);
                 GameObject.Destroy(organ.gameObject);
+            }
+
+            foreach (EmbeddedObject embeddedObject in bodyPart.embeddedObjects)
+            {
+                GameObject.Destroy(embeddedObject.gameObject);
             }
 
             bodyPart.SeverAllConnections();

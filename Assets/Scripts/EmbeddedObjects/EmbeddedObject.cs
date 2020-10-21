@@ -4,6 +4,7 @@ using UnityEngine;
 public class EmbeddedObject : MonoBehaviour
 {
     public BodyPart parentBodyPart;
+    public Clock clock;
 
     //default to being allowed in anything; to be overriden in inheriting classes if necessary.
     public bool allowedInAllBodyParts = true;
@@ -27,8 +28,7 @@ public class EmbeddedObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-
+        clock = FindObjectOfType<Clock>();
     }
 
     public bool Embed(BodyPart bodypart)

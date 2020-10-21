@@ -10,6 +10,7 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
     private List<EmbeddedObjectSelector> embeddedObjectSelectors = new List<EmbeddedObjectSelector>();
 
     public GameObject bulletSelectorPrefab;
+    public GameObject bombSelectorPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,11 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
         if (embeddedObject is Bullet)
         {
             NewSelector(embeddedObject, bulletSelectorPrefab, externalEmbeddedObjectSelectorsPanel);
+        }
+
+        if (embeddedObject is Bomb)
+        {
+            NewSelector(embeddedObject, bombSelectorPrefab, externalEmbeddedObjectSelectorsPanel);
         }
 
     }
@@ -56,14 +62,18 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
         GameObject selectedGameObject = FindObjectOfType<ButtonActions>().selectedGameObject;
 
         //make selector for each embeddedobject in currently selected bodypart
-        if (!(selectedGameObject.GetComponent<BodyPart>() is null))
+        if (!(selectedGameObject == null))
         {
-            foreach (EmbeddedObject embeddedObject in selectedGameObject.GetComponent<BodyPart>().embeddedObjects)
+            if (!(selectedGameObject.GetComponent<BodyPart>() is null))
             {
-                NewEmbeddedObject(embeddedObject);
+                foreach (EmbeddedObject embeddedObject in selectedGameObject.GetComponent<BodyPart>().embeddedObjects)
+                {
+                    NewEmbeddedObject(embeddedObject);
+                }
             }
         }
-        
+
+      
         //make selector for all embeddedobjects not currently embedded in something
         foreach (EmbeddedObject embeddedObject in FindObjectsOfType<EmbeddedObject>())
         {
