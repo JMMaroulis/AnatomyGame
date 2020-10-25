@@ -80,4 +80,9 @@ public class Bomb : EmbeddedObject
         }
     }
 
+    public override string GenerateDescriptionObjectSpecific()
+    {
+        return $"\nTime until detonation: {expiryTime - timeElapsed} seconds.";
+    }
+
 }

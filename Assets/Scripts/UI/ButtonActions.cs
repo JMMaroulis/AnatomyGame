@@ -37,7 +37,6 @@ public class ButtonActions : MonoBehaviour
     public Button waitButton;
     public Button cancelActionButton;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +45,7 @@ public class ButtonActions : MonoBehaviour
         bodyPartManager = FindObjectOfType<BodyPartManager>();
 
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
         examineBox.text = "";
         cancelActionButton.interactable = false;
 
@@ -60,7 +60,7 @@ public class ButtonActions : MonoBehaviour
         unlocks = FindObjectOfType<UnlockTracker>();
         bloodButton.gameObject.SetActive(unlocks.blood);
         surgeryButton.gameObject.SetActive(unlocks.surgery);
-        medicineButton.gameObject.SetActive(unlocks.medicine_blood || unlocks.medicine_poison || unlocks.medicine_speed); //medicine permissions on individual level
+        medicineButton.gameObject.SetActive(true); //healing potions always required
         charmsButton.gameObject.SetActive(unlocks.charms_petrification || unlocks.charms_heart || unlocks.charms_lung || unlocks.charms_blood_regen); //charm permissions on individual level
         spawnLimbButton.gameObject.SetActive(unlocks.spawn);
         spawnOrganButton.gameObject.SetActive(unlocks.spawn);
@@ -145,27 +145,28 @@ public class ButtonActions : MonoBehaviour
             button.transform.GetChild(0).gameObject.GetComponent<Text>().text = "";
             button.transform.GetComponentInChildren<MouseOver>().mouseoverEnabled = false;
             button.transform.GetComponentInChildren<MouseOver>().ResetTimer();
-            button.interactable = true;
         }
         UpdateMenuTabsInteractivity();
     }
 
-    public void ActionInProgress()
+    public void UpdateMenuButtonsInteractivity(bool interactable)
     {
         foreach (Button button in menuButtons)
         {
-            button.interactable = false;
+            button.interactable = interactable;
         }
+    }
+
+    public void ActionInProgress()
+    {
+        UpdateMenuButtonsInteractivity(false);
 
         cancelActionButton.interactable = true;
     }
 
     public void ActionFinished()
     {
-        foreach (Button button in menuButtons)
-        {
-            button.interactable = true;
-        }
+        UpdateMenuButtonsInteractivity(true);
 
         cancelActionButton.interactable = false;
     }

@@ -11,6 +11,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     private UnlockTracker unlockTracker;
 
     public GameObject bullet;
+    public GameObject bomb;
 
     // Start is called before the first frame update
     void Start()
@@ -94,7 +95,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             for (int i = 0; i < numberOfInjuries; i++)
             {
                 //selected bodypart to injure, and injury to apply
-                int injuryNumber = Random.Range(0, 7);
+                int injuryNumber = Random.Range(0, 8);
                 Organ organ = organs[Random.Range(0, organs.Count)];
                 BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
 
@@ -178,6 +179,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         Debug.Log($"{organ.name} external");
                         textLog.NewLogEntry($"The {organ.name} requires re-implanting.");
                         Remove(organ);
+                        break;
+
+                    case 7:
+                        Debug.Log($"Bomb implanted in {bodyPart.name}");
+                        textLog.NewLogEntry($"There's an explosive device in the {bodyPart.name}");
+                        ImplantBomb(bodyPart);
                         break;
 
                     default:
@@ -298,6 +305,13 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         GameObject newBullet = Instantiate(bullet);
         newBullet.name = "Bullet";
         newBullet.GetComponent<Bullet>().Embed(bodyPart);
+    }
+
+    public void ImplantBomb(BodyPart bodyPart)
+    {
+        GameObject newBomb = Instantiate(bomb);
+        newBomb.name = "Bomb";
+        newBomb.GetComponent<Bomb>().Embed(bodyPart);
     }
 
     public void Crush(BodyPart bodyPart)

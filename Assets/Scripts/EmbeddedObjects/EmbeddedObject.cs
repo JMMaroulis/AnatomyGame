@@ -70,7 +70,14 @@ public class EmbeddedObject : MonoBehaviour
             description += $"\nLocation: Embedded in {parentBodyPart.gameObject.name}";
         }
 
+        description += GenerateDescriptionObjectSpecific();
+
         return description;
+    }
+
+    public virtual string GenerateDescriptionObjectSpecific()
+    {
+        return "";
     }
 
 }

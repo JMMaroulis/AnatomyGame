@@ -642,7 +642,7 @@ MonoBehaviour:
   medicine_blood: 0
   charms_heart: 0
   charms_lung: 0
-  charms_petrification: 1
+  charms_petrification: 0
   charms_blood_regen: 0
   blood: 1
   spawn: 0

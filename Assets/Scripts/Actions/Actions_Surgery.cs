@@ -17,6 +17,7 @@ public static class Actions_Surgery
         clock.StartClockUntil(seconds);
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -32,7 +33,8 @@ public static class Actions_Surgery
 
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
+            buttonActions.ClearAllButtons();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
         }
 
@@ -49,6 +51,7 @@ public static class Actions_Surgery
         clock.StartClockUntil(seconds);
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -63,7 +66,8 @@ public static class Actions_Surgery
             organ.SeverAllConnections();
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors(organParent);
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
+            buttonActions.ClearAllButtons();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
 
             //remove from being child of bodypart
@@ -87,6 +91,7 @@ public static class Actions_Surgery
         clock.StartClockUntil(seconds);
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -100,7 +105,8 @@ public static class Actions_Surgery
             embeddedObject.Remove();
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
+            buttonActions.ClearAllButtons();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
 
             //remove from being child of bodypart
@@ -131,6 +137,7 @@ public static class Actions_Surgery
         clock.StartClockUntil(seconds);
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -145,7 +152,8 @@ public static class Actions_Surgery
             bodyPart.AddContainedOrgan(organ);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
+            buttonActions.ClearAllButtons();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
 
             //make organ child of bodypart
@@ -182,6 +190,7 @@ public static class Actions_Surgery
         clock.StartClockUntil(seconds);
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -195,7 +204,8 @@ public static class Actions_Surgery
             embeddedObject.Embed(bodypart);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
+            buttonActions.ClearAllButtons();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_implants += 1;
@@ -216,6 +226,7 @@ public static class Actions_Surgery
         clock.StartClockUntil(seconds);
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -229,7 +240,8 @@ public static class Actions_Surgery
             bodyPart2.CreateConnection(bodyPart1);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
+            buttonActions.ClearAllButtons();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_attachments += 1;
@@ -249,6 +261,7 @@ public static class Actions_Surgery
         clock.StartClockUntil(seconds);
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -282,7 +295,8 @@ public static class Actions_Surgery
             GameObject.Destroy(bodyPart.gameObject);
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<ButtonActions>().ClearAllButtons();
+            buttonActions.ClearAllButtons();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
 
             MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_destroyed += 1;
