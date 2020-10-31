@@ -33,7 +33,7 @@ public static class Actions_Surgery
 
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            buttonActions.ClearAllButtons();
+            buttonActions.SelectSurgeryAction();
             buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
         }
@@ -61,23 +61,31 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            //disconnect
-            BodyPart organParent = organ.connectedBodyParts[0];
-            organ.SeverAllConnections();
-            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors(organParent);
-            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            buttonActions.ClearAllButtons();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
-            UpdateAllBodyPartHeartConnections();
-
-            //remove from being child of bodypart
-            organ.transform.SetParent(organ.transform.parent.parent);
-
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
+            RemoveOrganProcess(organ);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSurgeryAction();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
 
         }
 
+    }
+
+    public static void RemoveOrganProcess(Organ organ)
+    {
+        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+
+        //disconnect
+        BodyPart organParent = organ.connectedBodyParts[0];
+        organ.SeverAllConnections();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors(organParent);
+        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+
+        UpdateAllBodyPartHeartConnections();
+
+        //remove from being child of bodypart
+        organ.transform.SetParent(organ.transform.parent.parent);
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
     }
 
     public static void RemoveEmbeddedObject(EmbeddedObject embeddedObject, float seconds, int goldCost)
@@ -101,22 +109,27 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            //disconnect
-            embeddedObject.Remove();
-            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            buttonActions.ClearAllButtons();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
-            UpdateAllBodyPartHeartConnections();
-
-            //remove from being child of bodypart
-            embeddedObject.transform.SetParent(MonoBehaviour.FindObjectOfType<EmbeddedObjectSelectorManager>().transform);
-
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_remove_implants += 1;
+            RemoveEmbeddedObjectProcess(embeddedObject);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-
+            buttonActions.SelectSurgeryAction();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
         }
 
+    }
+
+    public static void RemoveEmbeddedObjectProcess(EmbeddedObject embeddedObject)
+    {
+        //disconnect
+        embeddedObject.Remove();
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+
+        UpdateAllBodyPartHeartConnections();
+
+        //remove from being child of bodypart
+        embeddedObject.transform.SetParent(MonoBehaviour.FindObjectOfType<EmbeddedObjectSelectorManager>().transform);
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_remove_implants += 1;
     }
 
     public static void ImplantOrgan(Organ organ, BodyPart bodyPart, float seconds, int goldCost)
@@ -147,23 +160,28 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            //connect
-            organ.CreateConnection(bodyPart);
-            bodyPart.AddContainedOrgan(organ);
-            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            buttonActions.ClearAllButtons();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
-            UpdateAllBodyPartHeartConnections();
-
-            //make organ child of bodypart
-            organ.transform.SetParent(bodyPart.transform);
-
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
+            ImplantOrganProcess(organ, bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-
+            buttonActions.SelectSurgeryAction();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
         }
 
+    }
+
+    public static void ImplantOrganProcess(Organ organ, BodyPart bodyPart)
+    {
+        //connect
+        organ.CreateConnection(bodyPart);
+        bodyPart.AddContainedOrgan(organ);
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+
+        UpdateAllBodyPartHeartConnections();
+
+        //make organ child of bodypart
+        organ.transform.SetParent(bodyPart.transform);
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
     }
 
     public static void EmbedObject(EmbeddedObject embeddedObject, BodyPart bodypart, float seconds, int goldCost)
@@ -200,19 +218,24 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            //connect
-            embeddedObject.Embed(bodypart);
-            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            buttonActions.ClearAllButtons();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
-            UpdateAllBodyPartHeartConnections();
-
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_implants += 1;
+            EmbedObjectProcess(embeddedObject, bodypart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-
+            buttonActions.SelectSurgeryAction();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
         }
 
+    }
+
+    public static void EmbedObjectProcess(EmbeddedObject embeddedObject, BodyPart bodypart)
+    {
+        //connect
+        embeddedObject.Embed(bodypart);
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+
+        UpdateAllBodyPartHeartConnections();
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_implants += 1;
     }
 
     public static void ConnectBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, float seconds, int goldCost)
@@ -236,18 +259,24 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            bodyPart1.CreateConnection(bodyPart2);
-            bodyPart2.CreateConnection(bodyPart1);
-            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            buttonActions.ClearAllButtons();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
-            UpdateAllBodyPartHeartConnections();
 
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_attachments += 1;
-            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        }
+        }ConnectBodyPartCoroutine(bodyPart1, bodyPart2);
+        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+        buttonActions.SelectSurgeryAction();
+        buttonActions.UpdateMenuButtonsInteractivity(true);
 
+    }
+
+    public static void ConnectBodyPartCoroutine(BodyPart bodyPart1, BodyPart bodyPart2)
+    {
+        bodyPart1.CreateConnection(bodyPart2);
+        bodyPart2.CreateConnection(bodyPart1);
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+
+        UpdateAllBodyPartHeartConnections();
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_attachments += 1;
     }
 
     public static void DeleteBodyPart(BodyPart bodyPart, float seconds, int goldCost)
@@ -271,39 +300,44 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            foreach (Organ organ in bodyPart.containedOrgans)
-            {
-                GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
-                GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(organ);
-                GameObject.Destroy(organ.gameObject);
-            }
-
-            foreach (EmbeddedObject embeddedObject in bodyPart.embeddedObjects)
-            {
-                GameObject.Destroy(embeddedObject.gameObject);
-            }
-
-            bodyPart.SeverAllConnections();
-            GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
-            GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(bodyPart);
-
-            if (bodyPart is Organ)
-            {
-                GameObject.FindObjectOfType<BodyPartManager>().organs.Remove((Organ)bodyPart);
-            }
-
-            GameObject.Destroy(bodyPart.gameObject);
-            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-            buttonActions.ClearAllButtons();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
-            UpdateAllBodyPartHeartConnections();
-
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_destroyed += 1;
+            DeleteBodyPartProcess(bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-
+            buttonActions.SelectSurgeryAction();
+            buttonActions.UpdateMenuButtonsInteractivity(true);
         }
 
+    }
+
+    public static void DeleteBodyPartProcess(BodyPart bodyPart)
+    {
+        foreach (Organ organ in bodyPart.containedOrgans)
+        {
+            GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
+            GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(organ);
+            GameObject.Destroy(organ.gameObject);
+        }
+
+        foreach (EmbeddedObject embeddedObject in bodyPart.embeddedObjects)
+        {
+            GameObject.Destroy(embeddedObject.gameObject);
+        }
+
+        bodyPart.SeverAllConnections();
+        GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
+        GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(bodyPart);
+
+        if (bodyPart is Organ)
+        {
+            GameObject.FindObjectOfType<BodyPartManager>().organs.Remove((Organ)bodyPart);
+        }
+
+        GameObject.Destroy(bodyPart.gameObject);
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+
+        UpdateAllBodyPartHeartConnections();
+
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_destroyed += 1;
     }
 
     private static void UpdateAllBodyPartHeartConnections()

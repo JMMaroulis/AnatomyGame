@@ -293,7 +293,7 @@ public class BodyPart : MonoBehaviour
                 slowPoison = Mathf.Max(0.0f, slowPoison - 2.0f * antidoteProcessed);
             }
             //decays at 1/100th unit per second, if no poison to neutralise
-            antidote = Mathf.Max(0.0f, antidote - (deltaTime * 0.01f));
+            antidote = Mathf.Max(0.0f, antidote - (deltaTime * 0.001f));
         }
 
         //slow poison

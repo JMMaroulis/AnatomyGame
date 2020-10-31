@@ -47,4 +47,4 @@ MonoBehaviour:
   clock: {fileID: 0}
   allowedInAllBodyParts: 1
   timeElapsed: 0
-  expiryTime: 300
+  expiryTime: 1200

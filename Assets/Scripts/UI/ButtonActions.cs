@@ -621,7 +621,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Medicine.InjectHealthPotion(bodypart, seconds, goldCost);
+                Actions_Medicine.InjectPotion(bodypart, "health", 100.00f, seconds, goldCost);
                 textLog.NewLogEntry($"Injecting 100 units of Health Potion into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
@@ -657,7 +657,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Medicine.InjectAntidote(bodypart, seconds, goldCost);
+                Actions_Medicine.InjectPotion(bodypart, "antidote", 50.00f, seconds, goldCost);
                 textLog.NewLogEntry($"Injecting 50 units of Antidote into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
@@ -692,7 +692,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Medicine.InjectSlowPoison(bodypart, seconds, goldCost);
+                Actions_Medicine.InjectPotion(bodypart, "slow poison", 50.00f, seconds, goldCost);
                 textLog.NewLogEntry($"Injecting 50 units of Slow Poison into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
@@ -727,7 +727,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost); 
+                Actions_Medicine.InjectPotion(bodypart, "stasis", 50.00f, seconds, goldCost);
                 textLog.NewLogEntry($"Injecting 50 units of Stasis Potion into the {bodypart.name}..."); 
                 actionTimeBar.Reset(seconds);
             }
@@ -762,8 +762,8 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Medicine.InjectStasisPotion(bodypart, seconds, goldCost);
-                textLog.NewLogEntry($"Injecting 50 units of Stasis Potion into the {bodypart.name}...");
+                Actions_Medicine.InjectPotion(bodypart, "haste", 50.00f, seconds, goldCost);
+                textLog.NewLogEntry($"Injecting 50 units of Haste Potion into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
         };
@@ -799,7 +799,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Medicine.InjectCoagulantPotion(bodypart, seconds, goldCost); 
+                Actions_Medicine.InjectPotion(bodypart, "coagulant", 50.00f, seconds, goldCost);
                 textLog.NewLogEntry($"Injecting 50 units of Coagulant Potion into the {bodypart.name}..."); 
                 actionTimeBar.Reset(seconds);
             }
