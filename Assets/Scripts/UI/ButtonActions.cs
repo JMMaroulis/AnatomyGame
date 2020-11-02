@@ -178,63 +178,13 @@ public class ButtonActions : MonoBehaviour
         actionTimeBar.Reset(1.0f);
     }
 
-    public void SelectBodyPartOptions(bool firstClick = true)
+    public void SetButtonMouseoverText(Button button, string text)
     {
-        ClearAllButtons();
-        if (firstClick)
-        {
-            bodyPartMenuCounter = 0;
-        }
-
-        //put bodyparts on first 6 buttons
-        //TODO: Order this list somehow. Alphabetically, maybe?
-        int numBodyParts = bodyPartManager.bodyParts.Count();
-        int countStart = bodyPartMenuCounter;
-        int menuCount = 0;
-        while(menuCount < menuButtons.Count() && bodyPartMenuCounter < bodyPartManager.bodyParts.Count())
-        {
-            //select bodypart
-            AssignSelectBodyPart(menuButtons[bodyPartMenuCounter - countStart], bodyPartManager.bodyParts[bodyPartMenuCounter]);
-            bodyPartMenuCounter += 1;
-            menuCount += 1;
-        }
-
-        if (bodyPartMenuCounter < numBodyParts)
-        {
-            //more bodyparts button
-            UnityEngine.Events.UnityAction action = () => { SelectBodyPartOptions(false); };
-            menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
-            menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
-        }
-
-    }
-
-    public void SelectOrganOptions(bool firstClick)
-    {
-        ClearAllButtons();
-        if (firstClick)
-        {
-            organMenuCounter = 0;
-        }
-
-        //put organs on first 6 buttons
-        //TODO: Order this list somehow. Alphabetically, maybe?
-        int numOrgans = bodyPartManager.organs.Count();
-        int countStart = organMenuCounter;
-        while (organMenuCounter < Mathf.Min(numOrgans, countStart + 7))
-        {
-            //select organ
-            AssignSelectOrgan(menuButtons[organMenuCounter - countStart], bodyPartManager.organs[organMenuCounter]);
-            organMenuCounter += 1;
-        }
-
-        if (organMenuCounter < numOrgans)
-        {
-            //more organs button
-            UnityEngine.Events.UnityAction action = () => { SelectOrganOptions(false); };
-            menuButtons[7].GetComponent<Button>().onClick.AddListener(action);
-            menuButtons[7].transform.GetChild(0).gameObject.GetComponent<Text>().text = "More...";
-        }
+        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
+        mouseover.mouseoverEnabled = true;
+        mouseover.ResetTimer();
+        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+        mouseOverText.text = text;
     }
 
     //set as onclick in editor
@@ -262,6 +212,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectSurgeryActionOptions_BodyPart()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
 
         BodyPart bodypart = selectedGameObject.GetComponent<BodyPart>();
 
@@ -282,6 +233,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectSurgeryActionOptions_Organ()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
         Organ organ = (Organ)selectedGameObject.GetComponent<BodyPart>();
 
         AssignRemoveOrganButton(menuButtons[0], organ);
@@ -306,6 +258,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectSurgeryActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
 
         EmbeddedObject embeddedObject = selectedGameObject.GetComponent<EmbeddedObject>();
 
@@ -328,6 +281,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectWaitActionOptions()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
 
         AssignWaitTenSeconds(menuButtons[0]);
         AssignWaitThirtySeconds(menuButtons[1]);
@@ -363,6 +317,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectBloodActionOptions_BodyPart()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
 
         AssignBandagesButton(menuButtons[0], selectedGameObject.GetComponent<BodyPart>());
         AssignBloodlettingButton(menuButtons[1], selectedGameObject.GetComponent<BodyPart>());
@@ -373,6 +328,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectBloodActionOptions_Organ()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
 
         AssignAddBloodButton(menuButtons[0], selectedGameObject.GetComponent<BodyPart>());
         AssignRemoveBloodButton(menuButtons[1], selectedGameObject.GetComponent<BodyPart>());
@@ -381,6 +337,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectBloodActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(false);
 
         Debug.Log("AAAAA");
     }
@@ -412,6 +369,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectMedicineActionOptions_BodyPart()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
         int n = 0;
 
         AssignInjectHealthPotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
@@ -435,6 +393,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectMedicineActionOptions_Organ()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
         int n = 0;
 
         AssignInjectHealthPotionButton(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
@@ -457,6 +416,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectMedicineActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(false);
 
         Debug.Log("AAAAA");
     }
@@ -488,6 +448,8 @@ public class ButtonActions : MonoBehaviour
     {
         int n = 0;
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
+
         if (unlocks.charms_heart)
         {
             AssignApplyHeartCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
@@ -510,6 +472,8 @@ public class ButtonActions : MonoBehaviour
     {
         int n = 0;
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
+
         if (unlocks.charms_heart)
         {
             AssignApplyHeartCharm(menuButtons[n], selectedGameObject.GetComponent<BodyPart>()); n++;
@@ -531,6 +495,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectCharmActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(false);
 
         Debug.Log("AAAAA");
     }
@@ -578,6 +543,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectSpawnOrganActionOptions()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
 
         AssignSpawnHeartButton(menuButtons[0]);
         AssignSpawnLeftLungButton(menuButtons[1]);
@@ -593,6 +559,7 @@ public class ButtonActions : MonoBehaviour
     public void SelectSpawnBodyPartActionOptions()
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
 
         AssignSpawnLeftArmButton(menuButtons[0]);
         AssignSpawnRightArmButton(menuButtons[1]);
@@ -632,12 +599,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Health Potion (100 units): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Health Potion: Processed at 1/5 units per second, heals one damage per unit.\nIf bodypart is undamaged, processed at 1/100 units per second.";
+        string mouseoverText = "Health Potion: Processed at 1/5 units per second, heals one damage per unit.\nIf bodypart is undamaged, processed at 1/100 units per second.";
+        SetButtonMouseoverText(button, mouseoverText);
 
     }
 
@@ -668,11 +631,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Antidote (50 units): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Antidote: Mutually neutralises 1 unit of slow poison per second. Decays at 1/100 units per second if no poison present in the bodypart.";
+        string mouseoverText = "Antidote: Mutually neutralises 1 unit of slow poison per second. Decays at 1/100 units per second if no poison present in the bodypart.";
+        SetButtonMouseoverText(button, mouseoverText);
 
     }
 
@@ -703,11 +663,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Slow Poison (50 units): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Slow Poison: Deals 1/1000 damage per unit per second. Slowly processed by liver.";
+        string mouseoverText = "Slow Poison: Deals 1/1000 damage per unit per second. Slowly processed by liver.";
+        SetButtonMouseoverText(button, mouseoverText);
 
     }
 
@@ -738,11 +695,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Stasis Potion (50 units): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Decreases local rate of time passing in bodypart. Decays at 1/100 units per second, unaffected by own temporal slowing.\nWARNING: Effect of high dosages extremely dangerous and unpredictable.";
+        string mouseoverText = "Decreases local rate of time passing in bodypart. Decays at 1/100 units per second, unaffected by own temporal slowing.\nWARNING: Effect of high dosages extremely dangerous and unpredictable.";
+        SetButtonMouseoverText(button, mouseoverText);
 
     }
 
@@ -774,12 +728,8 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = $"Inject Haste Potion (50 units): {seconds} seconds, {goldCost} gold";
 
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Increases local rate of time passing in bodypart. Decays at 1/100 units per second, unaffected by own temporal acceleration.";
-
+        string mouseoverText = "Increases local rate of time passing in bodypart. Decays at 1/100 units per second, unaffected by own temporal acceleration.";
+        SetButtonMouseoverText(button, mouseoverText);
 
     }
 
@@ -810,11 +760,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Coagulant Potion (50 units): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Decreases bloodloss rate by 0.5 units per second. Decays at 1/100 unit per second, if no bloodloss to be healed.";
+        string mouseoverText = "Decreases bloodloss rate by 0.5 units per second. Decays at 1/100 unit per second, if no bloodloss to be healed.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     #endregion
@@ -848,11 +795,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Apply Heart Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Heart Charm: Causes the bodypart to function as a heart for the duration.";
+        string mouseoverText = "Heart Charm: Causes the bodypart to function as a heart for the duration.";
+        SetButtonMouseoverText(button, mouseoverText);
 
     }
 
@@ -883,12 +827,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Apply Lung Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Lung Charm: Causes the bodypart to function as a lung for the duration.";
-
+        string mouseoverText = "Lung Charm: Causes the bodypart to function as a lung for the duration.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignApplyPetrificationCharm(Button button, BodyPart bodypart)
@@ -918,12 +858,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Apply Petrification Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Petrification Charm: The bodypart ceases all functions for the duration.";
-
+        string mouseoverText = "Petrification Charm: The bodypart ceases all functions for the duration.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignApplyBloodRegenCharm(Button button, BodyPart bodypart)
@@ -953,12 +889,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Apply Blood Regen Charm (30 Minutes): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Blood Regen Charm: Produces 30 units of blood per second for the duration, up to the bodypart maximum capacity.";
-
+        string mouseoverText = "Blood Regen Charm: Produces 30 units of blood per second for the duration, up to the bodypart maximum capacity.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     #endregion
@@ -992,11 +924,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Bandages: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Reduced bloodloss by 10 units per second.";
+        string mouseoverText = "Reduced bloodloss by 10 units per second.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignBloodlettingButton(Button button, BodyPart bodypart)
@@ -1025,11 +954,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Bloodletting: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Induces bloodloss of 10 units per second.";
+        string mouseoverText = "Induces bloodloss of 10 units per second.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignAddBloodButton(Button button, BodyPart bodypart)
@@ -1058,11 +984,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Blood: (100 units): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Directly adds 100 units of blood.";
+        string mouseoverText = "Directly adds 100 units of blood.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignRemoveBloodButton(Button button, BodyPart bodypart)
@@ -1092,11 +1015,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Remove Blood: (100 units): {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Directly removes 100 units of blood.";
+        string mouseoverText = "Directly removes 100 units of blood.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     #endregion
@@ -1135,11 +1055,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Amputate Bodypart: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Disconnects the bodypart from all connected bodyparts.\nCauses profuse bloodloss in connected bodyparts.";
+        string mouseoverText = "Disconnects the bodypart from all connected bodyparts.\nCauses profuse bloodloss in connected bodyparts.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignAttachBodyPartButton(Button button, BodyPart bodypart)
@@ -1167,6 +1084,7 @@ public class ButtonActions : MonoBehaviour
     void SelectBodyPartToAttachOptions(BodyPart bodypart)
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
 
         //put bodyparts on first 6 buttons
         //TODO: Order this list somehow. Alphabetically, maybe?
@@ -1220,11 +1138,8 @@ public class ButtonActions : MonoBehaviour
         };
         button.onClick.AddListener(action);
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = $"Connects {bodyPart1.name} to {bodyPart2.name}.";
+        string mouseoverText = $"Connects {bodyPart1.name} to {bodyPart2.name}.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignDestroyBodyPart(Button button, BodyPart bodypart)
@@ -1259,11 +1174,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Destroy: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Destroys the selected bodypart.";
+        string mouseoverText = "Destroys the selected bodypart.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     #endregion
@@ -1315,6 +1227,7 @@ public class ButtonActions : MonoBehaviour
     public void ImplantOrganOptions(bool firstClick = true)
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
         if (firstClick)
         {
             bodyPartMenuCounter = 0;
@@ -1352,6 +1265,7 @@ public class ButtonActions : MonoBehaviour
     public void ImplantEmbeddedObjectOptions(bool firstClick = true)
     {
         ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
         if (firstClick)
         {
             bodyPartMenuCounter = 0;
@@ -1455,11 +1369,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Implant {embeddedObject.name} into {bodypart.name}: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Implants the selected organ into the selected bodypart.";
+        string mouseoverText = "Implants the selected organ into the selected bodypart.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignRemoveOrganButton(Button button, Organ organ)
@@ -1485,11 +1396,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Extract Organ: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Removes the selected organ from the containing bodypart.";
+        string mouseoverText = "Removes the selected organ from the containing bodypart.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignRemoveEmbeddedObjectButton(Button button, EmbeddedObject embeddedObject)
@@ -1515,11 +1423,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Extract Embedded Object: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Removes the selected embedded object from the containing bodypart.";
+        string mouseoverText = "Removes the selected embedded object from the containing bodypart.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignDestroyOrgan(Button button, Organ organ)
@@ -1549,11 +1454,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Destroy: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Destroys the selected organ.\nSelected organ cannot be currently implanted in a bodypart.";
+        string mouseoverText = "Destroys the selected organ.\nSelected organ cannot be currently implanted in a bodypart.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     #endregion
@@ -1603,12 +1505,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new heart: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Heart, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-
+        string mouseoverText = "Creates a new Heart, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnLeftLungButton(Button button)
@@ -1634,11 +1532,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new  left lung: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Left Lung, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        string mouseoverText = "Creates a new Left Lung, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
 
     }
 
@@ -1665,12 +1560,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new Right Lung: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Right Lung, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-
+        string mouseoverText = "Creates a new Right Lung, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnBrainButton(Button button)
@@ -1696,11 +1587,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Brain, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        string mouseoverText = "Creates a new Brain, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnLeftEyeButton(Button button)
@@ -1726,11 +1614,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new left eye: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Left Eye, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        string mouseoverText = "Creates a new Left Eye, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnRightEyeButton(Button button)
@@ -1756,11 +1641,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new right eye: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Right Eye, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        string mouseoverText = "Creates a new Right Eye, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnLiverButton(Button button)
@@ -1785,11 +1667,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new liver: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Liver, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        string mouseoverText = "Creates a new Liver, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnStomachButton(Button button)
@@ -1814,11 +1693,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new stomach: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Stomach, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        string mouseoverText = "Creates a new Stomach, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnLeftArmButton(Button button)
@@ -1843,12 +1719,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new left arm: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Left Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-
+        string mouseoverText = "Creates a new Left Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnRightArmButton(Button button)
@@ -1873,12 +1745,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new right arm: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Right Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-
+        string mouseoverText = "Creates a new Right Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnLeftLegButton(Button button)
@@ -1903,12 +1771,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new left leg: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Left Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-
+        string mouseoverText = "Creates a new Left Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnRightLegButton(Button button)
@@ -1933,12 +1797,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new right leg: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Right Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-
+        string mouseoverText = "Creates a new Right Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnTorsoButton(Button button)
@@ -1963,13 +1823,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new torso: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Torso, with all contained organs, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-
-
+        string mouseoverText = "Creates a new Torso, with all contained organs, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignSpawnHeadButton(Button button)
@@ -1994,12 +1849,8 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Spawn a new head: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Creates a new Head, with all contained organs, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-
+        string mouseoverText = "Creates a new Head, with all contained organs, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     #endregion

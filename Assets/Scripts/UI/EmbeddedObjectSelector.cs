@@ -33,6 +33,7 @@ public class EmbeddedObjectSelector : MonoBehaviour, IPointerClickHandler
         buttonActions.selectedGameObject = embeddedObject.gameObject;
         //embeddedObjectSelectorManager.ResetSelectors();
         buttonActions.ClearAllButtons();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
     }
 
 }

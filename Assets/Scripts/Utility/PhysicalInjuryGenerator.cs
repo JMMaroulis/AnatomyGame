@@ -330,7 +330,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     public void Sever(BodyPart bodyPart)
     {
         bodyPart.damage += 50;
+        foreach(BodyPart connectedBodyPart in bodyPart.connectedBodyParts)
+        {
+            connectedBodyPart.bloodLossRate += 20.0f;
+        }
         Actions_Surgery.RemoveBodyPart(bodyPart, 0, 0);
+        bodyPart.bloodLossRate += 20.0f;
     }
 
     public void SlowPoison(BodyPart bodyPart)
