@@ -87,8 +87,7 @@ public class ButtonActions : MonoBehaviour
 
     public void UpdateMenuTabsInteractivity()
     {
-
-        if (selectedGameObject == null)
+        if (clock.isTimePassing)
         {
             bloodButton.interactable = false;
             surgeryButton.interactable = false;
@@ -96,6 +95,18 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = false;
             spawnOrganButton.interactable = false;
+            waitButton.interactable = false;
+            return;
+        }
+
+        else if (selectedGameObject == null)
+        {
+            bloodButton.interactable = false;
+            surgeryButton.interactable = false;
+            medicineButton.interactable = false;
+            charmsButton.interactable = false;
+            spawnLimbButton.interactable = true;
+            spawnOrganButton.interactable = true;
             waitButton.interactable = false;
             return;
         }

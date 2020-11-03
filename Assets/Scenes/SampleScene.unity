@@ -7433,7 +7433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28819a09b9a47264389fd78a2756739c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTimePassing: 1
+  isTimePassing: 0
   clockTarget: 0
   globalTimeScalingFactor: 0
   actionCancelFlag: 0

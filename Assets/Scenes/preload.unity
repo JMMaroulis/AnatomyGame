@@ -645,7 +645,7 @@ MonoBehaviour:
   charms_petrification: 0
   charms_blood_regen: 0
   blood: 1
-  spawn: 0
+  spawn: 1
   levelstart_surgery: 0
   levelstart_medicine_poison: 0
   levelstart_medicine_speed: 0

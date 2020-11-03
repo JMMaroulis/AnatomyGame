@@ -15,7 +15,7 @@ public class BodyPartStatusManager : MonoBehaviour
         UpdateStatusCollection();
     }
 
-    void UpdateStatusCollection()
+    public void UpdateStatusCollection()
     {
         //kill all children of this object
         foreach (Transform child in transform)

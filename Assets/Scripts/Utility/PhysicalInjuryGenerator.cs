@@ -334,7 +334,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         {
             connectedBodyPart.bloodLossRate += 20.0f;
         }
-        Actions_Surgery.RemoveBodyPart(bodyPart, 0, 0);
+        Actions_Surgery.RemoveBodyPartProcess(bodyPart);
         bodyPart.bloodLossRate += 20.0f;
     }
 
@@ -346,14 +346,14 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     public void Missing(Organ organ)
     {
         organs.Remove((Organ)organ);
-        Actions_Surgery.RemoveOrgan((Organ)organ, 0, 0);
-        Actions_Surgery.DeleteBodyPart(organ, 0, 0);
+        Actions_Surgery.RemoveOrganProcess((Organ)organ);
+        Actions_Surgery.DeleteBodyPartProcess(organ);
     }
 
     public void Remove(Organ organ)
     {
         organs.Remove(organ);
-        Actions_Surgery.RemoveOrgan(organ, 0, 0);
+        Actions_Surgery.RemoveOrganProcess(organ);
     }
 
     public void Petrify(BodyPart bodyPart)

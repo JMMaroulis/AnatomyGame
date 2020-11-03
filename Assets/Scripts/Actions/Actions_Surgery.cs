@@ -6,12 +6,12 @@ using UnityEngine;
 public static class Actions_Surgery
 {
 
-    public static void RemoveBodyPart(BodyPart bodyPartObject, float seconds, int goldCost)
+    public static void RemoveBodyPart(BodyPart bodyPart, float seconds, int goldCost)
     {
-        StaticCoroutine.Start(RemoveBodyPartCoroutine(bodyPartObject, seconds, goldCost));
+        StaticCoroutine.Start(RemoveBodyPartCoroutine(bodyPart, seconds, goldCost));
     }
 
-    public static IEnumerator RemoveBodyPartCoroutine(BodyPart bodyPartObject, float seconds, int goldCost)
+    public static IEnumerator RemoveBodyPartCoroutine(BodyPart bodyPart, float seconds, int goldCost)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -27,16 +27,22 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            bodyPartObject.SeverAllConnections();
-            MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
+            RemoveBodyPartProcess(bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-
-            GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
             buttonActions.SelectSurgeryAction();
-            UpdateAllBodyPartHeartConnections();
+
         }
 
+    }
+
+    public static void RemoveBodyPartProcess(BodyPart bodyPart)
+    {
+        bodyPart.SeverAllConnections();
+        MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
+        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+        MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+        UpdateAllBodyPartHeartConnections();
     }
 
     public static void RemoveOrgan(Organ organObject, float seconds, int goldCost)
@@ -58,12 +64,12 @@ public static class Actions_Surgery
             yield return null;
         }
         buttonActions.ActionFinished();
+
         if (!clock.actionCancelFlag)
         {
             RemoveOrganProcess(organ);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
-
         }
 
     }
@@ -77,6 +83,7 @@ public static class Actions_Surgery
         organ.SeverAllConnections();
         GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors(organParent);
         GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+        MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
 
         UpdateAllBodyPartHeartConnections();
 
@@ -171,6 +178,7 @@ public static class Actions_Surgery
         bodyPart.AddContainedOrgan(organ);
         GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
         GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+        MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
 
         UpdateAllBodyPartHeartConnections();
 
@@ -227,6 +235,7 @@ public static class Actions_Surgery
         embeddedObject.Embed(bodypart);
         GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
         GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+        MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
 
         UpdateAllBodyPartHeartConnections();
 
@@ -254,10 +263,11 @@ public static class Actions_Surgery
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-
-        }ConnectBodyPartCoroutine(bodyPart1, bodyPart2);
-        GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-        buttonActions.SelectSurgeryAction();
+            ConnectBodyPartCoroutine(bodyPart1, bodyPart2);
+            GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+            buttonActions.SelectSurgeryAction();
+        }
 
     }
 
@@ -296,6 +306,7 @@ public static class Actions_Surgery
         {
             DeleteBodyPartProcess(bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
             buttonActions.SelectSurgeryAction();
         }
 
