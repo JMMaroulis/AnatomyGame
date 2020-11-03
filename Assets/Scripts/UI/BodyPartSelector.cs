@@ -7,6 +7,7 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
     public BodyPart bodyPart;
     public Image connectedImage;
     public Image disconnectedImage;
+    public Image borderHighlight;
     private ButtonActions buttonActions;
     private BodyPartSelectorManager bodyPartSelectorManager;
     private EmbeddedObjectSelectorManager embeddedObjectSelectorManager;
@@ -41,6 +42,7 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
         bodyPartSelectorManager.ResetSelectors();
         embeddedObjectSelectorManager.ResetSelectors();
         buttonActions.ClearAllButtons();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
     }
 
 }

@@ -15,18 +15,21 @@ public static class Actions_Blood
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
-        
+        buttonActions.UpdateMenuButtonsInteractivity(false);
+
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
             yield return null;
         }
         buttonActions.ActionFinished();
+
         if (!clock.actionCancelFlag)
         {
             bodyPart.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().bloodLossRate - 10);
             MonoBehaviour.FindObjectOfType<ActionTracker>().blood_bandages += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectBloodAction();
         }
         else
         {
@@ -44,6 +47,7 @@ public static class Actions_Blood
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -56,6 +60,7 @@ public static class Actions_Blood
             bodyPart.GetComponent<BodyPart>().bloodLossRate += 10;
             MonoBehaviour.FindObjectOfType<ActionTracker>().blood_lettings += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectBloodAction();
         }
         else
         {
@@ -73,6 +78,7 @@ public static class Actions_Blood
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -86,6 +92,7 @@ public static class Actions_Blood
             bodyPart.GetComponent<BodyPart>().blood += 100;
             MonoBehaviour.FindObjectOfType<ActionTracker>().blood_injected += 100;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectBloodAction();
         }
         else
         {
@@ -103,6 +110,7 @@ public static class Actions_Blood
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
+        buttonActions.UpdateMenuButtonsInteractivity(false);
 
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
@@ -116,6 +124,7 @@ public static class Actions_Blood
             bodyPart.GetComponent<BodyPart>().LoseBloodAmount(100);
             MonoBehaviour.FindObjectOfType<ActionTracker>().blood_extracted += 100;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectBloodAction();
         }
         else
         {

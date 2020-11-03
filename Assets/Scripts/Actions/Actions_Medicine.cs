@@ -26,6 +26,7 @@ public static class Actions_Medicine
         {
             InjectPotionProcess(bodyPart.GetComponent<BodyPart>(), type, amount);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectMedicineAction();
         }
         else
         {

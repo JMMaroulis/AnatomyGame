@@ -34,7 +34,6 @@ public static class Actions_Surgery
             GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
             GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
             buttonActions.SelectSurgeryAction();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
             UpdateAllBodyPartHeartConnections();
         }
 
@@ -64,7 +63,6 @@ public static class Actions_Surgery
             RemoveOrganProcess(organ);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
 
         }
 
@@ -112,7 +110,6 @@ public static class Actions_Surgery
             RemoveEmbeddedObjectProcess(embeddedObject);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
         }
 
     }
@@ -163,7 +160,6 @@ public static class Actions_Surgery
             ImplantOrganProcess(organ, bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
         }
 
     }
@@ -221,7 +217,6 @@ public static class Actions_Surgery
             EmbedObjectProcess(embeddedObject, bodypart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
         }
 
     }
@@ -263,7 +258,6 @@ public static class Actions_Surgery
         }ConnectBodyPartCoroutine(bodyPart1, bodyPart2);
         GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
         buttonActions.SelectSurgeryAction();
-        buttonActions.UpdateMenuButtonsInteractivity(true);
 
     }
 
@@ -303,7 +297,6 @@ public static class Actions_Surgery
             DeleteBodyPartProcess(bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
-            buttonActions.UpdateMenuButtonsInteractivity(true);
         }
 
     }

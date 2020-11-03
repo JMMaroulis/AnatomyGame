@@ -12,10 +12,12 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
     public GameObject bulletSelectorPrefab;
     public GameObject bombSelectorPrefab;
 
+    private ButtonActions buttonActions;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        buttonActions = FindObjectOfType<ButtonActions>();
     }
 
     // Update is called once per frame
@@ -55,6 +57,8 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
             selector.GetComponent<EmbeddedObjectSelector>().embeddedObject = embeddedObject;
         }
     }
+
+
 
     public void ResetSelectors()
     {

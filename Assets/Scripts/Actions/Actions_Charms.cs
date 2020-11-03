@@ -27,6 +27,7 @@ public static class Actions_Charms
             bodyPartObject.gameObject.AddComponent<HeartCharm>();
             MonoBehaviour.FindObjectOfType<ActionTracker>().charm_heart += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectCharmAction();
         }
         else
         {
@@ -57,6 +58,7 @@ public static class Actions_Charms
             bodyPartObject.gameObject.AddComponent<LungCharm>();
             MonoBehaviour.FindObjectOfType<ActionTracker>().charm_lung += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectCharmAction();
         }
         else
         {
@@ -87,6 +89,7 @@ public static class Actions_Charms
             bodyPartObject.gameObject.AddComponent<PetrificationCharm>();
             MonoBehaviour.FindObjectOfType<ActionTracker>().charm_petrification += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectCharmAction();
         }
         else
         {

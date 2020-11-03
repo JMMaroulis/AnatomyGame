@@ -6,6 +6,7 @@ public class EmbeddedObjectSelector : MonoBehaviour, IPointerClickHandler
 {
     public EmbeddedObject embeddedObject;
     public Image image;
+    public Image borderHighlight;
     private ButtonActions buttonActions;
     private EmbeddedObjectSelectorManager embeddedObjectSelectorManager;
 
@@ -15,6 +16,7 @@ public class EmbeddedObjectSelector : MonoBehaviour, IPointerClickHandler
         embeddedObjectSelectorManager = FindObjectOfType<EmbeddedObjectSelectorManager>();
         buttonActions = FindObjectOfType<ButtonActions>();
         Update();
+        borderHighlight.enabled = ShouldBeHighlighted(embeddedObject);
     }
 
     // Update is called once per frame
@@ -32,8 +34,27 @@ public class EmbeddedObjectSelector : MonoBehaviour, IPointerClickHandler
     {
         buttonActions.selectedGameObject = embeddedObject.gameObject;
         //embeddedObjectSelectorManager.ResetSelectors();
+        FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+
         buttonActions.ClearAllButtons();
         buttonActions.UpdateMenuButtonsInteractivity(false);
+        borderHighlight.enabled = ShouldBeHighlighted(embeddedObject);
+    }
+
+    private bool ShouldBeHighlighted(EmbeddedObject embeddedObject)
+    {
+        if (buttonActions.selectedGameObject == null)
+        {
+            return false;
+        }
+
+        //if embedded object is selected
+        if (embeddedObject.gameObject == buttonActions.selectedGameObject)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 }

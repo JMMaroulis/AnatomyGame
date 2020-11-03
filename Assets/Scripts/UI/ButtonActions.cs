@@ -85,9 +85,22 @@ public class ButtonActions : MonoBehaviour
 
     }
 
-    void UpdateMenuTabsInteractivity()
+    public void UpdateMenuTabsInteractivity()
     {
+
         if (selectedGameObject == null)
+        {
+            bloodButton.interactable = false;
+            surgeryButton.interactable = false;
+            medicineButton.interactable = false;
+            charmsButton.interactable = false;
+            spawnLimbButton.interactable = false;
+            spawnOrganButton.interactable = false;
+            waitButton.interactable = false;
+            return;
+        }
+
+        else if (selectedGameObject == null)
         {
             bloodButton.interactable = false;
             surgeryButton.interactable = false;
@@ -151,6 +164,11 @@ public class ButtonActions : MonoBehaviour
 
     public void UpdateMenuButtonsInteractivity(bool interactable)
     {
+        if (clock.isTimePassing)
+        {
+            interactable = false;
+        }
+
         foreach (Button button in menuButtons)
         {
             button.interactable = interactable;
@@ -160,14 +178,14 @@ public class ButtonActions : MonoBehaviour
     public void ActionInProgress()
     {
         UpdateMenuButtonsInteractivity(false);
-
+        UpdateMenuTabsInteractivity();
         cancelActionButton.interactable = true;
     }
 
     public void ActionFinished()
     {
         UpdateMenuButtonsInteractivity(true);
-
+        UpdateMenuTabsInteractivity();
         cancelActionButton.interactable = false;
     }
 
@@ -209,7 +227,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void SelectSurgeryActionOptions_BodyPart()
+    private void SelectSurgeryActionOptions_BodyPart()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
@@ -223,6 +241,7 @@ public class ButtonActions : MonoBehaviour
         }
 
         AssignAttachBodyPartButton(menuButtons[1], bodypart);
+
         AssignDestroyBodyPart(menuButtons[2], bodypart);
         if (bodypart.connectedBodyParts.Count() != 0)
         {
@@ -230,7 +249,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void SelectSurgeryActionOptions_Organ()
+    private void SelectSurgeryActionOptions_Organ()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
@@ -255,7 +274,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void SelectSurgeryActionOptions_EmbeddedObject()
+    private void SelectSurgeryActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
@@ -314,7 +333,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void SelectBloodActionOptions_BodyPart()
+    private void SelectBloodActionOptions_BodyPart()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
@@ -325,7 +344,7 @@ public class ButtonActions : MonoBehaviour
         AssignRemoveBloodButton(menuButtons[3], selectedGameObject.GetComponent<BodyPart>());
     }
 
-    public void SelectBloodActionOptions_Organ()
+    private void SelectBloodActionOptions_Organ()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
@@ -334,7 +353,7 @@ public class ButtonActions : MonoBehaviour
         AssignRemoveBloodButton(menuButtons[1], selectedGameObject.GetComponent<BodyPart>());
     }
 
-    public void SelectBloodActionOptions_EmbeddedObject()
+    private void SelectBloodActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(false);
@@ -366,7 +385,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void SelectMedicineActionOptions_BodyPart()
+    private void SelectMedicineActionOptions_BodyPart()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
@@ -390,7 +409,7 @@ public class ButtonActions : MonoBehaviour
  
     }
 
-    public void SelectMedicineActionOptions_Organ()
+    private void SelectMedicineActionOptions_Organ()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
@@ -413,7 +432,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void SelectMedicineActionOptions_EmbeddedObject()
+    private void SelectMedicineActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(false);
@@ -444,7 +463,7 @@ public class ButtonActions : MonoBehaviour
 
     }
 
-    public void SelectCharmActionOptions_BodyPart()
+    private void SelectCharmActionOptions_BodyPart()
     {
         int n = 0;
         ClearAllButtons();
@@ -468,7 +487,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void SelectCharmActionOptions_Organ()
+    private void SelectCharmActionOptions_Organ()
     {
         int n = 0;
         ClearAllButtons();
@@ -492,7 +511,7 @@ public class ButtonActions : MonoBehaviour
         }
     }
 
-    public void SelectCharmActionOptions_EmbeddedObject()
+    private void SelectCharmActionOptions_EmbeddedObject()
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(false);

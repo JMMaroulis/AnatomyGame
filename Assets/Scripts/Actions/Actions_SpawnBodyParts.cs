@@ -28,6 +28,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnHeart("Heart");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnOrganActionOptions();
         }
         else
         {
@@ -60,6 +61,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftLung("Left Lung");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnOrganActionOptions();
         }
         else
         {
@@ -92,6 +94,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnRightLung("Right Lung");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnOrganActionOptions();
         }
         else
         {
@@ -122,6 +125,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnBrain("Brain");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnOrganActionOptions();
         }
         else
         {
@@ -152,6 +156,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftEye("Left Eye");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnOrganActionOptions();
         }
         else
         {
@@ -182,6 +187,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnRightEye("Right Eye");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnOrganActionOptions();
         }
         else
         {
@@ -212,6 +218,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLiver("Liver");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnOrganActionOptions();
         }
         else
         {
@@ -242,6 +249,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnStomach("Stomach");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnOrganActionOptions();
         }
         else
         {
@@ -276,6 +284,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftArm("Left Arm");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnBodyPartActionOptions();
         }
         else
         {
@@ -306,6 +315,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnRightArm("Right Arm");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnBodyPartActionOptions();
         }
         else
         {
@@ -337,6 +347,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnLeftLeg("Left Leg");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnBodyPartActionOptions();
         }
         else
         {
@@ -367,6 +378,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnRightLeg("Right Leg");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnBodyPartActionOptions();
         }
         else
         {
@@ -397,6 +409,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnTorso("Torso");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnBodyPartActionOptions();
         }
         else
         {
@@ -427,6 +440,7 @@ public static class Actions_SpawnBodyParts
             Object.FindObjectOfType<BodyPartSpawner>().SpawnHead("Head");
             MonoBehaviour.FindObjectOfType<ActionTracker>().spawn_spawned += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
+            buttonActions.SelectSpawnBodyPartActionOptions();
         }
         else
         {

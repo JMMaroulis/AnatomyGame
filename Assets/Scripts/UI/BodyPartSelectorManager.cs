@@ -45,9 +45,13 @@ public class BodyPartSelectorManager : MonoBehaviour
     private List<BodyPartSelector> externalSelectors = new List<BodyPartSelector>();
     public GameObject externalSelectorsPanel;
 
+    private ButtonActions buttonActions;
+
     // Start is called before the first frame update
     void Start()
     {
+        buttonActions = FindObjectOfType<ButtonActions>();
+
         List<BodyPart> bodyParts = FindObjectsOfType<BodyPart>().ToList();
         foreach (BodyPart bodyPart in bodyParts)
         {
@@ -56,6 +60,7 @@ public class BodyPartSelectorManager : MonoBehaviour
                 NewBodyPart(bodyPart);
             }
         }
+
     }
 
     // Update is called once per frame
@@ -63,7 +68,6 @@ public class BodyPartSelectorManager : MonoBehaviour
     {
         
     }
-
 
     public void NewBodyPart(BodyPart bodyPart)
     {
@@ -150,13 +154,66 @@ public class BodyPartSelectorManager : MonoBehaviour
             GameObject selector = GameObject.Instantiate(selectorPrefab, panel.transform);
             organSelectors.Add(selector.GetComponent<BodyPartSelector>());
             selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
+            selector.GetComponent<BodyPartSelector>().borderHighlight.enabled = ShouldBeHighlighted(bodyPart);
         }
         else
         {
             GameObject selector = GameObject.Instantiate(selectorPrefab, notPartOfMainPanel.transform);
             externalSelectors.Add(selector.GetComponent<BodyPartSelector>());
             selector.GetComponent<BodyPartSelector>().bodyPart = bodyPart;
+            selector.GetComponent<BodyPartSelector>().borderHighlight.enabled = ShouldBeHighlighted(bodyPart);
         }
+
+    }
+
+    private bool ShouldBeHighlighted(BodyPart bodyPart)
+    {
+        if (buttonActions.selectedGameObject == null)
+        {
+            return false;
+        }
+
+        //if bodypart is selected
+        if (bodyPart.gameObject == buttonActions.selectedGameObject)
+        {
+            return true;
+        }
+
+        //if selected organ inside bodypart is selected
+        if (buttonActions.selectedGameObject.GetComponent<Organ>() != null)
+        {
+            if (bodyPart.containedOrgans.Contains(buttonActions.selectedGameObject.GetComponent<Organ>()))
+            {
+                return true;
+            }
+        }
+
+
+        //if selected embedded inside bodypart is selected
+        if (buttonActions.selectedGameObject.GetComponent<EmbeddedObject>() != null)
+        {
+            BodyPart parent = buttonActions.selectedGameObject.GetComponent<EmbeddedObject>().parentBodyPart;
+            if (parent == null)
+            {
+                return false;
+            }
+
+            if (bodyPart == parent)
+            {
+                return true;
+            }
+
+
+            foreach (Organ organ in parent.containedOrgans)
+            {
+                if (organ.embeddedObjects.Contains(buttonActions.selectedGameObject.GetComponent<EmbeddedObject>()))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void ResetSelectors(BodyPart selectedBodyPartOverride = null)
