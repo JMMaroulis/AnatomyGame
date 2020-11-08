@@ -481,6 +481,13 @@ public class BodyPart : MonoBehaviour
 
     public bool CheckEmbeddedObjectValidity(EmbeddedObject embeddedObject)
     {
+        if (embeddedObject is ClockworkHeart)
+        {
+            int a = containedOrgans.OfType<Heart>().Count();
+            int b = embeddedObjects.OfType<ClockworkHeart>().Count();
+            return ((a + b) < maxHearts);
+        }
+
         return true;
     }
 

@@ -29,11 +29,16 @@ public static class Actions_Wait
         clock.actionCancelFlag = false;
     }
 
-    public static void WaitOneHour()
+    public static void DischargePatient()
     {
-        GameObject.FindObjectOfType<Clock>().StartClockUntil(3600);
+        if (MonoBehaviour.FindObjectOfType<LifeMonitor>().SafeToDischarge())
+        {
+            GameObject.FindObjectOfType<Clock>().StartClockUntil(3600.0f);
+            GameObject.FindObjectOfType<TextLog>().NewLogEntry("Waiting one hour...");
+            GameObject.FindObjectOfType<ActionTimeBar>().Reset(3600.0f);
+            StaticCoroutine.Start(WaitOneHourCoroutine());
+        }
 
-        StaticCoroutine.Start(WaitOneHourCoroutine());
     }
 
     public static IEnumerator WaitOneHourCoroutine()

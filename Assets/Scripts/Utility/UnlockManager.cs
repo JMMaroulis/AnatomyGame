@@ -78,6 +78,13 @@ public class UnlockManager : MonoBehaviour
         buttons[7].onClick.AddListener(action);
         buttons[7].transform.GetChild(0).GetComponent<Text>().text = "Bodypart Delivery Service";
 
+        if (unlockTracker.spawn)
+        {
+            buttons[8].interactable = false;
+        }
+        action = () => { unlockTracker.spawn_object = true; LevelStart(); };
+        buttons[8].onClick.AddListener(action);
+        buttons[8].transform.GetChild(0).GetComponent<Text>().text = "Implant Delivery Service";
     }
 
     // Update is called once per frame

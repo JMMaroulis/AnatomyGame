@@ -302,16 +302,14 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             parentBodyPart.bloodLossRate += 10;
         }
 
-        GameObject newBullet = Instantiate(bullet);
-        newBullet.name = "Bullet";
-        newBullet.GetComponent<Bullet>().Embed(bodyPart);
+        EmbeddedObject newBullet = FindObjectOfType<ObjectSpawner>().SpawnBullet("bullet");
+        newBullet.Embed(bodyPart);
     }
 
     public void ImplantBomb(BodyPart bodyPart)
     {
-        GameObject newBomb = Instantiate(bomb);
-        newBomb.name = "Bomb";
-        newBomb.GetComponent<Bomb>().Embed(bodyPart);
+        EmbeddedObject newBomb = FindObjectOfType<ObjectSpawner>().SpawnBomb("bomb");
+        newBomb.Embed(bodyPart);
     }
 
     public void Crush(BodyPart bodyPart)

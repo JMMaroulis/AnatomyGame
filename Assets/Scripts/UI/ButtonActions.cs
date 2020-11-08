@@ -34,6 +34,7 @@ public class ButtonActions : MonoBehaviour
     public Button charmsButton;
     public Button spawnLimbButton;
     public Button spawnOrganButton;
+    public Button spawnObjectButton;
     public Button waitButton;
     public Button cancelActionButton;
 
@@ -64,6 +65,7 @@ public class ButtonActions : MonoBehaviour
         charmsButton.gameObject.SetActive(unlocks.charms_petrification || unlocks.charms_heart || unlocks.charms_lung || unlocks.charms_blood_regen); //charm permissions on individual level
         spawnLimbButton.gameObject.SetActive(unlocks.spawn);
         spawnOrganButton.gameObject.SetActive(unlocks.spawn);
+        spawnObjectButton.gameObject.SetActive(unlocks.spawn_object);
         waitButton.gameObject.SetActive(true);
     }
 
@@ -95,6 +97,7 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = false;
             spawnOrganButton.interactable = false;
+            spawnObjectButton.interactable = false;
             waitButton.interactable = false;
             return;
         }
@@ -107,7 +110,8 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
-            waitButton.interactable = false;
+            spawnObjectButton.interactable = true;
+            waitButton.interactable = true;
             return;
         }
 
@@ -119,6 +123,7 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
+            spawnObjectButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -131,6 +136,7 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = true;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
+            spawnObjectButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -143,6 +149,7 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = true;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
+            spawnObjectButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -155,6 +162,7 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
+            spawnObjectButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -530,45 +538,6 @@ public class ButtonActions : MonoBehaviour
         Debug.Log("AAAAA");
     }
 
-    #region Selection
-
-    //make a button select a given bodypart
-    void AssignSelectBodyPart(Button button, BodyPart bodyPart)
-    {
-        UnityEngine.Events.UnityAction action = () => { SelectBodyPart(bodyPart); };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = bodyPart.name;
-    }
-
-    //select a given bodypart
-    void SelectBodyPart(BodyPart bodyPart)
-    {
-        selectedGameObject = bodyPart.gameObject;
-        FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-    }
-
-    //make a button select a given bodypart
-    void AssignSelectOrgan(Button button, Organ organ)
-    {
-        UnityEngine.Events.UnityAction action = () => { SelectBodyPart(organ); };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        if (organ.connectedBodyParts.Count != 0)
-        {
-            buttonText.text = $"{organ.GetComponent<Organ>().connectedBodyParts[0].name} : {organ.name}";
-        }
-        else
-        {
-            buttonText.text = $"External : {organ.name}";
-        }
-    }
-
-    #endregion
-
-
     //set as onclick in editor
     public void SelectSpawnOrganActionOptions()
     {
@@ -597,6 +566,15 @@ public class ButtonActions : MonoBehaviour
         AssignSpawnRightLegButton(menuButtons[3]);
         AssignSpawnHeadButton(menuButtons[4]);
         AssignSpawnTorsoButton(menuButtons[5]);
+    }
+
+    //set as onclick in editor
+    public void SelectSpawnObjectActionOptions()
+    {
+        ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
+
+        AssignSpawnClockworkHeart(menuButtons[0]);
     }
 
 
@@ -1885,6 +1863,36 @@ public class ButtonActions : MonoBehaviour
 
     #endregion
 
+    #region spawn objects
+
+    void AssignSpawnClockworkHeart(Button button)
+    {
+        float seconds = 60.0f * 3.0f;
+        int goldCost = 150;
+        UnityEngine.Events.UnityAction action = () =>
+        {
+            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
+            {
+                textLog.NewLogEntry("Insufficient funds.");
+            }
+            else
+            {
+                Actions_SpawnObjects.SpawnClockworkHeart(seconds, goldCost);
+                textLog.NewLogEntry($"Spawning a new clockwork heart...");
+                actionTimeBar.Reset(seconds);
+            }
+        };
+        button.onClick.AddListener(action);
+
+        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
+        buttonText.text = $"Spawn a clockwork heart: {seconds} seconds, {goldCost} gold";
+
+        string mouseoverText = "Creates a new clockwork heart. Not as efficient as the real thing, but cheaper.";
+        SetButtonMouseoverText(button, mouseoverText);
+    }
+
+    #endregion
+
     #region wait
 
     void AssignWaitTenSeconds(Button button)
@@ -1937,7 +1945,7 @@ public class ButtonActions : MonoBehaviour
 
     void AssignWaitOneHour(Button button)
     {
-        UnityEngine.Events.UnityAction action = () => { Actions_Wait.WaitOneHour(); textLog.NewLogEntry("Waiting one hour..."); actionTimeBar.Reset(3600.0f); };
+        UnityEngine.Events.UnityAction action = () => { Actions_Wait.DischargePatient(); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = "Wait an hour (Victory Check)";
