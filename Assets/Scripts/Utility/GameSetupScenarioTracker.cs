@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 
-public class InjurySpawnTracker : MonoBehaviour
+public class GameSetupScenarioTracker : MonoBehaviour
 {
     public int easyInjuries;
     public int mediumInjuries;
     public int hardInjuries;
+    public int requestedProcedures;
+
     public int patientNumber;
 
     public int levelstart_easyInjuries;
     public int levelstart_mediumInjuries;
     public int levelstart_hardInjuries;
     public int levelstart_patientNumber;
+    public int levelstart_requestedProcedures;
 
     // Start is called before the first frame update
     void Start()

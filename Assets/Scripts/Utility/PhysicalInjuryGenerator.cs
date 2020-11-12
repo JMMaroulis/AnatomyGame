@@ -13,16 +13,20 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     public GameObject bullet;
     public GameObject bomb;
 
+    //requested procedure logs
+    public bool ClockworkHeartRequest;
+
     // Start is called before the first frame update
     void Start()
     {
-        InjurySpawnTracker injurySpawnTracker = GameObject.FindObjectOfType<InjurySpawnTracker>();
+        GameSetupScenarioTracker injurySpawnTracker = GameObject.FindObjectOfType<GameSetupScenarioTracker>();
         unlockTracker = FindObjectOfType<UnlockTracker>();
         PopulateBodyPartsList();
         PopulateOrgansList();
         EasyInjuries(injurySpawnTracker.easyInjuries);
         MediumInjuries(injurySpawnTracker.mediumInjuries);
         HardInjuries(injurySpawnTracker.hardInjuries);
+        RequestedProcedures(injurySpawnTracker.requestedProcedures);
     }
 
     //select n random bodyparts
@@ -281,6 +285,27 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             }
 
         }
+    }
+
+    public void RequestedProcedures(int numberOfProcedures)
+    {
+        for (int i = 0; i < numberOfProcedures; i++)
+        {
+            int procedureNumber = Random.Range(0, 1);
+
+            switch (procedureNumber)
+            {
+                case 0:
+                    textLog.NewLogEntry("The patient requests that their heart be clockwork, not biological.");
+                    ClockworkHeartRequest = true;
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
     }
 
     //assorted physical injury methods

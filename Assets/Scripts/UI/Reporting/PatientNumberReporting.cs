@@ -9,7 +9,7 @@ public class PatientNumberReporting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        patientNumberText.text = $"Patient #{FindObjectOfType<InjurySpawnTracker>().patientNumber}";
+        patientNumberText.text = $"Patient #{FindObjectOfType<GameSetupScenarioTracker>().patientNumber}";
     }
 
     // Update is called once per frame

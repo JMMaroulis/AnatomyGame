@@ -34,7 +34,7 @@ public class SaveManager : MonoBehaviour
         GoldTracker goldTracker = FindObjectOfType<GoldTracker>();
         encodedTrackers += "\"goldTracker\": " + JsonUtility.ToJson(goldTracker) + ",";
 
-        InjurySpawnTracker injurySpawnTracker = FindObjectOfType<InjurySpawnTracker>();
+        GameSetupScenarioTracker injurySpawnTracker = FindObjectOfType<GameSetupScenarioTracker>();
         encodedTrackers += "\"injurySpawnTracker\": " + JsonUtility.ToJson(injurySpawnTracker) + ",";
 
         UnlockTracker unlockTracker = FindObjectOfType<UnlockTracker>();
@@ -69,7 +69,7 @@ public class SaveManager : MonoBehaviour
             JsonUtility.FromJsonOverwrite(encoders.goldTracker, goldTracker);
             goldTracker.OnLoad();
 
-            InjurySpawnTracker injurySpawnTracker = FindObjectOfType<InjurySpawnTracker>();
+            GameSetupScenarioTracker injurySpawnTracker = FindObjectOfType<GameSetupScenarioTracker>();
             JsonUtility.FromJsonOverwrite(encoders.injurySpawnTracker, injurySpawnTracker);
             injurySpawnTracker.OnLoad();
 

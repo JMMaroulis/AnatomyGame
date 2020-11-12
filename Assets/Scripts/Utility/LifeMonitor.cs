@@ -67,6 +67,12 @@ public class LifeMonitor : MonoBehaviour
             victory = false;
         }
 
+        if (ClockworkHeartCheck())
+        {
+            victory = false;
+        }
+
+
         hasPlayerWon = victory;
         if (victory)
         {
@@ -92,109 +98,9 @@ public class LifeMonitor : MonoBehaviour
         bool safe = true;
 
         //check there's an appropriate number of each organ and limb
-        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
+        if (BodyPartCountCheck())
         {
-            //limbs
-            int numLeftArms = bodyPart.connectedBodyParts.Count(element => element is LeftArm);
-            if (bodyPart.maxLeftArms != numLeftArms)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxLeftArms} left arms, has {numLeftArms}.");
-                safe = false;
-            }
-
-            int numRightArms = bodyPart.connectedBodyParts.Count(element => element is RightArm);
-            if (bodyPart.maxRightArms != numRightArms)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxRightArms} right arms, has {numRightArms}.");
-                safe = false;
-            }
-
-            int numLeftLegs = bodyPart.connectedBodyParts.Count(element => element is LeftLeg);
-            if (bodyPart.maxLeftLegs != numLeftLegs)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxLeftLegs} left legs, has {numLeftLegs}.");
-                safe = false;
-            }
-
-            int numRightLegs = bodyPart.connectedBodyParts.Count(element => element is RightLeg);
-            if (bodyPart.maxRightLegs != numRightLegs)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxRightLegs} right legs, has {numRightLegs}.");
-                safe = false;
-            }
-
-            int numHeads = bodyPart.connectedBodyParts.Count(element => element is Head);
-            if (bodyPart.maxHeads != numHeads)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxHeads} heads, has {numHeads}.");
-                safe = false;
-            }
-
-            int numTorsos = bodyPart.connectedBodyParts.Count(element => element is Torso);
-            if (bodyPart.maxTorsos != numTorsos)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxTorsos} torsos, has {numTorsos}.");
-                safe = false;
-            }
-
-            //organs
-            int numBrains = bodyPart.containedOrgans.Count(element => element is Brain);
-            if (bodyPart.maxBrains != numBrains)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxBrains} brains, has {numBrains}.");
-                safe = false;
-            }
-
-            int numLeftEyes = bodyPart.containedOrgans.Count(element => element is LeftEye);
-            if (bodyPart.maxLeftEyes != numLeftEyes)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxLeftEyes} left eyes, has {numLeftEyes}.");
-                safe = false;
-            }
-
-            int numRightEyes = bodyPart.containedOrgans.Count(element => element is RightEye);
-            if (bodyPart.maxRightEyes != numRightEyes)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxRightEyes} right eyes, has {numRightEyes}.");
-                safe = false;
-            }
-
-            int numHearts = bodyPart.containedOrgans.Count(element => element is Heart);
-            numHearts += bodyPart.embeddedObjects.Count(element => element is ClockworkHeart);
-            if (bodyPart.maxHearts != numHearts)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxHearts} hearts, has {numHearts}.");
-                safe = false;
-            }
-
-            int numLivers = bodyPart.containedOrgans.Count(element => element is Liver);
-            if (bodyPart.maxLivers != numLivers)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxLivers} livers, has {numLivers}.");
-                safe = false;
-            }
-
-            int numLeftLungs = bodyPart.containedOrgans.Count(element => element is LeftLung);
-            if (bodyPart.maxLeftLungs != numLeftLungs)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxLeftLungs} left lungs, has {numLeftLungs}.");
-                safe = false;
-            }
-
-            int numRightLungs = bodyPart.containedOrgans.Count(element => element is RightLung);
-            if (bodyPart.maxRightLungs != numRightLungs)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxRightLungs} right lungs, has {numRightLungs}.");
-                safe = false;
-            }
-
-            int numStomachs = bodyPart.containedOrgans.Count(element => element is Stomach);
-            if (bodyPart.maxStomachs != numStomachs)
-            {
-                textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxStomachs} stomachs, has {numStomachs}.");
-                safe = false;
-            }
-
+            safe = false;
         }
 
         //currently, all charms are set to expire after 30 minutes anyway, but best to check just in case:
@@ -208,6 +114,11 @@ public class LifeMonitor : MonoBehaviour
             safe = false;
         }
 
+        if (ClockworkHeartCheck())
+        {
+            safe = false;
+        }
+
         return safe;
 
     }
@@ -217,6 +128,10 @@ public class LifeMonitor : MonoBehaviour
         bool result = false;
         foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
+            if (!bodyPart.isPartOfMainBody)
+            {
+                continue;
+            }
             if (bodyPart.slowPoison > 0)
             {
                 textLog.NewLogEntry($"{bodyPart.name} is still poisoned.");
@@ -225,6 +140,10 @@ public class LifeMonitor : MonoBehaviour
         }
         foreach (Organ organ in bodyPartManager.organs)
         {
+            if (!organ.isPartOfMainBody)
+            {
+                continue;
+            }
             if (organ.slowPoison > 0)
             {
                 textLog.NewLogEntry($"{organ.name} is still poisoned.");
@@ -240,6 +159,10 @@ public class LifeMonitor : MonoBehaviour
         bool result = false;
         foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
+            if (!bodyPart.isPartOfMainBody)
+            {
+                continue;
+            }
             if (bodyPart.GetComponent<Charm>() != null)
             {
                 textLog.NewLogEntry($"{bodyPart.name} is still charmed.");
@@ -248,6 +171,10 @@ public class LifeMonitor : MonoBehaviour
         }
         foreach (Organ organ in bodyPartManager.organs)
         {
+            if (!organ.isPartOfMainBody)
+            {
+                continue;
+            }
             if (organ.GetComponent<Charm>() != null)
             {
                 textLog.NewLogEntry($"{organ.name} is still charmed.");
@@ -284,6 +211,11 @@ public class LifeMonitor : MonoBehaviour
         //check there's an appropriate number of each organ and limb
         foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
+            if (!bodyPart.isPartOfMainBody)
+            {
+                continue;
+            }
+
             //limbs
             int numLeftArms = bodyPart.connectedBodyParts.Count(element => element is LeftArm);
             if (bodyPart.maxLeftArms != numLeftArms)
@@ -395,6 +327,10 @@ public class LifeMonitor : MonoBehaviour
         bool result = false;
         foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
+            if (!bodyPart.isPartOfMainBody)
+            {
+                continue;
+            }
             if (bodyPart.blood < bodyPart.bloodRequiredToFunction)
             {
                 textLog.NewLogEntry($"{bodyPart.name} doesn't have enough blood.");
@@ -413,6 +349,10 @@ public class LifeMonitor : MonoBehaviour
         }
         foreach (Organ organ in bodyPartManager.organs)
         {
+            if (!organ.isPartOfMainBody)
+            {
+                continue;
+            }
             if (organ.blood < organ.bloodRequiredToFunction)
             {
                 textLog.NewLogEntry($"{organ.name} doesn't have enough blood.");
@@ -431,4 +371,36 @@ public class LifeMonitor : MonoBehaviour
         }
         return result;
     }
+
+    public bool ClockworkHeartCheck()
+    {
+
+        bool result = false;
+
+        if (FindObjectOfType<PhysicalInjuryGenerator>().ClockworkHeartRequest)
+        {
+
+            Heart[] hearts = FindObjectsOfType<Heart>();
+            int n = 0;
+            foreach (Heart heart in hearts)
+            {
+                if (heart.isPartOfMainBody)
+                {
+                    n += 1;
+                }
+            }
+
+            if (n > 0)
+            {
+                result = true;
+                textLog.NewLogEntry($"The patient still has {hearts.Count()} hearts that aren't clockwork.");
+            }
+
+
+        }
+
+        return result;
+        
+    }
+
 }

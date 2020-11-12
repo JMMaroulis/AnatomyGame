@@ -3,7 +3,7 @@
 public class LevelManager : MonoBehaviour
 {
     public GoldTracker goldTracker;
-    public InjurySpawnTracker injurySpawnTracker;
+    public GameSetupScenarioTracker gameSetupScenarioTracker;
     public UnlockTracker unlockTracker;
     public ActionTracker actionTracker;
     public RandomTracker randomTracker;
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
 
         goldTracker.LevelStart();
-        injurySpawnTracker.LevelStart();
+        gameSetupScenarioTracker.LevelStart();
         unlockTracker.LevelStart();
         actionTracker.LevelStart();
         randomTracker.LevelStart();

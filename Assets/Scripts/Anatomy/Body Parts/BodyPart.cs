@@ -10,19 +10,43 @@ public class BodyPart : MonoBehaviour
 
     //blood stuff
     public float bloodRequiredToFunction;
-    public float blood;
+    public float _blood;
+    public float blood
+    {
+        set { _blood = Mathf.Min(Mathf.Max(0, value), bloodMax); }
+        get { return _blood; }
+    }
     public float bloodLossRate;
     public float bloodPumpRate;
     public float bloodMax;
 
     //oxygen stuff
-    public float oxygen;
+    public float _oxygen;
+    public float oxygen
+    {
+        set { _oxygen = Mathf.Min(Mathf.Max(0, value), oxygenMax); }
+        get { return _oxygen; }
+    }
     public float oxygenMax;
     public float oxygenRequired;
 
-    public float damage;
+    //dmage stuff
+    public float _damage;
+    public float damage
+    {
+        set { _damage = Mathf.Min(value, damageMax); }
+        get { return _damage; }
+    }
     public float damageMax;
-    public float efficiency;
+
+    //efficiency stuff
+    public float efficiencyMultiplier;
+    public float _efficiency;
+    public float efficiency
+    {
+        set { _efficiency = value; }
+        get { return _efficiency * efficiencyMultiplier; }
+    }
 
     //connections
     //NB: connectedHearts and connectedOrgans are NOT MUTUALLY EXCLUSIVE LISTS

@@ -6,7 +6,7 @@ public class NewGameManager : MonoBehaviour
 {
     public UnlockTracker unlockTracker;
     public GoldTracker goldTracker;
-    public InjurySpawnTracker injurySpawnTracker;
+    public GameSetupScenarioTracker injurySpawnTracker;
 
 
     // Start is called before the first frame update
