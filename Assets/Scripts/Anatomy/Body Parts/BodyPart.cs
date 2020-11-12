@@ -10,43 +10,20 @@ public class BodyPart : MonoBehaviour
 
     //blood stuff
     public float bloodRequiredToFunction;
-    public float _blood;
-    public float blood
-    {
-        set { _blood = Mathf.Min(Mathf.Max(0, value), bloodMax); }
-        get { return _blood; }
-    }
+    public float blood;
     public float bloodLossRate;
     public float bloodPumpRate;
     public float bloodMax;
 
     //oxygen stuff
-    public float _oxygen;
-    public float oxygen
-    {
-        set { _oxygen = Mathf.Min(Mathf.Max(0, value), oxygenMax); }
-        get { return _oxygen; }
-    }
+    public float oxygen;
     public float oxygenMax;
     public float oxygenRequired;
+    public float oxygenDamageRate;
 
-    //dmage stuff
-    public float _damage;
-    public float damage
-    {
-        set { _damage = Mathf.Min(value, damageMax); }
-        get { return _damage; }
-    }
+    public float damage;
     public float damageMax;
-
-    //efficiency stuff
-    public float efficiencyMultiplier;
-    public float _efficiency;
-    public float efficiency
-    {
-        set { _efficiency = value; }
-        get { return _efficiency * efficiencyMultiplier; }
-    }
+    public float efficiency;
 
     //connections
     //NB: connectedHearts and connectedOrgans are NOT MUTUALLY EXCLUSIVE LISTS
@@ -85,6 +62,7 @@ public class BodyPart : MonoBehaviour
     public float stasisPotion;
     public float coagulantPotion;
     public float hastePotion;
+    public float slowPoisonDamageRate;
 
     public BodyPartManager bodyPartManager;
 
@@ -327,7 +305,7 @@ public class BodyPart : MonoBehaviour
         {
             float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * 0.001f);
             slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
-            damage = Mathf.Max(0.0f, damage + slowPoison * deltaTime * 0.001f);
+            damage = Mathf.Max(0.0f, damage + slowPoison * deltaTime * slowPoisonDamageRate);
         }
 
         //coagulant potion
@@ -535,7 +513,7 @@ public class BodyPart : MonoBehaviour
     public void UpdateDamage(float deltaTime)
     {
         float oxygenRatio = 1 - Mathf.Min((oxygen / oxygenRequired), 1); //0 good, 1 bad
-        damage = Mathf.Min(damage + (oxygenRatio * deltaTime * 0.2f), damageMax);
+        damage = Mathf.Min(damage + (oxygenRatio * deltaTime * oxygenDamageRate), damageMax);
     }
 
     public void SeverConnectionOutgoing(GameObject connectedBodyPart, float inducedBloodLossRate)

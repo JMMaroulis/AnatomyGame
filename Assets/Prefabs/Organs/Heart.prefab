@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5862114816469363198}
   - component: {fileID: 5757449452893809029}
   m_Layer: 0
-  m_Name: new Heart
+  m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,30 +46,37 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
-  clock: {fileID: 0}
   bloodRequiredToFunction: 100
   blood: 500
   bloodLossRate: 0
   bloodPumpRate: 50
   bloodMax: 700
-  oxygen: 250
+  oxygen: 500
   oxygenMax: 500
   oxygenRequired: 5
+  oxygenDamageRate: 0.2
   damage: 0
   damageMax: 100
-  efficiency: 1
+  efficiency: 0
   connectedBodyParts: []
   containedOrgans: []
   connectedHearts: []
-  maxArms: 0
-  maxLegs: 0
+  embeddedObjects: []
+  isPartOfMainBody: 0
+  isConnectedToBrain: 0
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
   maxHeads: 0
   maxTorsos: 1
   maxBrains: 0
-  maxEyes: 0
+  maxLeftEyes: 0
+  maxRightEyes: 0
   maxHearts: 0
   maxLivers: 0
-  maxLungs: 0
+  maxLeftLungs: 0
+  maxRightLungs: 0
   maxStomachs: 0
   healthPotion: 0
   antidote: 0
@@ -77,3 +84,5 @@ MonoBehaviour:
   stasisPotion: 0
   coagulantPotion: 0
   hastePotion: 0
+  slowPoisonDamageRate: 0.001
+  bodyPartManager: {fileID: 0}

@@ -16,7 +16,6 @@ public class ButtonActions : MonoBehaviour
     public Text examineBox;
 
     private int bodyPartMenuCounter = 0;
-    private int organMenuCounter = 0;
 
     public LifeMonitor lifeMonitor;
     public ActionTimeBar actionTimeBar;
@@ -327,7 +326,7 @@ public class ButtonActions : MonoBehaviour
         AssignWaitFiveMinutes(menuButtons[3]);
         AssignWaitTenMinutes(menuButtons[4]);
         AssignWaitThirtyMinutes(menuButtons[5]);
-        AssignWaitOneHour(menuButtons[6]);
+        AssignDischargePatient(menuButtons[6]);
     }
 
     //set as onclick in editor
@@ -1943,12 +1942,12 @@ public class ButtonActions : MonoBehaviour
         buttonText.text = "Wait thirty minutes";
     }
 
-    void AssignWaitOneHour(Button button)
+    void AssignDischargePatient(Button button)
     {
         UnityEngine.Events.UnityAction action = () => { Actions_Wait.DischargePatient(); };
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = "Wait an hour (Victory Check)";
+        buttonText.text = "Discharge Patient (30 minutes)";
     }
 
     #endregion

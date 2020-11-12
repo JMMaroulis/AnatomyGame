@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public static class Actions_Wait
@@ -33,9 +31,9 @@ public static class Actions_Wait
     {
         if (MonoBehaviour.FindObjectOfType<LifeMonitor>().SafeToDischarge())
         {
-            GameObject.FindObjectOfType<Clock>().StartClockUntil(3600.0f);
-            GameObject.FindObjectOfType<TextLog>().NewLogEntry("Waiting one hour...");
-            GameObject.FindObjectOfType<ActionTimeBar>().Reset(3600.0f);
+            GameObject.FindObjectOfType<Clock>().StartClockUntil(1800.0f);
+            GameObject.FindObjectOfType<TextLog>().NewLogEntry("Waiting 30 minutes...");
+            GameObject.FindObjectOfType<ActionTimeBar>().Reset(1800.0f);
             StaticCoroutine.Start(WaitOneHourCoroutine());
         }
 

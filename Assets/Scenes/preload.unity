@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldTracker: {fileID: 1189550778}
-  injurySpawnTracker: {fileID: 1607601281}
+  gameSetupScenarioTracker: {fileID: 1607601281}
   unlockTracker: {fileID: 1749921798}
   actionTracker: {fileID: 675533211}
   randomTracker: {fileID: 871787592}
@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 1607601282}
   - component: {fileID: 1607601281}
   m_Layer: 0
-  m_Name: InjurySpawnTracker
+  m_Name: GameScenarioSetupTracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,17 +631,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1607601280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a9eeefa45b03b48a8f3aeed552c912, type: 3}
+  m_Script: {fileID: 11500000, guid: a52240101fc16c341a309044f81b91f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   easyInjuries: 0
   mediumInjuries: 0
   hardInjuries: 0
+  requestedProcedures: 0
   patientNumber: 0
   levelstart_easyInjuries: 0
   levelstart_mediumInjuries: 0
   levelstart_hardInjuries: 0
   levelstart_patientNumber: 0
+  levelstart_requestedProcedures: 0
 --- !u!114 &1607601282
 MonoBehaviour:
   m_ObjectHideFlags: 0
