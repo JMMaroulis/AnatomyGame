@@ -82,9 +82,9 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[8].interactable = false;
         }
-        action = () => { unlockTracker.spawn_object = true; LevelStart(); };
+        action = () => { unlockTracker.spawn_clock = true; LevelStart(); };
         buttons[8].onClick.AddListener(action);
-        buttons[8].transform.GetChild(0).GetComponent<Text>().text = "Implant Delivery Service";
+        buttons[8].transform.GetChild(0).GetComponent<Text>().text = "Clockwork Delivery Service";
     }
 
     // Update is called once per frame

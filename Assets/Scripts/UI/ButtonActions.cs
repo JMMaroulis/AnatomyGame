@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
 
 public class ButtonActions : MonoBehaviour
 {
@@ -33,7 +34,8 @@ public class ButtonActions : MonoBehaviour
     public Button charmsButton;
     public Button spawnLimbButton;
     public Button spawnOrganButton;
-    public Button spawnObjectButton;
+    public Button spawnClockLimbButton;
+    public Button spawnClockOrganButton;
     public Button waitButton;
     public Button cancelActionButton;
 
@@ -64,7 +66,8 @@ public class ButtonActions : MonoBehaviour
         charmsButton.gameObject.SetActive(unlocks.charms_petrification || unlocks.charms_heart || unlocks.charms_lung || unlocks.charms_blood_regen); //charm permissions on individual level
         spawnLimbButton.gameObject.SetActive(unlocks.spawn);
         spawnOrganButton.gameObject.SetActive(unlocks.spawn);
-        spawnObjectButton.gameObject.SetActive(unlocks.spawn_object);
+        spawnClockLimbButton.gameObject.SetActive(unlocks.spawn);
+        spawnClockOrganButton.gameObject.SetActive(unlocks.spawn_clock);
         waitButton.gameObject.SetActive(true);
     }
 
@@ -96,7 +99,8 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = false;
             spawnOrganButton.interactable = false;
-            spawnObjectButton.interactable = false;
+            spawnClockLimbButton.interactable = false;
+            spawnClockOrganButton.interactable = false;
             waitButton.interactable = false;
             return;
         }
@@ -109,7 +113,8 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
-            spawnObjectButton.interactable = true;
+            spawnClockLimbButton.interactable = true;
+            spawnClockOrganButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -122,7 +127,8 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
-            spawnObjectButton.interactable = true;
+            spawnClockLimbButton.interactable = true;
+            spawnClockOrganButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -135,7 +141,8 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = true;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
-            spawnObjectButton.interactable = true;
+            spawnClockLimbButton.interactable = true;
+            spawnClockOrganButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -148,7 +155,8 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = true;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
-            spawnObjectButton.interactable = true;
+            spawnClockLimbButton.interactable = true;
+            spawnClockOrganButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -161,7 +169,8 @@ public class ButtonActions : MonoBehaviour
             charmsButton.interactable = false;
             spawnLimbButton.interactable = true;
             spawnOrganButton.interactable = true;
-            spawnObjectButton.interactable = true;
+            spawnClockLimbButton.interactable = true;
+            spawnClockOrganButton.interactable = true;
             waitButton.interactable = true;
             return;
         }
@@ -543,15 +552,56 @@ public class ButtonActions : MonoBehaviour
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
 
-        AssignSpawnHeartButton(menuButtons[0]);
-        AssignSpawnLeftLungButton(menuButtons[1]);
-        AssignSpawnRightLungButton(menuButtons[2]);
-        AssignSpawnBrainButton(menuButtons[3]);
-        AssignSpawnLeftEyeButton(menuButtons[4]);
-        AssignSpawnRightEyeButton(menuButtons[5]);
-        AssignSpawnLiverButton(menuButtons[6]);
-        AssignSpawnStomachButton(menuButtons[7]);
+        float seconds = 60.0f * 5.0f;
+        int goldCost = 250;
+
+        AssignSpawnBodyPartTemplate(menuButtons[0], goldCost, seconds, Actions_SpawnBodyParts.SpawnHeart, "Heart");
+        AssignSpawnBodyPartTemplate(menuButtons[1], goldCost, seconds, Actions_SpawnBodyParts.SpawnLeftLung, "Left Lung");
+        AssignSpawnBodyPartTemplate(menuButtons[2], goldCost, seconds, Actions_SpawnBodyParts.SpawnRightLung, "Right Lung");
+        AssignSpawnBodyPartTemplate(menuButtons[3], goldCost, seconds, Actions_SpawnBodyParts.SpawnBrain, "Brain");
+        AssignSpawnBodyPartTemplate(menuButtons[4], goldCost, seconds, Actions_SpawnBodyParts.SpawnLeftEye, "Left Eye");
+        AssignSpawnBodyPartTemplate(menuButtons[5], goldCost, seconds, Actions_SpawnBodyParts.SpawnRightEye, "Right Eye");
+        AssignSpawnBodyPartTemplate(menuButtons[6], goldCost, seconds, Actions_SpawnBodyParts.SpawnLiver, "Liver");
+        AssignSpawnBodyPartTemplate(menuButtons[7], goldCost, seconds, Actions_SpawnBodyParts.SpawnStomach, "Stomach");
+
     }
+
+    //set as onclick in editor
+    public void SelectSpawnClockworkOrganActionOptions()
+    {
+        ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
+
+        float seconds = 60.0f * 5.0f;
+        int goldCost = 150;
+
+        AssignSpawnClockworkTemplate(menuButtons[0], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkHeart, "Heart");
+        AssignSpawnClockworkTemplate(menuButtons[1], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftLung, "Left Lung");
+        AssignSpawnClockworkTemplate(menuButtons[2], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightLung, "Right Lung");
+        AssignSpawnClockworkTemplate(menuButtons[3], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkBrain, "Brain");
+        AssignSpawnClockworkTemplate(menuButtons[4], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftEye, "Left Eye");
+        AssignSpawnClockworkTemplate(menuButtons[5], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightEye, "Right Eye");
+        AssignSpawnClockworkTemplate(menuButtons[6], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLiver, "Liver");
+        AssignSpawnClockworkTemplate(menuButtons[7], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkStomach, "Stomach");
+    }
+
+    //set as onclick in editor
+    public void SelectSpawnClockworkLimbActionOptions()
+    {
+        ClearAllButtons();
+        UpdateMenuButtonsInteractivity(true);
+
+        float seconds = 60.0f * 5.0f;
+        int goldCost = 150;
+
+        AssignSpawnClockworkTemplate(menuButtons[0], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftArm, "Left Arm");
+        AssignSpawnClockworkTemplate(menuButtons[1], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightArm, "Right Arm");
+        AssignSpawnClockworkTemplate(menuButtons[2], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftLeg, "Left Leg");
+        AssignSpawnClockworkTemplate(menuButtons[3], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightLeg, "Right Leg");
+        AssignSpawnClockworkTemplate(menuButtons[4], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkHead, "Head");
+        AssignSpawnClockworkTemplate(menuButtons[5], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkTorso, "Torso");
+    }
+
 
     //set as onclick in editor
     public void SelectSpawnBodyPartActionOptions()
@@ -559,12 +609,15 @@ public class ButtonActions : MonoBehaviour
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
 
-        AssignSpawnLeftArmButton(menuButtons[0]);
-        AssignSpawnRightArmButton(menuButtons[1]);
-        AssignSpawnLeftLegButton(menuButtons[2]);
-        AssignSpawnRightLegButton(menuButtons[3]);
-        AssignSpawnHeadButton(menuButtons[4]);
-        AssignSpawnTorsoButton(menuButtons[5]);
+        float seconds = 60.0f * 5.0f;
+        int goldCost = 250;
+
+        AssignSpawnBodyPartTemplate(menuButtons[0], goldCost, seconds, Actions_SpawnBodyParts.SpawnLeftArm, "Left Arm");
+        AssignSpawnBodyPartTemplate(menuButtons[1], goldCost, seconds, Actions_SpawnBodyParts.SpawnRightArm, "Right Arm");
+        AssignSpawnBodyPartTemplate(menuButtons[2], goldCost, seconds, Actions_SpawnBodyParts.SpawnLeftLeg, "Left Leg");
+        AssignSpawnBodyPartTemplate(menuButtons[3], goldCost, seconds, Actions_SpawnBodyParts.SpawnRightLeg, "Right Leg");
+        AssignSpawnBodyPartTemplate(menuButtons[4], goldCost, seconds, Actions_SpawnBodyParts.SpawnHead, "Head");
+        AssignSpawnBodyPartTemplate(menuButtons[5], goldCost, seconds, Actions_SpawnBodyParts.SpawnTorso, "Torso");
     }
 
     //set as onclick in editor
@@ -572,8 +625,6 @@ public class ButtonActions : MonoBehaviour
     {
         ClearAllButtons();
         UpdateMenuButtonsInteractivity(true);
-
-        AssignSpawnClockworkHeart(menuButtons[0]);
     }
 
 
@@ -1487,12 +1538,8 @@ public class ButtonActions : MonoBehaviour
 
     #endregion
 
-    #region spawnBodyParts
-
-    void AssignSpawnHeartButton(Button button)
+    void AssignSpawnBodyPartTemplate(Button button, int goldCost, float seconds, Action<float, int> spawnMethod, string partName)
     {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () =>
         {
             if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
@@ -1501,8 +1548,8 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_SpawnBodyParts.SpawnHeart(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new heart...");
+                spawnMethod(seconds, goldCost);
+                textLog.NewLogEntry($"Spawning a new {partName}..");
                 actionTimeBar.Reset(seconds);
             }
         };
@@ -1510,16 +1557,14 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new heart: {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"{partName}: {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Creates a new Heart, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        string mouseoverText = $"Creates a new {partName}, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
         SetButtonMouseoverText(button, mouseoverText);
     }
 
-    void AssignSpawnLeftLungButton(Button button)
+    void AssignSpawnClockworkTemplate(Button button, int goldCost, float seconds, Action<float, int> spawnMethod, string partName)
     {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
         UnityEngine.Events.UnityAction action = () =>
         {
             if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
@@ -1528,8 +1573,8 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_SpawnBodyParts.SpawnLeftLung(seconds, goldCost); 
-                textLog.NewLogEntry($"Spawning a new lung...");
+                spawnMethod(seconds, goldCost);
+                textLog.NewLogEntry($"Spawning a new {partName}..");
                 actionTimeBar.Reset(seconds);
             }
         };
@@ -1537,360 +1582,11 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new  left lung: {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"{partName}: {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Creates a new Left Lung, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-
-    }
-
-    void AssignSpawnRightLungButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("Insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnRightLung(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new lung...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new Right Lung: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Right Lung, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
+        string mouseoverText = $"Creates a new {partName}, unconnected to any bodypart.";
         SetButtonMouseoverText(button, mouseoverText);
     }
-
-    void AssignSpawnBrainButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnBrain(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new brain...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new brain: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Brain, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnLeftEyeButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("Insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnLeftEye(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new eye...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new left eye: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Left Eye, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnRightEyeButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("Insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnRightEye(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new eye...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new right eye: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Right Eye, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnLiverButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnLiver(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new liver...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new liver: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Liver, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnStomachButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnStomach(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new stomach...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new stomach: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Stomach, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnLeftArmButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnLeftArm(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new arm...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new left arm: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Left Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnRightArmButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnRightArm(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new arm...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new right arm: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Right Arm, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnLeftLegButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnLeftLeg(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new leg...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new left leg: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Left Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnRightLegButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnRightLeg(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new leg...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new right leg: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Right Leg, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnTorsoButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("Insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnTorso(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new torso...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new torso: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Torso, with all contained organs, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    void AssignSpawnHeadButton(Button button)
-    {
-        float seconds = 60.0f * 5.0f;
-        int goldCost = 250;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("Insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnBodyParts.SpawnHead(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new head...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a new head: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new Head, with all contained organs, unconnected to any bodypart. Has full blood, oxygen, and health levels.\nWill require immediate attention.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    #endregion
-
-    #region spawn objects
-
-    void AssignSpawnClockworkHeart(Button button)
-    {
-        float seconds = 60.0f * 3.0f;
-        int goldCost = 150;
-        UnityEngine.Events.UnityAction action = () =>
-        {
-            if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
-            {
-                textLog.NewLogEntry("Insufficient funds.");
-            }
-            else
-            {
-                Actions_SpawnObjects.SpawnClockworkHeart(seconds, goldCost);
-                textLog.NewLogEntry($"Spawning a new clockwork heart...");
-                actionTimeBar.Reset(seconds);
-            }
-        };
-        button.onClick.AddListener(action);
-
-        Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Spawn a clockwork heart: {seconds} seconds, {goldCost} gold";
-
-        string mouseoverText = "Creates a new clockwork heart. Not as efficient as the real thing, but cheaper.";
-        SetButtonMouseoverText(button, mouseoverText);
-    }
-
-    #endregion
 
     #region wait
 

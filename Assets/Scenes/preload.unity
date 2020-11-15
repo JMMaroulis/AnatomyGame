@@ -341,6 +341,22 @@ MonoBehaviour:
     type: 3}
   stomachPrefab: {fileID: 3127633483755530073, guid: 9be7e5e062d0f7544affec32730a9666,
     type: 3}
+  clockworkheartPrefab: {fileID: 4890087455251969224, guid: 631fc7dd925171f4aa618eeb5a7f1a26,
+    type: 3}
+  clockworkleftLungPrefab: {fileID: 6125758644491104160, guid: e5db1e74d3a9e7941ac6d9035ff68c28,
+    type: 3}
+  clockworkrightLungPrefab: {fileID: 6125758644491104160, guid: 435def8a33ebe934bb100492a2cbb298,
+    type: 3}
+  clockworkbrainPrefab: {fileID: 2281875767903849586, guid: 11d9fc52998bb0a4b9541bafa30c8620,
+    type: 3}
+  clockworkleftEyePrefab: {fileID: 971546644430363128, guid: 8ea46324c5db3054d8d840dc37dfad5a,
+    type: 3}
+  clockworkrightEyePrefab: {fileID: 971546644430363128, guid: fc14b8ba81d6a0247b039b92f34709ea,
+    type: 3}
+  clockworkliverPrefab: {fileID: 3888702768378693778, guid: 0199c8ac7a463a74eb225d7635c8bc7e,
+    type: 3}
+  clockworkstomachPrefab: {fileID: 3127633483755530073, guid: 241517c6f30b5854eb2b1bfc9970aa35,
+    type: 3}
   leftArmPrefab: {fileID: 2268493196242816365, guid: 5e798ed622559524a9a3583c62aa8a26,
     type: 3}
   rightArmPrefab: {fileID: 2277114606650625870, guid: cd904326e7a47334f9d5a8192c39ec60,
@@ -352,6 +368,18 @@ MonoBehaviour:
   torsoPrefab: {fileID: 5947049902768832402, guid: 82cbe099f0366de4eb27d17dcef6e5fa,
     type: 3}
   headPrefab: {fileID: 4013890393164018642, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+    type: 3}
+  clockworkleftArmPrefab: {fileID: 2268493196242816365, guid: 1e0694eedd4b17942a0cdc9fd5de73e8,
+    type: 3}
+  clockworkrightArmPrefab: {fileID: 2277114606650625870, guid: d8bbbb6f681d6ed47b0bcea15a3cdb2d,
+    type: 3}
+  clockworkleftLegPrefab: {fileID: 5161813791163897157, guid: a0f646d5ab8baa14399c212f1a167534,
+    type: 3}
+  clockworkrightLegPrefab: {fileID: 4620452861275319660, guid: cfad783eab000f3449da53f230fdafb5,
+    type: 3}
+  clockworktorsoPrefab: {fileID: 5947049902768832402, guid: 16cdac15f40e481469dca5ead70f4b21,
+    type: 3}
+  clockworkheadPrefab: {fileID: 4013890393164018642, guid: 19cb82f57db09ea4abdc91e01e86d221,
     type: 3}
 --- !u!114 &1136662593
 MonoBehaviour:
@@ -710,7 +738,7 @@ MonoBehaviour:
   charms_blood_regen: 0
   blood: 1
   spawn: 1
-  spawn_object: 1
+  spawn_clock: 1
   levelstart_surgery: 0
   levelstart_medicine_poison: 0
   levelstart_medicine_speed: 0
@@ -721,7 +749,7 @@ MonoBehaviour:
   levelstart_charms_blood_regen: 0
   levelstart_blood: 0
   levelstart_spawn: 0
-  levelstart_spawn_object: 0
+  levelstart_spawn_clock: 0
 --- !u!114 &1749921799
 MonoBehaviour:
   m_ObjectHideFlags: 0

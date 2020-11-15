@@ -12,6 +12,16 @@ public class BodyPartSpawner : MonoBehaviour
     public GameObject liverPrefab;
     public GameObject stomachPrefab;
 
+    //clockwork organ prefabs
+    public GameObject clockworkheartPrefab;
+    public GameObject clockworkleftLungPrefab;
+    public GameObject clockworkrightLungPrefab;
+    public GameObject clockworkbrainPrefab;
+    public GameObject clockworkleftEyePrefab;
+    public GameObject clockworkrightEyePrefab;
+    public GameObject clockworkliverPrefab;
+    public GameObject clockworkstomachPrefab;
+
     //limb prefabs
     public GameObject leftArmPrefab;
     public GameObject rightArmPrefab;
@@ -19,6 +29,14 @@ public class BodyPartSpawner : MonoBehaviour
     public GameObject rightLegPrefab;
     public GameObject torsoPrefab;
     public GameObject headPrefab;
+
+    //clockwork limb prefabs
+    public GameObject clockworkleftArmPrefab;
+    public GameObject clockworkrightArmPrefab;
+    public GameObject clockworkleftLegPrefab;
+    public GameObject clockworkrightLegPrefab;
+    public GameObject clockworktorsoPrefab;
+    public GameObject clockworkheadPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +49,8 @@ public class BodyPartSpawner : MonoBehaviour
     {
 
     }
+
+    #region organs
 
     public BodyPart SpawnHeart(string name)
     {
@@ -104,6 +124,86 @@ public class BodyPartSpawner : MonoBehaviour
         return bodyPart.GetComponent<BodyPart>();
     }
 
+    #endregion
+
+    #region clockworkorgans
+
+    public BodyPart SpawnClockworkHeart(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkheartPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkLeftLung(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkleftLungPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkRightLung(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkrightLungPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkBrain(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkbrainPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkLeftEye(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkleftEyePrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkRightEye(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkrightEyePrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkLiver(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkliverPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkStomach(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkstomachPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    #endregion
+
+    #region limbs
+
     public BodyPart SpawnLeftArm(string name)
     {
         GameObject bodyPart = Instantiate(leftArmPrefab);
@@ -156,20 +256,87 @@ public class BodyPartSpawner : MonoBehaviour
         return bodyPart.GetComponent<BodyPart>();
     }
 
+    #endregion
+
+    #region clockworklimbs
+
+    public BodyPart SpawnClockworkLeftArm(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkleftArmPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkRightArm(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkrightArmPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkLeftLeg(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkleftLegPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkRightLeg(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkrightLegPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkTorso(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworktorsoPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    public BodyPart SpawnClockworkHead(string name)
+    {
+        GameObject bodyPart = Instantiate(clockworkheadPrefab);
+        bodyPart.name = name;
+        Faff(bodyPart);
+
+        return bodyPart.GetComponent<BodyPart>();
+    }
+
+    #endregion
+
 
     private void Faff(GameObject bodyPart)
     {
+        //add bodypart to tracking lists
         FindObjectOfType<BodyPartStatusManager>().AddStatus(bodyPart.GetComponent<BodyPart>());
         FindObjectOfType<BodyPartManager>().bodyParts.Add(bodyPart.GetComponent<BodyPart>());
+
+
         if (bodyPart.GetComponent<Organ>() != null)
         {
             FindObjectOfType<BodyPartManager>().organs.Add(bodyPart.GetComponent<Organ>());
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan(bodyPart.GetComponent<Organ>());
         }
-        foreach (Organ organ in bodyPart.GetComponent<BodyPart>().containedOrgans)
+
+        else
         {
-            FindObjectOfType<BodyPartStatusManager>().AddStatus(organ.GetComponent<BodyPart>());
+            foreach (Organ organ in bodyPart.GetComponent<BodyPart>().containedOrgans)
+            {
+                FindObjectOfType<BodyPartStatusManager>().AddStatus(organ.GetComponent<BodyPart>());
+            }
+            GameObject.FindObjectOfType<BodyPartSelectorManager>().NewBodyPart(bodyPart.GetComponent<BodyPart>());
         }
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().NewOrgan((Organ)bodyPart.GetComponent<BodyPart>());
+
     }
 
 }

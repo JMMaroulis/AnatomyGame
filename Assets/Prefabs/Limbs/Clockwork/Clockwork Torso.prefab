@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6675934801669765112}
-  - component: {fileID: 5690681944904997238}
+  - component: {fileID: 8073482343823834240}
   m_Layer: 0
   m_Name: Clockwork Torso
   m_TagString: Untagged
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5690681944904997238
+--- !u!114 &8073482343823834240
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,24 +45,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5947049902768832402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca33a1b888d7eef47801768797802d1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d22c1dea4c8354409f6b1792dbb5aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  timeScale: 1
+  timeScale: 0
   isFunctioning: 1
-  bloodRequiredToFunction: 100
-  blood: 500
+  bloodRequiredToFunction: 0
+  blood: 0
   bloodLossRate: 0
   bloodPumpRate: 70
   bloodMax: 700
-  oxygen: 500
+  oxygen: 0
   oxygenMax: 500
-  oxygenRequired: 5
-  oxygenDamageRate: 0.2
+  oxygenRequired: 0
+  oxygenDamageRate: 0
   damage: 0
   damageMax: 100
-  efficiency: 1
+  efficiency: 0
   connectedBodyParts: []
   containedOrgans:
   - {fileID: 4423966712575667111}
@@ -98,8 +98,8 @@ MonoBehaviour:
   antidoteProcessRate: 1
   slowPoisonProcessRate: 0
   coagulantPotionProcessRate: 0
-  stasisPotionProcessRate: 0.01
-  hastePotionProcessRate: 0.01
+  stasisPotionProcessRate: 0.1
+  hastePotionProcessRate: 0.1
   slowPoisonDamageRate: 0
   bodyPartManager: {fileID: 0}
 --- !u!1001 &161419536588591298
@@ -169,6 +169,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8265029840331986491, guid: 241517c6f30b5854eb2b1bfc9970aa35,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8265029840331986491, guid: 241517c6f30b5854eb2b1bfc9970aa35,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 8073482343823834240}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 241517c6f30b5854eb2b1bfc9970aa35, type: 3}
 --- !u!4 &1952934614515890260 stripped
@@ -256,6 +266,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4674608444458499986, guid: 435def8a33ebe934bb100492a2cbb298,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4674608444458499986, guid: 435def8a33ebe934bb100492a2cbb298,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 8073482343823834240}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 435def8a33ebe934bb100492a2cbb298, type: 3}
 --- !u!4 &4405816434177779753 stripped
@@ -343,6 +363,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6591851867739191267, guid: 631fc7dd925171f4aa618eeb5a7f1a26,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6591851867739191267, guid: 631fc7dd925171f4aa618eeb5a7f1a26,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 8073482343823834240}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 631fc7dd925171f4aa618eeb5a7f1a26, type: 3}
 --- !u!4 &5240630524139358788 stripped
@@ -430,6 +460,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 887573554101790315, guid: 0199c8ac7a463a74eb225d7635c8bc7e,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 887573554101790315, guid: 0199c8ac7a463a74eb225d7635c8bc7e,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 8073482343823834240}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0199c8ac7a463a74eb225d7635c8bc7e, type: 3}
 --- !u!4 &2699830946412426899 stripped
@@ -517,6 +557,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7515821261488980292, guid: e5db1e74d3a9e7941ac6d9035ff68c28,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7515821261488980292, guid: e5db1e74d3a9e7941ac6d9035ff68c28,
+        type: 3}
+      propertyPath: connectedBodyParts.Array.data[0]
+      value: 
+      objectReference: {fileID: 8073482343823834240}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5db1e74d3a9e7941ac6d9035ff68c28, type: 3}
 --- !u!4 &1998081369155391445 stripped
