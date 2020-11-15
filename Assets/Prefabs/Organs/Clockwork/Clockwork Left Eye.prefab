@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &971546644430363128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6317736935091072235}
+  - component: {fileID: 6292673315239631848}
+  m_Layer: 0
+  m_Name: Clockwork Left Eye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6317736935091072235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971546644430363128}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6292673315239631848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971546644430363128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a952e2e76787e34f8d9d1f16bda79c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTimePassing: 0
+  timeScale: 0
+  isFunctioning: 1
+  bloodRequiredToFunction: 0
+  blood: 0
+  bloodLossRate: 0
+  bloodPumpRate: 70
+  bloodMax: 700
+  oxygen: 0
+  oxygenMax: 500
+  oxygenRequired: 0
+  oxygenDamageRate: 0
+  damage: 0
+  damageMax: 100
+  efficiency: 0
+  connectedBodyParts: []
+  containedOrgans: []
+  connectedHearts: []
+  embeddedObjects: []
+  isPartOfMainBody: 0
+  isConnectedToBrain: 0
+  maxLeftArms: 0
+  maxRightArms: 0
+  maxLeftLegs: 0
+  maxRightLegs: 0
+  maxHeads: 1
+  maxTorsos: 0
+  maxBrains: 0
+  maxLeftEyes: 0
+  maxRightEyes: 0
+  maxHearts: 0
+  maxLivers: 0
+  maxLeftLungs: 0
+  maxRightLungs: 0
+  maxStomachs: 0
+  healthPotion: 0
+  antidote: 0
+  slowPoison: 0
+  stasisPotion: 0
+  coagulantPotion: 0
+  hastePotion: 0
+  healthPotionProcessRate: 0
+  antidoteProcessRate: 1
+  slowPoisonProcessRate: 0
+  coagulantPotionProcessRate: 0
+  stasisPotionProcessRate: 0.1
+  hastePotionProcessRate: 0.1
+  slowPoisonDamageRate: 0
+  bodyPartManager: {fileID: 0}

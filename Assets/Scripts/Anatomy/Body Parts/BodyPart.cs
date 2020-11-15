@@ -62,6 +62,14 @@ public class BodyPart : MonoBehaviour
     public float stasisPotion;
     public float coagulantPotion;
     public float hastePotion;
+
+    public float healthPotionProcessRate;
+    public float antidoteProcessRate;
+    public float slowPoisonProcessRate;
+    public float coagulantPotionProcessRate;
+    public float stasisPotionProcessRate;
+    public float hastePotionProcessRate;
+
     public float slowPoisonDamageRate;
 
     public BodyPartManager bodyPartManager;
@@ -253,12 +261,12 @@ public class BodyPart : MonoBehaviour
         //but there being no way out of them is no bueno
         if (stasisPotion > 0.0f)
         {
-            float stasisPotionProcessed = Mathf.Min(stasisPotion, deltaTime * 0.01f);
+            float stasisPotionProcessed = Mathf.Min(stasisPotion, deltaTime * stasisPotionProcessRate);
             stasisPotion = Mathf.Max(0.0f, stasisPotion - stasisPotionProcessed);
         }
         if (hastePotion > 0.0f)
         {
-            float hastePotionProcessed = Mathf.Min(hastePotion, deltaTime * 0.01f);
+            float hastePotionProcessed = Mathf.Min(hastePotion, deltaTime * hastePotionProcessRate);
             hastePotion = Mathf.Max(0.0f, hastePotion - hastePotionProcessed);
         }
 
@@ -271,7 +279,7 @@ public class BodyPart : MonoBehaviour
             if (damage > 0.0f)
             {
                 //in 1 second, will process 1/5 unit of health potion, curing 1/5 units of damage
-                float healthPotionProcessed = Mathf.Min(healthPotion, deltaTime * 0.5f);
+                float healthPotionProcessed = Mathf.Min(healthPotion, deltaTime * healthPotionProcessRate);
                 healthPotion = Mathf.Max(0.0f, healthPotion - healthPotionProcessed);
                 damage = Mathf.Max(0.0f, damage - healthPotionProcessed);
             }
@@ -290,7 +298,7 @@ public class BodyPart : MonoBehaviour
             if (slowPoison > 0.0f)
             {
                 //in 1 second, will neutralise 2 units of poison
-                float antidoteProcessed = Mathf.Min(antidote, deltaTime * 1.0f);
+                float antidoteProcessed = Mathf.Min(antidote, deltaTime * antidoteProcessRate);
                 antidote = Mathf.Max(0.0f, antidote - antidoteProcessed);
                 slowPoison = Mathf.Max(0.0f, slowPoison - 2.0f * antidoteProcessed);
             }
@@ -303,7 +311,7 @@ public class BodyPart : MonoBehaviour
         //processes at 0.001 units per seconds
         if (slowPoison > 0.0f)
         {
-            float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * 0.001f);
+            float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * slowPoisonProcessRate);
             slowPoison = Mathf.Max(0.0f, slowPoison - slowPoisonProcessed);
             damage = Mathf.Max(0.0f, damage + slowPoison * deltaTime * slowPoisonDamageRate);
         }
@@ -313,7 +321,7 @@ public class BodyPart : MonoBehaviour
         {
             if (bloodLossRate > 0.0f)
             {
-                float coagulantPotionProcessed = Mathf.Min(coagulantPotion, deltaTime * 0.5f);
+                float coagulantPotionProcessed = Mathf.Min(coagulantPotion, deltaTime * coagulantPotionProcessRate);
                 bloodLossRate = Mathf.Max(0, bloodLossRate - coagulantPotionProcessed);
                 coagulantPotion = Mathf.Max(0.0f, coagulantPotion - coagulantPotionProcessed);
             }
@@ -513,7 +521,8 @@ public class BodyPart : MonoBehaviour
     public void UpdateDamage(float deltaTime)
     {
         float oxygenRatio = 1 - Mathf.Min((oxygen / oxygenRequired), 1); //0 good, 1 bad
-        damage = Mathf.Min(damage + (oxygenRatio * deltaTime * oxygenDamageRate), damageMax);
+        float newDamage = oxygenRatio * deltaTime * oxygenDamageRate;
+        damage = Mathf.Clamp(damage + newDamage, 0, damageMax);
     }
 
     public void SeverConnectionOutgoing(GameObject connectedBodyPart, float inducedBloodLossRate)

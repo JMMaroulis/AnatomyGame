@@ -586,6 +586,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149823460}
   m_CullTransparentMesh: 0
+--- !u!114 &162469656 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1874321550833006078, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 2058775374}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46681511a39710041b71b9ff255cb0af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &176774457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10109,6 +10121,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
+      propertyPath: containedOrgans.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
       propertyPath: connectedBodyParts.Array.data[0]
       value: 
       objectReference: {fileID: 1854074271}
@@ -10127,10 +10144,25 @@ PrefabInstance:
       propertyPath: blood
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: containedOrgans.Array.data[3]
+      value: 
+      objectReference: {fileID: 162469656}
+    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: containedOrgans.Array.data[2]
+      value: 
+      objectReference: {fileID: 162469656}
     - target: {fileID: 3038774217316100592, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: m_Name
       value: Brain
+      objectReference: {fileID: 0}
+    - target: {fileID: 3038774217316100592, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 38696759639743268, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
