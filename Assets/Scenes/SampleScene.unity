@@ -1360,8 +1360,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -386.2, y: -192.65}
-  m_SizeDelta: {x: -990.7, y: -385.3}
+  m_AnchoredPosition: {x: -412.7, y: -192.65}
+  m_SizeDelta: {x: -937.6, y: -385.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &266766654
 MonoBehaviour:
@@ -8017,25 +8017,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headSelectorsPanel: {fileID: 474656696}
+  torsoSelectorsPanel: {fileID: 19733032}
+  leftArmSelectorsPanel: {fileID: 1739933585}
+  rightArmSelectorsPanel: {fileID: 920316079}
+  leftLegSelectorsPanel: {fileID: 266766652}
+  rightLegSelectorsPanel: {fileID: 1712658390}
+  organSelectorsPanel: {fileID: 458757137}
   headSelectorPrefab: {fileID: 5017211689231872245, guid: 1d2b7becd9985bc408310ab5b977fa11,
     type: 3}
-  torsoSelectorsPanel: {fileID: 19733032}
   torsoSelectorPrefab: {fileID: 5017211689231872245, guid: fa2739dd2be91204eacaa7f15e0f364f,
     type: 3}
-  leftArmSelectorsPanel: {fileID: 1739933585}
   leftArmSelectorPrefab: {fileID: 5017211689231872245, guid: d7604e35eed8d0545a52b1b67516c1af,
     type: 3}
-  rightArmSelectorsPanel: {fileID: 920316079}
   rightArmSelectorPrefab: {fileID: 5017211689231872245, guid: 10fbf00e62860934e9977ee9f77a275f,
     type: 3}
-  leftLegSelectorsPanel: {fileID: 266766652}
   leftLegSelectorPrefab: {fileID: 5017211689231872245, guid: 61b20a6beb4ab284d9d09ad709d3e985,
     type: 3}
-  rightLegSelectorsPanel: {fileID: 1712658390}
   rightLegSelectorPrefab: {fileID: 5017211689231872245, guid: bdcae6c575c19ac4ab5ee70c20ab5799,
     type: 3}
-  organSelectorsPanel: {fileID: 458757137}
-  organSelectorPrefab: {fileID: 5017211689231872245, guid: ead9f12e6dc05e04f95fa6f8a0c0a3da,
+  clockworkheadSelectorPrefab: {fileID: 5017211689231872245, guid: 2aa13049f9844974fbcb58ccb264095c,
+    type: 3}
+  clockworktorsoSelectorPrefab: {fileID: 5017211689231872245, guid: c1186205532f0fe49a434892b7fe31d9,
+    type: 3}
+  clockworkleftArmSelectorPrefab: {fileID: 5017211689231872245, guid: 7c9d4512ece85b449bead2417289031a,
+    type: 3}
+  clockworkrightArmSelectorPrefab: {fileID: 5017211689231872245, guid: a3fbbe9f4fe2e804d934e906e79f1a86,
+    type: 3}
+  clockworkleftLegSelectorPrefab: {fileID: 5017211689231872245, guid: 8b059659089e7b74a830528781e0339e,
+    type: 3}
+  clockworkrightLegSelectorPrefab: {fileID: 5017211689231872245, guid: 558fe0f5ba323614c9448cedcf1526e8,
     type: 3}
   rightLungSelectorPrefab: {fileID: 5017211689231872245, guid: c6a4e1190519d7a42b44926cd82e0fe5,
     type: 3}
@@ -8045,13 +8055,29 @@ MonoBehaviour:
     type: 3}
   brainSelectorPrefab: {fileID: 5017211689231872245, guid: d1d08aae73b074346b439eba885bf73d,
     type: 3}
-  leftEyeyeSelectorPrefab: {fileID: 5017211689231872245, guid: d60f8a224ac87244987f4f0d19305f3f,
+  leftEyeSelectorPrefab: {fileID: 5017211689231872245, guid: d60f8a224ac87244987f4f0d19305f3f,
     type: 3}
-  rightEyeyeSelectorPrefab: {fileID: 5017211689231872245, guid: 0f13b81aaee6f024781dce3d7de436f0,
+  rightEyeSelectorPrefab: {fileID: 5017211689231872245, guid: 0f13b81aaee6f024781dce3d7de436f0,
     type: 3}
   liverSelectorPrefab: {fileID: 5017211689231872245, guid: c979dee0d6c57df4cbc66a759ab9bdae,
     type: 3}
   stomachSelectorPrefab: {fileID: 5017211689231872245, guid: d14f6c7edd35dcf42910fc5cefb32dad,
+    type: 3}
+  clockworkrightLungSelectorPrefab: {fileID: 5017211689231872245, guid: 86b88750e2055aa469f3ff262a90c241,
+    type: 3}
+  clockworkleftLungSelectorPrefab: {fileID: 5017211689231872245, guid: dbeb8ee1d2a4f2c49a42848824561664,
+    type: 3}
+  clockworkheartSelectorPrefab: {fileID: 5017211689231872245, guid: 7c2186ec6550520448fc67efc6063f7b,
+    type: 3}
+  clockworkbrainSelectorPrefab: {fileID: 5017211689231872245, guid: 77cbfb63f8bbbce4fbd5431d27a6e04e,
+    type: 3}
+  clockworkleftEyeSelectorPrefab: {fileID: 5017211689231872245, guid: 681405493c510b747998471ce41e8df0,
+    type: 3}
+  clockworkrightEyeSelectorPrefab: {fileID: 5017211689231872245, guid: b27019fe47300784aac4d4584dc073c7,
+    type: 3}
+  clockworkliverSelectorPrefab: {fileID: 5017211689231872245, guid: e0562747e773d074fa8e4124680f0a5d,
+    type: 3}
+  clockworkstomachSelectorPrefab: {fileID: 5017211689231872245, guid: d3c06180a7b818d458745ca05cb26870,
     type: 3}
   externalSelectorsPanel: {fileID: 681536218}
 --- !u!114 &1430206371
@@ -9065,8 +9091,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -231.5, y: -192.65}
-  m_SizeDelta: {x: -994.6, y: -385.3}
+  m_AnchoredPosition: {x: -201.3, y: -192.65}
+  m_SizeDelta: {x: -934.3, y: -385.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1712658392
 MonoBehaviour:

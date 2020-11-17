@@ -4,43 +4,56 @@ using System.Linq;
 
 public class BodyPartSelectorManager : MonoBehaviour
 {
-
+    //selector tracker lists
     private List<BodyPartSelector> headSelectors = new List<BodyPartSelector>();
-    public GameObject headSelectorsPanel;
-    public GameObject headSelectorPrefab;
-
     private List<BodyPartSelector> torsoSelectors = new List<BodyPartSelector>();
-    public GameObject torsoSelectorsPanel;
-    public GameObject torsoSelectorPrefab;
-
     private List<BodyPartSelector> leftArmSelectors = new List<BodyPartSelector>();
-    public GameObject leftArmSelectorsPanel;
-    public GameObject leftArmSelectorPrefab;
-
     private List<BodyPartSelector> rightArmSelectors = new List<BodyPartSelector>();
-    public GameObject rightArmSelectorsPanel;
-    public GameObject rightArmSelectorPrefab;
-
     private List<BodyPartSelector> leftLegSelectors = new List<BodyPartSelector>();
-    public GameObject leftLegSelectorsPanel;
-    public GameObject leftLegSelectorPrefab;
-
     private List<BodyPartSelector> rightLegSelectors = new List<BodyPartSelector>();
+    private List<BodyPartSelector> organSelectors = new List<BodyPartSelector>();
+
+    //panels
+    public GameObject headSelectorsPanel;
+    public GameObject torsoSelectorsPanel;
+    public GameObject leftArmSelectorsPanel;
+    public GameObject rightArmSelectorsPanel;
+    public GameObject leftLegSelectorsPanel;
     public GameObject rightLegSelectorsPanel;
+    public GameObject organSelectorsPanel;
+
+    //selector prefabs
+    public GameObject headSelectorPrefab;
+    public GameObject torsoSelectorPrefab;
+    public GameObject leftArmSelectorPrefab;
+    public GameObject rightArmSelectorPrefab;
+    public GameObject leftLegSelectorPrefab;
     public GameObject rightLegSelectorPrefab;
 
-    private List<BodyPartSelector> organSelectors = new List<BodyPartSelector>();
-    public GameObject organSelectorsPanel;
-    public GameObject organSelectorPrefab;
+    public GameObject clockworkheadSelectorPrefab;
+    public GameObject clockworktorsoSelectorPrefab;
+    public GameObject clockworkleftArmSelectorPrefab;
+    public GameObject clockworkrightArmSelectorPrefab;
+    public GameObject clockworkleftLegSelectorPrefab;
+    public GameObject clockworkrightLegSelectorPrefab;
 
     public GameObject rightLungSelectorPrefab;
     public GameObject leftLungSelectorPrefab;
     public GameObject heartSelectorPrefab;
     public GameObject brainSelectorPrefab;
-    public GameObject leftEyeyeSelectorPrefab;
-    public GameObject rightEyeyeSelectorPrefab;
+    public GameObject leftEyeSelectorPrefab;
+    public GameObject rightEyeSelectorPrefab;
     public GameObject liverSelectorPrefab;
     public GameObject stomachSelectorPrefab;
+
+    public GameObject clockworkrightLungSelectorPrefab;
+    public GameObject clockworkleftLungSelectorPrefab;
+    public GameObject clockworkheartSelectorPrefab;
+    public GameObject clockworkbrainSelectorPrefab;
+    public GameObject clockworkleftEyeSelectorPrefab;
+    public GameObject clockworkrightEyeSelectorPrefab;
+    public GameObject clockworkliverSelectorPrefab;
+    public GameObject clockworkstomachSelectorPrefab;
 
     private List<BodyPartSelector> externalSelectors = new List<BodyPartSelector>();
     public GameObject externalSelectorsPanel;
@@ -71,8 +84,37 @@ public class BodyPartSelectorManager : MonoBehaviour
 
     public void NewBodyPart(BodyPart bodyPart)
     {
+        if (bodyPart is ClockworkHead)
+        {
+            NewSelector(bodyPart, clockworkheadSelectorPrefab, headSelectorsPanel, headSelectorsPanel);
+        }
 
-        if (bodyPart is Head)
+        else if (bodyPart is ClockworkTorso)
+        {
+            NewSelector(bodyPart, clockworktorsoSelectorPrefab, torsoSelectorsPanel, torsoSelectorsPanel);
+        }
+
+        else if (bodyPart is ClockworkLeftArm)
+        {
+            NewSelector(bodyPart, clockworkleftArmSelectorPrefab, leftArmSelectorsPanel, leftArmSelectorsPanel);
+        }
+
+        else if (bodyPart is ClockworkRightArm)
+        {
+            NewSelector(bodyPart, clockworkrightArmSelectorPrefab, rightArmSelectorsPanel, rightArmSelectorsPanel);
+        }
+
+        else if (bodyPart is ClockworkLeftLeg)
+        {
+            NewSelector(bodyPart, clockworkleftLegSelectorPrefab, leftLegSelectorsPanel, leftLegSelectorsPanel);
+        }
+
+        else if (bodyPart is ClockworkRightLeg)
+        {
+            NewSelector(bodyPart, clockworkrightLegSelectorPrefab, rightLegSelectorsPanel, rightLegSelectorsPanel);
+        }
+
+        else if (bodyPart is Head)
         {
             NewSelector(bodyPart, headSelectorPrefab, headSelectorsPanel, headSelectorsPanel);
         }
@@ -106,7 +148,46 @@ public class BodyPartSelectorManager : MonoBehaviour
 
     public void NewOrgan(Organ organ)
     {
-        if (organ is LeftLung)
+        if (organ is ClockworkLeftLung)
+        {
+            NewSelector(organ, clockworkleftLungSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+
+        else if (organ is ClockworkRightLung)
+        {
+            NewSelector(organ, clockworkrightLungSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+
+        else if (organ is ClockworkHeart)
+        {
+            NewSelector(organ, clockworkheartSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+
+        else if (organ is ClockworkBrain)
+        {
+            NewSelector(organ, clockworkbrainSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+
+        else if (organ is ClockworkLeftEye)
+        {
+            NewSelector(organ, clockworkleftEyeSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+        else if (organ is ClockworkRightEye)
+        {
+            NewSelector(organ, clockworkrightEyeSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+
+        else if (organ is ClockworkLiver)
+        {
+            NewSelector(organ, clockworkliverSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+
+        else if (organ is ClockworkStomach)
+        {
+            NewSelector(organ, clockworkstomachSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+        }
+
+        else if (organ is LeftLung)
         {
             NewSelector(organ, leftLungSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
@@ -128,11 +209,11 @@ public class BodyPartSelectorManager : MonoBehaviour
 
         else if (organ is LeftEye)
         {
-            NewSelector(organ, leftEyeyeSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+            NewSelector(organ, leftEyeSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
         else if (organ is RightEye)
         {
-            NewSelector(organ, rightEyeyeSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
+            NewSelector(organ, rightEyeSelectorPrefab, organSelectorsPanel, externalSelectorsPanel);
         }
 
         else if (organ is Liver)
