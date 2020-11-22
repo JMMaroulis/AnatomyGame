@@ -575,14 +575,14 @@ public class ButtonActions : MonoBehaviour
         float seconds = 60.0f * 5.0f;
         int goldCost = 150;
 
-        AssignSpawnClockworkTemplate(menuButtons[0], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkHeart, "Heart");
-        AssignSpawnClockworkTemplate(menuButtons[1], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftLung, "Left Lung");
-        AssignSpawnClockworkTemplate(menuButtons[2], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightLung, "Right Lung");
-        AssignSpawnClockworkTemplate(menuButtons[3], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkBrain, "Brain");
-        AssignSpawnClockworkTemplate(menuButtons[4], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftEye, "Left Eye");
-        AssignSpawnClockworkTemplate(menuButtons[5], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightEye, "Right Eye");
-        AssignSpawnClockworkTemplate(menuButtons[6], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLiver, "Liver");
-        AssignSpawnClockworkTemplate(menuButtons[7], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkStomach, "Stomach");
+        AssignSpawnClockworkTemplate(menuButtons[0], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkHeart, "Clockwork Heart");
+        AssignSpawnClockworkTemplate(menuButtons[1], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftLung, "Clockwork Left Lung");
+        AssignSpawnClockworkTemplate(menuButtons[2], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightLung, "Clockwork Right Lung");
+        AssignSpawnClockworkTemplate(menuButtons[3], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkBrain, "Clockwork Brain");
+        AssignSpawnClockworkTemplate(menuButtons[4], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftEye, "Clockwork Left Eye");
+        AssignSpawnClockworkTemplate(menuButtons[5], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightEye, "Clockwork Right Eye");
+        AssignSpawnClockworkTemplate(menuButtons[6], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLiver, "Clockwork Liver");
+        AssignSpawnClockworkTemplate(menuButtons[7], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkStomach, "Clockwork Stomach");
     }
 
     //set as onclick in editor
@@ -594,12 +594,12 @@ public class ButtonActions : MonoBehaviour
         float seconds = 60.0f * 5.0f;
         int goldCost = 150;
 
-        AssignSpawnClockworkTemplate(menuButtons[0], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftArm, "Left Arm");
-        AssignSpawnClockworkTemplate(menuButtons[1], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightArm, "Right Arm");
-        AssignSpawnClockworkTemplate(menuButtons[2], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftLeg, "Left Leg");
-        AssignSpawnClockworkTemplate(menuButtons[3], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightLeg, "Right Leg");
-        AssignSpawnClockworkTemplate(menuButtons[4], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkHead, "Head");
-        AssignSpawnClockworkTemplate(menuButtons[5], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkTorso, "Torso");
+        AssignSpawnClockworkTemplate(menuButtons[0], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftArm, "Clockwork Left Arm");
+        AssignSpawnClockworkTemplate(menuButtons[1], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightArm, "Clockwork Right Arm");
+        AssignSpawnClockworkTemplate(menuButtons[2], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkLeftLeg, "Clockwork Left Leg");
+        AssignSpawnClockworkTemplate(menuButtons[3], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkRightLeg, "Clockwork Right Leg");
+        AssignSpawnClockworkTemplate(menuButtons[4], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkHead, "Clockwork Head");
+        AssignSpawnClockworkTemplate(menuButtons[5], goldCost, seconds, Actions_SpawnBodyParts.SpawnClockworkTorso, "Clockwork Torso");
     }
 
 

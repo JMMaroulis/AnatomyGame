@@ -374,10 +374,10 @@ public class LifeMonitor : MonoBehaviour
 
     public bool ClockworkHeartCheck()
     {
-
+        /*
         bool result = false;
 
-        if (FindObjectOfType<PhysicalInjuryGenerator>().ClockworkHeartRequest)
+        if (FindObjectOfType<MedicalProcedureGenerator>().ClockworkHeartRequest)
         {
 
             Heart[] hearts = FindObjectsOfType<Heart>();
@@ -400,6 +400,8 @@ public class LifeMonitor : MonoBehaviour
         }
 
         return result;
+        */
+        return false;
         
     }
 

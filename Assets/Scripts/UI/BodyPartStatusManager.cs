@@ -9,9 +9,14 @@ public class BodyPartStatusManager : MonoBehaviour
     private BodyPartManager bodyPartManager;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         bodyPartManager = FindObjectOfType<BodyPartManager>();
+    }
+
+
+    void Start()
+    {
         UpdateStatusCollection();
     }
 

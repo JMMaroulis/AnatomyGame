@@ -8,7 +8,7 @@ public class BodyPartManager : MonoBehaviour
     public List<BodyPart> bodyParts;
     public List<Organ> organs;
 
-    public void Start()
+    public void Awake()
     {
         clock = FindObjectOfType<Clock>();
         bodyParts = FindObjectsOfType<BodyPart>().ToList();

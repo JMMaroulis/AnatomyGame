@@ -59,21 +59,18 @@ public class BodyPartSelectorManager : MonoBehaviour
     public GameObject externalSelectorsPanel;
 
     private ButtonActions buttonActions;
+    private BodyPartManager bodyPartManager;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         buttonActions = FindObjectOfType<ButtonActions>();
+        bodyPartManager = FindObjectOfType<BodyPartManager>();
+    }
 
-        List<BodyPart> bodyParts = FindObjectsOfType<BodyPart>().ToList();
-        foreach (BodyPart bodyPart in bodyParts)
-        {
-            if (!(bodyPart is Organ))
-            {
-                NewBodyPart(bodyPart);
-            }
-        }
-
+    void Start()
+    {
+        ResetSelectors();
     }
 
     // Update is called once per frame
@@ -313,26 +310,32 @@ public class BodyPartSelectorManager : MonoBehaviour
 
         if (!(selectedBodyPart is null))
         {
-            //organ selectors for external organs, and organs inside selected bodypart
-            foreach (Organ organ in FindObjectsOfType<Organ>())
+
+            //if selected an organ, pretend we've selected its parent for determining what to display
+            BodyPart tempSelectedBodyPart = selectedBodyPart;
+            if (selectedBodyPart is Organ && selectedBodyPart.connectedBodyParts.Count() > 0)
             {
-                BodyPart tempSelectedBodyPart = selectedBodyPart;
+                tempSelectedBodyPart = selectedBodyPart.connectedBodyParts[0];
+            }
 
-                //if selected an organ, use parent bodypart for determining which organs to display
-                if (selectedBodyPart is Organ && selectedBodyPart.connectedBodyParts.Count() > 0)
-                {
-                    tempSelectedBodyPart = selectedBodyPart.connectedBodyParts[0];
-                }
+            //organ selectors for organs inside selected bodypart
+            foreach (Organ organ in tempSelectedBodyPart.containedOrgans)
+            {
+                NewOrgan(organ);
+            }
+        }
 
-                if (organ.connectedBodyParts.Count == 0 || organ.connectedBodyParts[0] == tempSelectedBodyPart)
-                {
-                    NewOrgan(organ);
-                }
+        foreach (Organ organ in bodyPartManager.organs)
+        {
+            //display organ if it either has no parent
+            if (organ.connectedBodyParts.Count == 0)
+            {
+                NewOrgan(organ);
             }
         }
 
         //make new bodypart selectors
-        foreach (BodyPart bodyPart in FindObjectsOfType<BodyPart>())
+        foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
             if (!(bodyPart is Organ))
             {

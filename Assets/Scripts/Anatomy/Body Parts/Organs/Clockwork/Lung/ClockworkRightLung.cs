@@ -1,4 +1,4 @@
-﻿public class ClockworkRightLung : Lung
+﻿public class ClockworkRightLung : RightLeg
 {
 
 }

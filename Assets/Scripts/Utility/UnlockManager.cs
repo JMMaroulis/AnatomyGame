@@ -78,7 +78,7 @@ public class UnlockManager : MonoBehaviour
         buttons[7].onClick.AddListener(action);
         buttons[7].transform.GetChild(0).GetComponent<Text>().text = "Bodypart Delivery Service";
 
-        if (unlockTracker.spawn)
+        if (unlockTracker.spawn_clock)
         {
             buttons[8].interactable = false;
         }

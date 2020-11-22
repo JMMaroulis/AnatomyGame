@@ -1,32 +1,40 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using System.Linq;
 
 public class PhysicalInjuryGenerator : MonoBehaviour
 {
     public GameObject body;
     public TextLog textLog;
-    private List<BodyPart> bodyParts;
-    private List<Organ> organs;
+    private BodyPartManager bodyPartManager;
     private UnlockTracker unlockTracker;
 
     public GameObject bullet;
     public GameObject bomb;
 
-    //requested procedure logs
-    public bool ClockworkHeartRequest;
-
     // Start is called before the first frame update
     void Start()
     {
+        bodyPartManager = FindObjectOfType<BodyPartManager>();
         GameSetupScenarioTracker injurySpawnTracker = GameObject.FindObjectOfType<GameSetupScenarioTracker>();
         unlockTracker = FindObjectOfType<UnlockTracker>();
-        PopulateBodyPartsList();
-        PopulateOrgansList();
         EasyInjuries(injurySpawnTracker.easyInjuries);
         MediumInjuries(injurySpawnTracker.mediumInjuries);
         HardInjuries(injurySpawnTracker.hardInjuries);
-        RequestedProcedures(injurySpawnTracker.requestedProcedures);
+        FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+        FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+    }
+
+    public Organ RandomOrgan()
+    {
+        Organ organ = bodyPartManager.organs[Random.Range(0, bodyPartManager.organs.Count)];
+        return organ;
+    }
+
+    public BodyPart RandomLimb()
+    {
+        BodyPart limb = bodyPartManager.bodyParts[Random.Range(0, bodyPartManager.bodyParts.Count)];
+        return limb;
     }
 
     //select n random bodyparts
@@ -37,29 +45,31 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
             for (int i = 0; i < numberOfInjuries; i++)
             {
-                //selected bodypart to injure, and injury to apply
-                BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
-                int injuryNumber = Random.Range(0, 5);
 
-                //apply injury
+                //select and apply random injury
+                int injuryNumber = Random.Range(0, 5);
+                BodyPart limb;
                 switch (injuryNumber)
                 {
                     case 0:
-                        Debug.Log($"Stabbed {bodyPart.name}");
-                        textLog.NewLogEntry($"The {bodyPart.name} has been stabbed.");
-                        Stab(bodyPart);
+                        limb = RandomLimb();
+                        Debug.Log($"Stabbed {limb.name}");
+                        textLog.NewLogEntry($"The {limb.name} has been stabbed.");
+                        Stab(limb);
                         break;
 
                     case 1:
-                        Debug.Log($"Shot {bodyPart.name}");
-                        textLog.NewLogEntry($"The {bodyPart.name} has been shot.");
-                        Shoot(bodyPart);
+                        limb = RandomLimb();
+                        Debug.Log($"Shot {limb.name}");
+                        textLog.NewLogEntry($"The {limb.name} has been shot.");
+                        Shoot(limb);
                         break;
 
                     case 2:
-                        Debug.Log($"Crushed {bodyPart.name}");
-                        textLog.NewLogEntry($"The {bodyPart.name} has been crushed.");
-                        Crush(bodyPart);
+                        limb = RandomLimb();
+                        Debug.Log($"Crushed {limb.name}");
+                        textLog.NewLogEntry($"The {limb.name} has been crushed.");
+                        Crush(limb);
                         break;
 
                     case 3:
@@ -68,9 +78,10 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                             i--;
                             break;
                         }
-                        Debug.Log($"Snake bit {bodyPart.name}");
-                        textLog.NewLogEntry($"The {bodyPart.name} has been bitten by a venomous snake.");
-                        SnakeBite(bodyPart);
+                        limb = RandomLimb();
+                        Debug.Log($"Snake bit {limb.name}");
+                        textLog.NewLogEntry($"The {limb.name} has been bitten by a venomous snake.");
+                        SnakeBite(limb);
                         break;
 
                     case 4:
@@ -79,9 +90,10 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                             i--;
                             break;
                         }
-                        Debug.Log($"Poisoned {bodyPart.name}");
-                        textLog.NewLogEntry($"The {bodyPart.name} has been poisoned.");
-                        SlowPoison(bodyPart);
+                        limb = RandomLimb();
+                        Debug.Log($"Poisoned {limb.name}");
+                        textLog.NewLogEntry($"The {limb.name} has been poisoned.");
+                        SlowPoison(limb);
                         break;
 
                     default:
@@ -93,17 +105,17 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
     public void MediumInjuries(int numberOfInjuries)
     {
-        if (numberOfInjuries != 0)
+        if (numberOfInjuries > 0)
         {
 
             for (int i = 0; i < numberOfInjuries; i++)
             {
-                //selected bodypart to injure, and injury to apply
-                int injuryNumber = Random.Range(0, 8);
-                Organ organ = organs[Random.Range(0, organs.Count)];
-                BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
+                Organ organ;
+                BodyPart limb;
+                int n = 0;
 
                 //apply injury
+                int injuryNumber = Random.Range(0, 8);
                 switch (injuryNumber)
                 {
                     case 0:
@@ -112,6 +124,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                             i--;
                             break;
                         }
+                        organ = RandomOrgan();
                         Debug.Log($"Stabbed {organ.name}");
                         textLog.NewLogEntry($"The {organ.name} has been stabbed.");
                         Stab(organ);
@@ -124,6 +137,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                             i--;
                             break;
                         }
+                        organ = RandomOrgan();
                         Debug.Log($"Shot {organ.name}");
                         textLog.NewLogEntry($"The {organ.name} has been shot.");
                         Shoot(organ);
@@ -135,25 +149,38 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                             i--;
                             break;
                         }
+                        organ = RandomOrgan();
                         Debug.Log($"Crushed {organ.name}");
                         textLog.NewLogEntry($"The {organ.name} has been poisoned.");
                         SlowPoison(organ);
-                        SlowPoison(organ.connectedBodyParts[0]);
                         break;
 
                     case 3:
-                        if (!unlockTracker.spawn)
+                        organ = RandomOrgan();
+                        while (organ is Brain || !(organ.gameObject.GetComponent<PetrificationCharm>() is null) || n < 5)
                         {
-                            i--;
+                            organ = RandomOrgan();
+                            n += 1;
+                        }
+                        if (n > 5 || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
+                        {
+                            i -= 1;
                             break;
                         }
+                        organ = RandomOrgan();
                         Debug.Log($"{organ.name} missing");
                         textLog.NewLogEntry($"The {organ.name} is missing?!");
                         Missing(organ);
                         break;
 
                     case 4:
-                        if (organ is Eye || organ is Stomach || organ is Liver || organ is Brain || !(organ.gameObject.GetComponent<PetrificationCharm>() is null) )
+                        organ = RandomOrgan();
+                        while (organ is Heart || organ is Brain || organ is Lung || !(organ.gameObject.GetComponent<PetrificationCharm>() is null) || n < 5)
+                        {
+                            organ = RandomOrgan();
+                            n += 1;
+                        }
+                        if (n > 5)
                         {
                             i -= 1;
                             break;
@@ -164,18 +191,30 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         break;
 
                     case 5:
-                        if (bodyPart is Torso || bodyPart is Head)
+                        limb = RandomLimb();
+                        while (limb is Torso || limb is Head ||  n < 5)
+                        {
+                            limb = RandomLimb();
+                            n += 1;
+                        }
+                        if (n > 5)
                         {
                             i -= 1;
                             break;
                         }
-                        Debug.Log($"Severed {bodyPart.name}");
-                        textLog.NewLogEntry($"The {bodyPart.name} has been severed.");
-                        Sever(bodyPart);
+                        Debug.Log($"Severed {limb.name}");
+                        textLog.NewLogEntry($"The {limb.name} has been severed.");
+                        Sever(limb);
                         break;
 
                     case 6:
-                        if (organ is Heart || organ is Lung || organ is Brain)
+                        organ = RandomOrgan();
+                        while (organ is Heart || organ is Brain || organ is Lung || n < 5)
+                        {
+                            organ = RandomOrgan();
+                            n += 1;
+                        }
+                        if (n > 5)
                         {
                             i -= 1;
                             break;
@@ -186,9 +225,10 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         break;
 
                     case 7:
-                        Debug.Log($"Bomb implanted in {bodyPart.name}");
-                        textLog.NewLogEntry($"There's an explosive device in the {bodyPart.name}");
-                        ImplantBomb(bodyPart);
+                        limb = RandomLimb();
+                        Debug.Log($"Bomb implanted in {limb.name}");
+                        textLog.NewLogEntry($"There's an explosive device in the {limb.name}");
+                        ImplantBomb(limb);
                         break;
 
                     default:
@@ -204,13 +244,14 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
         if (numberOfInjuries != 0)
         {
+            Organ organ;
+            BodyPart limb;
+            int n = 0;
 
             for (int i = 0; i < numberOfInjuries; i++)
             {
                 //selected bodypart to injure, and injury to apply
                 int injuryNumber = Random.Range(0, 5);
-                Organ organ = organs[Random.Range(0, organs.Count)];
-                BodyPart bodyPart = bodyParts[Random.Range(0, bodyParts.Count)];
 
                 //apply injury
                 switch (injuryNumber)
@@ -230,18 +271,13 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         break;
 
                     case 2:
-                        if (!(organ is Brain))
+                        organ = RandomOrgan();
+                        while ( !(organ is Brain) || !(organ is Heart) || n < 5)
                         {
-                            i -= 1;
-                            break;
+                            organ = RandomOrgan();
+                            n += 1;
                         }
-                        Debug.Log($"{organ.name} petrified");
-                        textLog.NewLogEntry($"The {organ.name} has been temporarily petrified.");
-                        Petrify(organ);
-                        break;
-
-                    case 3:
-                        if (!(organ is Brain))
+                        if (n > 5)
                         {
                             i -= 1;
                             break;
@@ -252,13 +288,16 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         break;
 
                     case 4:
-                        if ((organ is Heart && !unlockTracker.charms_heart) || (organ is Lung && !unlockTracker.charms_lung) || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart))
+                        organ = RandomOrgan();
+                        while ((organ is Heart && !unlockTracker.charms_heart) || (organ is Lung && !unlockTracker.charms_lung) || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart) || n < 5)
                         {
-                            if (!(organ is Heart || organ is Lung || organ is Brain))
-                            {
-                                i -= 1;
-                                break;
-                            }
+                            organ = RandomOrgan();
+                            n += 1;
+                        }
+                        if (n > 5)
+                        {
+                            i -= 1;
+                            break;
                         }
                         Debug.Log($"{organ.name} external");
                         textLog.NewLogEntry($"The {organ.name} requires re-implanting.");
@@ -266,13 +305,16 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         break;
 
                     case 5:
-                        if (!unlockTracker.spawn || (organ is Heart && !unlockTracker.charms_heart) || (organ is Lung && !unlockTracker.charms_lung) || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart))
+                        organ = RandomOrgan();
+                        while (!unlockTracker.spawn || (organ is Heart && !unlockTracker.charms_heart) || (organ is Lung && !unlockTracker.charms_lung) || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart) || n < 5)
                         {
-                            if (!(organ is Heart || organ is Lung || organ is Brain))
-                            {
-                                i -= 1;
-                                break;
-                            }
+                            organ = RandomOrgan();
+                            n += 1;
+                        }
+                        if (n > 5)
+                        {
+                            i -= 1;
+                            break;
                         }
                         Debug.Log($"{organ.name} missing");
                         textLog.NewLogEntry($"The {organ.name} is missing!?.");
@@ -285,27 +327,6 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             }
 
         }
-    }
-
-    public void RequestedProcedures(int numberOfProcedures)
-    {
-        for (int i = 0; i < numberOfProcedures; i++)
-        {
-            int procedureNumber = Random.Range(0, 1);
-
-            switch (procedureNumber)
-            {
-                case 0:
-                    textLog.NewLogEntry("The patient requests that their heart be clockwork, not biological.");
-                    ClockworkHeartRequest = true;
-                    break;
-
-                default:
-                    break;
-            }
-
-        }
-
     }
 
     //assorted physical injury methods
@@ -368,47 +389,43 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
     public void Missing(Organ organ)
     {
-        organs.Remove((Organ)organ);
-        Actions_Surgery.RemoveOrganProcess((Organ)organ);
+        Actions_Surgery.RemoveOrganProcess(organ);
         Actions_Surgery.DeleteBodyPartProcess(organ);
     }
 
     public void Remove(Organ organ)
     {
-        organs.Remove(organ);
         Actions_Surgery.RemoveOrganProcess(organ);
     }
 
     public void Petrify(BodyPart bodyPart)
     {
-        Actions_Charms.ApplyPetrificationCharm((Organ)bodyPart, 0, 0);
+        Actions_Charms.ApplyPetrificationCharmProcess((Organ)bodyPart);
     }
 
-    void PopulateBodyPartsList()
+    public List<BodyPart> BodyPartsList()
     {
-
-        bodyParts = new List<BodyPart>();
-
-        //get bodyparts from body
-        for (int i = 0; i < body.transform.childCount; i++)
-        {
-            bodyParts.Add(body.transform.GetChild(i).GetComponent<BodyPart>());
-        }
-
+        List<BodyPart> x = FindObjectsOfType<BodyPart>().ToList();
+        var y = from bodyPart in x where bodyPart.isPartOfMainBody select bodyPart;
+        return y.ToList<BodyPart>();
     }
 
-    void PopulateOrgansList()
+    public List<Organ> PopulateOrgansList()
     {
-        organs = new List<Organ>();
+
+        List<BodyPart> x = BodyPartsList();
+        List<Organ> organs = new List<Organ>();
 
         //get organs from bodyparts list
-        foreach(BodyPart bodyPart in bodyParts)
+        foreach(BodyPart bodyPart in x)
         {
             foreach (Organ organ in bodyPart.containedOrgans)
             {
                 organs.Add(organ);
             }
         }
+
+        return organs;
 
     }
 }

@@ -71,8 +71,6 @@ public class Bomb : EmbeddedObject
                 //I can't shake the feeling that invoking surgery to do this is not going to end particulary well
                 //but, it has all the setup and cleanup required to make it work
                 Actions_Surgery.DeleteBodyPartProcess(parentBodyPart);
-                FindObjectOfType<BodyPartManager>().bodyParts.Remove(parentBodyPart);
-                Destroy(parentBodyPart);
                 Destroy(this);
                 return;
             }

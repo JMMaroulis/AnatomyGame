@@ -1310,7 +1310,6 @@ MonoBehaviour:
   textLog: {fileID: 746780209}
   bullet: {fileID: 4163447092566984401, guid: 39720435f53879940a98c8847e5e4f78, type: 3}
   bomb: {fileID: 7763544942679848157, guid: c2ab0dd6b35e1674594a4962016d0970, type: 3}
-  ClockworkHeartRequest: 0
 --- !u!4 &257884927
 Transform:
   m_ObjectHideFlags: 0
@@ -10454,16 +10453,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
-      propertyPath: oxygen
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
-        type: 3}
-      propertyPath: blood
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387252113512761771, guid: a06dd97c5b85b054d9a3a1997c1739e7,
-        type: 3}
       propertyPath: containedOrgans.Array.data[3]
       value: 
       objectReference: {fileID: 162469656}
@@ -10472,6 +10461,11 @@ PrefabInstance:
       propertyPath: containedOrgans.Array.data[2]
       value: 
       objectReference: {fileID: 162469656}
+    - target: {fileID: 1874321550833006078, guid: a06dd97c5b85b054d9a3a1997c1739e7,
+        type: 3}
+      propertyPath: efficiency
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3038774217316100592, guid: a06dd97c5b85b054d9a3a1997c1739e7,
         type: 3}
       propertyPath: m_Name

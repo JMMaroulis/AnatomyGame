@@ -1,5 +1,5 @@
 ﻿[System.Serializable]
-public class ClockworkLeftLung : Lung
+public class ClockworkLeftLung : LeftLung
 {
 
 }

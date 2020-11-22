@@ -314,6 +314,7 @@ public static class Actions_Surgery
 
     public static void DeleteBodyPartProcess(BodyPart bodyPart)
     {
+        //destroy all organs contained in the bodypart
         foreach (Organ organ in bodyPart.containedOrgans)
         {
             GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
@@ -321,17 +322,19 @@ public static class Actions_Surgery
             GameObject.Destroy(organ.gameObject);
         }
 
+        //destroy all objects embedded in the bodypart
         foreach (EmbeddedObject embeddedObject in bodyPart.embeddedObjects)
         {
             GameObject.Destroy(embeddedObject.gameObject);
         }
 
+        //remove bodypart from tracking lists
         bodyPart.SeverAllConnections();
         GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
         GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(bodyPart);
-
         if (bodyPart is Organ)
         {
+            BodyPartManager x = GameObject.FindObjectOfType<BodyPartManager>();
             GameObject.FindObjectOfType<BodyPartManager>().organs.Remove((Organ)bodyPart);
         }
 
