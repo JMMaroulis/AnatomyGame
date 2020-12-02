@@ -66,7 +66,7 @@ public class ButtonActions : MonoBehaviour
         charmsButton.gameObject.SetActive(unlocks.charms_petrification || unlocks.charms_heart || unlocks.charms_lung || unlocks.charms_blood_regen); //charm permissions on individual level
         spawnLimbButton.gameObject.SetActive(unlocks.spawn);
         spawnOrganButton.gameObject.SetActive(unlocks.spawn);
-        spawnClockLimbButton.gameObject.SetActive(unlocks.spawn);
+        spawnClockLimbButton.gameObject.SetActive(unlocks.spawn_clock);
         spawnClockOrganButton.gameObject.SetActive(unlocks.spawn_clock);
         waitButton.gameObject.SetActive(true);
     }
@@ -77,16 +77,35 @@ public class ButtonActions : MonoBehaviour
     {
 
         //update bodypart examination textbox every x seconds
-        if (selectedGameObject)
+        secondCounter += Time.unscaledDeltaTime;
+        if(secondCounter >= 0.3f || examineBox.text == "")
         {
-            secondCounter += Time.unscaledDeltaTime;
-            if(secondCounter >= 0.3f || examineBox.text == "")
-            {
-                ExamineSelectedGameObject();
-                secondCounter = 0.0f;
-            }
-        }        
+            ExamineSelectedGameObject();
+            secondCounter = 0.0f;
+        }
+     
+    }
 
+    public void DisableAllButtons()
+    {
+        bloodButton.interactable = false;
+        surgeryButton.interactable = false;
+        medicineButton.interactable = false;
+        charmsButton.interactable = false;
+        spawnLimbButton.interactable = false;
+        spawnOrganButton.interactable = false;
+        spawnClockLimbButton.interactable = false;
+        spawnClockOrganButton.interactable = false;
+        waitButton.interactable = false;
+
+        menuButtons[0].interactable = false;
+        menuButtons[1].interactable = false;
+        menuButtons[2].interactable = false;
+        menuButtons[3].interactable = false;
+        menuButtons[4].interactable = false;
+        menuButtons[5].interactable = false;
+        menuButtons[6].interactable = false;
+        menuButtons[7].interactable = false;
     }
 
     public void UpdateMenuTabsInteractivity()
@@ -1189,7 +1208,7 @@ public class ButtonActions : MonoBehaviour
             else
             {
                 Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost);
-                textLog.NewLogEntry($"connecting the {bodyPart1.name} to the {bodyPart2.name}...");
+                textLog.NewLogEntry($"Connecting the {bodyPart1.name} to the {bodyPart2.name}...");
                 actionTimeBar.Reset(seconds);
             }
 
@@ -1524,7 +1543,7 @@ public class ButtonActions : MonoBehaviour
     {
         if (selectedGameObject == null)
         {
-            examineBox.text = "You need to select a something for that!";
+            examineBox.text = "Nothing currently selected.";
         }
         else if(!(selectedGameObject.GetComponent<BodyPart>() is null))
         {

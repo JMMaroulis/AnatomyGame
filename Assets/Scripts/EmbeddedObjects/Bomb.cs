@@ -55,7 +55,6 @@ public class Bomb : EmbeddedObject
         if (timeElapsed >= expiryTime)
         {
             Explode();
-            Destroy(this);
         }
     }
 
@@ -72,11 +71,21 @@ public class Bomb : EmbeddedObject
                 //but, it has all the setup and cleanup required to make it work
                 Actions_Surgery.DeleteBodyPartProcess(parentBodyPart);
                 Destroy(this);
-                return;
             }
 
             FindObjectOfType<TextLog>().NewLogEntry("A bomb just exploded!");
+
+            ButtonActions buttonActions = FindObjectOfType<ButtonActions>();
+            if (buttonActions.selectedGameObject == this.gameObject)
+            {
+                FindObjectOfType<ButtonActions>().selectedGameObject = null;
+            }
+            FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+            FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+
             Destroy(this);
+
+
         }
     }
 

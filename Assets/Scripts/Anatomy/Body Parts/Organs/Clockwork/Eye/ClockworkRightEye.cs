@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ClockworkLeftEye : Eye
+public class ClockworkRightEye : RightEye
 {
 
 }

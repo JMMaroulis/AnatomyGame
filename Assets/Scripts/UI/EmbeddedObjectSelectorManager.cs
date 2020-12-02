@@ -71,9 +71,9 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
         ClearAllSelectors();
         GameObject selectedGameObject = FindObjectOfType<ButtonActions>().selectedGameObject;
 
-        //make selector for each embeddedobject in currently selected bodypart
         if (!(selectedGameObject == null))
         {
+            //make selector for each embeddedobject in currently selected bodypart
             if (!(selectedGameObject.GetComponent<BodyPart>() is null))
             {
                 foreach (EmbeddedObject embeddedObject in selectedGameObject.GetComponent<BodyPart>().embeddedObjects)
@@ -81,9 +81,21 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
                     NewEmbeddedObject(embeddedObject);
                 }
             }
+
+            //make selector for each embeddedobject in parent of currently selected object
+            if (!(selectedGameObject.GetComponent<EmbeddedObject>() is null))
+            {
+                if (!(selectedGameObject.GetComponent<EmbeddedObject>().parentBodyPart is null))
+                {
+                    foreach (EmbeddedObject embeddedObject in selectedGameObject.GetComponent<EmbeddedObject>().parentBodyPart.embeddedObjects)
+                    {
+                        NewEmbeddedObject(embeddedObject);
+                    }
+                }
+            }
+
         }
 
-      
         //make selector for all embeddedobjects not currently embedded in something
         foreach (EmbeddedObject embeddedObject in FindObjectsOfType<EmbeddedObject>())
         {
@@ -92,6 +104,7 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
                 NewEmbeddedObject(embeddedObject);
             }
         }
+
 
 
     }

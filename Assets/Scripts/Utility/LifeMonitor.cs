@@ -76,19 +76,17 @@ public class LifeMonitor : MonoBehaviour
         hasPlayerWon = victory;
         if (victory)
         {
-            GameObject.FindObjectOfType<GoldTracker>().goldAccumulated += 500;
-            textLog.NewLogEntry("Congratulations, he'll live! Your payment is 500 gold. Transfer in 5 seconds...");
-
-            yield return new WaitForSeconds(5 * Time.timeScale);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("UnlockScreen");
+            FindObjectOfType<GoldTracker>().goldAccumulated += FindObjectOfType<GameSetupScenarioTracker>().goldReward;
+            textLog.NewLogEntry($"Congratulations, he'll live! Your payment is {FindObjectOfType<GameSetupScenarioTracker>().goldReward} gold. Transfer in 5 seconds...");
         }
         else
         {
             textLog.NewLogEntry("Insufficient patient treatment. No payment for you. Transfer in 5 seconds...");
-
-            yield return new WaitForSeconds(5 * Time.timeScale);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("UnlockScreen");
         }
+
+        FindObjectOfType<ButtonActions>().DisableAllButtons();
+        yield return new WaitForSeconds(5 * Time.timeScale);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("UnlockScreen");
 
     }
 
@@ -282,7 +280,6 @@ public class LifeMonitor : MonoBehaviour
             }
 
             int numHearts = bodyPart.containedOrgans.Count(element => element is Heart);
-            numHearts += bodyPart.embeddedObjects.Count(element => element is ClockworkHeart);
             if (bodyPart.maxHearts != numHearts)
             {
                 textLog.NewLogEntry($"{bodyPart.name} should have {bodyPart.maxHearts} hearts, has {numHearts}.");

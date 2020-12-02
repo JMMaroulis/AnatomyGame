@@ -34,6 +34,10 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     public BodyPart RandomLimb()
     {
         BodyPart limb = bodyPartManager.bodyParts[Random.Range(0, bodyPartManager.bodyParts.Count)];
+        while (limb is Organ)
+        {
+            limb = bodyPartManager.bodyParts[Random.Range(0, bodyPartManager.bodyParts.Count)];
+        }
         return limb;
     }
 
@@ -162,7 +166,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                             organ = RandomOrgan();
                             n += 1;
                         }
-                        if (n > 5 || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
+                        if (n > 5 || organ is Brain || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
                         {
                             i -= 1;
                             break;
@@ -175,7 +179,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
                     case 4:
                         organ = RandomOrgan();
-                        while (organ is Heart || organ is Brain || organ is Lung || !(organ.gameObject.GetComponent<PetrificationCharm>() is null) || n < 5)
+                        bool x = false;
+                        x = x || (organ is Lung && !unlockTracker.charms_lung);
+                        x = x || (organ is Heart && !unlockTracker.charms_heart);
+                        x = x || (organ is Brain && (!unlockTracker.charms_heart || !unlockTracker.charms_lung));
+                        x = x || !(organ.GetComponent<PetrificationCharm>() is null);
+                        while (x || n < 5)
                         {
                             organ = RandomOrgan();
                             n += 1;
@@ -272,7 +281,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
                     case 2:
                         organ = RandomOrgan();
-                        while ( !(organ is Brain) || !(organ is Heart) || n < 5)
+                        while ( !(organ is Brain) || n < 5)
                         {
                             organ = RandomOrgan();
                             n += 1;

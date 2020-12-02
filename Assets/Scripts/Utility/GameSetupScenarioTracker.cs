@@ -15,6 +15,12 @@ public class GameSetupScenarioTracker : MonoBehaviour
     public int levelstart_patientNumber;
     public int levelstart_requestedProcedures;
 
+    public int goldReward;
+
+    public int easyInjuryReward;
+    public int mediumInjuryReward;
+    public int hardInjuryReward;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +56,9 @@ public class GameSetupScenarioTracker : MonoBehaviour
         levelstart_mediumInjuries = mediumInjuries;
         levelstart_hardInjuries = hardInjuries;
         levelstart_patientNumber = patientNumber;
+
         NextPatient();
+        GoldRewardCalculation();
     }
 
     public void OnLoad()
@@ -59,6 +67,14 @@ public class GameSetupScenarioTracker : MonoBehaviour
         mediumInjuries = levelstart_mediumInjuries;
         hardInjuries   = levelstart_hardInjuries;
         patientNumber  = levelstart_patientNumber;
+    }
+
+    private void GoldRewardCalculation()
+    {
+        goldReward = 0;
+        goldReward += easyInjuryReward * easyInjuries;
+        goldReward += mediumInjuryReward * mediumInjuries;
+        goldReward += hardInjuryReward * hardInjuries;
     }
 
 }

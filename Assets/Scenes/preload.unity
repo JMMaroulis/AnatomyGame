@@ -672,6 +672,10 @@ MonoBehaviour:
   levelstart_hardInjuries: 0
   levelstart_patientNumber: 0
   levelstart_requestedProcedures: 0
+  goldReward: 0
+  easyInjuryReward: 100
+  mediumInjuryReward: 500
+  hardInjuryReward: 1000
 --- !u!114 &1607601282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,7 +741,7 @@ MonoBehaviour:
   charms_petrification: 0
   charms_blood_regen: 0
   blood: 1
-  spawn: 1
+  spawn: 0
   spawn_clock: 1
   levelstart_surgery: 0
   levelstart_medicine_poison: 0

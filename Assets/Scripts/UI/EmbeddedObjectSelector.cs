@@ -33,7 +33,7 @@ public class EmbeddedObjectSelector : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         buttonActions.selectedGameObject = embeddedObject.gameObject;
-        //embeddedObjectSelectorManager.ResetSelectors();
+        embeddedObjectSelectorManager.ResetSelectors();
         FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
 
         buttonActions.ClearAllButtons();

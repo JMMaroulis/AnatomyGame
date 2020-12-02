@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 
 public class BodyPart : MonoBehaviour
@@ -232,13 +233,13 @@ public class BodyPart : MonoBehaviour
         //if bodypart doesn't have enough blood to lose, inflict the remaining loss on neighbouring parts instead
         if (bloodLostRemainder > 0 && connectedBodyParts.Count > 0 && stepcount < 3)
         {
-            connectedBodyParts[Random.Range(0, connectedBodyParts.Count)].LoseBloodAmount(bloodLostRemainder, stepcount + 1);
+            connectedBodyParts[UnityEngine.Random.Range(0, connectedBodyParts.Count)].LoseBloodAmount(bloodLostRemainder, stepcount + 1);
         }
 
         //then start draining organs
         if (bloodLostRemainder > 0 && containedOrgans.Count > 0 && stepcount < 3)
         {
-            containedOrgans[Random.Range(0, containedOrgans.Count)].LoseBloodAmount(bloodLostRemainder, stepcount + 1);
+            containedOrgans[UnityEngine.Random.Range(0, containedOrgans.Count)].LoseBloodAmount(bloodLostRemainder, stepcount + 1);
         }
     }
 
@@ -565,61 +566,60 @@ public class BodyPart : MonoBehaviour
 
         description += $"Examining {this.gameObject.name}:\n";
 
+        description += $"Damage: {Math.Round(damage, 2)} / {damageMax}\n";
 
-        description += $"Damage: {damage} / {damageMax}\n";
+        description += $"Blood: {Math.Round(blood, 2)} units, requires {bloodRequiredToFunction} to function.\n";
 
-        description += $"Blood: {blood} units, requires {bloodRequiredToFunction} to function.\n";
+        description += $"Losing {Math.Round(bloodLossRate, 2)} units of blood per second.\n";
 
-        description += $"Losing {bloodLossRate} units of blood per second.\n";
-
-        description += $"Oxygen: {oxygen} / {oxygenMax}, requires {oxygenRequired} per second to function.\n";
+        description += $"Oxygen: {Math.Round(oxygen, 2)} / {oxygenMax}, requires {oxygenRequired} per second to function.\n";
 
         if (healthPotion > 0.0f)
         {
-            description += $"Health Potion: {healthPotion} Units.\n";
+            description += $"Health Potion: {Math.Round(healthPotion, 2)} Units.\n";
         }
 
         if (antidote > 0.0f)
         {
-            description += $"Antidote: {antidote} Units.\n";
+            description += $"Antidote: {Math.Round(antidote, 2)} Units.\n";
         }
 
         if (slowPoison > 0.0f)
         {
-            description += $"Slow Poison: {slowPoison} Units.\n";
+            description += $"Slow Poison: {Math.Round(slowPoison, 2)} Units.\n";
         }
 
         if (stasisPotion > 0.0f)
         {
-            description += $"Stasis Potion: {stasisPotion} Units.\n";
+            description += $"Stasis Potion: {Math.Round(stasisPotion, 2)} Units.\n";
         }
 
         if (hastePotion > 0.0f)
         {
-            description += $"Haste Potion: {hastePotion} Units.\n";
+            description += $"Haste Potion: {Math.Round(hastePotion, 2)} Units.\n";
         }
 
         if (coagulantPotion > 0.0f)
         {
-            description += $"Coagulant Potion: {coagulantPotion} Units.\n";
+            description += $"Coagulant Potion: {Math.Round(coagulantPotion, 2)} Units.\n";
         }
 
         if (this.GetComponent<HeartCharm>() != null)
         {
             HeartCharm heartCharm = this.GetComponent<HeartCharm>();
-            description += $"Heart Charm: {heartCharm.expiryTime - heartCharm.timeElapsed} seconds remaining.\n";
+            description += $"Heart Charm: {Math.Round(heartCharm.expiryTime - heartCharm.timeElapsed, 2)} seconds remaining.\n";
         }
 
         if (this.GetComponent<LungCharm>() != null)
         {
             LungCharm lungCharm = this.GetComponent<LungCharm>();
-            description += $"Lung Charm: {lungCharm.expiryTime - lungCharm.timeElapsed} seconds remaining.\n";
+            description += $"Lung Charm: {Math.Round(lungCharm.expiryTime - lungCharm.timeElapsed, 2)} seconds remaining.\n";
         }
 
         if (this.GetComponent<PetrificationCharm>() != null)
         {
             PetrificationCharm petrificationCharm = this.GetComponent<PetrificationCharm>();
-            description += $"Petrification Charm: {petrificationCharm.expiryTime - petrificationCharm.timeElapsed} seconds remaining.\n";
+            description += $"Petrification Charm: {Math.Round(petrificationCharm.expiryTime - petrificationCharm.timeElapsed, 2)} seconds remaining.\n";
         }
 
         description += "Connected to: ";
