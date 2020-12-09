@@ -157,7 +157,7 @@ public class LifeMonitor : MonoBehaviour
         bool result = false;
         foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
         {
-            if (!bodyPart.isPartOfMainBody)
+            if (!bodyPart.isPartOfMainBody || bodyPart is Organ)
             {
                 continue;
             }
@@ -212,6 +212,12 @@ public class LifeMonitor : MonoBehaviour
             if (!bodyPart.isPartOfMainBody)
             {
                 continue;
+            }
+
+            if (bodyPart.requiresReplacing)
+            {
+                textLog.NewLogEntry($"{bodyPart.name} requires replacement!");
+                result = true;
             }
 
             //limbs

@@ -46,6 +46,7 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 0
   isFunctioning: 1
+  requiresReplacing: 0
   bloodRequiredToFunction: 0
   blood: 0
   bloodLossRate: 0

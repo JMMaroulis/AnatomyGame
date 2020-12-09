@@ -11,7 +11,6 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
 
     public GameObject bulletSelectorPrefab;
     public GameObject bombSelectorPrefab;
-    public GameObject clockworkHeartSelectorPrefab;
 
     private ButtonActions buttonActions;
 
@@ -39,11 +38,6 @@ public class EmbeddedObjectSelectorManager : MonoBehaviour
         if (embeddedObject is Bomb)
         {
             NewSelector(embeddedObject, bombSelectorPrefab, externalEmbeddedObjectSelectorsPanel);
-        }
-
-        if (embeddedObject is ClockworkHeart)
-        {
-            NewSelector(embeddedObject, clockworkHeartSelectorPrefab, externalEmbeddedObjectSelectorsPanel);
         }
 
     }

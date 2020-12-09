@@ -8,6 +8,7 @@ public class BodyPart : MonoBehaviour
     public bool isTimePassing;
     public float timeScale;
     public bool isFunctioning;
+    public bool requiresReplacing;
 
     //blood stuff
     public float bloodRequiredToFunction;
@@ -340,7 +341,7 @@ public class BodyPart : MonoBehaviour
 
     public void CheckForFunctionality()
     {
-        isFunctioning = (blood > bloodRequiredToFunction) && (oxygen > 0);
+        isFunctioning = (blood >= bloodRequiredToFunction) && (oxygen >= oxygenRequired);
     }
 
     //kicks off recursive process for finding brain, and efficiency thereof
@@ -449,42 +450,42 @@ public class BodyPart : MonoBehaviour
     {
         if (organ is Brain)
         {
-            return (connectedBodyParts.OfType<Brain>().Count() < maxBrains);
+            return (containedOrgans.OfType<Brain>().Count() < maxBrains);
         }
 
         if (organ is LeftEye)
         {
-            return (connectedBodyParts.OfType<LeftEye>().Count() < maxLeftEyes);
+            return (containedOrgans.OfType<LeftEye>().Count() < maxLeftEyes);
         }
 
         if (organ is RightEye)
         {
-            return (connectedBodyParts.OfType<RightEye>().Count() < maxRightEyes);
+            return (containedOrgans.OfType<RightEye>().Count() < maxRightEyes);
         }
 
         if (organ is Heart)
         {
-            return (connectedBodyParts.OfType<Heart>().Count() < maxHearts);
+            return (containedOrgans.OfType<Heart>().Count() < maxHearts);
         }
 
         if (organ is Liver)
         {
-            return (connectedBodyParts.OfType<Liver>().Count() < maxLivers);
+            return (containedOrgans.OfType<Liver>().Count() < maxLivers);
         }
 
         if (organ is LeftLung)
         {
-            return (connectedBodyParts.OfType<Lung>().Count() < maxLeftLungs);
+            return (containedOrgans.OfType<LeftLung>().Count() < maxLeftLungs);
         }
 
         if (organ is RightLung)
         {
-            return (connectedBodyParts.OfType<Lung>().Count() < maxRightLungs);
+            return (containedOrgans.OfType<RightLung>().Count() < maxRightLungs);
         }
 
         if (organ is Stomach)
         {
-            return (connectedBodyParts.OfType<Stomach>().Count() < maxStomachs);
+            return (containedOrgans.OfType<Stomach>().Count() < maxStomachs);
         }
 
         return false;
@@ -573,6 +574,11 @@ public class BodyPart : MonoBehaviour
         description += $"Losing {Math.Round(bloodLossRate, 2)} units of blood per second.\n";
 
         description += $"Oxygen: {Math.Round(oxygen, 2)} / {oxygenMax}, requires {oxygenRequired} per second to function.\n";
+
+        if (requiresReplacing)
+        {
+            description += $"Requires replacing.\n";
+        }
 
         if (healthPotion > 0.0f)
         {

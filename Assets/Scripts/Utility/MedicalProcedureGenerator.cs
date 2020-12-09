@@ -10,6 +10,8 @@ public class MedicalProcedureGenerator : MonoBehaviour
     private List<Organ> organs;
     private UnlockTracker unlockTracker;
 
+    private BodyPartManager bodyPartManager;
+
     //requested procedure logs
     public bool ClockworkHeartRequest;
 
@@ -25,15 +27,27 @@ public class MedicalProcedureGenerator : MonoBehaviour
 
     public void RequestedProcedures(int numberOfProcedures)
     {
-        for (int i = 0; i < numberOfProcedures; i++)
+        int i = 0;
+        while(i < numberOfProcedures)
         {
-            int procedureNumber = Random.Range(0, 1);
+            int procedureNumber = Random.Range(0, 3);
 
             switch (procedureNumber)
             {
                 case 0:
                     textLog.NewLogEntry("The patient requests that their heart(s) be clockwork, not biological.");
                     ClockworkHeartRequest = true;
+                    i += 1;
+                    break;
+
+                case 1:
+
+                    i = RandomOrganReplcament(i);
+                    break;
+
+                case 2:
+
+                    i = RandomLimbReplacement(i);
                     break;
 
                 default:
@@ -43,6 +57,69 @@ public class MedicalProcedureGenerator : MonoBehaviour
         }
 
     }
+
+    private int RandomOrganReplcament(int i)
+    {
+        int n = 0;
+        Organ organ = RandomOrgan();
+        bool x = false;
+        x = x || (organ is Brain && (!unlockTracker.charms_heart || !unlockTracker.charms_lung));
+        x = x || (organ is Heart && !unlockTracker.charms_heart);
+        x = x || (organ is Lung && !unlockTracker.charms_lung);
+        while (x && n < 5)
+        {
+            organ = RandomOrgan();
+            n += 1;
+        }
+        if (n > 5 || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
+        {
+            return i;
+        }
+        Debug.Log($"{organ.name} replacement");
+        textLog.NewLogEntry($"The patient requires a {organ.name} replacement.");
+        organ.requiresReplacing = true;
+        return i + 1;
+    }
+
+    private int RandomLimbReplacement(int i)
+    {
+        int n = 0;
+        BodyPart bodyPart = RandomLimb();
+        bool x = false;
+        x = x || (bodyPart is Brain && (!unlockTracker.charms_heart || !unlockTracker.charms_lung));
+        x = x || (bodyPart is Heart && !unlockTracker.charms_heart);
+        x = x || (bodyPart is Lung && !unlockTracker.charms_lung);
+        while (x && n < 5)
+        {
+            bodyPart = RandomLimb();
+            n += 1;
+        }
+        if (n > 5 || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
+        {
+            return i;
+        }
+        Debug.Log($"{bodyPart.name} replacement");
+        textLog.NewLogEntry($"The patient requires a {bodyPart.name} replacement.");
+        bodyPart.requiresReplacing = true;
+        return i + 1;
+    }
+
+    public Organ RandomOrgan()
+    {
+        Organ organ = bodyPartManager.organs[Random.Range(0, bodyPartManager.organs.Count)];
+        return organ;
+    }
+
+    public BodyPart RandomLimb()
+    {
+        BodyPart limb = bodyPartManager.bodyParts[Random.Range(0, bodyPartManager.bodyParts.Count)];
+        while (limb is Organ)
+        {
+            limb = bodyPartManager.bodyParts[Random.Range(0, bodyPartManager.bodyParts.Count)];
+        }
+        return limb;
+    }
+
 
     void PopulateBodyPartsList()
     {

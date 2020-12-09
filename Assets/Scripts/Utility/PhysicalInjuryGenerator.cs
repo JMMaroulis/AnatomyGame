@@ -46,58 +46,32 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     {
         if (numberOfInjuries != 0)
         {
-
-            for (int i = 0; i < numberOfInjuries; i++)
+            int i = 0;
+            while (i < numberOfInjuries)
             {
 
                 //select and apply random injury
                 int injuryNumber = Random.Range(0, 5);
-                BodyPart limb;
                 switch (injuryNumber)
                 {
                     case 0:
-                        limb = RandomLimb();
-                        Debug.Log($"Stabbed {limb.name}");
-                        textLog.NewLogEntry($"The {limb.name} has been stabbed.");
-                        Stab(limb);
+                        if (StabLimb()) { i += 1; }
                         break;
 
                     case 1:
-                        limb = RandomLimb();
-                        Debug.Log($"Shot {limb.name}");
-                        textLog.NewLogEntry($"The {limb.name} has been shot.");
-                        Shoot(limb);
+                        if (ShootLimb()) { i += 1; }
                         break;
 
                     case 2:
-                        limb = RandomLimb();
-                        Debug.Log($"Crushed {limb.name}");
-                        textLog.NewLogEntry($"The {limb.name} has been crushed.");
-                        Crush(limb);
+                        if (CrushLimb()) { i += 1; }
                         break;
 
                     case 3:
-                        if (!unlockTracker.medicine_poison)
-                        {
-                            i--;
-                            break;
-                        }
-                        limb = RandomLimb();
-                        Debug.Log($"Snake bit {limb.name}");
-                        textLog.NewLogEntry($"The {limb.name} has been bitten by a venomous snake.");
-                        SnakeBite(limb);
+                        if (SnakeBite()) { i += 1; }
                         break;
 
                     case 4:
-                        if (!unlockTracker.medicine_poison)
-                        {
-                            i--;
-                            break;
-                        }
-                        limb = RandomLimb();
-                        Debug.Log($"Poisoned {limb.name}");
-                        textLog.NewLogEntry($"The {limb.name} has been poisoned.");
-                        SlowPoison(limb);
+                        if (SlowPoisonLimb()) { i += 1; }
                         break;
 
                     default:
@@ -111,133 +85,44 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     {
         if (numberOfInjuries > 0)
         {
-
-            for (int i = 0; i < numberOfInjuries; i++)
+            int i = 0;
+            while (i < numberOfInjuries)
             {
-                Organ organ;
-                BodyPart limb;
-                int n = 0;
 
                 //apply injury
                 int injuryNumber = Random.Range(0, 8);
                 switch (injuryNumber)
                 {
                     case 0:
-                        if (!unlockTracker.medicine_blood && !unlockTracker.spawn)
-                        {
-                            i--;
-                            break;
-                        }
-                        organ = RandomOrgan();
-                        Debug.Log($"Stabbed {organ.name}");
-                        textLog.NewLogEntry($"The {organ.name} has been stabbed.");
-                        Stab(organ);
-                        Stab(organ.connectedBodyParts[0]);
+                        if (StabOrgan()) { i += 1; }
                         break;
 
                     case 1:
-                        if (!unlockTracker.medicine_blood && !unlockTracker.spawn)
-                        {
-                            i--;
-                            break;
-                        }
-                        organ = RandomOrgan();
-                        Debug.Log($"Shot {organ.name}");
-                        textLog.NewLogEntry($"The {organ.name} has been shot.");
-                        Shoot(organ);
+                        if (ShootOrgan()) { i += 1; }
                         break;
 
                     case 2:
-                        if (!unlockTracker.medicine_poison && !unlockTracker.spawn)
-                        {
-                            i--;
-                            break;
-                        }
-                        organ = RandomOrgan();
-                        Debug.Log($"Crushed {organ.name}");
-                        textLog.NewLogEntry($"The {organ.name} has been poisoned.");
-                        SlowPoison(organ);
+                        if (SlowPoisonOrgan()) { i += 1; }
                         break;
 
                     case 3:
-                        organ = RandomOrgan();
-                        while (organ is Brain || !(organ.gameObject.GetComponent<PetrificationCharm>() is null) || n < 5)
-                        {
-                            organ = RandomOrgan();
-                            n += 1;
-                        }
-                        if (n > 5 || organ is Brain || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
-                        {
-                            i -= 1;
-                            break;
-                        }
-                        organ = RandomOrgan();
-                        Debug.Log($"{organ.name} missing");
-                        textLog.NewLogEntry($"The {organ.name} is missing?!");
-                        Missing(organ);
+                        if (MissingOrganMedium()) { i += 1; }
                         break;
 
                     case 4:
-                        organ = RandomOrgan();
-                        bool x = false;
-                        x = x || (organ is Lung && !unlockTracker.charms_lung);
-                        x = x || (organ is Heart && !unlockTracker.charms_heart);
-                        x = x || (organ is Brain && (!unlockTracker.charms_heart || !unlockTracker.charms_lung));
-                        x = x || !(organ.GetComponent<PetrificationCharm>() is null);
-                        while (x || n < 5)
-                        {
-                            organ = RandomOrgan();
-                            n += 1;
-                        }
-                        if (n > 5)
-                        {
-                            i -= 1;
-                            break;
-                        }
-                        Debug.Log($"{organ.name} petrified");
-                        textLog.NewLogEntry($"The {organ.name} has been temporarily petrified.");
-                        Petrify(organ);
+                        if (PetrifyOrganMedium()) { i += 1; }
                         break;
 
                     case 5:
-                        limb = RandomLimb();
-                        while (limb is Torso || limb is Head ||  n < 5)
-                        {
-                            limb = RandomLimb();
-                            n += 1;
-                        }
-                        if (n > 5)
-                        {
-                            i -= 1;
-                            break;
-                        }
-                        Debug.Log($"Severed {limb.name}");
-                        textLog.NewLogEntry($"The {limb.name} has been severed.");
-                        Sever(limb);
+                        if (SeverLimbMedium()) { i += 1; }
                         break;
 
                     case 6:
-                        organ = RandomOrgan();
-                        while (organ is Heart || organ is Brain || organ is Lung || n < 5)
-                        {
-                            organ = RandomOrgan();
-                            n += 1;
-                        }
-                        if (n > 5)
-                        {
-                            i -= 1;
-                            break;
-                        }
-                        Debug.Log($"{organ.name} external");
-                        textLog.NewLogEntry($"The {organ.name} requires re-implanting.");
-                        Remove(organ);
+                        if (RemoveOrganMedium()) { i += 1; }
                         break;
 
                     case 7:
-                        limb = RandomLimb();
-                        Debug.Log($"Bomb implanted in {limb.name}");
-                        textLog.NewLogEntry($"There's an explosive device in the {limb.name}");
-                        ImplantBomb(limb);
+                        if (ImplantBomb()) { i += 1; }
                         break;
 
                     default:
@@ -250,14 +135,10 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
     public void HardInjuries(int numberOfInjuries)
     {
-
         if (numberOfInjuries != 0)
         {
-            Organ organ;
-            BodyPart limb;
-            int n = 0;
-
-            for (int i = 0; i < numberOfInjuries; i++)
+            int i = 0;
+            while (i < numberOfInjuries)
             {
                 //selected bodypart to injure, and injury to apply
                 int injuryNumber = Random.Range(0, 5);
@@ -266,68 +147,19 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                 switch (injuryNumber)
                 {
                     case 0:
-                        BodyPart Torso = FindObjectOfType<Torso>();
-                        Sever(Torso);
-                        Debug.Log($"Severed {Torso.name}");
-                        textLog.NewLogEntry($"The {Torso.name} has been severed from all limbs.");
+                        if (SeverTorso()) { i += 1; }
                         break;
 
                     case 1:
-                        BodyPart head = FindObjectOfType<Head>();
-                        Sever(head);
-                        Debug.Log($"Severed {head.name}");
-                        textLog.NewLogEntry($"Decapitation!");
-                        break;
-
-                    case 2:
-                        organ = RandomOrgan();
-                        while ( !(organ is Brain) || n < 5)
-                        {
-                            organ = RandomOrgan();
-                            n += 1;
-                        }
-                        if (n > 5)
-                        {
-                            i -= 1;
-                            break;
-                        }
-                        Debug.Log($"{organ.name} petrified");
-                        textLog.NewLogEntry($"The {organ.name} has been temporarily petrified.");
-                        Petrify(organ);
+                        if (SeverHead()) { i += 1; }
                         break;
 
                     case 4:
-                        organ = RandomOrgan();
-                        while ((organ is Heart && !unlockTracker.charms_heart) || (organ is Lung && !unlockTracker.charms_lung) || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart) || n < 5)
-                        {
-                            organ = RandomOrgan();
-                            n += 1;
-                        }
-                        if (n > 5)
-                        {
-                            i -= 1;
-                            break;
-                        }
-                        Debug.Log($"{organ.name} external");
-                        textLog.NewLogEntry($"The {organ.name} requires re-implanting.");
-                        Remove(organ);
+                        if (RemoveOrganHard()) { i += 1; }
                         break;
 
                     case 5:
-                        organ = RandomOrgan();
-                        while (!unlockTracker.spawn || (organ is Heart && !unlockTracker.charms_heart) || (organ is Lung && !unlockTracker.charms_lung) || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart) || n < 5)
-                        {
-                            organ = RandomOrgan();
-                            n += 1;
-                        }
-                        if (n > 5)
-                        {
-                            i -= 1;
-                            break;
-                        }
-                        Debug.Log($"{organ.name} missing");
-                        textLog.NewLogEntry($"The {organ.name} is missing!?.");
-                        Missing(organ);
+                        if (MissingOrganHard()) { i += 1; }
                         break;
 
                     default:
@@ -339,77 +171,367 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     }
 
     //assorted physical injury methods
-    public void Stab(BodyPart bodyPart)
+    public bool StabOrgan()
     {
-        bodyPart.damage = Mathf.Min(bodyPart.damage + 30, bodyPart.damageMax);
-        bodyPart.bloodLossRate += 10;
+        if (!unlockTracker.medicine_blood && !unlockTracker.spawn)
+        {
+            return false;
+        }
+
+        Organ organ = RandomOrgan();
+
+        Debug.Log($"Stabbed {organ.name}");
+        textLog.NewLogEntry($"The {organ.name} has been stabbed.");
+
+        organ.damage = Mathf.Clamp(organ.damage + 30, 0, organ.damageMax);
+        organ.bloodLossRate += 10;
+
+        if (organ.connectedBodyParts.Count() > 0)
+        {
+            organ.connectedBodyParts[0].damage = Mathf.Clamp(organ.connectedBodyParts[0].damage + 30, 0, organ.connectedBodyParts[0].damageMax);
+            organ.connectedBodyParts[0].bloodLossRate += 10;
+        }
+
+        return true;
     }
 
-    public void Shoot(BodyPart bodyPart)
+    public bool StabLimb()
     {
-        bodyPart.damage = Mathf.Min(bodyPart.damage + 30, bodyPart.damageMax);
-        bodyPart.bloodLossRate += 10;
+        BodyPart limb = RandomLimb();
 
-        if (bodyPart is Organ && bodyPart.connectedBodyParts.Count > 0)
+        Debug.Log($"Stabbed {limb.name}");
+        textLog.NewLogEntry($"The {limb.name} has been stabbed.");
+
+        limb.damage = Mathf.Clamp(limb.damage + 30, 0, limb.damageMax);
+        limb.bloodLossRate += 10;
+
+        return true;
+    }
+
+    public bool ShootLimb()
+    {
+        BodyPart limb = RandomLimb();
+        Debug.Log($"Shot {limb.name}");
+        textLog.NewLogEntry($"The {limb.name} has been shot.");
+
+        limb.damage = Mathf.Min(limb.damage + 30, limb.damageMax);
+        limb.bloodLossRate += 10;
+
+        if (limb is Organ && limb.connectedBodyParts.Count > 0)
         {
-            BodyPart parentBodyPart = bodyPart.connectedBodyParts[0];
+            BodyPart parentBodyPart = limb.connectedBodyParts[0];
             parentBodyPart.damage = Mathf.Min(parentBodyPart.damage + 30, parentBodyPart.damageMax);
             parentBodyPart.bloodLossRate += 10;
         }
 
         EmbeddedObject newBullet = FindObjectOfType<ObjectSpawner>().SpawnBullet("bullet");
-        newBullet.Embed(bodyPart);
+        newBullet.Embed(limb);
+
+        return true;
     }
 
-    public void ImplantBomb(BodyPart bodyPart)
+    public bool ShootOrgan()
     {
+        if (!unlockTracker.medicine_blood && !unlockTracker.spawn)
+        {
+            return false;
+        }
+
+        Organ organ = RandomOrgan();
+        Debug.Log($"Shot {organ.name}");
+        textLog.NewLogEntry($"The {organ.name} has been shot.");
+
+        organ.damage = Mathf.Min(organ.damage + 30, organ.damageMax);
+        organ.bloodLossRate += 10;
+
+        if (organ.connectedBodyParts.Count > 0)
+        {
+            BodyPart parentBodyPart = organ.connectedBodyParts[0];
+            parentBodyPart.damage = Mathf.Min(parentBodyPart.damage + 30, parentBodyPart.damageMax);
+            parentBodyPart.bloodLossRate += 10;
+        }
+
+        EmbeddedObject newBullet = FindObjectOfType<ObjectSpawner>().SpawnBullet("bullet");
+        newBullet.Embed(organ);
+
+        return true;
+    }
+
+    public bool ImplantBomb()
+    {
+        BodyPart limb = RandomLimb();
+        Debug.Log($"Bomb implanted in {limb.name}");
+        textLog.NewLogEntry($"There's an explosive device in the {limb.name}");
+
         EmbeddedObject newBomb = FindObjectOfType<ObjectSpawner>().SpawnBomb("bomb");
-        newBomb.Embed(bodyPart);
+        newBomb.Embed(limb);
+
+        return true;
     }
 
-    public void Crush(BodyPart bodyPart)
+    public bool CrushLimb()
     {
-        bodyPart.damage = Mathf.Min(bodyPart.damage + 30, bodyPart.damageMax);
-        bodyPart.bloodLossRate += 10;
+        BodyPart limb = RandomLimb();
+        Debug.Log($"Crushed {limb.name}");
+        textLog.NewLogEntry($"The {limb.name} has been crushed.");
+
+        limb.damage = Mathf.Min(limb.damage + 30, limb.damageMax);
+        limb.bloodLossRate += 10;
+
+        return true;
     }
 
-    public void SnakeBite(BodyPart bodyPart)
+    public bool SnakeBite()
     {
-        bodyPart.damage = Mathf.Min(bodyPart.damage + 10, bodyPart.damageMax);
-        bodyPart.bloodLossRate += 3;
-        bodyPart.slowPoison += 50;
+        if (!unlockTracker.medicine_poison)
+        {
+            return false;
+        }
+
+        BodyPart limb = RandomLimb();
+        Debug.Log($"Snake bit {limb.name}");
+        textLog.NewLogEntry($"The {limb.name} has been bitten by a venomous snake.");
+
+        limb.damage = Mathf.Min(limb.damage + 10, limb.damageMax);
+        limb.bloodLossRate += 3;
+        limb.slowPoison += 50;
+
+        return true;
     }
 
-    public void Sever(BodyPart bodyPart)
+    public bool SeverTorso()
     {
-        bodyPart.damage += 50;
-        foreach(BodyPart connectedBodyPart in bodyPart.connectedBodyParts)
+        BodyPart torso = FindObjectOfType<Torso>();
+
+        if (torso.connectedBodyParts.Count() == 0)
+        {
+            return false;
+        }
+
+        Debug.Log($"Severed {torso.name}");
+        textLog.NewLogEntry($"The {torso.name} has been severed from all limbs.");
+
+        torso.damage += 50;
+        foreach(BodyPart connectedBodyPart in torso.connectedBodyParts)
         {
             connectedBodyPart.bloodLossRate += 20.0f;
         }
-        Actions_Surgery.RemoveBodyPartProcess(bodyPart);
-        bodyPart.bloodLossRate += 20.0f;
+        Actions_Surgery.RemoveBodyPartProcess(torso);
+        torso.bloodLossRate += 20.0f;
+
+        return true;
     }
 
-    public void SlowPoison(BodyPart bodyPart)
+    public bool SeverHead()
     {
-        bodyPart.slowPoison += 100;
+        BodyPart head = FindObjectOfType<Head>();
+
+        if (head.connectedBodyParts.Count() == 0)
+        {
+            return false;
+        }
+
+        Debug.Log($"Severed {head.name}");
+        textLog.NewLogEntry($"The {head.name} has been severed from all limbs.");
+
+        head.damage += 50;
+        foreach (BodyPart connectedBodyPart in head.connectedBodyParts)
+        {
+            connectedBodyPart.bloodLossRate += 20.0f;
+        }
+        Actions_Surgery.RemoveBodyPartProcess(head);
+        head.bloodLossRate += 20.0f;
+
+        return true;
     }
 
-    public void Missing(Organ organ)
+    public bool SeverLimbMedium()
     {
+        bool x = true;
+        int n = 0;
+        BodyPart limb = new BodyPart();
+        while (x && n < 5)
+        {
+            limb = RandomLimb();
+            x = false;
+            x = x || limb.connectedBodyParts.Count() == 0;
+            x = x || limb is Head;
+            n += 1;
+        }
+
+        if (n >= 5)
+        {
+            return false;
+        }
+
+        Debug.Log($"Severed {limb.name}");
+        textLog.NewLogEntry($"The {limb.name} has been severed from all limbs.");
+
+        limb.damage += 50;
+        foreach (BodyPart connectedBodyPart in limb.connectedBodyParts)
+        {
+            connectedBodyPart.bloodLossRate += 20.0f;
+        }
+        Actions_Surgery.RemoveBodyPartProcess(limb);
+        limb.bloodLossRate += 20.0f;
+
+        return true;
+    }
+
+    public bool SlowPoisonOrgan()
+    {
+        if (!unlockTracker.medicine_poison)
+        {
+            return false;
+        }
+
+        BodyPart organ = RandomOrgan();
+        Debug.Log($"Poisoned {organ.name}");
+        textLog.NewLogEntry($"The {organ.name} has been poisoned.");
+
+        organ.slowPoison += 100;
+
+        return true;
+    }
+
+    public bool SlowPoisonLimb()
+    {
+        if (!unlockTracker.medicine_poison)
+        {
+            return false;
+        }
+
+        BodyPart limb = RandomLimb();
+        Debug.Log($"Poisoned {limb.name}");
+        textLog.NewLogEntry($"The {limb.name} has been poisoned.");
+
+        limb.slowPoison += 100;
+
+        return true;
+    }
+
+    public bool MissingOrganMedium()
+    {
+        Organ organ = RandomOrgan();
+        int n = 0;
+        bool x = true;
+        x = x || (organ is Brain);
+        x = x || (organ is Heart && !unlockTracker.charms_heart);
+        x = x || (organ is Lung && !unlockTracker.charms_lung);
+        x = x || !(organ.gameObject.GetComponent<PetrificationCharm>() is null);
+
+        while (x && n < 5)
+        {
+            organ = RandomOrgan();
+            x = x || (organ is Brain);
+            x = x || (organ is Heart && !unlockTracker.charms_heart);
+            x = x || (organ is Lung && !unlockTracker.charms_lung);
+            x = x || !(organ.gameObject.GetComponent<PetrificationCharm>() is null);
+            n += 1;
+        }
+        if (n > 5 || organ is Brain || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
+        {
+            return false;
+        }
+
+        Debug.Log($"{organ.name} missing");
+        textLog.NewLogEntry($"The {organ.name} is missing?!");
+
         Actions_Surgery.RemoveOrganProcess(organ);
         Actions_Surgery.DeleteBodyPartProcess(organ);
+
+        return true;
+
     }
 
-    public void Remove(Organ organ)
+    public bool MissingOrganHard()
     {
+        Organ organ = RandomOrgan();
+        int n = 0;
+
+        while (!(organ.gameObject.GetComponent<PetrificationCharm>() is null) && n < 5)
+        {
+            organ = RandomOrgan();
+            n += 1;
+        }
+        if (n > 5 || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
+        {
+            return false;
+        }
+
+        Debug.Log($"{organ.name} missing");
+        textLog.NewLogEntry($"The {organ.name} is missing?!");
+
         Actions_Surgery.RemoveOrganProcess(organ);
+        Actions_Surgery.DeleteBodyPartProcess(organ);
+
+        return true;
     }
 
-    public void Petrify(BodyPart bodyPart)
+    public bool RemoveOrganMedium()
     {
-        Actions_Charms.ApplyPetrificationCharmProcess((Organ)bodyPart);
+        Organ organ = RandomOrgan();
+        int n = 0;
+        bool x = false;
+        x = x || (organ is Heart && !unlockTracker.charms_heart);
+        x = x || (organ is Lung && !unlockTracker.charms_lung);
+        x = x || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart);
+        while (x && n < 5)
+        {
+            organ = RandomOrgan();
+            x = false;
+            x = x || (organ is Heart && !unlockTracker.charms_heart);
+            x = x || (organ is Lung && !unlockTracker.charms_lung);
+            x = x || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart);
+            n += 1;
+        }
+        if (n > 5)
+        {
+            return false;
+        }
+        Debug.Log($"{organ.name} external");
+        textLog.NewLogEntry($"The {organ.name} requires re-implanting.");
+
+        Actions_Surgery.RemoveOrganProcess(organ);
+
+        return true;
+    }
+
+    public bool RemoveOrganHard()
+    {
+        Organ organ = RandomOrgan();
+        Debug.Log($"{organ.name} external");
+        textLog.NewLogEntry($"The {organ.name} requires re-implanting.");
+
+        Actions_Surgery.RemoveOrganProcess(organ);
+
+        return true;
+    }
+
+    public bool PetrifyOrganMedium()
+    {
+        Organ organ = RandomOrgan();
+        int n = 0;
+        bool x = false;
+        x = x || (organ is Lung && !unlockTracker.charms_lung);
+        x = x || (organ is Heart && !unlockTracker.charms_heart);
+        x = x || (organ is Brain && (!unlockTracker.charms_heart || !unlockTracker.charms_lung));
+        x = x || !(organ.GetComponent<PetrificationCharm>() is null);
+        while (x && n < 5)
+        {
+            organ = RandomOrgan();
+            n += 1;
+        }
+        if (n > 5)
+        {
+            return false;
+        }
+        Debug.Log($"{organ.name} petrified");
+        textLog.NewLogEntry($"The {organ.name} has been temporarily petrified.");
+
+        Actions_Charms.ApplyPetrificationCharmProcess(organ);
+
+        return true;
     }
 
     public List<BodyPart> BodyPartsList()
