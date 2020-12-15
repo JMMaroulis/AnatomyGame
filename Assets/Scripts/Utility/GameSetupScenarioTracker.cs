@@ -20,6 +20,7 @@ public class GameSetupScenarioTracker : MonoBehaviour
     public int easyInjuryReward;
     public int mediumInjuryReward;
     public int hardInjuryReward;
+    public int requestedProcedureReward;
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +34,13 @@ public class GameSetupScenarioTracker : MonoBehaviour
 
     }
 
-    public void NextPatient()
+    public void NewInjuries()
     {
         patientNumber += 1;
+        levelstart_easyInjuries = easyInjuries;
+        levelstart_mediumInjuries = mediumInjuries;
+        levelstart_hardInjuries = hardInjuries;
+        levelstart_patientNumber = patientNumber;
 
         easyInjuries += 1;
         if (easyInjuries == 3)
@@ -48,17 +53,21 @@ public class GameSetupScenarioTracker : MonoBehaviour
             mediumInjuries = 0;
             hardInjuries += 1;
         }
+
+    }
+
+    public void NewProcedures()
+    {
+        patientNumber += 1;
+
+        levelstart_requestedProcedures = requestedProcedures;
+
+        requestedProcedures += 1;
     }
 
     public void LevelStart()
     {
-        levelstart_easyInjuries = easyInjuries;
-        levelstart_mediumInjuries = mediumInjuries;
-        levelstart_hardInjuries = hardInjuries;
-        levelstart_patientNumber = patientNumber;
 
-        NextPatient();
-        GoldRewardCalculation();
     }
 
     public void OnLoad()
@@ -67,14 +76,8 @@ public class GameSetupScenarioTracker : MonoBehaviour
         mediumInjuries = levelstart_mediumInjuries;
         hardInjuries   = levelstart_hardInjuries;
         patientNumber  = levelstart_patientNumber;
-    }
 
-    private void GoldRewardCalculation()
-    {
-        goldReward = 0;
-        goldReward += easyInjuryReward * easyInjuries;
-        goldReward += mediumInjuryReward * mediumInjuries;
-        goldReward += hardInjuryReward * hardInjuries;
+        requestedProcedures = levelstart_requestedProcedures;
     }
 
 }

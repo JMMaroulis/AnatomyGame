@@ -676,6 +676,7 @@ MonoBehaviour:
   easyInjuryReward: 100
   mediumInjuryReward: 500
   hardInjuryReward: 1000
+  requestedProcedureReward: 500
 --- !u!114 &1607601282
 MonoBehaviour:
   m_ObjectHideFlags: 0

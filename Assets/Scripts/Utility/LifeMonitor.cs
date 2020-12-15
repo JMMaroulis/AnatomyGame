@@ -67,12 +67,6 @@ public class LifeMonitor : MonoBehaviour
             victory = false;
         }
 
-        if (ClockworkHeartCheck())
-        {
-            victory = false;
-        }
-
-
         hasPlayerWon = victory;
         if (victory)
         {
@@ -108,11 +102,6 @@ public class LifeMonitor : MonoBehaviour
         }
 
         if (EmbeddedObjectCheck())
-        {
-            safe = false;
-        }
-
-        if (ClockworkHeartCheck())
         {
             safe = false;
         }

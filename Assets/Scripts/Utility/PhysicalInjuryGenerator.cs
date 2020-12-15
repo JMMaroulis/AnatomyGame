@@ -12,15 +12,21 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     public GameObject bullet;
     public GameObject bomb;
 
+    public GameSetupScenarioTracker gameSetupTracker;
+
     // Start is called before the first frame update
     void Start()
     {
         bodyPartManager = FindObjectOfType<BodyPartManager>();
-        GameSetupScenarioTracker injurySpawnTracker = GameObject.FindObjectOfType<GameSetupScenarioTracker>();
+        gameSetupTracker = GameObject.FindObjectOfType<GameSetupScenarioTracker>();
         unlockTracker = FindObjectOfType<UnlockTracker>();
-        EasyInjuries(injurySpawnTracker.easyInjuries);
-        MediumInjuries(injurySpawnTracker.mediumInjuries);
-        HardInjuries(injurySpawnTracker.hardInjuries);
+    }
+
+    public void GenerateInjuries()
+    {
+        EasyInjuries(gameSetupTracker.easyInjuries);
+        MediumInjuries(gameSetupTracker.mediumInjuries);
+        HardInjuries(gameSetupTracker.hardInjuries);
         FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
         FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
     }
@@ -141,7 +147,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             while (i < numberOfInjuries)
             {
                 //selected bodypart to injure, and injury to apply
-                int injuryNumber = Random.Range(0, 5);
+                int injuryNumber = Random.Range(0, 4);
 
                 //apply injury
                 switch (injuryNumber)
@@ -154,11 +160,11 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                         if (SeverHead()) { i += 1; }
                         break;
 
-                    case 4:
+                    case 2:
                         if (RemoveOrganHard()) { i += 1; }
                         break;
 
-                    case 5:
+                    case 3:
                         if (MissingOrganHard()) { i += 1; }
                         break;
 

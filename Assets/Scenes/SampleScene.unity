@@ -1310,6 +1310,7 @@ MonoBehaviour:
   textLog: {fileID: 746780209}
   bullet: {fileID: 4163447092566984401, guid: 39720435f53879940a98c8847e5e4f78, type: 3}
   bomb: {fileID: 7763544942679848157, guid: c2ab0dd6b35e1674594a4962016d0970, type: 3}
+  gameSetupTracker: {fileID: 0}
 --- !u!4 &257884927
 Transform:
   m_ObjectHideFlags: 0
@@ -4727,6 +4728,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 851796574}
   m_CullTransparentMesh: 0
+--- !u!1 &873364930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 873364932}
+  - component: {fileID: 873364931}
+  m_Layer: 0
+  m_Name: MedicalProcedureGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &873364931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873364930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca535dd5bffc0444811cb98e034f83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 965609865}
+  textLog: {fileID: 746780209}
+  ClockworkHeartRequest: 0
+--- !u!4 &873364932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873364930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.179323, y: 1.7622753, z: -354.96875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &909303170
 GameObject:
   m_ObjectHideFlags: 0
@@ -7454,6 +7501,49 @@ MonoBehaviour:
   currentTime: {fileID: 188086456}
   clockText: {fileID: 182947857}
   clockSlider: {fileID: 361797261}
+--- !u!1 &1312661561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1312661563}
+  - component: {fileID: 1312661562}
+  m_Layer: 0
+  m_Name: LevelStartSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1312661562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312661561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40cb65f5e67836f428c0f0ba8537e178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1312661563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312661561}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.179323, y: 1.7622753, z: -354.96875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1318061123
 GameObject:
   m_ObjectHideFlags: 0
@@ -8096,8 +8186,6 @@ MonoBehaviour:
   bulletSelectorPrefab: {fileID: 5017211689231872245, guid: 9eba69d61b5e23f499ac9a0d2c8fddbc,
     type: 3}
   bombSelectorPrefab: {fileID: 5017211689231872245, guid: 7817754b3cedd534f856c1fc16752753,
-    type: 3}
-  clockworkHeartSelectorPrefab: {fileID: 5017211689231872245, guid: 31a0ca5468a790a4f863b006fd93e068,
     type: 3}
 --- !u!1 &1527814401
 GameObject:
