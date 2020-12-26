@@ -653,6 +653,8 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10.0f;
         int goldCost = 30;
+        int healthPotion = 100;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null)
@@ -665,8 +667,8 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Medicine.InjectPotion(bodypart, "health", 100.00f, seconds, goldCost);
-                textLog.NewLogEntry($"Injecting 100 units of Health Potion into the {bodypart.name}...");
+                Actions_Medicine.InjectPotion(bodypart, "health", healthPotion, seconds, goldCost);
+                textLog.NewLogEntry($"Injecting {healthPotion} units of Health Potion into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
         };
@@ -674,7 +676,7 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Inject Health Potion (100 units): {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Inject Health Potion ({healthPotion} units): {seconds} seconds, {goldCost} gold";
 
         string mouseoverText = "Health Potion: Processed at 1/5 units per second, heals one damage per unit.\nIf bodypart is undamaged, processed at 1/100 units per second.";
         SetButtonMouseoverText(button, mouseoverText);
@@ -1039,6 +1041,8 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 20.0f;
         int goldCost = 20;
+        int blood = 500;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null)
@@ -1047,21 +1051,21 @@ public class ButtonActions : MonoBehaviour
             }
             if ((goldTracker.goldAccumulated - goldTracker.goldSpent) < goldCost)
             {
-                textLog.NewLogEntry("insufficient funds.");
+                textLog.NewLogEntry("Insufficient funds.");
             }
             else
             {
-                Actions_Blood.AddBlood(bodypart, seconds, goldCost);
-                textLog.NewLogEntry($"Injecting 100 units of blood into the {bodypart.name}...");
+                Actions_Blood.AddBlood(bodypart, seconds, goldCost, blood);
+                textLog.NewLogEntry($"Injecting {blood} units of blood into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
         };
 
         button.onClick.AddListener(action);
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Inject Blood: (100 units): {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Inject Blood: ({blood} units): {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Directly adds 100 units of blood.";
+        string mouseoverText = $"Directly adds {blood} units of blood.";
         SetButtonMouseoverText(button, mouseoverText);
     }
 
@@ -1104,6 +1108,9 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
+        float damage = 40;
+        float bloodLossRate = 4;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null)
@@ -1121,7 +1128,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Surgery.RemoveBodyPart(bodypart, seconds, goldCost);
+                Actions_Surgery.RemoveBodyPart(bodypart, seconds, goldCost, damage, bloodLossRate);
                 textLog.NewLogEntry($"Removing the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
@@ -1200,6 +1207,9 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
+        float damage = 40;
+        float bloodLossRate = 4;
+
         UnityEngine.Events.UnityAction action = () => {
             if (bodyPart1.connectedBodyParts.Contains(bodyPart2) || bodyPart2.connectedBodyParts.Contains(bodyPart1))
             {
@@ -1207,7 +1217,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost);
+                Actions_Surgery.ConnectBodyParts(bodyPart1, bodyPart2, seconds, goldCost, bloodLossRate, damage);
                 textLog.NewLogEntry($"Connecting the {bodyPart1.name} to the {bodyPart2.name}...");
                 actionTimeBar.Reset(seconds);
             }
@@ -1381,6 +1391,9 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 10.0f;
         int goldCost = 0;
+        float damage = 40;
+        float bloodLossRate = 4;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null || organ == null)
@@ -1397,7 +1410,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Surgery.ImplantOrgan(organ, bodypart, seconds, goldCost);
+                Actions_Surgery.ImplantOrgan(organ, bodypart, seconds, goldCost, bloodLossRate, damage);
                 textLog.NewLogEntry($"Implanting the {organ.name} into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
@@ -1419,6 +1432,9 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 60.0f * 10.0f;
         int goldCost = 0;
+        float damage = 40;
+        float bloodLossRate = 4;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null || embeddedObject == null)
@@ -1435,7 +1451,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Surgery.EmbedObject(embeddedObject, bodypart, seconds, goldCost);
+                Actions_Surgery.EmbedObject(embeddedObject, bodypart, seconds, goldCost, bloodLossRate, damage);
                 textLog.NewLogEntry($"Implanting the {embeddedObject.name} into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
@@ -1454,6 +1470,9 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
+        float damage = 40;
+        float bloodLossRate = 4;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (organ == null)
@@ -1462,7 +1481,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Surgery.RemoveOrgan(organ, seconds, goldCost);
+                Actions_Surgery.RemoveOrgan(organ, seconds, goldCost, bloodLossRate, damage);
                 textLog.NewLogEntry($"Extracting the {organ.name}...");
                 actionTimeBar.Reset(seconds);
             }
@@ -1481,6 +1500,9 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 10 * 60.0f;
         int goldCost = 0;
+        float damage = 40;
+        float bloodLossRate = 4;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (embeddedObject == null)
@@ -1489,7 +1511,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Surgery.RemoveEmbeddedObject(embeddedObject, seconds, goldCost);
+                Actions_Surgery.RemoveEmbeddedObject(embeddedObject, seconds, goldCost, bloodLossRate, damage);
                 textLog.NewLogEntry($"Extracting the {embeddedObject.name}...");
                 actionTimeBar.Reset(seconds);
             }

@@ -71,7 +71,7 @@ public class LifeMonitor : MonoBehaviour
         if (victory)
         {
             FindObjectOfType<GoldTracker>().goldAccumulated += FindObjectOfType<GameSetupScenarioTracker>().goldReward;
-            textLog.NewLogEntry($"Congratulations, he'll live! Your payment is {FindObjectOfType<GameSetupScenarioTracker>().goldReward} gold. Transfer in 5 seconds...");
+            textLog.NewLogEntry($"Congratulations, they'll live! Your payment is {FindObjectOfType<GameSetupScenarioTracker>().goldReward} gold. Transfer in 5 seconds...");
         }
         else
         {
@@ -206,6 +206,12 @@ public class LifeMonitor : MonoBehaviour
             if (bodyPart.requiresReplacing)
             {
                 textLog.NewLogEntry($"{bodyPart.name} requires replacement!");
+                result = true;
+            }
+
+            if (bodyPart.requiresAmputation)
+            {
+                textLog.NewLogEntry($"{bodyPart.name} requires amputation!");
                 result = true;
             }
 

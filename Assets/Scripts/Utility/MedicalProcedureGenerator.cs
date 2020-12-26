@@ -29,7 +29,7 @@ public class MedicalProcedureGenerator : MonoBehaviour
         int i = 0;
         while(i < numberOfProcedures)
         {
-            int procedureNumber = Random.Range(0, 3);
+            int procedureNumber = Random.Range(0, 4);
 
             switch (procedureNumber)
             {
@@ -45,6 +45,10 @@ public class MedicalProcedureGenerator : MonoBehaviour
                     if (RandomLimbReplacement()) { i += 1; }
                     break;
 
+                case 3:
+                    if (RandomLimbAmputation()) { i += 1; }
+                    break;
+
                 default:
                     break;
             }
@@ -55,7 +59,7 @@ public class MedicalProcedureGenerator : MonoBehaviour
 
     private bool ClockworkHeartReplacement()
     {
-        if (!unlockTracker.spawn && !unlockTracker.spawn_clock)
+        if ((!unlockTracker.spawn && !unlockTracker.spawn_clock) || (!unlockTracker.charms_heart) || ClockworkHeartRequest)
         {
             return false;
         }
@@ -94,22 +98,79 @@ public class MedicalProcedureGenerator : MonoBehaviour
         int n = 0;
         BodyPart bodyPart = RandomLimb();
         bool x = false;
-        x = x || (bodyPart is Brain && (!unlockTracker.charms_heart || !unlockTracker.charms_lung));
-        x = x || (bodyPart is Heart && !unlockTracker.charms_heart);
-        x = x || (bodyPart is Lung && !unlockTracker.charms_lung);
         x = x || bodyPart.requiresReplacing;
+        x = x || bodyPart.requiresAmputation;
+        x = x || bodyPart is Head;
+        x = x || bodyPart is Torso;
         while (x && n < 5)
         {
             bodyPart = RandomLimb();
             n += 1;
         }
-        if (n > 5 || (!unlockTracker.spawn && !unlockTracker.spawn_clock) || bodyPart.requiresReplacing)
+        if (n > 5 || (!unlockTracker.spawn && !unlockTracker.spawn_clock) || bodyPart.requiresReplacing || bodyPart.requiresAmputation || bodyPart is Head || bodyPart is Torso)
         {
             return false;
         }
         Debug.Log($"{bodyPart.name} replacement");
         textLog.NewLogEntry($"The patient requires a {bodyPart.name} replacement.");
         bodyPart.requiresReplacing = true;
+        return true;
+    }
+
+    private bool RandomLimbAmputation()
+    {
+        int n = 0;
+        BodyPart bodyPart = RandomLimb();
+        bool x = false;
+        x = x || bodyPart.requiresReplacing;
+        x = x || bodyPart.requiresAmputation;
+        x = x || bodyPart is Head;
+        x = x || bodyPart is Torso;
+        while (x && n < 5)
+        {
+            bodyPart = RandomLimb();
+            n += 1;
+        }
+        if (n > 5 || bodyPart.requiresReplacing || bodyPart.requiresAmputation || bodyPart is Head || bodyPart is Torso)
+        {
+            return false;
+        }
+        Debug.Log($"{bodyPart.name} amputation");
+        textLog.NewLogEntry($"The patient requires a {bodyPart.name} amputation.");
+
+        bodyPart.requiresAmputation = true;
+
+        //this bit is *horrifyingly* long-winded,
+        //but I don/t know how to do it less explicitly
+        if (bodyPart is LeftArm)
+        {
+            foreach(BodyPart connectedBodyPart in bodyPart.connectedBodyParts)
+            {
+                connectedBodyPart.maxLeftArms -= 1;
+            }
+        }
+        if (bodyPart is RightArm)
+        {
+            foreach (BodyPart connectedBodyPart in bodyPart.connectedBodyParts)
+            {
+                connectedBodyPart.maxRightArms -= 1;
+            }
+        }
+        if (bodyPart is LeftLeg)
+        {
+            foreach (BodyPart connectedBodyPart in bodyPart.connectedBodyParts)
+            {
+                connectedBodyPart.maxLeftLegs -= 1;
+            }
+        }
+        if (bodyPart is RightLeg)
+        {
+            foreach (BodyPart connectedBodyPart in bodyPart.connectedBodyParts)
+            {
+                connectedBodyPart.maxRightLegs -= 1;
+            }
+        }
+
         return true;
     }
 

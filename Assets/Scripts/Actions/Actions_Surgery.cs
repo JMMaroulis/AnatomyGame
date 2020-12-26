@@ -6,22 +6,25 @@ using UnityEngine;
 public static class Actions_Surgery
 {
 
-    public static void RemoveBodyPart(BodyPart bodyPart, float seconds, int goldCost)
+    public static void RemoveBodyPart(BodyPart bodyPart, float seconds, int goldCost, float damageInduced, float bloodLossRateInduced)
     {
-        StaticCoroutine.Start(RemoveBodyPartCoroutine(bodyPart, seconds, goldCost));
+        StaticCoroutine.Start(RemoveBodyPartCoroutine(bodyPart, seconds, goldCost, damageInduced, bloodLossRateInduced));
     }
 
-    public static IEnumerator RemoveBodyPartCoroutine(BodyPart bodyPart, float seconds, int goldCost)
+    public static IEnumerator RemoveBodyPartCoroutine(BodyPart bodyPart, float seconds, int goldCost, float damageInduced, float bloodLossRateInduced)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
 
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
         buttonActions.UpdateMenuButtonsInteractivity(false);
-
         buttonActions.ActionInProgress();
+
+
+
         while (clock.isTimePassing)
         {
+            RemoveBodyPartDuring(bodyPart, clock, seconds, bloodLossRateInduced, damageInduced);
             yield return null;
         }
         buttonActions.ActionFinished();
@@ -30,9 +33,26 @@ public static class Actions_Surgery
             RemoveBodyPartProcess(bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
-
         }
 
+    }
+
+    public static void RemoveBodyPartDuring(BodyPart bodyPart, Clock clock, float seconds, float bloodLossRateInduced, float damageInduced)
+    {
+        float bloodLossPerSecond = bloodLossRateInduced / seconds;
+        float damagePerSecond = damageInduced / seconds;
+
+        float bloodLossFrame = bloodLossPerSecond * Time.deltaTime * clock.clockSlider.value;
+        float damageFrame = damagePerSecond * Time.deltaTime * clock.clockSlider.value;
+
+        bodyPart.bloodLossRate += bloodLossFrame;
+        bodyPart.damage += damageFrame;
+
+        foreach (BodyPart connectedBodyPart in bodyPart.connectedBodyParts)
+        {
+            connectedBodyPart.bloodLossRate += bloodLossFrame;
+            connectedBodyPart.damage += damageFrame;
+        }
     }
 
     public static void RemoveBodyPartProcess(BodyPart bodyPart)
@@ -45,12 +65,12 @@ public static class Actions_Surgery
         UpdateAllBodyPartHeartConnections();
     }
 
-    public static void RemoveOrgan(Organ organObject, float seconds, int goldCost)
+    public static void RemoveOrgan(Organ organObject, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
-        StaticCoroutine.Start(RemoveOrganCoroutine(organObject, seconds, goldCost));
+        StaticCoroutine.Start(RemoveOrganCoroutine(organObject, seconds, goldCost, bloodLossRateInduced, damageInduced));
     }
 
-    public static IEnumerator RemoveOrganCoroutine(Organ organ, float seconds, int goldCost)
+    public static IEnumerator RemoveOrganCoroutine(Organ organ, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -61,6 +81,7 @@ public static class Actions_Surgery
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
+            RemoveOrganDuring(organ, clock, seconds, bloodLossRateInduced, damageInduced);
             yield return null;
         }
         buttonActions.ActionFinished();
@@ -72,6 +93,21 @@ public static class Actions_Surgery
             buttonActions.SelectSurgeryAction();
         }
 
+    }
+
+    public static void RemoveOrganDuring(Organ organ, Clock clock, float seconds, float bloodLossRateInduced, float damageInduced)
+    {
+        float bloodLossPerSecond = bloodLossRateInduced / seconds;
+        float damagePerSecond = damageInduced / seconds;
+
+        float bloodLossFrame = bloodLossPerSecond * Time.deltaTime * clock.clockSlider.value;
+        float damageFrame = damagePerSecond * Time.deltaTime * clock.clockSlider.value;
+
+        foreach (BodyPart connectedBodyPart in organ.connectedBodyParts)
+        {
+            connectedBodyPart.bloodLossRate += bloodLossFrame;
+            connectedBodyPart.damage += damageFrame;
+        }
     }
 
     public static void RemoveOrganProcess(Organ organ)
@@ -93,12 +129,12 @@ public static class Actions_Surgery
         MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organremovals += 1;
     }
 
-    public static void RemoveEmbeddedObject(EmbeddedObject embeddedObject, float seconds, int goldCost)
+    public static void RemoveEmbeddedObject(EmbeddedObject embeddedObject, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
-        StaticCoroutine.Start(RemoveEmbeddedObjectCoroutine(embeddedObject, seconds, goldCost));
+        StaticCoroutine.Start(RemoveEmbeddedObjectCoroutine(embeddedObject, seconds, goldCost, bloodLossRateInduced, damageInduced));
     }
 
-    public static IEnumerator RemoveEmbeddedObjectCoroutine(EmbeddedObject embeddedObject, float seconds, int goldCost)
+    public static IEnumerator RemoveEmbeddedObjectCoroutine(EmbeddedObject embeddedObject, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -109,6 +145,7 @@ public static class Actions_Surgery
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
+            RemoveEmbeddedObjectDuring(embeddedObject.parentBodyPart, clock, seconds, bloodLossRateInduced, damageInduced);
             yield return null;
         }
         buttonActions.ActionFinished();
@@ -117,6 +154,25 @@ public static class Actions_Surgery
             RemoveEmbeddedObjectProcess(embeddedObject);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
+        }
+
+    }
+
+    public static void RemoveEmbeddedObjectDuring(BodyPart bodyPart, Clock clock, float seconds, float bloodLossRateInduced, float damageInduced)
+    {
+        float bloodLossPerSecond = bloodLossRateInduced / seconds;
+        float damagePerSecond = damageInduced / seconds;
+
+        float bloodLossFrame = bloodLossPerSecond * Time.deltaTime * clock.clockSlider.value;
+        float damageFrame = damagePerSecond * Time.deltaTime * clock.clockSlider.value;
+
+        bodyPart.bloodLossRate += bloodLossFrame;
+        bodyPart.damage += damageFrame;
+
+        if (bodyPart is Organ && bodyPart.connectedBodyParts.Count() > 0)
+        {
+            bodyPart.connectedBodyParts[0].bloodLossRate += bloodLossFrame;
+            bodyPart.connectedBodyParts[0].damage += damageFrame;
         }
 
     }
@@ -136,7 +192,7 @@ public static class Actions_Surgery
         MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_remove_implants += 1;
     }
 
-    public static void ImplantOrgan(Organ organ, BodyPart bodyPart, float seconds, int goldCost)
+    public static void ImplantOrgan(Organ organ, BodyPart bodyPart, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
 
         if (organ.connectedBodyParts.Count != 0)
@@ -145,10 +201,10 @@ public static class Actions_Surgery
             return;
         }
 
-        StaticCoroutine.Start(ImplantOrganCoroutine(organ, bodyPart, seconds, goldCost));
+        StaticCoroutine.Start(ImplantOrganCoroutine(organ, bodyPart, seconds, goldCost, bloodLossRateInduced, damageInduced));
     }
 
-    public static IEnumerator ImplantOrganCoroutine(Organ organ, BodyPart bodyPart, float seconds, int goldCost)
+    public static IEnumerator ImplantOrganCoroutine(Organ organ, BodyPart bodyPart, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -159,6 +215,7 @@ public static class Actions_Surgery
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
+            ImplantOrganDuring(bodyPart, clock, seconds, bloodLossRateInduced, damageInduced);
             yield return null;
         }
         buttonActions.ActionFinished();
@@ -169,6 +226,18 @@ public static class Actions_Surgery
             buttonActions.SelectSurgeryAction();
         }
 
+    }
+
+    public static void ImplantOrganDuring(BodyPart bodyPart, Clock clock, float seconds, float bloodLossRateInduced, float damageInduced)
+    {
+        float bloodLossPerSecond = bloodLossRateInduced / seconds;
+        float damagePerSecond = damageInduced / seconds;
+
+        float bloodLossFrame = bloodLossPerSecond * Time.deltaTime * clock.clockSlider.value;
+        float damageFrame = damagePerSecond * Time.deltaTime * clock.clockSlider.value;
+
+        bodyPart.bloodLossRate += bloodLossFrame;
+        bodyPart.damage += damageFrame;
     }
 
     public static void ImplantOrganProcess(Organ organ, BodyPart bodyPart)
@@ -188,7 +257,7 @@ public static class Actions_Surgery
         MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_organtransplant += 1;
     }
 
-    public static void EmbedObject(EmbeddedObject embeddedObject, BodyPart bodypart, float seconds, int goldCost)
+    public static void EmbedObject(EmbeddedObject embeddedObject, BodyPart bodypart, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
 
         if (!(embeddedObject.parentBodyPart is null))
@@ -203,10 +272,10 @@ public static class Actions_Surgery
             return;
         }
 
-        StaticCoroutine.Start(EmbedObjectCoroutine(embeddedObject, bodypart, seconds, goldCost));
+        StaticCoroutine.Start(EmbedObjectCoroutine(embeddedObject, bodypart, seconds, goldCost, bloodLossRateInduced, damageInduced));
     }
 
-    public static IEnumerator EmbedObjectCoroutine(EmbeddedObject embeddedObject, BodyPart bodypart, float seconds, int goldCost)
+    public static IEnumerator EmbedObjectCoroutine(EmbeddedObject embeddedObject, BodyPart bodyPart, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -217,16 +286,22 @@ public static class Actions_Surgery
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
+            EmbedObjectDuring(bodyPart, clock, seconds, bloodLossRateInduced, damageInduced);
             yield return null;
         }
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            EmbedObjectProcess(embeddedObject, bodypart);
+            EmbedObjectProcess(embeddedObject, bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectSurgeryAction();
         }
 
+    }
+
+    public static void EmbedObjectDuring(BodyPart bodyPart, Clock clock, float seconds, float bloodLossRateInduced, float damageInduced)
+    {
+        ImplantOrganDuring(bodyPart, clock, seconds, bloodLossRateInduced, damageInduced);
     }
 
     public static void EmbedObjectProcess(EmbeddedObject embeddedObject, BodyPart bodypart)
@@ -242,12 +317,12 @@ public static class Actions_Surgery
         MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_implants += 1;
     }
 
-    public static void ConnectBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, float seconds, int goldCost)
+    public static void ConnectBodyParts(BodyPart bodyPart1, BodyPart bodyPart2, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
-        StaticCoroutine.Start(ConnectBodyPartCoroutine(bodyPart1, bodyPart2, seconds, goldCost));
+        StaticCoroutine.Start(ConnectBodyPartCoroutine(bodyPart1, bodyPart2, seconds, goldCost, bloodLossRateInduced, damageInduced));
     }
 
-    public static IEnumerator ConnectBodyPartCoroutine(BodyPart bodyPart1, BodyPart bodyPart2, float seconds, int goldCost)
+    public static IEnumerator ConnectBodyPartCoroutine(BodyPart bodyPart1, BodyPart bodyPart2, float seconds, int goldCost, float bloodLossRateInduced, float damageInduced)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -258,12 +333,13 @@ public static class Actions_Surgery
         buttonActions.ActionInProgress();
         while (clock.isTimePassing)
         {
+            ConnectBodyPartDuring(bodyPart1, bodyPart2, clock, seconds, bloodLossRateInduced, damageInduced);
             yield return null;
         }
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            ConnectBodyPartCoroutine(bodyPart1, bodyPart2);
+            ConnectBodyPartProcess(bodyPart1, bodyPart2);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
             buttonActions.SelectSurgeryAction();
@@ -271,7 +347,61 @@ public static class Actions_Surgery
 
     }
 
-    public static void ConnectBodyPartCoroutine(BodyPart bodyPart1, BodyPart bodyPart2)
+    public static void ConnectBodyPartDuring(BodyPart bodyPart1, BodyPart bodyPart2, Clock clock, float seconds, float bloodLossRateInduced, float damageInduced)
+    {
+        float bloodLossPerSecond = bloodLossRateInduced / seconds;
+        float damagePerSecond = damageInduced / seconds;
+
+        float bloodLossFrame = bloodLossPerSecond * Time.deltaTime * clock.clockSlider.value;
+        float damageFrame = damagePerSecond * Time.deltaTime * clock.clockSlider.value;
+
+        bool x = false;
+        x = x || bodyPart1 is ClockworkHead;
+        x = x || bodyPart1 is ClockworkTorso;
+        x = x || bodyPart1 is ClockworkLeftArm;
+        x = x || bodyPart1 is ClockworkLeftLeg;
+        x = x || bodyPart1 is ClockworkRightArm;
+        x = x || bodyPart1 is ClockworkRightLeg;
+        x = x || bodyPart1 is ClockworkTorso;
+        x = x || bodyPart1 is ClockworkLiver;
+        x = x || bodyPart1 is ClockworkHeart;
+        x = x || bodyPart1 is ClockworkLeftEye;
+        x = x || bodyPart1 is ClockworkRightEye;
+        x = x || bodyPart1 is ClockworkBrain;
+        x = x || bodyPart1 is ClockworkStomach;
+        x = x || bodyPart1 is ClockworkLeftLung;
+        x = x || bodyPart1 is ClockworkRightLung;
+        if (!x)
+        {
+            bodyPart1.bloodLossRate += bloodLossFrame;
+            bodyPart1.damage += damageFrame;
+        }
+
+        bool y = false;
+        y = y || bodyPart2 is ClockworkHead;
+        y = y || bodyPart2 is ClockworkTorso;
+        y = y || bodyPart2 is ClockworkLeftArm;
+        y = y || bodyPart2 is ClockworkLeftLeg;
+        y = y || bodyPart2 is ClockworkRightArm;
+        y = y || bodyPart2 is ClockworkRightLeg;
+        y = y || bodyPart2 is ClockworkTorso;
+        y = y || bodyPart2 is ClockworkLiver;
+        y = y || bodyPart2 is ClockworkHeart;
+        y = y || bodyPart2 is ClockworkLeftEye;
+        y = y || bodyPart2 is ClockworkRightEye;
+        y = y || bodyPart2 is ClockworkBrain;
+        y = y || bodyPart2 is ClockworkStomach;
+        y = y || bodyPart2 is ClockworkLeftLung;
+        y = y || bodyPart2 is ClockworkRightLung;
+        if (!y)
+        {
+            bodyPart2.bloodLossRate += bloodLossFrame;
+            bodyPart2.damage += damageFrame;
+        }
+
+    }
+
+    public static void ConnectBodyPartProcess(BodyPart bodyPart1, BodyPart bodyPart2)
     {
         bodyPart1.CreateConnection(bodyPart2);
         bodyPart2.CreateConnection(bodyPart1);

@@ -9,6 +9,7 @@ public class BodyPart : MonoBehaviour
     public float timeScale;
     public bool isFunctioning;
     public bool requiresReplacing;
+    public bool requiresAmputation;
 
     //blood stuff
     public float bloodRequiredToFunction;
@@ -571,13 +572,21 @@ public class BodyPart : MonoBehaviour
 
         description += $"Blood: {Math.Round(blood, 2)} units, requires {bloodRequiredToFunction} to function.\n";
 
-        description += $"Losing {Math.Round(bloodLossRate, 2)} units of blood per second.\n";
+        if (bloodLossRate > 0.0f)
+        {
+            description += $"Losing {Math.Round(bloodLossRate, 2)} units of blood per second.\n";
+        }
 
         description += $"Oxygen: {Math.Round(oxygen, 2)} / {oxygenMax}, requires {oxygenRequired} per second to function.\n";
 
         if (requiresReplacing)
         {
             description += $"Requires replacing.\n";
+        }
+
+        if (requiresAmputation)
+        {
+            description += $"Requires amputating.\n";
         }
 
         if (healthPotion > 0.0f)

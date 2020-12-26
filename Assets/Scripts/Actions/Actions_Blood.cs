@@ -68,12 +68,12 @@ public static class Actions_Blood
         }
     }
 
-    public static void AddBlood(BodyPart bodyPart, float seconds, int goldCost)
+    public static void AddBlood(BodyPart bodyPart, float seconds, int goldCost, int blood)
     {
-        StaticCoroutine.Start(AddBloodCoroutine(bodyPart, seconds, goldCost));
+        StaticCoroutine.Start(AddBloodCoroutine(bodyPart, seconds, goldCost, blood));
     }
 
-    private static IEnumerator AddBloodCoroutine(BodyPart bodyPart, float seconds, int goldCost)
+    private static IEnumerator AddBloodCoroutine(BodyPart bodyPart, float seconds, int goldCost, int blood)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -89,8 +89,8 @@ public static class Actions_Blood
 
         if (!clock.actionCancelFlag)
         {
-            bodyPart.GetComponent<BodyPart>().blood += 100;
-            MonoBehaviour.FindObjectOfType<ActionTracker>().blood_injected += 100;
+            bodyPart.GetComponent<BodyPart>().blood += blood;
+            MonoBehaviour.FindObjectOfType<ActionTracker>().blood_injected += blood;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectBloodAction();
         }

@@ -17,15 +17,6 @@ public class LevelStartSetup : MonoBehaviour
 
         int choice = Random.Range(0, 2);
 
-        //A (hopefully) temporary fix; all current injuries need one of these two,
-        //so to prevent spawning injuries if none of the injuries can be fixed,
-        //here we are
-        UnlockTracker unlockTracker = FindObjectOfType<UnlockTracker>();
-        if (!unlockTracker.spawn_clock && !unlockTracker.spawn)
-        {
-            choice = 0;
-        }
-
         switch (choice)
         {
             case 0:
@@ -36,7 +27,7 @@ public class LevelStartSetup : MonoBehaviour
                 break;
 
             case 1:
-                Debug.Log("Generating voluntary Procedures");
+                Debug.Log("Generating voluntary procedures");
                 gameSetupScenarioTracker.NewProcedures();
                 medicalProcedureGenerator.RequestedProcedures(gameSetupScenarioTracker.requestedProcedures);
                 gameSetupScenarioTracker.goldReward = CalculateProceduresGoldReward();
