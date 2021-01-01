@@ -16,6 +16,7 @@ public class LevelStartSetup : MonoBehaviour
         physicalInjuryGenerator = FindObjectOfType<PhysicalInjuryGenerator>();
 
         int choice = Random.Range(0, 2);
+        gameSetupScenarioTracker.patientNumber += 1;
 
         switch (choice)
         {

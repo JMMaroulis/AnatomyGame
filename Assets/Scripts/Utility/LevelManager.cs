@@ -25,10 +25,6 @@ public class LevelManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
 
-        goldTracker.LevelStart();
-        gameSetupScenarioTracker.LevelStart();
-        unlockTracker.LevelStart();
-        actionTracker.LevelStart();
         randomTracker.LevelStart();
     }
 }

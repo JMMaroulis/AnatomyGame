@@ -4,7 +4,6 @@ using System.IO;
 public class SaveManager : MonoBehaviour
 {
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -21,38 +20,29 @@ public class SaveManager : MonoBehaviour
     private class Encoders{
 
         public string goldTracker;
-        public string injurySpawnTracker;
         public string unlockTracker;
+        public string perkTracker;
         public string actionTracker;
         public string randomTracker;
+        public string gameSetupScenarioTracker;
     }
 
     public void EncodeTrackers()
     {
-        string encodedTrackers = "";
-
         GoldTracker goldTracker = FindObjectOfType<GoldTracker>();
-        encodedTrackers += "\"goldTracker\": " + JsonUtility.ToJson(goldTracker) + ",";
-
-        GameSetupScenarioTracker injurySpawnTracker = FindObjectOfType<GameSetupScenarioTracker>();
-        encodedTrackers += "\"injurySpawnTracker\": " + JsonUtility.ToJson(injurySpawnTracker) + ",";
-
         UnlockTracker unlockTracker = FindObjectOfType<UnlockTracker>();
-        encodedTrackers += "\"unlockTracker\": " + JsonUtility.ToJson(unlockTracker) + ",";
-
         ActionTracker actionTracker = FindObjectOfType<ActionTracker>();
-        encodedTrackers += "\"actionTracker\": " + JsonUtility.ToJson(actionTracker);
-
         RandomTracker randomTracker = FindObjectOfType<RandomTracker>();
-        encodedTrackers += "\"randomTracker\": " + JsonUtility.ToJson(randomTracker);
-
+        GameSetupScenarioTracker gameSetupScenarioTracker = FindObjectOfType<GameSetupScenarioTracker>();
+        PerkTracker perkTracker = FindObjectOfType<PerkTracker>();
 
         Encoders encoders = new Encoders();
         encoders.goldTracker = JsonUtility.ToJson(goldTracker);
-        encoders.injurySpawnTracker = JsonUtility.ToJson(injurySpawnTracker);
         encoders.unlockTracker = JsonUtility.ToJson(unlockTracker);
         encoders.actionTracker = JsonUtility.ToJson(actionTracker);
         encoders.randomTracker = JsonUtility.ToJson(randomTracker);
+        encoders.perkTracker = JsonUtility.ToJson(perkTracker);
+        encoders.gameSetupScenarioTracker = JsonUtility.ToJson(gameSetupScenarioTracker);
 
         string json = JsonUtility.ToJson(encoders);
         System.IO.File.WriteAllText(@"savegame.json", json);
@@ -67,19 +57,19 @@ public class SaveManager : MonoBehaviour
 
             GoldTracker goldTracker = FindObjectOfType<GoldTracker>();
             JsonUtility.FromJsonOverwrite(encoders.goldTracker, goldTracker);
-            goldTracker.OnLoad();
 
-            GameSetupScenarioTracker injurySpawnTracker = FindObjectOfType<GameSetupScenarioTracker>();
-            JsonUtility.FromJsonOverwrite(encoders.injurySpawnTracker, injurySpawnTracker);
-            injurySpawnTracker.OnLoad();
+            GameSetupScenarioTracker gameSetupScenarioTracker = FindObjectOfType<GameSetupScenarioTracker>();
+            JsonUtility.FromJsonOverwrite(encoders.gameSetupScenarioTracker, gameSetupScenarioTracker);
+            gameSetupScenarioTracker.OnLoad();
 
             UnlockTracker unlockTracker = FindObjectOfType<UnlockTracker>();
             JsonUtility.FromJsonOverwrite(encoders.unlockTracker, unlockTracker);
-            unlockTracker.OnLoad();
+
+            PerkTracker perkTracker = FindObjectOfType<PerkTracker>();
+            JsonUtility.FromJsonOverwrite(encoders.perkTracker, perkTracker);
 
             ActionTracker actionTracker = FindObjectOfType<ActionTracker>();
             JsonUtility.FromJsonOverwrite(encoders.actionTracker, actionTracker);
-            actionTracker.OnLoad();
 
             RandomTracker randomTracker = FindObjectOfType<RandomTracker>();
             JsonUtility.FromJsonOverwrite(encoders.randomTracker, randomTracker);

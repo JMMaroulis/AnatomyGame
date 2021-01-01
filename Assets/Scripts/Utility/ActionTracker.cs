@@ -77,59 +77,7 @@ public class ActionTracker : MonoBehaviour
         output += $"Objects implanted: ${ surgery_implants}\n";
         output += $"Objects removed: ${ surgery_remove_implants}\n";
 
-
         return output;
     }
 
-    public void LevelStart()
-    {
-        levelstart_blood_injected =  blood_injected;
-        levelstart_blood_extracted = blood_extracted;
-        levelstart_blood_bandages = blood_bandages;
-        levelstart_blood_lettings = blood_lettings;
-        levelstart_surgery_amputations = surgery_amputations;
-        levelstart_surgery_attachments = surgery_attachments;
-        levelstart_surgery_organremovals = surgery_organremovals;
-        levelstart_surgery_organtransplant = surgery_organtransplant;
-        levelstart_surgery_destroyed = surgery_destroyed;
-        levelstart_surgery_implants = surgery_implants;
-        levelstart_surgery_remove_implants = surgery_remove_implants;
-        levelstart_spawn_spawned = spawn_spawned;
-        levelstart_medicine_health = medicine_health;
-        levelstart_medicine_antidote = medicine_antidote;
-        levelstart_medicine_slowpoison = medicine_slowpoison;
-        levelstart_medicine_stasis = medicine_stasis;
-        levelstart_medicine_haste = medicine_haste;
-        levelstart_medicine_coagulant = medicine_coagulant;
-        levelstart_charm_heart = charm_heart;
-        levelstart_charm_lung = charm_lung;
-        levelstart_charm_petrification = charm_petrification;
-        levelstart_charm_bloodregen = charm_bloodregen;
-    }
-
-    public void OnLoad()
-    {
-        blood_injected = levelstart_blood_injected;
-        blood_extracted = levelstart_blood_extracted;
-        blood_bandages = levelstart_blood_bandages;
-        blood_lettings = levelstart_blood_lettings;
-        surgery_amputations = levelstart_surgery_amputations;
-        surgery_attachments = levelstart_surgery_attachments;
-        surgery_organremovals = levelstart_surgery_organremovals;
-        surgery_organtransplant = levelstart_surgery_organtransplant;
-        surgery_destroyed = levelstart_surgery_destroyed;
-        surgery_remove_implants = levelstart_surgery_remove_implants;
-        surgery_implants = levelstart_surgery_implants;
-        spawn_spawned = levelstart_spawn_spawned;
-        medicine_health = levelstart_medicine_health;
-        medicine_antidote = levelstart_medicine_antidote;
-        medicine_slowpoison = levelstart_medicine_slowpoison;
-        medicine_stasis = levelstart_medicine_stasis;
-        medicine_haste = levelstart_medicine_haste;
-        medicine_coagulant = levelstart_medicine_coagulant;
-        charm_heart = levelstart_charm_heart;
-        charm_lung = levelstart_charm_lung;
-        charm_petrification = levelstart_charm_petrification;
-        charm_bloodregen = levelstart_charm_bloodregen;
-    }
 }

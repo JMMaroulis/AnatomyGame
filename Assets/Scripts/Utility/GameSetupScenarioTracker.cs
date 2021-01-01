@@ -9,12 +9,6 @@ public class GameSetupScenarioTracker : MonoBehaviour
 
     public int patientNumber;
 
-    public int levelstart_easyInjuries;
-    public int levelstart_mediumInjuries;
-    public int levelstart_hardInjuries;
-    public int levelstart_patientNumber;
-    public int levelstart_requestedProcedures;
-
     public int goldReward;
 
     public int easyInjuryReward;
@@ -36,48 +30,22 @@ public class GameSetupScenarioTracker : MonoBehaviour
 
     public void NewInjuries()
     {
-        patientNumber += 1;
-        levelstart_easyInjuries = easyInjuries;
-        levelstart_mediumInjuries = mediumInjuries;
-        levelstart_hardInjuries = hardInjuries;
-        levelstart_patientNumber = patientNumber;
-
-        easyInjuries += 1;
-        if (easyInjuries == 3)
-        {
-            easyInjuries = 0;
-            mediumInjuries += 1;
-        }
-        if (mediumInjuries == 3)
-        {
-            mediumInjuries = 0;
-            hardInjuries += 1;
-        }
-
+        easyInjuries = Mathf.FloorToInt(patientNumber % 3);
+        mediumInjuries = Mathf.FloorToInt((patientNumber / 3) % 3);
+        hardInjuries = Mathf.FloorToInt(patientNumber / 9);
     }
 
     public void NewProcedures()
     {
-        patientNumber += 1;
-
-        levelstart_requestedProcedures = requestedProcedures;
-
-        requestedProcedures += 1;
-    }
-
-    public void LevelStart()
-    {
-
+        requestedProcedures = Mathf.CeilToInt(patientNumber / 2);
+        requestedProcedures = Mathf.Max(1, requestedProcedures);
     }
 
     public void OnLoad()
     {
-        easyInjuries = levelstart_easyInjuries;
-        mediumInjuries = levelstart_mediumInjuries;
-        hardInjuries   = levelstart_hardInjuries;
-        patientNumber  = levelstart_patientNumber;
-
-        requestedProcedures = levelstart_requestedProcedures;
+        //here cause the level setup thing adds 1 to the patient number on scene start
+        //so if we don't do this, on load, we'll have essentially skipped a patient
+        patientNumber -= 1;
     }
 
 }
