@@ -4,8 +4,8 @@
 
 public class ActionTracker : MonoBehaviour
 {
-    public int blood_injected;
-    public int blood_extracted;
+    public float blood_injected;
+    public float blood_extracted;
     public int blood_bandages;
     public int blood_lettings;
     public int surgery_amputations;
@@ -27,8 +27,8 @@ public class ActionTracker : MonoBehaviour
     public int charm_petrification;
     public int charm_bloodregen;
 
-    public int levelstart_blood_injected;
-    public int levelstart_blood_extracted;
+    public float levelstart_blood_injected;
+    public float levelstart_blood_extracted;
     public int levelstart_blood_bandages;
     public int levelstart_blood_lettings;
     public int levelstart_surgery_amputations;

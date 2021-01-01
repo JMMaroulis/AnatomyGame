@@ -46,12 +46,14 @@ MonoBehaviour:
   isTimePassing: 0
   timeScale: 1
   isFunctioning: 1
+  requiresReplacing: 0
+  requiresAmputation: 0
   bloodRequiredToFunction: 100
-  blood: 500
+  _blood: 500
   bloodLossRate: 0
   bloodPumpRate: 70
   bloodMax: 700
-  oxygen: 500
+  _oxygen: 500
   oxygenMax: 500
   oxygenRequired: 5
   oxygenDamageRate: 0.2

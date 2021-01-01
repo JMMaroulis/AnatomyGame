@@ -803,7 +803,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Skip Unlock
+  m_Text: Skip to Perks
 --- !u!222 &999761916
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2702,7 +2702,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1421815737}
-        m_MethodName: LevelStart
+        m_MethodName: PerkScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

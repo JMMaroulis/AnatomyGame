@@ -5,12 +5,12 @@ public static class Actions_Blood
 {
 
     //apply bandages to selected bodypart
-    public static void Bandages(BodyPart bodyPart, float seconds, int goldCost)
+    public static void Bandages(BodyPart bodyPart, float seconds, int goldCost, float bloodLossReduction)
     {
-        StaticCoroutine.Start(BandagesCoroutine(bodyPart, seconds, goldCost));
+        StaticCoroutine.Start(BandagesCoroutine(bodyPart, seconds, goldCost, bloodLossReduction));
     } 
     
-    private static IEnumerator BandagesCoroutine(BodyPart bodyPart, float seconds, int goldCost)
+    private static IEnumerator BandagesCoroutine(BodyPart bodyPart, float seconds, int goldCost, float bloodLossReduction)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -26,7 +26,7 @@ public static class Actions_Blood
 
         if (!clock.actionCancelFlag)
         {
-            bodyPart.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().bloodLossRate - 10);
+            bodyPart.GetComponent<BodyPart>().bloodLossRate = Mathf.Max(0, bodyPart.GetComponent<BodyPart>().bloodLossRate - bloodLossReduction);
             MonoBehaviour.FindObjectOfType<ActionTracker>().blood_bandages += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectBloodAction();
@@ -37,12 +37,12 @@ public static class Actions_Blood
         }
     }
 
-    public static void Bloodletting(BodyPart bodyPart, float seconds, int goldCost)
+    public static void Bloodletting(BodyPart bodyPart, float seconds, int goldCost, float bloodLossInduction)
     {
-        StaticCoroutine.Start(BloodlettingCoroutine(bodyPart, seconds, goldCost));
+        StaticCoroutine.Start(BloodlettingCoroutine(bodyPart, seconds, goldCost, bloodLossInduction));
     }
 
-    private static IEnumerator BloodlettingCoroutine(BodyPart bodyPart, float seconds, int goldCost)
+    private static IEnumerator BloodlettingCoroutine(BodyPart bodyPart, float seconds, int goldCost, float bloodLossInduction)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -57,7 +57,7 @@ public static class Actions_Blood
         buttonActions.ActionFinished();
         if (!clock.actionCancelFlag)
         {
-            bodyPart.GetComponent<BodyPart>().bloodLossRate += 10;
+            bodyPart.GetComponent<BodyPart>().bloodLossRate += bloodLossInduction;
             MonoBehaviour.FindObjectOfType<ActionTracker>().blood_lettings += 1;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectBloodAction();
@@ -100,12 +100,12 @@ public static class Actions_Blood
         }
     }
 
-    public static void RemoveBlood(BodyPart bodyPart, float seconds, int goldCost)
+    public static void RemoveBlood(BodyPart bodyPart, float seconds, int goldCost, float blood)
     {
-        StaticCoroutine.Start(RemoveBloodCoroutine(bodyPart, seconds, goldCost));
+        StaticCoroutine.Start(RemoveBloodCoroutine(bodyPart, seconds, goldCost, blood));
     }
 
-    private static IEnumerator RemoveBloodCoroutine(BodyPart bodyPart, float seconds, int goldCost)
+    private static IEnumerator RemoveBloodCoroutine(BodyPart bodyPart, float seconds, int goldCost, float blood)
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         clock.StartClockUntil(seconds);
@@ -121,8 +121,8 @@ public static class Actions_Blood
 
         if (!clock.actionCancelFlag)
         {
-            bodyPart.GetComponent<BodyPart>().LoseBloodAmount(100);
-            MonoBehaviour.FindObjectOfType<ActionTracker>().blood_extracted += 100;
+            bodyPart.GetComponent<BodyPart>().LoseBloodAmount(blood);
+            MonoBehaviour.FindObjectOfType<ActionTracker>().blood_extracted += blood;
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
             buttonActions.SelectBloodAction();
         }

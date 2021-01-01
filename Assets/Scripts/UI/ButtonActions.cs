@@ -980,6 +980,7 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 30.0f;
         int goldCost = 10;
+        int bloodLossReduction = 10;
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null)
@@ -992,7 +993,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Blood.Bandages(bodypart, seconds, goldCost);
+                Actions_Blood.Bandages(bodypart, seconds, goldCost, bloodLossReduction);
                 textLog.NewLogEntry($"Applying bandages to the {bodypart.name}..."); 
                 actionTimeBar.Reset(seconds);
             }
@@ -1003,7 +1004,7 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Bandages: {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Reduced bloodloss by 10 units per second.";
+        string mouseoverText = $"Reduced bloodloss by {bloodLossReduction} units per second.";
         SetButtonMouseoverText(button, mouseoverText);
     }
 
@@ -1011,6 +1012,8 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 30.0f;
         int goldCost = 0;
+        int bloodLossInduction = 10;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null)
@@ -1023,7 +1026,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Blood.Bloodletting(bodypart, seconds, goldCost); 
+                Actions_Blood.Bloodletting(bodypart, seconds, goldCost, bloodLossInduction); 
                 textLog.NewLogEntry($"Inducing bleeding in the {bodypart.name}..."); 
                 actionTimeBar.Reset(seconds);
             }
@@ -1033,7 +1036,7 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Bloodletting: {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Induces bloodloss of 10 units per second.";
+        string mouseoverText = $"Induces bloodloss of {bloodLossInduction} units per second.";
         SetButtonMouseoverText(button, mouseoverText);
     }
 
@@ -1065,7 +1068,7 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Inject Blood: ({blood} units): {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = $"Directly adds {blood} units of blood.";
+        string mouseoverText = $"Injects {blood} units of blood.";
         SetButtonMouseoverText(button, mouseoverText);
     }
 
@@ -1073,6 +1076,8 @@ public class ButtonActions : MonoBehaviour
     {
         float seconds = 20.0f;
         int goldCost = 0;
+        int blood = 500;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null)
@@ -1085,7 +1090,7 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Blood.RemoveBlood(bodypart, seconds, goldCost); 
+                Actions_Blood.RemoveBlood(bodypart, seconds, goldCost, blood); 
                 textLog.NewLogEntry($"Extracting 100 units of blood from the {bodypart.name}..."); 
                 actionTimeBar.Reset(seconds);
             }
@@ -1094,9 +1099,9 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Remove Blood: (100 units): {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Remove Blood: ({blood} units): {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Directly removes 100 units of blood.";
+        string mouseoverText = $"Removes {blood} units of blood.";
         SetButtonMouseoverText(button, mouseoverText);
     }
 
@@ -1139,7 +1144,11 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Amputate Bodypart: {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Disconnects the bodypart from all connected bodyparts.\nCauses profuse bloodloss in connected bodyparts.";
+        string mouseoverText = 
+            "Disconnects the bodypart from all connected bodyparts.\n" +
+            "Causes bloodloss in this and connected bodyparts.\n" +
+            "Causes damage in this and connected bodyparts.";
+
         SetButtonMouseoverText(button, mouseoverText);
     }
 
@@ -1225,7 +1234,11 @@ public class ButtonActions : MonoBehaviour
         };
         button.onClick.AddListener(action);
 
-        string mouseoverText = $"Connects {bodyPart1.name} to {bodyPart2.name}.";
+        string mouseoverText = 
+            $"Connects {bodyPart1.name} to {bodyPart2.name}.\n" +
+            $"Causes bloodloss in both bodyparts.\n" +
+            $"Causes damage to both bodyparts.";
+
         SetButtonMouseoverText(button, mouseoverText);
     }
 
@@ -1421,11 +1434,11 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Implant {organ.name} into {bodypart.name}: {seconds} seconds, {goldCost} gold";
 
-        MouseOver mouseover = button.transform.GetComponentInChildren<MouseOver>();
-        mouseover.mouseoverEnabled = true;
-        mouseover.ResetTimer();
-        Text mouseOverText = mouseover.transform.GetChild(1).GetChild(0).GetComponent<Text>();
-        mouseOverText.text = "Implants the selected organ into the selected bodypart.";
+        string mouseoverText = 
+            "Implants the selected organ into the selected bodypart.\n" +
+           $"Increases bloodloss rate in {bodypart} by {bloodLossRate} units.\n" +
+           $"Causes {damage} damage to the bodypart.";
+        SetButtonMouseoverText(button, mouseoverText);
     }
 
     void AssignEmbedObjectButton(Button button, BodyPart bodypart, EmbeddedObject embeddedObject)
@@ -1462,7 +1475,10 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Implant {embeddedObject.name} into {bodypart.name}: {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Implants the selected organ into the selected bodypart.";
+        string mouseoverText =
+            $"Implants the {embeddedObject} into the selected bodypart.\n" +
+            $"Increases bloodloss rate in {bodypart} by {bloodLossRate} units.\n" +
+            $"Causes {damage} damage to the bodypart.";
         SetButtonMouseoverText(button, mouseoverText);
     }
 
@@ -1492,7 +1508,10 @@ public class ButtonActions : MonoBehaviour
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
         buttonText.text = $"Extract Organ: {seconds} seconds, {goldCost} gold";
 
-        string mouseoverText = "Removes the selected organ from the containing bodypart.";
+        string mouseoverText = 
+            "Removes the selected organ from the containing bodypart." +
+           $"Increases bloodloss rate in {organ.connectedBodyParts[0]} by {bloodLossRate} units.\n" +
+           $"Causes {damage} damage to the bodypart.";
         SetButtonMouseoverText(button, mouseoverText);
     }
 

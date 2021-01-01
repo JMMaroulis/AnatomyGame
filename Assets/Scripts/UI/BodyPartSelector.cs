@@ -34,6 +34,8 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
 
         connectedImage.enabled = bodyPart.connectedBodyParts.Count > 0;
         disconnectedImage.enabled = bodyPart.connectedBodyParts.Count == 0;
+
+        ColourUpdate();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -43,6 +45,15 @@ public class BodyPartSelector : MonoBehaviour, IPointerClickHandler
         embeddedObjectSelectorManager.ResetSelectors();
         buttonActions.ClearAllButtons();
         buttonActions.UpdateMenuButtonsInteractivity(false);
+    }
+
+    public void ColourUpdate()
+    {
+        float bloodLossRatio = bodyPart.bloodLossRate / 40.0f;
+        float gb = 1 - bloodLossRatio;
+
+        connectedImage.color = new Color(1, gb, gb);
+        disconnectedImage.color = new Color(1, gb, gb);
     }
 
 }
