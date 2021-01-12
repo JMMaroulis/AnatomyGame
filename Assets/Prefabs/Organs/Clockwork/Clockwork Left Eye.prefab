@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  timeScale: 0
+  timeScale: 1
   isFunctioning: 1
   requiresReplacing: 0
   requiresAmputation: 0

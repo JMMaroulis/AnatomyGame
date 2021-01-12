@@ -1226,7 +1226,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Skip to Perks
+  m_Text: Finish Purchasing Licences
 --- !u!222 &999761916
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3152,7 +3152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000036114365}
+  m_AnchoredPosition: {x: 0, y: -0.000012958917}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1932447041
@@ -3210,7 +3210,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'Incoming patient injuries:
+
+'
 --- !u!1 &1942193265
 GameObject:
   m_ObjectHideFlags: 0

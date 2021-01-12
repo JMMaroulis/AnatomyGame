@@ -9,6 +9,7 @@ public class UnlockManager : MonoBehaviour
     public Text goldText;
 
     private UnlockTracker unlockTracker;
+    private GoldTracker goldTracker;
 
     public int medicine_poison_cost;
     public int medicine_speed_cost;
@@ -24,88 +25,43 @@ public class UnlockManager : MonoBehaviour
     void Start()
     {
         FindObjectOfType<PhysicalInjuryGenerator>().GenerateInjuries();
+        goldTracker = FindObjectOfType<GoldTracker>();
 
         unlockTracker = FindObjectOfType<UnlockTracker>();
         UnityEngine.Events.UnityAction action = null;
 
-        int gold = FindObjectOfType<GoldTracker>().goldAccumulated - FindObjectOfType<GoldTracker>().goldSpent;
-
-        if (unlockTracker.medicine_poison || gold < medicine_poison_cost)
-        {
-            buttons[0].interactable = false;
-        }
         action = () => { unlockTracker.medicine_poison = true; FindObjectOfType<GoldTracker>().goldSpent += medicine_poison_cost; };
         buttons[0].onClick.AddListener(action);
         buttons[0].transform.GetChild(0).GetComponent<Text>().text = $"Poison Medication License: {medicine_poison_cost} Gold";
 
-
-        if (unlockTracker.medicine_speed || gold < medicine_speed_cost)
-        {
-            buttons[1].interactable = false;
-        }
         action = () => { unlockTracker.medicine_speed = true; FindObjectOfType<GoldTracker>().goldSpent += medicine_speed_cost; };
         buttons[1].onClick.AddListener(action);
         buttons[1].transform.GetChild(0).GetComponent<Text>().text = $"Temporal Medication License: {medicine_speed_cost} Gold";
 
-
-        if (unlockTracker.medicine_blood || gold < medicine_blood_cost)
-        {
-            buttons[2].interactable = false;
-        }
         action = () => { unlockTracker.medicine_blood = true; FindObjectOfType<GoldTracker>().goldSpent += medicine_blood_cost; };
         buttons[2].onClick.AddListener(action);
         buttons[2].transform.GetChild(0).GetComponent<Text>().text = $"Blood Medication License: {medicine_blood_cost} Gold";
 
-
-        if (unlockTracker.charms_heart || gold < heartcharm_cost)
-        {
-            buttons[3].interactable = false;
-        }
         action = () => { unlockTracker.charms_heart = true; FindObjectOfType<GoldTracker>().goldSpent += heartcharm_cost; };
         buttons[3].onClick.AddListener(action);
         buttons[3].transform.GetChild(0).GetComponent<Text>().text = $"Heart Charm License: {heartcharm_cost} Gold";
 
-
-        if (unlockTracker.charms_lung || gold < lungcharm_cost)
-        {
-            buttons[4].interactable = false;
-        }
         action = () => { unlockTracker.charms_lung = true; FindObjectOfType<GoldTracker>().goldSpent += lungcharm_cost; };
         buttons[4].onClick.AddListener(action);
         buttons[4].transform.GetChild(0).GetComponent<Text>().text = $"Lung Charm License: {lungcharm_cost} Gold";
 
-
-        if (unlockTracker.charms_blood_regen || gold < bloodregencharm_cost)
-        {
-            buttons[5].interactable = false;
-        }
         action = () => { unlockTracker.charms_blood_regen = true; FindObjectOfType<GoldTracker>().goldSpent += bloodregencharm_cost; };
         buttons[5].onClick.AddListener(action);
         buttons[5].transform.GetChild(0).GetComponent<Text>().text = $"Blood Regeneration Charm License: {bloodregencharm_cost} Gold";
 
-
-        if (unlockTracker.charms_petrification || gold < petrificationcharm_cost)
-        {
-            buttons[6].interactable = false;
-        }
         action = () => { unlockTracker.charms_petrification = true; FindObjectOfType<GoldTracker>().goldSpent += petrificationcharm_cost; };
         buttons[6].onClick.AddListener(action);
         buttons[6].transform.GetChild(0).GetComponent<Text>().text = $"Petrification Charm License: {petrificationcharm_cost} Gold";
 
-
-        if (unlockTracker.spawn || gold < bodypartdelivery_cost)
-        {
-            buttons[7].interactable = false;
-        }
         action = () => { unlockTracker.spawn = true; FindObjectOfType<GoldTracker>().goldSpent += bodypartdelivery_cost; };
         buttons[7].onClick.AddListener(action);
         buttons[7].transform.GetChild(0).GetComponent<Text>().text = $"Bodypart Delivery Service: {bodypartdelivery_cost} Gold";
 
-
-        if (unlockTracker.spawn_clock || gold < clockworkdelivery_cost)
-        {
-            buttons[8].interactable = false;
-        }
         action = () => { unlockTracker.spawn_clock = true; FindObjectOfType<GoldTracker>().goldSpent += clockworkdelivery_cost; };
         buttons[8].onClick.AddListener(action);
         buttons[8].transform.GetChild(0).GetComponent<Text>().text = $"Clockwork Delivery Service: {clockworkdelivery_cost} Gold";
@@ -114,7 +70,45 @@ public class UnlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        goldText.text = $"Gold: {gold}";
+        goldText.text = $"Gold: {goldTracker.gold}";
+
+        if (unlockTracker.medicine_poison || goldTracker.gold < medicine_poison_cost)
+        {
+            buttons[0].interactable = false;
+        }
+        if (unlockTracker.medicine_speed || goldTracker.gold < medicine_speed_cost)
+        {
+            buttons[1].interactable = false;
+        }
+        if (unlockTracker.medicine_blood || goldTracker.gold < medicine_blood_cost)
+        {
+            buttons[2].interactable = false;
+        }
+        if (unlockTracker.charms_heart || goldTracker.gold < heartcharm_cost)
+        {
+            buttons[3].interactable = false;
+        }
+        if (unlockTracker.charms_lung || goldTracker.gold < lungcharm_cost)
+        {
+            buttons[4].interactable = false;
+        }
+        if (unlockTracker.charms_blood_regen || goldTracker.gold < bloodregencharm_cost)
+        {
+            buttons[5].interactable = false;
+        }
+        if (unlockTracker.charms_petrification || goldTracker.gold < petrificationcharm_cost)
+        {
+            buttons[6].interactable = false;
+        }
+        if (unlockTracker.spawn || goldTracker.gold < bodypartdelivery_cost)
+        {
+            buttons[7].interactable = false;
+        }
+        if (unlockTracker.spawn_clock || goldTracker.gold < clockworkdelivery_cost)
+        {
+            buttons[8].interactable = false;
+        }
+
     }
 
     public void PerkScreen()

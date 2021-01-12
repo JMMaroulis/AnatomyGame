@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTimePassing: 0
-  timeScale: 14
+  timeScale: 1
   isFunctioning: 1
   requiresReplacing: 0
   requiresAmputation: 0
-  index: 0
+  index: 14
   bloodRequiredToFunction: 100
   _blood: 500
   bloodLossRate: 0

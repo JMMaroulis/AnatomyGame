@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldSpent: 0
-  goldAccumulated: 500
+  goldAccumulated: 1000
 --- !u!1 &1224743750
 GameObject:
   m_ObjectHideFlags: 0
