@@ -9,20 +9,19 @@ public class LevelStartSetup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         Debug.Log("Generating Level");
+
         gameSetupScenarioTracker = FindObjectOfType<GameSetupScenarioTracker>();
         medicalProcedureGenerator = FindObjectOfType<MedicalProcedureGenerator>();
         physicalInjuryGenerator = FindObjectOfType<PhysicalInjuryGenerator>();
 
-        int choice = Random.Range(0, 2);
-        gameSetupScenarioTracker.patientNumber += 1;
+        //voluntary procedure generation currently disabled
+        int choice = Random.Range(0, 1);
 
         switch (choice)
         {
             case 0:
                 Debug.Log("Generating Injuries");
-                gameSetupScenarioTracker.NewInjuries();
                 physicalInjuryGenerator.GenerateInjuries();
                 gameSetupScenarioTracker.goldReward = CalculateInjuriesGoldReward();
                 break;

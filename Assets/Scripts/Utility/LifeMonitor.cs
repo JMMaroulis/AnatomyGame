@@ -31,7 +31,7 @@ public class LifeMonitor : MonoBehaviour
         StaticCoroutine.Start(VictoryCheckCoroutine());
     }
 
-    public IEnumerator VictoryCheckCoroutine()
+    private IEnumerator VictoryCheckCoroutine()
     {
         textLog.NewLogEntry("Checking patient condition:");
         bool victory = true;
@@ -80,8 +80,8 @@ public class LifeMonitor : MonoBehaviour
 
         FindObjectOfType<ButtonActions>().DisableAllButtons();
         yield return new WaitForSeconds(5 * Time.timeScale);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("UnlockScreen");
 
+        FindObjectOfType<SceneTransitionManager>().UnlockScreen();
     }
 
     public bool SafeToDischarge()
@@ -110,7 +110,7 @@ public class LifeMonitor : MonoBehaviour
 
     }
 
-    public bool DrugCheck()
+    private bool DrugCheck()
     {
         bool result = false;
         foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
@@ -141,7 +141,7 @@ public class LifeMonitor : MonoBehaviour
         return result;
     }
 
-    public bool CharmCheck()
+    private bool CharmCheck()
     {
         bool result = false;
         foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
@@ -171,7 +171,7 @@ public class LifeMonitor : MonoBehaviour
         return result;
     }
 
-    public bool EmbeddedObjectCheck()
+    private bool EmbeddedObjectCheck()
     {
         bool result = false;
 
@@ -191,7 +191,7 @@ public class LifeMonitor : MonoBehaviour
         return result;
     }
 
-    public bool BodyPartCountCheck()
+    private bool BodyPartCountCheck()
     {
         bool result = false;
 
@@ -320,7 +320,7 @@ public class LifeMonitor : MonoBehaviour
         return result;
     }
 
-    public bool VitalsCheck()
+    private bool VitalsCheck()
     {
         bool result = false;
         foreach (BodyPart bodyPart in bodyPartManager.bodyParts)
@@ -370,7 +370,7 @@ public class LifeMonitor : MonoBehaviour
         return result;
     }
 
-    public bool ClockworkHeartCheck()
+    private bool ClockworkHeartCheck()
     {
         /*
         bool result = false;

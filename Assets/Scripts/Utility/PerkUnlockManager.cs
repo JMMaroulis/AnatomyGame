@@ -19,9 +19,10 @@ public class PerkUnlockManager : MonoBehaviour
 
     }
 
+    //assigned to button
     public void LevelStart()
     {
-        FindObjectOfType<LevelManager>().LevelStart();
+        FindObjectOfType<SceneTransitionManager>().SampleScene();
     }
 
 }

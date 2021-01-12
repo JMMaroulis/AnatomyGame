@@ -4,60 +4,96 @@ using System.Linq;
 
 public class PhysicalInjuryGenerator : MonoBehaviour
 {
-    public GameObject body;
-    public TextLog textLog;
+    private TextLog textLog;
     private BodyPartManager bodyPartManager;
     private UnlockTracker unlockTracker;
+    private GameSetupScenarioTracker gameSetupTracker;
 
     public GameObject bullet;
     public GameObject bomb;
 
-    public GameSetupScenarioTracker gameSetupTracker;
+    public List<int> randomNumbers;
+    public int randomIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        bodyPartManager = FindObjectOfType<BodyPartManager>();
-        gameSetupTracker = GameObject.FindObjectOfType<GameSetupScenarioTracker>();
-        unlockTracker = FindObjectOfType<UnlockTracker>();
+
     }
 
     public void GenerateInjuries()
     {
+        textLog = FindObjectOfType<TextLog>();
+        bodyPartManager = FindObjectOfType<BodyPartManager>();
+        unlockTracker = FindObjectOfType<UnlockTracker>();
+        gameSetupTracker = FindObjectOfType<GameSetupScenarioTracker>();
+
         EasyInjuries(gameSetupTracker.easyInjuries);
         MediumInjuries(gameSetupTracker.mediumInjuries);
         HardInjuries(gameSetupTracker.hardInjuries);
-        FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-        FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+        randomIndex = 0;
+
+        try
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+                GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            }
+        }
+        catch(System.Exception e)
+        {
+            Debug.LogError($"PhysicalInjuryGenertor: Error resetting selectors: {e}");
+        }
+
     }
 
-    public Organ RandomOrgan()
+    public void GenerateRandomNumbers()
     {
-        Organ organ = bodyPartManager.organs[Random.Range(0, bodyPartManager.organs.Count)];
+        randomNumbers = new List<int>();
+        var x = Random.state;
+        for (int i = 0; i < 100000; i++)
+        {
+            randomNumbers.Add(Mathf.RoundToInt(Random.value * 1000.0f));
+        }
+        randomIndex = 0;
+    }
+
+    private int RandomNumber(int max)
+    {
+        int x = randomNumbers[randomIndex] % max;
+        randomIndex += 1;
+        return x;
+    }
+
+    private Organ RandomOrgan()
+    {
+        Organ organ = bodyPartManager.organs[RandomNumber(bodyPartManager.organs.Count)];
         return organ;
     }
 
-    public BodyPart RandomLimb()
+    private BodyPart RandomLimb()
     {
-        BodyPart limb = bodyPartManager.bodyParts[Random.Range(0, bodyPartManager.bodyParts.Count)];
+        BodyPart limb = bodyPartManager.bodyParts[RandomNumber(bodyPartManager.bodyParts.Count)];
         while (limb is Organ)
         {
-            limb = bodyPartManager.bodyParts[Random.Range(0, bodyPartManager.bodyParts.Count)];
+            limb = bodyPartManager.bodyParts[RandomNumber(bodyPartManager.bodyParts.Count)];
         }
         return limb;
     }
 
     //select n random bodyparts
-    public void EasyInjuries(int numberOfInjuries)
+    private void EasyInjuries(int numberOfInjuries)
     {
         if (numberOfInjuries != 0)
         {
+            bodyPartManager.OrderLists();
+
             int i = 0;
             while (i < numberOfInjuries)
             {
-
                 //select and apply random injury
-                int injuryNumber = Random.Range(0, 5);
+                int injuryNumber = RandomNumber(5);
                 switch (injuryNumber)
                 {
                     case 0:
@@ -87,7 +123,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         }
     }
 
-    public void MediumInjuries(int numberOfInjuries)
+    private void MediumInjuries(int numberOfInjuries)
     {
         if (numberOfInjuries > 0)
         {
@@ -95,8 +131,10 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             while (i < numberOfInjuries)
             {
 
+                bodyPartManager.OrderLists();
+
                 //apply injury
-                int injuryNumber = Random.Range(0, 8);
+                int injuryNumber = RandomNumber(8);
                 switch (injuryNumber)
                 {
                     case 0:
@@ -139,15 +177,18 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         }
     }
 
-    public void HardInjuries(int numberOfInjuries)
+    private void HardInjuries(int numberOfInjuries)
     {
         if (numberOfInjuries != 0)
         {
+
+            bodyPartManager.OrderLists();
+
             int i = 0;
             while (i < numberOfInjuries)
             {
                 //selected bodypart to injure, and injury to apply
-                int injuryNumber = Random.Range(0, 4);
+                int injuryNumber = RandomNumber(4);
 
                 //apply injury
                 switch (injuryNumber)
@@ -177,12 +218,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
     }
 
     //assorted physical injury methods
-    public bool StabOrgan()
+    private bool StabOrgan()
     {
-        if (!unlockTracker.medicine_blood && !unlockTracker.spawn)
-        {
-            return false;
-        }
+        //if (!unlockTracker.medicine_blood && !unlockTracker.spawn)
+        //{
+        //    return false;
+        //}
 
         Organ organ = RandomOrgan();
 
@@ -201,7 +242,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool StabLimb()
+    private bool StabLimb()
     {
         BodyPart limb = RandomLimb();
 
@@ -214,7 +255,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool ShootLimb()
+    private bool ShootLimb()
     {
         BodyPart limb = RandomLimb();
         Debug.Log($"Shot {limb.name}");
@@ -236,12 +277,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool ShootOrgan()
+    private bool ShootOrgan()
     {
-        if (!unlockTracker.medicine_blood && !unlockTracker.spawn)
-        {
-            return false;
-        }
+        //if (!unlockTracker.medicine_blood && !unlockTracker.spawn)
+        //{
+        //    return false;
+        //}
 
         Organ organ = RandomOrgan();
         Debug.Log($"Shot {organ.name}");
@@ -263,7 +304,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool ImplantBomb()
+    private bool ImplantBomb()
     {
         BodyPart limb = RandomLimb();
         Debug.Log($"Bomb implanted in {limb.name}");
@@ -275,7 +316,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool CrushLimb()
+    private bool CrushLimb()
     {
         BodyPart limb = RandomLimb();
         Debug.Log($"Crushed {limb.name}");
@@ -287,12 +328,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool SnakeBite()
+    private bool SnakeBite()
     {
-        if (!unlockTracker.medicine_poison)
-        {
-            return false;
-        }
+        //if (!unlockTracker.medicine_poison)
+        //{
+        //    return false;
+        //}
 
         BodyPart limb = RandomLimb();
         Debug.Log($"Snake bit {limb.name}");
@@ -305,7 +346,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool SeverTorso()
+    private bool SeverTorso()
     {
         BodyPart torso = FindObjectOfType<Torso>();
 
@@ -328,7 +369,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool SeverHead()
+    private bool SeverHead()
     {
         BodyPart head = FindObjectOfType<Head>();
 
@@ -351,7 +392,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool SeverLimbMedium()
+    private bool SeverLimbMedium()
     {
         bool x = true;
         int n = 0;
@@ -384,12 +425,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool SlowPoisonOrgan()
+    private bool SlowPoisonOrgan()
     {
-        if (!unlockTracker.medicine_poison)
-        {
-            return false;
-        }
+        //if (!unlockTracker.medicine_poison)
+        //{
+        //    return false;
+        //}
 
         BodyPart organ = RandomOrgan();
         Debug.Log($"Poisoned {organ.name}");
@@ -400,12 +441,12 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool SlowPoisonLimb()
+    private bool SlowPoisonLimb()
     {
-        if (!unlockTracker.medicine_poison)
-        {
-            return false;
-        }
+        //if (!unlockTracker.medicine_poison)
+        //{
+        //    return false;
+        //}
 
         BodyPart limb = RandomLimb();
         Debug.Log($"Poisoned {limb.name}");
@@ -416,26 +457,26 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool MissingOrganMedium()
+    private bool MissingOrganMedium()
     {
         Organ organ = RandomOrgan();
         int n = 0;
         bool x = true;
         x = x || (organ is Brain);
-        x = x || (organ is Heart && !unlockTracker.charms_heart);
-        x = x || (organ is Lung && !unlockTracker.charms_lung);
+        //x = x || (organ is Heart && !unlockTracker.charms_heart);
+        //x = x || (organ is Lung && !unlockTracker.charms_lung);
         x = x || !(organ.gameObject.GetComponent<PetrificationCharm>() is null);
 
         while (x && n < 5)
         {
             organ = RandomOrgan();
             x = x || (organ is Brain);
-            x = x || (organ is Heart && !unlockTracker.charms_heart);
-            x = x || (organ is Lung && !unlockTracker.charms_lung);
+            //x = x || (organ is Heart && !unlockTracker.charms_heart);
+            //x = x || (organ is Lung && !unlockTracker.charms_lung);
             x = x || !(organ.gameObject.GetComponent<PetrificationCharm>() is null);
             n += 1;
         }
-        if (n > 5 || organ is Brain || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
+        if (n > 5 || organ is Brain)// || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
         {
             return false;
         }
@@ -450,7 +491,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
 
     }
 
-    public bool MissingOrganHard()
+    private bool MissingOrganHard()
     {
         Organ organ = RandomOrgan();
         int n = 0;
@@ -460,35 +501,40 @@ public class PhysicalInjuryGenerator : MonoBehaviour
             organ = RandomOrgan();
             n += 1;
         }
-        if (n > 5 || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
+        if (n > 5)// || (!unlockTracker.spawn && !unlockTracker.spawn_clock))
         {
             return false;
         }
 
-        Debug.Log($"{organ.name} missing");
-        textLog.NewLogEntry($"The {organ.name} is missing?!");
+        if (organ.connectedBodyParts.Count() > 0)
+        {
+            Debug.Log($"{organ.name} missing");
+            textLog.NewLogEntry($"The {organ.name} is missing?!");
 
-        Actions_Surgery.RemoveOrganProcess(organ);
-        Actions_Surgery.DeleteBodyPartProcess(organ);
+            Actions_Surgery.RemoveOrganProcess(organ);
+            Actions_Surgery.DeleteBodyPartProcess(organ);
 
-        return true;
+            return true;
+        }
+
+        return false;
     }
 
-    public bool RemoveOrganMedium()
+    private bool RemoveOrganMedium()
     {
         Organ organ = RandomOrgan();
         int n = 0;
         bool x = false;
-        x = x || (organ is Heart && !unlockTracker.charms_heart);
-        x = x || (organ is Lung && !unlockTracker.charms_lung);
-        x = x || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart);
+        //x = x || (organ is Heart && !unlockTracker.charms_heart);
+        //x = x || (organ is Lung && !unlockTracker.charms_lung);
+        //x = x || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart);
         while (x && n < 5)
         {
             organ = RandomOrgan();
             x = false;
-            x = x || (organ is Heart && !unlockTracker.charms_heart);
-            x = x || (organ is Lung && !unlockTracker.charms_lung);
-            x = x || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart);
+            //x = x || (organ is Heart && !unlockTracker.charms_heart);
+            //x = x || (organ is Lung && !unlockTracker.charms_lung);
+            //x = x || (organ is Brain && !unlockTracker.charms_lung && !unlockTracker.charms_heart);
             n += 1;
         }
         if (n > 5)
@@ -503,25 +549,29 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public bool RemoveOrganHard()
+    private bool RemoveOrganHard()
     {
         Organ organ = RandomOrgan();
-        Debug.Log($"{organ.name} external");
-        textLog.NewLogEntry($"The {organ.name} requires re-implanting.");
+        if (organ.connectedBodyParts.Count() > 0)
+        {
+            Debug.Log($"{organ.name} external");
+            textLog.NewLogEntry($"The {organ.name} requires re-implanting.");
 
-        Actions_Surgery.RemoveOrganProcess(organ);
+            Actions_Surgery.RemoveOrganProcess(organ);
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
-    public bool PetrifyOrganMedium()
+    private bool PetrifyOrganMedium()
     {
         Organ organ = RandomOrgan();
         int n = 0;
         bool x = false;
-        x = x || (organ is Lung && !unlockTracker.charms_lung);
-        x = x || (organ is Heart && !unlockTracker.charms_heart);
-        x = x || (organ is Brain && (!unlockTracker.charms_heart || !unlockTracker.charms_lung));
+        //x = x || (organ is Lung && !unlockTracker.charms_lung);
+        //x = x || (organ is Heart && !unlockTracker.charms_heart);
+        //x = x || (organ is Brain && (!unlockTracker.charms_heart || !unlockTracker.charms_lung));
         x = x || !(organ.GetComponent<PetrificationCharm>() is null);
         while (x && n < 5)
         {
@@ -540,14 +590,14 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         return true;
     }
 
-    public List<BodyPart> BodyPartsList()
+    private List<BodyPart> BodyPartsList()
     {
         List<BodyPart> x = FindObjectsOfType<BodyPart>().ToList();
         var y = from bodyPart in x where bodyPart.isPartOfMainBody select bodyPart;
         return y.ToList<BodyPart>();
     }
 
-    public List<Organ> PopulateOrgansList()
+    private List<Organ> PopulateOrgansList()
     {
 
         List<BodyPart> x = BodyPartsList();

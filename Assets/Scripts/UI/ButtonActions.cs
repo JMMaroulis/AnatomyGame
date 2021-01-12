@@ -686,7 +686,9 @@ public class ButtonActions : MonoBehaviour
     void AssignInjectAntidoteButton(Button button, BodyPart bodypart)
     {
         float seconds = 10.0f;
-        int goldCost = 50;
+        int goldCost = 30;
+        float units = 100.0f;
+
         UnityEngine.Events.UnityAction action = () =>
         {
             if (bodypart == null)
@@ -699,8 +701,8 @@ public class ButtonActions : MonoBehaviour
             }
             else
             {
-                Actions_Medicine.InjectPotion(bodypart, "antidote", 50.00f, seconds, goldCost);
-                textLog.NewLogEntry($"Injecting 50 units of Antidote into the {bodypart.name}...");
+                Actions_Medicine.InjectPotion(bodypart, "antidote", units, seconds, goldCost);
+                textLog.NewLogEntry($"Injecting {units} units of Antidote into the {bodypart.name}...");
                 actionTimeBar.Reset(seconds);
             }
         };
@@ -708,7 +710,7 @@ public class ButtonActions : MonoBehaviour
         button.onClick.AddListener(action);
 
         Text buttonText = button.transform.GetChild(0).gameObject.GetComponent<Text>();
-        buttonText.text = $"Inject Antidote (50 units): {seconds} seconds, {goldCost} gold";
+        buttonText.text = $"Inject Antidote ({units} units): {seconds} seconds, {goldCost} gold";
 
         string mouseoverText = "Antidote: Mutually neutralises 1 unit of slow poison per second. Decays at 1/100 units per second if no poison present in the bodypart.";
         SetButtonMouseoverText(button, mouseoverText);
@@ -1510,7 +1512,7 @@ public class ButtonActions : MonoBehaviour
 
         string mouseoverText = 
             "Removes the selected organ from the containing bodypart." +
-           $"Increases bloodloss rate in {organ.connectedBodyParts[0]} by {bloodLossRate} units.\n" +
+            ((organ.connectedBodyParts.Count() > 0) ? $"Increases bloodloss rate in {organ.connectedBodyParts[0]} by {bloodLossRate} units.\n" : "") +
            $"Causes {damage} damage to the bodypart.";
         SetButtonMouseoverText(button, mouseoverText);
     }

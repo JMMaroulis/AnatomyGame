@@ -15,6 +15,14 @@ public class BodyPartManager : MonoBehaviour
         organs = FindObjectsOfType<Organ>().ToList();
     }
 
+    public void OrderLists()
+    {
+        List<BodyPart> x = bodyParts.OrderBy(bodyPart => bodyPart.index).ToList();
+        List<Organ> y = organs.OrderBy(organ => organ.index).ToList();
+        bodyParts = x;
+        organs = y;
+    }
+
     void Update()
     {
         if (clock.isTimePassing)

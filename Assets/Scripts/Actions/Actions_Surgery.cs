@@ -59,9 +59,20 @@ public static class Actions_Surgery
     {
         bodyPart.SeverAllConnections();
         MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_amputations += 1;
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-        MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+        try
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+                GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+                MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"RemoveBodyPartProcess: {e}");
+        }
+
         UpdateAllBodyPartHeartConnections();
     }
 
@@ -112,14 +123,23 @@ public static class Actions_Surgery
 
     public static void RemoveOrganProcess(Organ organ)
     {
-        ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();
-
         //disconnect
         BodyPart organParent = organ.connectedBodyParts[0];
         organ.SeverAllConnections();
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors(organParent);
-        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-        MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+        try
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors(organParent);
+                GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+                MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+            }
+
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e);
+        }
 
         UpdateAllBodyPartHeartConnections();
 
@@ -181,13 +201,27 @@ public static class Actions_Surgery
     {
         //disconnect
         embeddedObject.Remove();
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+        try
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+                GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            }
+
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"RemoveEmbeddedObjectProcess: {e}");
+        }
 
         UpdateAllBodyPartHeartConnections();
 
         //remove from being child of bodypart
-        embeddedObject.transform.SetParent(MonoBehaviour.FindObjectOfType<EmbeddedObjectSelectorManager>().transform);
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+        {
+            embeddedObject.transform.SetParent(MonoBehaviour.FindObjectOfType<EmbeddedObjectSelectorManager>().transform);
+        }
 
         MonoBehaviour.FindObjectOfType<ActionTracker>().surgery_remove_implants += 1;
     }
@@ -245,9 +279,20 @@ public static class Actions_Surgery
         //connect
         organ.CreateConnection(bodyPart);
         bodyPart.AddContainedOrgan(organ);
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-        MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+        try
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+                GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+                MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+            }
+
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"ImplantOrganProcess: {e}");
+        }
 
         UpdateAllBodyPartHeartConnections();
 
@@ -308,9 +353,20 @@ public static class Actions_Surgery
     {
         //connect
         embeddedObject.Embed(bodypart);
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
-        MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+        try
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+                GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+                MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+            }
+
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"EmbedObjectProcess: {e}");
+        }
 
         UpdateAllBodyPartHeartConnections();
 
@@ -405,8 +461,19 @@ public static class Actions_Surgery
     {
         bodyPart1.CreateConnection(bodyPart2);
         bodyPart2.CreateConnection(bodyPart1);
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+        try
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+                GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            }
+
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"ConnectBodyPartProcess: {e}");
+        }
 
         UpdateAllBodyPartHeartConnections();
 
@@ -436,7 +503,10 @@ public static class Actions_Surgery
         {
             DeleteBodyPartProcess(bodyPart);
             GameObject.FindObjectOfType<GoldTracker>().goldSpent += goldCost;
-            MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                MonoBehaviour.FindObjectOfType<BodyPartStatusManager>().UpdateStatusCollection();
+            }
             buttonActions.SelectSurgeryAction();
         }
 
@@ -447,8 +517,19 @@ public static class Actions_Surgery
         //destroy all organs contained in the bodypart
         foreach (Organ organ in bodyPart.containedOrgans)
         {
-            GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
-            GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(organ);
+            try
+            {
+                GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(organ);
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+                {
+                    GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(organ);
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError(e);
+            }
+
             GameObject.Destroy(organ.gameObject);
         }
 
@@ -458,10 +539,21 @@ public static class Actions_Surgery
             GameObject.Destroy(embeddedObject.gameObject);
         }
 
-        //remove bodypart from tracking lists
-        bodyPart.SeverAllConnections();
-        GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
-        GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(bodyPart);
+        //remove bodypart from tracking
+        try
+        {
+            bodyPart.SeverAllConnections();
+            GameObject.FindObjectOfType<BodyPartManager>().bodyParts.Remove(bodyPart);
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartStatusManager>().RemoveStatus(bodyPart);
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e);
+        }
+
         if (bodyPart is Organ)
         {
             BodyPartManager x = GameObject.FindObjectOfType<BodyPartManager>();
@@ -469,8 +561,18 @@ public static class Actions_Surgery
         }
 
         GameObject.Destroy(bodyPart.gameObject);
-        GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
-        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+        try
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SampleScene")
+            {
+                GameObject.FindObjectOfType<BodyPartSelectorManager>().ResetSelectors();
+                GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().ResetSelectors();
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError(e);
+        }
 
         UpdateAllBodyPartHeartConnections();
 

@@ -22,40 +22,49 @@ public class Clock : MonoBehaviour
     public Text clockText;
     public Slider clockSlider;
 
+    public bool manuallyDisabled;
+
     private BodyPartManager bodyPartManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        deathMonitor = FindObjectOfType<DeathMonitor>();
-        lifeMonitor = FindObjectOfType<LifeMonitor>();
-        bodyPartManager = FindObjectOfType<BodyPartManager>();
+        if (!manuallyDisabled)
+        {
+            deathMonitor = FindObjectOfType<DeathMonitor>();
+            lifeMonitor = FindObjectOfType<LifeMonitor>();
+            bodyPartManager = FindObjectOfType<BodyPartManager>();
 
-        //Time.timeScale = globalTimeScalingFactor;
-        isTimePassing = false;
-        currentTime.text = "00:00:00";
-        clockTarget = 0.0f;
-        timeElapsed = 0.0f;
+            //Time.timeScale = globalTimeScalingFactor;
+            isTimePassing = false;
+            currentTime.text = "00:00:00";
+            clockTarget = 0.0f;
+            timeElapsed = 0.0f;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        globalTimeScalingFactor = clockSlider.value;
-        //Time.timeScale = globalTimeScalingFactor;
-        clockText.text = $"Time Scaling: {globalTimeScalingFactor}x";
-
-        //checking if it's time for time to stop yet
-        if (timeElapsed >= clockTarget)
+        if (!manuallyDisabled)
         {
-            isTimePassing = false;
+            globalTimeScalingFactor = clockSlider.value;
+            //Time.timeScale = globalTimeScalingFactor;
+            clockText.text = $"Time Scaling: {globalTimeScalingFactor}x";
+
+            //checking if it's time for time to stop yet
+            if (timeElapsed >= clockTarget)
+            {
+                isTimePassing = false;
+            }
+
+            BodyPartsTimePassing();
+            deathMonitor.isTimePassing = isTimePassing;
+            lifeMonitor.isTimePassing = isTimePassing;
+
+            UpdateCurrentTime();
         }
-
-        BodyPartsTimePassing();
-        deathMonitor.isTimePassing = isTimePassing;
-        lifeMonitor.isTimePassing = isTimePassing;
-
-        UpdateCurrentTime();       
 
     }
 

@@ -2,9 +2,18 @@
 
 public class GameSetupScenarioTracker : MonoBehaviour
 {
-    public int easyInjuries;
-    public int mediumInjuries;
-    public int hardInjuries;
+    public int easyInjuries
+    {
+        get { return patientNumber % 3; }
+    }
+    public int mediumInjuries
+    {
+        get { return Mathf.FloorToInt((patientNumber / 3) % 3); }
+    }
+    public int hardInjuries
+    {
+        get { return Mathf.FloorToInt(patientNumber / 9); }
+    }
     public int requestedProcedures;
 
     public int patientNumber;
@@ -28,13 +37,6 @@ public class GameSetupScenarioTracker : MonoBehaviour
 
     }
 
-    public void NewInjuries()
-    {
-        easyInjuries = Mathf.FloorToInt(patientNumber % 3);
-        mediumInjuries = Mathf.FloorToInt((patientNumber / 3) % 3);
-        hardInjuries = Mathf.FloorToInt(patientNumber / 9);
-    }
-
     public void NewProcedures()
     {
         requestedProcedures = Mathf.CeilToInt(patientNumber / 2);
@@ -45,7 +47,7 @@ public class GameSetupScenarioTracker : MonoBehaviour
     {
         //here cause the level setup thing adds 1 to the patient number on scene start
         //so if we don't do this, on load, we'll have essentially skipped a patient
-        patientNumber -= 1;
+        //patientNumber -= 1;
     }
 
 }

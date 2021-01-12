@@ -49,7 +49,14 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Faff(GameObject embeddedObject)
     {
-        GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().NewEmbeddedObject(embeddedObject.GetComponent<EmbeddedObject>());
+        try
+        {
+            GameObject.FindObjectOfType<EmbeddedObjectSelectorManager>().NewEmbeddedObject(embeddedObject.GetComponent<EmbeddedObject>());
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Could not spawn embeddedobject: {e}");
+        }
     }
 
 }

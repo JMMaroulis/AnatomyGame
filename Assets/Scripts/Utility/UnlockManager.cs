@@ -20,22 +20,21 @@ public class UnlockManager : MonoBehaviour
     public int petrificationcharm_cost;
     public int clockworkdelivery_cost;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
+        FindObjectOfType<PhysicalInjuryGenerator>().GenerateInjuries();
+
         unlockTracker = FindObjectOfType<UnlockTracker>();
         UnityEngine.Events.UnityAction action = null;
 
         int gold = FindObjectOfType<GoldTracker>().goldAccumulated - FindObjectOfType<GoldTracker>().goldSpent;
-        goldText.text = $"Gold: {gold}";
 
         if (unlockTracker.medicine_poison || gold < medicine_poison_cost)
         {
             buttons[0].interactable = false;
         }
-        action = () => { unlockTracker.medicine_poison = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += medicine_poison_cost; };
+        action = () => { unlockTracker.medicine_poison = true; FindObjectOfType<GoldTracker>().goldSpent += medicine_poison_cost; };
         buttons[0].onClick.AddListener(action);
         buttons[0].transform.GetChild(0).GetComponent<Text>().text = $"Poison Medication License: {medicine_poison_cost} Gold";
 
@@ -44,7 +43,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[1].interactable = false;
         }
-        action = () => { unlockTracker.medicine_speed = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += medicine_speed_cost; };
+        action = () => { unlockTracker.medicine_speed = true; FindObjectOfType<GoldTracker>().goldSpent += medicine_speed_cost; };
         buttons[1].onClick.AddListener(action);
         buttons[1].transform.GetChild(0).GetComponent<Text>().text = $"Temporal Medication License: {medicine_speed_cost} Gold";
 
@@ -53,7 +52,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[2].interactable = false;
         }
-        action = () => { unlockTracker.medicine_blood = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += medicine_blood_cost; };
+        action = () => { unlockTracker.medicine_blood = true; FindObjectOfType<GoldTracker>().goldSpent += medicine_blood_cost; };
         buttons[2].onClick.AddListener(action);
         buttons[2].transform.GetChild(0).GetComponent<Text>().text = $"Blood Medication License: {medicine_blood_cost} Gold";
 
@@ -62,7 +61,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[3].interactable = false;
         }
-        action = () => { unlockTracker.charms_heart = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += heartcharm_cost; };
+        action = () => { unlockTracker.charms_heart = true; FindObjectOfType<GoldTracker>().goldSpent += heartcharm_cost; };
         buttons[3].onClick.AddListener(action);
         buttons[3].transform.GetChild(0).GetComponent<Text>().text = $"Heart Charm License: {heartcharm_cost} Gold";
 
@@ -71,7 +70,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[4].interactable = false;
         }
-        action = () => { unlockTracker.charms_lung = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += lungcharm_cost; };
+        action = () => { unlockTracker.charms_lung = true; FindObjectOfType<GoldTracker>().goldSpent += lungcharm_cost; };
         buttons[4].onClick.AddListener(action);
         buttons[4].transform.GetChild(0).GetComponent<Text>().text = $"Lung Charm License: {lungcharm_cost} Gold";
 
@@ -80,7 +79,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[5].interactable = false;
         }
-        action = () => { unlockTracker.charms_blood_regen = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += bloodregencharm_cost; };
+        action = () => { unlockTracker.charms_blood_regen = true; FindObjectOfType<GoldTracker>().goldSpent += bloodregencharm_cost; };
         buttons[5].onClick.AddListener(action);
         buttons[5].transform.GetChild(0).GetComponent<Text>().text = $"Blood Regeneration Charm License: {bloodregencharm_cost} Gold";
 
@@ -89,7 +88,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[6].interactable = false;
         }
-        action = () => { unlockTracker.charms_petrification = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += petrificationcharm_cost; };
+        action = () => { unlockTracker.charms_petrification = true; FindObjectOfType<GoldTracker>().goldSpent += petrificationcharm_cost; };
         buttons[6].onClick.AddListener(action);
         buttons[6].transform.GetChild(0).GetComponent<Text>().text = $"Petrification Charm License: {petrificationcharm_cost} Gold";
 
@@ -98,7 +97,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[7].interactable = false;
         }
-        action = () => { unlockTracker.spawn = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += bodypartdelivery_cost; };
+        action = () => { unlockTracker.spawn = true; FindObjectOfType<GoldTracker>().goldSpent += bodypartdelivery_cost; };
         buttons[7].onClick.AddListener(action);
         buttons[7].transform.GetChild(0).GetComponent<Text>().text = $"Bodypart Delivery Service: {bodypartdelivery_cost} Gold";
 
@@ -107,7 +106,7 @@ public class UnlockManager : MonoBehaviour
         {
             buttons[8].interactable = false;
         }
-        action = () => { unlockTracker.spawn_clock = true; PerkScreen(); FindObjectOfType<GoldTracker>().goldSpent += clockworkdelivery_cost; };
+        action = () => { unlockTracker.spawn_clock = true; FindObjectOfType<GoldTracker>().goldSpent += clockworkdelivery_cost; };
         buttons[8].onClick.AddListener(action);
         buttons[8].transform.GetChild(0).GetComponent<Text>().text = $"Clockwork Delivery Service: {clockworkdelivery_cost} Gold";
     }
@@ -115,12 +114,12 @@ public class UnlockManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        goldText.text = $"Gold: {gold}";
     }
 
     public void PerkScreen()
     {
-        SceneManager.LoadScene("PerkScreen");
+        FindObjectOfType<SceneTransitionManager>().PerkScreen();
     }
 
 }

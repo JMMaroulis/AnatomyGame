@@ -10,6 +10,7 @@ public class BodyPart : MonoBehaviour
     public bool isFunctioning;
     public bool requiresReplacing;
     public bool requiresAmputation;
+    public int index;
 
     //blood stuff
     public float bloodRequiredToFunction;
@@ -130,7 +131,6 @@ public class BodyPart : MonoBehaviour
     {
         bodyPartManager = FindObjectOfType<BodyPartManager>();
         UpdateHeartConnections();
-
     }
 
     public virtual void UpdateBodyPart(float deltaTime)
@@ -349,8 +349,9 @@ public class BodyPart : MonoBehaviour
         {
             if (slowPoison > 0.0f)
             {
-                //in 1 second, will neutralise 2 units of poison
-                float antidoteProcessed = Mathf.Min(antidote, deltaTime * antidoteProcessRate);
+                //in 1 second, will neutralise antidoteProcessRate units of poison
+                float antidoteProcessed = Mathf.Clamp(deltaTime * antidoteProcessRate, 0, antidote);
+                antidoteProcessed = Mathf.Clamp(antidoteProcessed, 0, slowPoison);
                 antidote -= antidoteProcessed;
                 slowPoison -= antidoteProcessRate * antidoteProcessed;
             }
@@ -364,7 +365,7 @@ public class BodyPart : MonoBehaviour
         if (slowPoison > 0.0f)
         {
             float slowPoisonProcessed = Mathf.Min(slowPoison, deltaTime * slowPoisonProcessRate);
-            slowPoison -= slowPoison - slowPoisonProcessed;
+            slowPoison -= slowPoisonProcessed;
             damage += slowPoison * deltaTime * slowPoisonDamageRate;
         }
 
