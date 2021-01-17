@@ -24,6 +24,7 @@ public class GameSetupScenarioTracker : MonoBehaviour
     public int mediumInjuryReward;
     public int hardInjuryReward;
     public int requestedProcedureReward;
+    public int unhappyPatients;
 
     // Start is called before the first frame update
     void Start()

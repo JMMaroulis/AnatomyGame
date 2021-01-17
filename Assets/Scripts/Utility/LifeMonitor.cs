@@ -76,6 +76,7 @@ public class LifeMonitor : MonoBehaviour
         else
         {
             textLog.NewLogEntry("Insufficient patient treatment. No payment for you. Transfer in 5 seconds...");
+            FindObjectOfType<GameSetupScenarioTracker>().unhappyPatients += 1;
         }
 
         FindObjectOfType<ButtonActions>().DisableAllButtons();
@@ -122,7 +123,7 @@ public class LifeMonitor : MonoBehaviour
             if (bodyPart.slowPoison > 0)
             {
                 textLog.NewLogEntry($"{bodyPart.name} is still poisoned.");
-                result = false;
+                result = true;
             }
         }
         foreach (Organ organ in bodyPartManager.organs)
@@ -134,7 +135,7 @@ public class LifeMonitor : MonoBehaviour
             if (organ.slowPoison > 0)
             {
                 textLog.NewLogEntry($"{organ.name} is still poisoned.");
-                result = false;
+                result = true;
             }
         }
 

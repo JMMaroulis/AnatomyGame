@@ -142,7 +142,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
                 //apply injury
                 //int injuryNumber = RandomNumber(8);
 
-                int injuryNumber = 1;
+                int injuryNumber = RandomNumber(8);
                 switch (injuryNumber)
                 {
                     case 0:
@@ -488,7 +488,7 @@ public class PhysicalInjuryGenerator : MonoBehaviour
         //     return false;
         // }
 
-        if (organ.connectedBodyParts.Count() > 0)
+        if (organ.connectedBodyParts.Count() > 0 && !(organ is Brain))
         {
             Debug.Log($"{organ.name} external");
             textLog.NewLogEntry($"The {organ.name} requires re-implanting.");

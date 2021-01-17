@@ -31,15 +31,17 @@ public static class Actions_Wait
     {
         if (MonoBehaviour.FindObjectOfType<LifeMonitor>().SafeToDischarge())
         {
-            GameObject.FindObjectOfType<Clock>().StartClockUntil(1800.0f);
+            //float seconds = 1800.0f;
+            float seconds = 1.0f;
+            GameObject.FindObjectOfType<Clock>().StartClockUntil(seconds);
             GameObject.FindObjectOfType<TextLog>().NewLogEntry("Waiting 30 minutes...");
-            GameObject.FindObjectOfType<ActionTimeBar>().Reset(1800.0f);
-            StaticCoroutine.Start(WaitOneHourCoroutine());
+            GameObject.FindObjectOfType<ActionTimeBar>().Reset(seconds);
+            StaticCoroutine.Start(DischargePatientCoroutine());
         }
 
     }
 
-    public static IEnumerator WaitOneHourCoroutine()
+    public static IEnumerator DischargePatientCoroutine()
     {
         Clock clock = MonoBehaviour.FindObjectOfType<Clock>();
         ButtonActions buttonActions = MonoBehaviour.FindObjectOfType<ButtonActions>();

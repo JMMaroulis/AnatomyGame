@@ -6,10 +6,16 @@ using UnityEngine.UI;
 public class UnlockManager : MonoBehaviour
 {
     public List<Button> buttons;
+
+    public Button continueButton;
+    public Text continueButtonText;
+
     public Text goldText;
+    public Text malpracticeText;
 
     private UnlockTracker unlockTracker;
     private GoldTracker goldTracker;
+    private GameSetupScenarioTracker gameSetupScenarioTracker;
 
     public int medicine_poison_cost;
     public int medicine_speed_cost;
@@ -26,6 +32,7 @@ public class UnlockManager : MonoBehaviour
     {
         FindObjectOfType<PhysicalInjuryGenerator>().GenerateInjuries();
         goldTracker = FindObjectOfType<GoldTracker>();
+        gameSetupScenarioTracker = FindObjectOfType<GameSetupScenarioTracker>();
 
         unlockTracker = FindObjectOfType<UnlockTracker>();
         UnityEngine.Events.UnityAction action = null;
@@ -40,7 +47,7 @@ public class UnlockManager : MonoBehaviour
 
         action = () => { unlockTracker.medicine_blood = true; FindObjectOfType<GoldTracker>().goldSpent += medicine_blood_cost; };
         buttons[2].onClick.AddListener(action);
-        buttons[2].transform.GetChild(0).GetComponent<Text>().text = $"Blood Medication License: {medicine_blood_cost} Gold";
+        buttons[2].transform.GetChild(0).GetComponent<Text>().text = $"Internal Bleeding Medication License: {medicine_blood_cost} Gold";
 
         action = () => { unlockTracker.charms_heart = true; FindObjectOfType<GoldTracker>().goldSpent += heartcharm_cost; };
         buttons[3].onClick.AddListener(action);
@@ -65,12 +72,19 @@ public class UnlockManager : MonoBehaviour
         action = () => { unlockTracker.spawn_clock = true; FindObjectOfType<GoldTracker>().goldSpent += clockworkdelivery_cost; };
         buttons[8].onClick.AddListener(action);
         buttons[8].transform.GetChild(0).GetComponent<Text>().text = $"Clockwork Delivery Service: {clockworkdelivery_cost} Gold";
+
+        if (gameSetupScenarioTracker.unhappyPatients >= 3)
+        {
+            continueButton.interactable = false;
+            continueButtonText.text = "Too many malpractice lawsuits! Career over!";
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         goldText.text = $"Gold: {goldTracker.gold}";
+        malpracticeText.text = $"Malpractice Lawsuits Ongoing: {gameSetupScenarioTracker.unhappyPatients}";
 
         if (unlockTracker.medicine_poison || goldTracker.gold < medicine_poison_cost)
         {
